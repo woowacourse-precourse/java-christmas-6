@@ -41,7 +41,7 @@ class OrderMenuTest {
     @Test
     void createOrderMenu() {
         //given
-        OrderMenu findOrderMenu = OrderMenu.createOrderMenu("티본스테이크", 2);
+        OrderMenu findOrderMenu = OrderMenu.createOrderMenu(T_BONE_STEAK_NAME, TWO_ORDER);
 
         //when
         Integer price = findOrderMenu.calculatePrice();
