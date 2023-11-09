@@ -24,12 +24,6 @@ public enum AppetizerMenu implements MenuItem {
         return price;
     }
 
-    static {
-        for (AppetizerMenu value : AppetizerMenu.values()) {
-            NAME_TO_ITEM_MAP.put(value.getName(),value);
-        }
-
-    }
 
 
 

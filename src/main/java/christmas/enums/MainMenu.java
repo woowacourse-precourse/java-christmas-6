@@ -14,13 +14,6 @@ public enum MainMenu implements MenuItem{
         this.price = price;
     }
 
-    static {
-        for (MainMenu value : MainMenu.values()) {
-            NAME_TO_ITEM_MAP.put(value.getName(),value);
-        }
-
-    }
-
     @Override
     public String getName() {
         return name;

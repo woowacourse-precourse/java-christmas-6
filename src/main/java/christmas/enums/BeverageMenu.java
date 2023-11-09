@@ -15,12 +15,6 @@ public enum BeverageMenu implements MenuItem{
         this.price = price;
     }
 
-    static {
-        for (BeverageMenu value : BeverageMenu.values()) {
-            NAME_TO_ITEM_MAP.put(value.getName(),value);
-        }
-    }
-
     @Override
     public String getName() {
         return name;

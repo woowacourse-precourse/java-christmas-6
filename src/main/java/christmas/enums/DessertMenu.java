@@ -11,13 +11,6 @@ public enum DessertMenu implements MenuItem{
         this.price = price;
     }
 
-    static {
-        for (DessertMenu value : DessertMenu.values()) {
-            NAME_TO_ITEM_MAP.put(value.getName(),value);
-        }
-
-    }
-
     @Override
     public String getName() {
         return name;
