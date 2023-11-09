@@ -2,10 +2,10 @@ package christmas;
 
 import java.util.List;
 
-public class OrderMenuList {
+public class OrderList {
     private final List<OrderMenu> orderMenuList;
 
-    public OrderMenuList(List<OrderMenu> orderMenuList) {
+    public OrderList(List<OrderMenu> orderMenuList) {
         this.orderMenuList = orderMenuList;
     }
 
