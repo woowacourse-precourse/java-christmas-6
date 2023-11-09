@@ -11,9 +11,10 @@ public class OrderMenu {
         this.orderQuantity = orderQuantity;
     }
 
-   /* public OneOrderMenu createOrder(MainMenu mainMenu, Integer orderQuantity){
-        return new OneOrderMenu(menuItem,orderQuantity);
-    }*/
+    public Integer calculatePrice(){
+       return this.menuItem.getPrice() * this.orderQuantity;
+    }
+
     public Integer getOrderQuantity() {
         return orderQuantity;
     }
