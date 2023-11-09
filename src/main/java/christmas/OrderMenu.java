@@ -1,13 +1,12 @@
 package christmas;
 
-import christmas.enums.MainMenu;
 import christmas.enums.MenuItem;
 
-public class OneOrderMenu {
+public class OrderMenu {
     private final MenuItem menuItem;
     private final Integer orderQuantity;
 
-    public OneOrderMenu(MenuItem menuItem, Integer orderQuantity) {
+    public OrderMenu(MenuItem menuItem, Integer orderQuantity) {
         this.menuItem = menuItem;
         this.orderQuantity = orderQuantity;
     }
