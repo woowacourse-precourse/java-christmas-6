@@ -1,13 +1,20 @@
 package christmas.enums;
 
-public enum BeverageMenu {
-    ZERO_COKE(3_000)
-    , RED_WINE(60_000)
-    , CHAMPAGNE(25_000);
+public enum BeverageMenu implements MenuItem{
+    ZERO_COKE("제로콜라",3_000)
+    , RED_WINE("레드와인",60_000)
+    , CHAMPAGNE("샴페인",25_000);
     private final Integer price;
+    private final String name;
 
-    BeverageMenu(Integer price) {
+    BeverageMenu(String name,Integer price) {
+        this.name = name;
         this.price = price;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     public Integer getPrice() {
