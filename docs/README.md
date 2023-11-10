@@ -70,9 +70,11 @@
 <details>
 <summary>(23.11.10)</summary>
 
-- [x] 크리스마스디데이이벤트 구현
+- [x] 크리스마스 디데이 이벤트 구현
   - 이벤트 기간을 생성자 파라미터로 설정해 확장성 있게 설계하려 시도
   - ChronoUnit 사용하여 로직구현
+- [x] 평일 할인 이벤트 구현
+  - ```LocalDate.getDayOfWeek``` 를 사용하여 평일을 구하는 로직 구현
 - [x] WooWaEvent 내부 메서드에 대한 고민
   - 이벤트 로직을 실행하는 ```execute()```
   - 이벤트 기간인지 확인하는 ```isEventActivate()```
@@ -104,6 +106,8 @@
   - ChronoUnit
     - 날짜 및 시간을 측정하는 단위를 나타내는 열거형
     - ```ChrononUtit.DAYS.between(localDate1, localDate2)``` 를 이용하면 경과일수를 구할 수 있다. 
+  - ```LocalDate.getDayOfWeek```
+    - 원하는 날짜의 요일을 추출할 수 있다.
   
   - Stream.Builder<T>();
     - Stream<T> 인스턴스를 생성하는 데 사용된다.
