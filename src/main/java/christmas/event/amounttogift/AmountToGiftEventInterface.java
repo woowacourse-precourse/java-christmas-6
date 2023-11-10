@@ -4,6 +4,6 @@ import christmas.event.WooWaEvent;
 import java.time.LocalDate;
 
 public interface AmountToGiftEventInterface extends WooWaEvent {
-    Boolean execute(LocalDate reservationDate, Integer totalOrderAmount);
+    String execute(LocalDate reservationDate, Integer totalOrderAmount);
 
 }

@@ -9,9 +9,10 @@ import org.junit.jupiter.api.Test;
 class SpecialDiscountEventTest {
     private final static LocalDate startDate = LocalDate.of(2023, Month.DECEMBER, 1);
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 31);
+    private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate specialDate = LocalDate.of(2023, Month.DECEMBER, 25);
     private final static LocalDate nonSpecialDate = LocalDate.of(2023, Month.DECEMBER, 26);
-    private final static SpecialDiscountEvent specialDiscountEvent = new SpecialDiscountEvent(startDate,endDate);
+    private final static SpecialDiscountEvent specialDiscountEvent = new SpecialDiscountEvent(eventPeriod,1000);
 
     @Test
     void reservationSpecialDate() {

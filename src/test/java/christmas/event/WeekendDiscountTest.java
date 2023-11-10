@@ -14,9 +14,10 @@ import org.junit.jupiter.api.Test;
 class WeekendDiscountTest {
     private final static LocalDate startDate = LocalDate.of(2023, Month.DECEMBER, 1);
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 31);
+    private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate weekDay = LocalDate.of(2023, Month.DECEMBER, 1);
     private final static LocalDate weekend = LocalDate.of(2023, Month.DECEMBER, 2);
-    private final static WeekendDiscount weekendDiscount = new WeekendDiscount(startDate, endDate);
+    private final static WeekendDiscount weekendDiscount = new WeekendDiscount(eventPeriod,2023);
     private final static OrderMenu orderMenuWithDessert = new OrderMenu(DessertMenu.CHOCOLATE_CAKE, 2);
     private final static OrderMenu orderMenuWithMain = new OrderMenu(MainMenu.T_BONE_STEAK, 2);
     private final static Integer DISCOUNT_AMOUNT = 2023;

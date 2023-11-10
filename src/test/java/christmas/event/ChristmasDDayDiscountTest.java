@@ -16,8 +16,9 @@ class ChristmasDDayDiscountTest {
 
     private final static LocalDate startDate = LocalDate.of(2023, Month.DECEMBER, 1);
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 25);
+    private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate overDate = LocalDate.of(2023, Month.DECEMBER, 26);
-    private final static ChristmasDDayDiscount christmasDDayDiscount = new ChristmasDDayDiscount(startDate, endDate);
+    private final static ChristmasDDayDiscount christmasDDayDiscount = new ChristmasDDayDiscount(eventPeriod,1000,100);
     private final static Integer DISCOUNT_START_AMOUNT = 1000;
     private final static Integer DISCOUNT_INCREMENT_PER_DAY = 100;
     //TODO: 다른 12월이 아닌경우에도 테스트해야함
