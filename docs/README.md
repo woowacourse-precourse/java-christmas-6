@@ -76,6 +76,7 @@
 - [x] 평일 할인 이벤트 구현
   - ```LocalDate.getDayOfWeek``` 를 사용하여 평일을 구하는 로직 구현
 - [x] 주말 할인 이벤트 구현
+- [x] 샴페인 증정 이벤트 구현
 - [x] WooWaEvent 내부 메서드에 대한 고민
   - 이벤트 로직을 실행하는 ```execute()```
   - 이벤트 기간인지 확인하는 ```isEventActivate()```
