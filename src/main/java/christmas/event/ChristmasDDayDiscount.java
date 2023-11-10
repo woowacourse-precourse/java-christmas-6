@@ -3,7 +3,7 @@ package christmas.event;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class ChristmasDDayDiscount implements WooWaEvent{
+public class ChristmasDDayDiscount implements WooWaEvent {
     private static final int DISCOUNT_START_AMOUNT = 1000;
     private static final int DISCOUNT_INCREMENT_PER_DAY = 100;
     private final LocalDate startDate;
@@ -22,12 +22,12 @@ public class ChristmasDDayDiscount implements WooWaEvent{
 
     @Override
     public Boolean isEventActivate(LocalDate reservationDate) {
-       return !(reservationDate.isBefore(startDate) || reservationDate.isAfter(endDate));
+        return !(reservationDate.isBefore(startDate) || reservationDate.isAfter(endDate));
     }
 
     @Override
     public Integer executeEvent(LocalDate reservationDate) {
-        if(isEventActivate(reservationDate)){
+        if (isEventActivate(reservationDate)) {
             return calculateDiscount(reservationDate);
         }
         return 0;

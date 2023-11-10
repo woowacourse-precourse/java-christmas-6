@@ -1,10 +1,10 @@
 package christmas.event;
-import static org.assertj.core.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.stream.Stream;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -38,10 +38,11 @@ class ChristmasDDayDiscountTest {
         assertThat(discountAmount).isEqualTo(expectedDiscountAmount);
     }
 
-    static Stream<Arguments> provideInputForDiscountAmountTesting(){
+    static Stream<Arguments> provideInputForDiscountAmountTesting() {
         Stream.Builder<Arguments> streamBuilder = Stream.builder();
         for (int i = 1; i <= endDate.getDayOfMonth(); i++) {
-            streamBuilder.add(Arguments.of(LocalDate.of(2023, Month.DECEMBER, i), DISCOUNT_START_AMOUNT + (i-1) * DISCOUNT_INCREMENT_PER_DAY));
+            streamBuilder.add(Arguments.of(LocalDate.of(2023, Month.DECEMBER, i),
+                    DISCOUNT_START_AMOUNT + (i - 1) * DISCOUNT_INCREMENT_PER_DAY));
         }
         return streamBuilder.build();
     }
