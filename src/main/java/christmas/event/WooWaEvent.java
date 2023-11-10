@@ -1,6 +1,9 @@
 package christmas.event;
 
+import java.time.LocalDate;
+
 public interface WooWaEvent {
 
-     Boolean isEventEnd();
+     Boolean isEventActivate(LocalDate reservationDate);
+     Integer executeEvent(LocalDate reservationDate);
 }
