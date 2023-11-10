@@ -1,4 +1,4 @@
-package christmas;
+package christmas.order;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class OrderList {
         this.orderMenuList = orderMenuList;
     }
 
-    public Integer calculateTotalPrice(){
+    public Integer calculateTotalPrice() {
         return orderMenuList.stream().mapToInt(OrderMenu::calculatePrice).sum();
     }
 

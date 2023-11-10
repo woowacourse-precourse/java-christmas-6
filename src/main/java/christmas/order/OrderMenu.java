@@ -1,7 +1,7 @@
-package christmas;
+package christmas.order;
 
+import christmas.MenuList;
 import christmas.enums.MenuItem;
-import christmas.enums.MenuList;
 
 public class OrderMenu {
     private final MenuItem menuItem;
@@ -12,13 +12,13 @@ public class OrderMenu {
         this.orderQuantity = orderQuantity;
     }
 
-    public static OrderMenu createOrderMenu(String menuName, Integer orderQuantity){
+    public static OrderMenu createOrderMenu(String menuName, Integer orderQuantity) {
         MenuItem menuByName = MenuList.getMenuByName(menuName);
-        return new OrderMenu(menuByName,orderQuantity);
+        return new OrderMenu(menuByName, orderQuantity);
     }
 
-    public Integer calculatePrice(){
-       return this.menuItem.getPrice() * this.orderQuantity;
+    public Integer calculatePrice() {
+        return this.menuItem.getPrice() * this.orderQuantity;
     }
 
     public Integer getOrderQuantity() {

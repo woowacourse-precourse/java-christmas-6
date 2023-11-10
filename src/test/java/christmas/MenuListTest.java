@@ -1,10 +1,12 @@
-package christmas.enums;
+package christmas;
 
 import static christmas.enums.BeverageMenu.CHAMPAGNE;
 import static christmas.enums.DessertMenu.CHOCOLATE_CAKE;
 import static christmas.enums.MainMenu.SEAFOOD_PASTA;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.MenuList;
+import christmas.enums.MenuItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

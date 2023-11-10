@@ -4,7 +4,7 @@ import static christmas.enums.MainMenu.T_BONE_STEAK;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.enums.MenuItem;
-import org.assertj.core.api.Assertions;
+import christmas.order.OrderMenu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

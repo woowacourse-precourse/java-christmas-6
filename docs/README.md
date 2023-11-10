@@ -9,7 +9,7 @@
 
 
 <details>
-<summary>(23.11.19)</summary> 
+<summary>(23.11.09)</summary> 
 
 - [x] 개념도 설계 및 구현계획 작성 
 - [x] 음식,주문, 주문목록, 주문메뉴 구현
@@ -68,7 +68,19 @@
 </details>
 
 <details>
-<summary>(23.11.20)</summary>
+<summary>(23.11.10)</summary>
+
+- [x] 크리스마스디데이이벤트 구현
+  - 이벤트 기간을 생성자 파라미터로 설정해 확장성 있게 설계하려 시도
+  - ChronoUnit 사용하여 로직구현
+- 배운점
+  - ChronoUnit
+    - 날짜 및 시간을 측정하는 단위를 나타내는 열거형
+    - 
+</details>
+
+<details>
+<summary>(23.11.11)</summary>
 </details>
 
 ## 플로우
