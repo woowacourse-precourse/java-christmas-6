@@ -11,11 +11,15 @@ public interface WooWaEvent {
         return null;
     }
 
-    default Integer executePerMenuDiscountEvent(LocalDate reservationDate,OrderMenu orderMenu){
+    default Integer executePerMenuDiscountEvent(LocalDate reservationDate, OrderMenu orderMenu){
         return null;
     }
 
     default Boolean executeGiftEvent(LocalDate reservationDate, Integer totalOrderAmount){
+        return null;
+    }
+
+    default Integer executeDateDiscountEvent(LocalDate reservationDate){
         return null;
     }
 

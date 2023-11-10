@@ -38,7 +38,7 @@ public class WeekendDiscount implements WooWaEvent {
     }
 
     @Override
-    public Integer executePerMenuDiscountEvent(LocalDate reservationDate,OrderMenu orderMenu) {
+    public Integer executePerMenuDiscountEvent(LocalDate reservationDate, OrderMenu orderMenu) {
         if(isEventActivate(reservationDate) && isWeekend(reservationDate)){
             return calculateDiscount(orderMenu);
         }
