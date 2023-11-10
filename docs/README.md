@@ -73,10 +73,26 @@
 - [x] 크리스마스디데이이벤트 구현
   - 이벤트 기간을 생성자 파라미터로 설정해 확장성 있게 설계하려 시도
   - ChronoUnit 사용하여 로직구현
+- [x] WooWaEvent 내부 메서드에 대한 고민
+  - 이벤트 로직을 실행하는 ```execute()```
+  - 이벤트 기간인지 확인하는 ```isEventActivate()```
+  - 크리스마스 이벤트를 보면 어차피 ```isEventActivate()```는 ```execute()``` 시 포함되는데 public으로 둘 필요가 있을까?
+    - ```isEventActivate()```를 private로 변경했을 때 예상
+      - 캡슐화 원칙을 유지하여 객체 내 데이터를 외부에 노출하지 아니한다.
+    - ```isEventActivate()```를 private로 변경했을 때 고민
+      - 추후 어떤 로직(ex: 이벤트의 활성/비활성 상태를 확인하고 실행하는 로직)이 구현될지 몰라 섣불리 변경하기가 고민된다.
+      - private로 구현해야한다면 다른 이벤트 클래스에 일일이 코드를 적어야한다
+    - ```isEventActivate()```를 유틸클래스로 따로 추출했을 때 고민
+      - 그렇다면 결국 interface에서 시작날짜와 종료날짜를 가져와야하므로, 코드는 복잡해지고, 이전보다 데이터도 외부에 더 자세히 노출된다.
+    - 결론
+      - 인터페이스에 ```isEventActivate()```를 사용하는것이 설계를 더 단순화하고, 내부정보를 덜 노출하며, 추후 확장성도 있다고 생각한다.
 - 배운점
   - ChronoUnit
     - 날짜 및 시간을 측정하는 단위를 나타내는 열거형
-    - 
+    - ```ChrononUtit.DAYS.between(localDate1, localDate2)``` 를 이용하면 경과일수를 구할 수 있다. 
+  
+  - Stream.Builder<T>();
+    - Stream<T> 인스턴스를 생성하는 데 사용된다.
 </details>
 
 <details>
