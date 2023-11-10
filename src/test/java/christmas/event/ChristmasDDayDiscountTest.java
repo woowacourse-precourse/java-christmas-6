@@ -25,7 +25,7 @@ class ChristmasDDayDiscountTest {
     @Test
     void whenEventActivate() {
 
-        Integer discountAmount = christmasDDayDiscount.executeEvent(overDate);
+        Integer discountAmount = christmasDDayDiscount.executeDateToDateEvent(overDate);
 
         assertThat(discountAmount).isEqualTo(0);
     }
@@ -35,7 +35,7 @@ class ChristmasDDayDiscountTest {
     @DisplayName("1일부터 25일까지 할인가 검증")
     public void dummy(LocalDate reservationDate, Integer expectedDiscountAmount) {
         //when
-        Integer discountAmount = christmasDDayDiscount.executeEvent(reservationDate);
+        Integer discountAmount = christmasDDayDiscount.executeDateToDateEvent(reservationDate);
 
         //then
         assertThat(discountAmount).isEqualTo(expectedDiscountAmount);

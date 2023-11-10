@@ -24,7 +24,7 @@ public class ChampagneGiftEvent implements WooWaEvent{
     }
 
     @Override
-    public Boolean executeEvent(LocalDate reservationDate, Integer totalOrderAmount) {
+    public Boolean executeGiftEvent(LocalDate reservationDate, Integer totalOrderAmount) {
         if (isEventActivate(reservationDate)) {
             return isGiftAmountOver(totalOrderAmount);
         }

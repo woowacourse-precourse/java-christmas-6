@@ -28,7 +28,7 @@ class ChampagneGiftEventTest {
     void isGiftAmountOver() {
         //when
         Integer totalOrderAmount = orderListOverGiftAmount.calculateTotalPrice();
-        Boolean giftOrNot = CHAMPAGNE_GIFT_EVENT.executeEvent(reservationDate, totalOrderAmount);
+        Boolean giftOrNot = CHAMPAGNE_GIFT_EVENT.executeGiftEvent(reservationDate, totalOrderAmount);
 
         //then
         Assertions.assertThat(giftOrNot).isTrue();
@@ -38,7 +38,7 @@ class ChampagneGiftEventTest {
     void isGiftAmountUnder() {
         //when
         Integer totalOrderAmount = orderListUnderGiftAmount.calculateTotalPrice();
-        Boolean giftOrNot = CHAMPAGNE_GIFT_EVENT.executeEvent(reservationDate, totalOrderAmount);
+        Boolean giftOrNot = CHAMPAGNE_GIFT_EVENT.executeGiftEvent(reservationDate, totalOrderAmount);
 
         //then
         Assertions.assertThat(giftOrNot).isFalse();

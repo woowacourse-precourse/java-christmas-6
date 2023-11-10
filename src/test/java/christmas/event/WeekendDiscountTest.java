@@ -25,7 +25,7 @@ class WeekendDiscountTest {
     @Test
     void weekDaySituationWithMain() {
         //when
-        Integer discountAmount = weekendDiscount.executeEvent(weekend, orderMenuWithMain);
+        Integer discountAmount = weekendDiscount.executePerMenuDiscountEvent(weekend, orderMenuWithMain);
 
         //then
         assertThat(discountAmount).isEqualTo(DISCOUNT_AMOUNT * orderMenuWithMain.getOrderQuantity());
@@ -35,7 +35,7 @@ class WeekendDiscountTest {
     @Test
     void weekendSituationWithMain() {
         //when
-        Integer discountAmount = weekendDiscount.executeEvent(weekDay, orderMenuWithMain);
+        Integer discountAmount = weekendDiscount.executePerMenuDiscountEvent(weekDay, orderMenuWithMain);
 
         //then
         assertThat(discountAmount).isEqualTo(NO_DISCOUNT_AMOUNT);
@@ -45,7 +45,7 @@ class WeekendDiscountTest {
     @Test
     void weekendSituationWithDessert() {
         //when
-        Integer discountAmount = weekendDiscount.executeEvent(weekend, orderMenuWithDessert);
+        Integer discountAmount = weekendDiscount.executePerMenuDiscountEvent(weekend, orderMenuWithDessert);
 
         //then
         assertThat(discountAmount).isEqualTo(NO_DISCOUNT_AMOUNT);
@@ -56,7 +56,7 @@ class WeekendDiscountTest {
     @Test
     void weekDaySituationWithDessert() {
         //when
-        Integer discountAmount = weekendDiscount.executeEvent(weekDay, orderMenuWithDessert);
+        Integer discountAmount = weekendDiscount.executePerMenuDiscountEvent(weekDay, orderMenuWithDessert);
 
         //then
         assertThat(discountAmount).isEqualTo(NO_DISCOUNT_AMOUNT);

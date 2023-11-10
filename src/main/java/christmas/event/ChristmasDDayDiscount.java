@@ -26,7 +26,7 @@ public class ChristmasDDayDiscount implements WooWaEvent {
     }
 
     @Override
-    public Integer executeEvent(LocalDate reservationDate) {
+    public Integer executeDateToDateEvent(LocalDate reservationDate) {
         if (isEventActivate(reservationDate)) {
             return calculateDiscount(reservationDate);
         }
