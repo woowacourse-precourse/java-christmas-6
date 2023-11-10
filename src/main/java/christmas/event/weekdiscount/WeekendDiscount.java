@@ -2,24 +2,23 @@ package christmas.event.weekdiscount;
 
 import christmas.enums.MainMenu;
 import christmas.enums.MenuItem;
-import christmas.event.WooWaEvent;
+import christmas.event.EventPeriod;
 import christmas.order.OrderMenu;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class WeekendDiscount implements WeekDiscountEventInterface {
-    private final static Integer DISCOUNT_AMOUNT = 2023;
-    private final LocalDate startDate;
-    private final LocalDate endDate;
+    private final Integer discountAmount;
+    private final EventPeriod eventPeriod;
 
-    public WeekendDiscount(LocalDate startDate, LocalDate endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public WeekendDiscount(EventPeriod eventPeriod, Integer discountAmount) {
+        this.eventPeriod = eventPeriod;
+        this.discountAmount = discountAmount;
     }
 
     private int calculateDiscount(OrderMenu orderMenu) {
         if (isMain(orderMenu.getMenuItem())) {
-           return orderMenu.getOrderQuantity() * DISCOUNT_AMOUNT;
+           return orderMenu.getOrderQuantity() * discountAmount;
         }
         return 0;
     }
@@ -34,7 +33,7 @@ public class WeekendDiscount implements WeekDiscountEventInterface {
 
     @Override
     public Boolean isEventActivate(LocalDate reservationDate) {
-        return !(reservationDate.isBefore(startDate) || reservationDate.isAfter(endDate));
+        return !(reservationDate.isBefore(eventPeriod.startDate()) || reservationDate.isAfter(eventPeriod.endDate()));
     }
 
     @Override

@@ -1,30 +1,29 @@
 package christmas.event.specialdiscount;
 
-import christmas.event.WooWaEvent;
+import christmas.event.EventPeriod;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class SpecialDiscountEvent implements SpecialDiscountEventInterface {
-    private final static Integer DISCOUNT_AMOUNT = 1000;
-    private final LocalDate startDate;
-    private final LocalDate endDate;
+    private final Integer discountAmount;
+    private final EventPeriod eventPeriod;
 
-    public SpecialDiscountEvent(LocalDate startDate, LocalDate endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public SpecialDiscountEvent(EventPeriod eventPeriod, Integer discountAmount) {
+        this.eventPeriod = eventPeriod;
+        this.discountAmount = discountAmount;
     }
 
     private Integer calculateDiscount(LocalDate reservationDate) {
         DayOfWeek dayOfWeek = reservationDate.getDayOfWeek();
         if(dayOfWeek == DayOfWeek.SUNDAY || reservationDate.getDayOfMonth() == 25){
-            return DISCOUNT_AMOUNT;
+            return discountAmount;
         }
         return 0;
     }
 
     @Override
     public Boolean isEventActivate(LocalDate reservationDate) {
-        return !(reservationDate.isBefore(startDate) || reservationDate.isAfter(endDate));
+        return !(reservationDate.isBefore(eventPeriod.startDate()) || reservationDate.isAfter(eventPeriod.endDate()));
     }
 
     @Override

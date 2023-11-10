@@ -1,28 +1,29 @@
 package christmas.event.increasediscount;
 
+import christmas.event.EventPeriod;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class ChristmasDDayDiscount implements IncreaseEverydayDiscountEventInterface {
-    private final static int DISCOUNT_START_AMOUNT = 1000;
-    private final static int DISCOUNT_INCREMENT_PER_DAY = 100;
-    private final LocalDate startDate;
-    private final LocalDate endDate;
+    private final int discountStartAmount;
+    private final int discountIncrementPerDay;
+    private final EventPeriod eventPeriod;
 
-    public ChristmasDDayDiscount(LocalDate startDate, LocalDate endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public ChristmasDDayDiscount(EventPeriod eventPeriod,int discountStartAmount, int discountIncrementPerDay ) {
+        this.discountStartAmount = discountStartAmount;
+        this.discountIncrementPerDay = discountIncrementPerDay;
+        this.eventPeriod = eventPeriod;
     }
 
     private int calculateDiscount(LocalDate reservationDate) {
-        int daysElapsed = (int) ChronoUnit.DAYS.between(startDate, reservationDate);
-        return DISCOUNT_START_AMOUNT + (daysElapsed * DISCOUNT_INCREMENT_PER_DAY);
+        int daysElapsed = (int) ChronoUnit.DAYS.between(eventPeriod.startDate(), reservationDate);
+        return discountStartAmount + (daysElapsed * discountIncrementPerDay);
     }
 
 
     @Override
     public Boolean isEventActivate(LocalDate reservationDate) {
-        return !(reservationDate.isBefore(startDate) || reservationDate.isAfter(endDate));
+        return !(reservationDate.isBefore(eventPeriod.startDate()) || reservationDate.isAfter(eventPeriod.endDate()));
     }
 
     @Override
