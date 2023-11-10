@@ -6,18 +6,18 @@ import java.time.LocalDate;
 
 public class AmountToGiftEvent implements AmountToGiftEventInterface {
     private final static String NONE = "NONE";
-    private final Integer defaultGiftAmount;//TODO: 명칭변경
+    private final Integer needAmountToGift;
     private final EventPeriod eventPeriod;
     private final MenuItem menuItem;
 
-    public AmountToGiftEvent(EventPeriod eventPeriod, Integer defaultGiftAmount, MenuItem menuItem) {
+    public AmountToGiftEvent(EventPeriod eventPeriod, Integer needAmountToGift, MenuItem menuItem) {
         this.eventPeriod = eventPeriod;
-        this.defaultGiftAmount = defaultGiftAmount;
+        this.needAmountToGift = needAmountToGift;
         this.menuItem = menuItem;
     }
 
     public String isGiftAmountOver(Integer totalOrderAmount) {
-        if (totalOrderAmount > defaultGiftAmount) {
+        if (totalOrderAmount > needAmountToGift) {
             return menuItem.getName();
         }
         return NONE;
