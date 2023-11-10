@@ -4,7 +4,7 @@ import christmas.event.EventPeriod;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class ChristmasDDayDiscount implements IncreaseEverydayDiscountEventInterface {
+public class ChristmasDDayDiscount implements IncreaseEverydayDiscountEvent {
     private final int discountStartAmount;
     private final int discountIncrementPerDay;
     private final EventPeriod eventPeriod;

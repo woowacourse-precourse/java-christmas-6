@@ -1,5 +1,10 @@
-package christmas.enums;
+package christmas.order;
 
+import christmas.enums.menu.AppetizerMenu;
+import christmas.enums.menu.BeverageMenu;
+import christmas.enums.menu.DessertMenu;
+import christmas.enums.menu.MainMenu;
+import christmas.enums.menu.MenuItem;
 import java.util.HashMap;
 import java.util.Map;
 

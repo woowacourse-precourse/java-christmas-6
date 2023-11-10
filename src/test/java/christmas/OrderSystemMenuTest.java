@@ -1,14 +1,14 @@
 package christmas;
 
-import static christmas.enums.MainMenu.T_BONE_STEAK;
+import static christmas.enums.menu.MainMenu.T_BONE_STEAK;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.enums.MenuItem;
+import christmas.enums.menu.MenuItem;
 import christmas.order.OrderMenu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class OrderMenuTest {
+class OrderSystemMenuTest {
     private final static String T_BONE_STEAK_NAME = "티본스테이크";
     private final static Integer TWO_ORDER = 2;
     private final static OrderMenu orderMenu = new OrderMenu(T_BONE_STEAK, TWO_ORDER);

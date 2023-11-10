@@ -1,29 +1,29 @@
 package christmas.event.weekdiscount;
 
-import christmas.enums.MainMenu;
-import christmas.enums.MenuItem;
+import christmas.enums.menu.MainMenu;
+import christmas.enums.menu.MenuItem;
 import christmas.event.EventPeriod;
 import christmas.order.OrderMenu;
+import christmas.order.Orders;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public class WeekendDiscount implements WeekDiscountEventInterface {
+public class WeekendDiscount implements WeekDiscountEvent {
     private final Integer discountAmount;
     private final EventPeriod eventPeriod;
+    private final MenuItem[] discountMenuItems;
 
-    public WeekendDiscount(EventPeriod eventPeriod, Integer discountAmount) {
+    public WeekendDiscount(EventPeriod eventPeriod, MenuItem[] discountMenuItems, Integer discountAmount) {
         this.eventPeriod = eventPeriod;
+        this.discountMenuItems = discountMenuItems;
         this.discountAmount = discountAmount;
     }
 
-    private int calculateDiscount(OrderMenu orderMenu) {
-        if (isMain(orderMenu.getMenuItem())) {
-           return orderMenu.getOrderQuantity() * discountAmount;
+    private int calculateDiscount(Orders orders) {
+        for (MenuItem discountMenuItem : discountMenuItems) {
+            return orders.findEventMenuCount(discountMenuItem) * discountAmount;
         }
         return 0;
-    }
-    private boolean isMain(MenuItem menuItem) {
-        return menuItem instanceof MainMenu;
     }
 
     private Boolean isWeekend(LocalDate reservationDate) {
@@ -37,9 +37,9 @@ public class WeekendDiscount implements WeekDiscountEventInterface {
     }
 
     @Override
-    public Integer execute(LocalDate reservationDate, OrderMenu orderMenu) {
-        if(isEventActivate(reservationDate) && isWeekend(reservationDate)){
-            return calculateDiscount(orderMenu);
+    public Integer execute(LocalDate reservationDate, Orders orders) {
+        if (isEventActivate(reservationDate) && isWeekend(reservationDate)) {
+            return calculateDiscount(orders);
         }
         return 0;
     }

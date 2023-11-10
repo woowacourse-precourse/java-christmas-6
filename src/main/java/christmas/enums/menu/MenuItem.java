@@ -1,4 +1,4 @@
-package christmas.enums;
+package christmas.enums.menu;
 
 
 public interface MenuItem {

@@ -1,29 +1,27 @@
 package christmas.event.weekdiscount;
 
-import christmas.enums.DessertMenu;
-import christmas.enums.MenuItem;
+import christmas.enums.menu.MenuItem;
 import christmas.event.EventPeriod;
-import christmas.order.OrderMenu;
+import christmas.order.Orders;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public class WeekdayDiscount implements WeekDiscountEventInterface {
+public class WeekdayDiscount implements WeekDiscountEvent {
     private final Integer discountAmount;
     private final EventPeriod eventPeriod;
+    private final MenuItem[] discountMenuItems;
 
-    public WeekdayDiscount(EventPeriod eventPeriod, Integer discountAmount) {
+    public WeekdayDiscount(EventPeriod eventPeriod, MenuItem[] discountMenuItems, Integer discountAmount) {
         this.eventPeriod = eventPeriod;
         this.discountAmount = discountAmount;
+        this.discountMenuItems = discountMenuItems;
     }
 
-    private int calculateDiscount(OrderMenu orderMenu) {
-        if (isDessert(orderMenu.getMenuItem())) {
-           return orderMenu.getOrderQuantity() * discountAmount;
+    private int calculateDiscount(Orders orders) {
+        for (MenuItem discountMenuItem : discountMenuItems) {
+            return orders.findEventMenuCount(discountMenuItem) * discountAmount;
         }
         return 0;
-    }
-    private boolean isDessert(MenuItem menuItem) {
-        return menuItem instanceof DessertMenu;
     }
 
     private Boolean isWeekDay(LocalDate reservationDate) {
@@ -37,9 +35,9 @@ public class WeekdayDiscount implements WeekDiscountEventInterface {
     }
 
     @Override
-    public Integer execute(LocalDate reservationDate, OrderMenu orderMenu) {
-        if(isEventActivate(reservationDate) && isWeekDay(reservationDate)){
-            return calculateDiscount(orderMenu);
+    public Integer execute(LocalDate reservationDate, Orders orders) {
+        if (isEventActivate(reservationDate) && isWeekDay(reservationDate)) {
+            return calculateDiscount(orders);
         }
         return 0;
     }

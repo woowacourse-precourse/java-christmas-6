@@ -1,28 +1,28 @@
 package christmas.event;
 
-import christmas.event.specialdiscount.SpecialDiscountEvent;
+import christmas.event.specialdiscount.SpecialDayDiscountEvent;
 import java.time.LocalDate;
 import java.time.Month;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class SpecialDiscountEventTest {
+class SpecialDayDiscountEventTest {
     private final static LocalDate startDate = LocalDate.of(2023, Month.DECEMBER, 1);
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 31);
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate specialDate = LocalDate.of(2023, Month.DECEMBER, 25);
     private final static LocalDate nonSpecialDate = LocalDate.of(2023, Month.DECEMBER, 26);
-    private final static SpecialDiscountEvent specialDiscountEvent = new SpecialDiscountEvent(eventPeriod,1000);
+    private final static SpecialDayDiscountEvent SPECIAL_DAY_DISCOUNT_EVENT = new SpecialDayDiscountEvent(eventPeriod,1000);
 
     @Test
     void reservationSpecialDate() {
-        Integer discountAmount = specialDiscountEvent.execute(specialDate);
+        Integer discountAmount = SPECIAL_DAY_DISCOUNT_EVENT.execute(specialDate);
         Assertions.assertThat(discountAmount).isEqualTo(1000);
     }
 
     @Test
     void reservationNoNSpecialDate() {
-        Integer discountAmount = specialDiscountEvent.execute(nonSpecialDate);
+        Integer discountAmount = SPECIAL_DAY_DISCOUNT_EVENT.execute(nonSpecialDate);
         Assertions.assertThat(discountAmount).isEqualTo(0);
     }
 }

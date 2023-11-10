@@ -1,4 +1,4 @@
-package christmas.enums;
+package christmas.enums.menu;
 
 public enum DessertMenu implements MenuItem {
     CHOCOLATE_CAKE("초코케이크", 15_000), ICE_CREAM("아이스크림", 5_000);
