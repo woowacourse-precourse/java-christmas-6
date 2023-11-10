@@ -15,5 +15,9 @@ public interface WooWaEvent {
         return null;
     }
 
+    default Boolean executeEvent(LocalDate reservationDate, Integer totalOrderAmount){
+        return null;
+    }
+
 
 }
