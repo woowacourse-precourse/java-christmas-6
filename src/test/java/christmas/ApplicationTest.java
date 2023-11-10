@@ -7,7 +7,7 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
-    private static final String LINE_SEPARATOR = System.lineSeparator();
+    private final static String LINE_SEPARATOR = System.lineSeparator();
 
     @Test
     void 모든_타이틀_출력() {

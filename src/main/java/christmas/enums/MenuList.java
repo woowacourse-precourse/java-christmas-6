@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MenuList {
-    private static final Map<String, MenuItem> menuItems = new HashMap<>();
+    private final static Map<String, MenuItem> menuItems = new HashMap<>();
 
     static {
         for (AppetizerMenu appetizerMenu : AppetizerMenu.values()) {
