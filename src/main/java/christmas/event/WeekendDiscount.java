@@ -17,7 +17,7 @@ public class WeekendDiscount implements WooWaEvent {
         this.endDate = endDate;
     }
 
-    public int calculateDiscount(OrderMenu orderMenu) {
+    private int calculateDiscount(OrderMenu orderMenu) {
         if (isMain(orderMenu.getMenuItem())) {
            return orderMenu.getOrderQuantity() * DISCOUNT_AMOUNT;
         }

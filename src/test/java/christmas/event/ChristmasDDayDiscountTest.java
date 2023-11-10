@@ -19,6 +19,7 @@ class ChristmasDDayDiscountTest {
     private final static ChristmasDDayDiscount christmasDDayDiscount = new ChristmasDDayDiscount(startDate, endDate);
     private final static Integer DISCOUNT_START_AMOUNT = 1000;
     private final static Integer DISCOUNT_INCREMENT_PER_DAY = 100;
+    //TODO: 다른 12월이 아닌경우에도 테스트해야함
 
     @DisplayName("날짜를 입력했을 때, 이벤트 날짜에 해당되지 않으면 0을 반환한다.")
     @Test
