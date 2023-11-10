@@ -1,35 +1,35 @@
-package christmas.event;
+package christmas.event.weekdiscount;
 
 import christmas.enums.DessertMenu;
-import christmas.enums.MainMenu;
 import christmas.enums.MenuItem;
+import christmas.event.WooWaEvent;
 import christmas.order.OrderMenu;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public class WeekendDiscount implements WooWaEvent {
+public class WeekdayDiscount implements WeekDiscountEventInterface {
     private final static Integer DISCOUNT_AMOUNT = 2023;
     private final LocalDate startDate;
     private final LocalDate endDate;
 
-    public WeekendDiscount(LocalDate startDate, LocalDate endDate) {
+    public WeekdayDiscount(LocalDate startDate, LocalDate endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
     private int calculateDiscount(OrderMenu orderMenu) {
-        if (isMain(orderMenu.getMenuItem())) {
+        if (isDessert(orderMenu.getMenuItem())) {
            return orderMenu.getOrderQuantity() * DISCOUNT_AMOUNT;
         }
         return 0;
     }
-    private boolean isMain(MenuItem menuItem) {
-        return menuItem instanceof MainMenu;
+    private boolean isDessert(MenuItem menuItem) {
+        return menuItem instanceof DessertMenu;
     }
 
-    private Boolean isWeekend(LocalDate reservationDate) {
+    private Boolean isWeekDay(LocalDate reservationDate) {
         DayOfWeek dayOfWeek = reservationDate.getDayOfWeek();
-        return (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY);
+        return (dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY);
     }
 
     @Override
@@ -38,8 +38,8 @@ public class WeekendDiscount implements WooWaEvent {
     }
 
     @Override
-    public Integer executePerMenuDiscountEvent(LocalDate reservationDate, OrderMenu orderMenu) {
-        if(isEventActivate(reservationDate) && isWeekend(reservationDate)){
+    public Integer execute(LocalDate reservationDate, OrderMenu orderMenu) {
+        if(isEventActivate(reservationDate) && isWeekDay(reservationDate)){
             return calculateDiscount(orderMenu);
         }
         return 0;

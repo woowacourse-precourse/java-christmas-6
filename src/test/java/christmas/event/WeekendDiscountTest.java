@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.enums.DessertMenu;
 import christmas.enums.MainMenu;
+import christmas.event.weekdiscount.WeekendDiscount;
 import christmas.order.OrderMenu;
 import java.time.LocalDate;
 import java.time.Month;
@@ -25,7 +26,7 @@ class WeekendDiscountTest {
     @Test
     void weekDaySituationWithMain() {
         //when
-        Integer discountAmount = weekendDiscount.executePerMenuDiscountEvent(weekend, orderMenuWithMain);
+        Integer discountAmount = weekendDiscount.execute(weekend, orderMenuWithMain);
 
         //then
         assertThat(discountAmount).isEqualTo(DISCOUNT_AMOUNT * orderMenuWithMain.getOrderQuantity());
@@ -35,7 +36,7 @@ class WeekendDiscountTest {
     @Test
     void weekendSituationWithMain() {
         //when
-        Integer discountAmount = weekendDiscount.executePerMenuDiscountEvent(weekDay, orderMenuWithMain);
+        Integer discountAmount = weekendDiscount.execute(weekDay, orderMenuWithMain);
 
         //then
         assertThat(discountAmount).isEqualTo(NO_DISCOUNT_AMOUNT);
@@ -45,7 +46,7 @@ class WeekendDiscountTest {
     @Test
     void weekendSituationWithDessert() {
         //when
-        Integer discountAmount = weekendDiscount.executePerMenuDiscountEvent(weekend, orderMenuWithDessert);
+        Integer discountAmount = weekendDiscount.execute(weekend, orderMenuWithDessert);
 
         //then
         assertThat(discountAmount).isEqualTo(NO_DISCOUNT_AMOUNT);
@@ -56,7 +57,7 @@ class WeekendDiscountTest {
     @Test
     void weekDaySituationWithDessert() {
         //when
-        Integer discountAmount = weekendDiscount.executePerMenuDiscountEvent(weekDay, orderMenuWithDessert);
+        Integer discountAmount = weekendDiscount.execute(weekDay, orderMenuWithDessert);
 
         //then
         assertThat(discountAmount).isEqualTo(NO_DISCOUNT_AMOUNT);

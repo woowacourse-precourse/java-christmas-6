@@ -2,6 +2,7 @@ package christmas.event;
 
 import christmas.enums.DessertMenu;
 import christmas.enums.MainMenu;
+import christmas.event.amounttogift.ChampagneGiftEvent;
 import christmas.order.OrderList;
 import christmas.order.OrderMenu;
 import java.time.LocalDate;
@@ -28,7 +29,7 @@ class ChampagneGiftEventTest {
     void isGiftAmountOver() {
         //when
         Integer totalOrderAmount = orderListOverGiftAmount.calculateTotalPrice();
-        Boolean giftOrNot = CHAMPAGNE_GIFT_EVENT.executeGiftEvent(reservationDate, totalOrderAmount);
+        Boolean giftOrNot = CHAMPAGNE_GIFT_EVENT.execute(reservationDate, totalOrderAmount);
 
         //then
         Assertions.assertThat(giftOrNot).isTrue();
@@ -38,7 +39,7 @@ class ChampagneGiftEventTest {
     void isGiftAmountUnder() {
         //when
         Integer totalOrderAmount = orderListUnderGiftAmount.calculateTotalPrice();
-        Boolean giftOrNot = CHAMPAGNE_GIFT_EVENT.executeGiftEvent(reservationDate, totalOrderAmount);
+        Boolean giftOrNot = CHAMPAGNE_GIFT_EVENT.execute(reservationDate, totalOrderAmount);
 
         //then
         Assertions.assertThat(giftOrNot).isFalse();

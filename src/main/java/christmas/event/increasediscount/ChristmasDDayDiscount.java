@@ -1,9 +1,9 @@
-package christmas.event;
+package christmas.event.increasediscount;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class ChristmasDDayDiscount implements WooWaEvent {
+public class ChristmasDDayDiscount implements IncreaseEverydayDiscountEventInterface {
     private final static int DISCOUNT_START_AMOUNT = 1000;
     private final static int DISCOUNT_INCREMENT_PER_DAY = 100;
     private final LocalDate startDate;
@@ -26,7 +26,7 @@ public class ChristmasDDayDiscount implements WooWaEvent {
     }
 
     @Override
-    public Integer executeDateToDateEvent(LocalDate reservationDate) {
+    public Integer execute(LocalDate reservationDate) {
         if (isEventActivate(reservationDate)) {
             return calculateDiscount(reservationDate);
         }

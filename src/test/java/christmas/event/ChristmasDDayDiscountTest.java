@@ -2,6 +2,7 @@ package christmas.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.event.increasediscount.ChristmasDDayDiscount;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.stream.Stream;
@@ -25,7 +26,7 @@ class ChristmasDDayDiscountTest {
     @Test
     void whenEventActivate() {
 
-        Integer discountAmount = christmasDDayDiscount.executeDateToDateEvent(overDate);
+        Integer discountAmount = christmasDDayDiscount.execute(overDate);
 
         assertThat(discountAmount).isEqualTo(0);
     }
@@ -35,7 +36,7 @@ class ChristmasDDayDiscountTest {
     @DisplayName("1일부터 25일까지 할인가 검증")
     public void dummy(LocalDate reservationDate, Integer expectedDiscountAmount) {
         //when
-        Integer discountAmount = christmasDDayDiscount.executeDateToDateEvent(reservationDate);
+        Integer discountAmount = christmasDDayDiscount.execute(reservationDate);
 
         //then
         assertThat(discountAmount).isEqualTo(expectedDiscountAmount);

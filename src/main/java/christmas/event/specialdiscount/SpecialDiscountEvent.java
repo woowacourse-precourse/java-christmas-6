@@ -1,9 +1,10 @@
-package christmas.event;
+package christmas.event.specialdiscount;
 
+import christmas.event.WooWaEvent;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public class SpecialDiscountEvent implements WooWaEvent {
+public class SpecialDiscountEvent implements SpecialDiscountEventInterface {
     private final static Integer DISCOUNT_AMOUNT = 1000;
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -27,7 +28,7 @@ public class SpecialDiscountEvent implements WooWaEvent {
     }
 
     @Override
-    public Integer executeDateDiscountEvent(LocalDate reservationDate) {
+    public Integer execute(LocalDate reservationDate) {
         if (isEventActivate(reservationDate)) {
             return calculateDiscount(reservationDate);
         }

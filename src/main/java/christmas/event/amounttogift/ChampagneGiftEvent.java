@@ -1,8 +1,8 @@
-package christmas.event;
+package christmas.event.amounttogift;
 
 import java.time.LocalDate;
 
-public class ChampagneGiftEvent implements WooWaEvent{
+public class ChampagneGiftEvent implements AmountToGiftEventInterface {
     private final static Integer DEFAULT_GIFT_AMOUNT = 120_000;
     private final LocalDate startDate;
     private final LocalDate endDate;
@@ -24,7 +24,7 @@ public class ChampagneGiftEvent implements WooWaEvent{
     }
 
     @Override
-    public Boolean executeGiftEvent(LocalDate reservationDate, Integer totalOrderAmount) {
+    public Boolean execute(LocalDate reservationDate, Integer totalOrderAmount) {
         if (isEventActivate(reservationDate)) {
             return isGiftAmountOver(totalOrderAmount);
         }
