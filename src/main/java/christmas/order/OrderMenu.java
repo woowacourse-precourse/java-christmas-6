@@ -1,7 +1,7 @@
 package christmas.order;
 
-import christmas.MenuList;
 import christmas.enums.MenuItem;
+import christmas.enums.MenuList;
 
 public class OrderMenu {
     private final MenuItem menuItem;
