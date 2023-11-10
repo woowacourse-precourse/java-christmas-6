@@ -5,8 +5,8 @@ import static christmas.enums.DessertMenu.CHOCOLATE_CAKE;
 import static christmas.enums.MainMenu.SEAFOOD_PASTA;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.MenuList;
 import christmas.enums.MenuItem;
+import christmas.enums.MenuList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
