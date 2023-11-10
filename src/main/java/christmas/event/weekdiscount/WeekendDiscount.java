@@ -28,7 +28,7 @@ public class WeekendDiscount implements WeekDiscountEventInterface {
 
     private Boolean isWeekend(LocalDate reservationDate) {
         DayOfWeek dayOfWeek = reservationDate.getDayOfWeek();
-        return (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY);
+        return (dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY);
     }
 
     @Override
