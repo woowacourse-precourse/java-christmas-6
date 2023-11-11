@@ -18,7 +18,7 @@ public class AmountToAGiftEvent implements AmountToGiftEvent {
     }
 
     public String isGiftAmountOver(Integer totalOrderAmount) {
-        if (totalOrderAmount > needAmountToGift) {
+        if (totalOrderAmount >= needAmountToGift) {
             return menuItem.getName();
         }
         return NONE;
