@@ -3,6 +3,8 @@ package christmas.order;
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 
 import christmas.enums.menu.MenuItem;
+import christmas.utils.MenuList;
+import java.util.Objects;
 
 public class Order {
     private final MenuItem menuItem;
@@ -37,5 +39,23 @@ public class Order {
 
     public MenuItem getMenuItem() {
         return menuItem;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Order order = (Order) o;
+        return Objects.equals(menuItem, order.menuItem) && Objects.equals(orderQuantity,
+                order.orderQuantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(menuItem, orderQuantity);
     }
 }
