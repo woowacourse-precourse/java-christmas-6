@@ -17,9 +17,7 @@ public class BadgeManager {
         this.wooWaEventManager = wooWaEventManager;
     }
 
-    public BenefitBadge isBadgeConditionSatisfied(LocalDate reservationDate, Orders orders){
-        EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, orders);
-        Integer totalBenefitAmount = eventBenefit.discountBenefit();
+    public BenefitBadge isBadgeConditionSatisfied(LocalDate reservationDate, Integer totalBenefitAmount){
         if(isSanta(totalBenefitAmount)){
             return SANTA;
         }
