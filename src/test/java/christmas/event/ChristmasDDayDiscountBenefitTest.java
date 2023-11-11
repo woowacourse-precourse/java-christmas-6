@@ -1,7 +1,11 @@
 package christmas.event;
 
+import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
+import static christmas.enums.benefit.DiscountBenefit.INCREASE_BENEFIT;
+import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.enums.benefit.DiscountBenefit;
 import christmas.event.increasediscount.ChristmasDDayDiscount;
 import java.time.LocalDate;
 import java.time.Month;
@@ -12,16 +16,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class ChristmasDDayDiscountTest {
+class ChristmasDDayDiscountBenefitTest {
 
     private final static LocalDate startDate = LocalDate.of(2023, Month.DECEMBER, 1);
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 25);
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate overDate = LocalDate.of(2023, Month.DECEMBER, 26);
-    private final static ChristmasDDayDiscount christmasDDayDiscount = new ChristmasDDayDiscount(eventPeriod,1000,100);
-    private final static Integer DISCOUNT_START_AMOUNT = 1000;
-    private final static Integer DISCOUNT_INCREMENT_PER_DAY = 100;
-    //TODO: 다른 12월이 아닌경우에도 테스트해야함
+    private final static ChristmasDDayDiscount christmasDDayDiscount = new ChristmasDDayDiscount(eventPeriod,
+            BASIC_BENEFIT.getAmount(), INCREASE_BENEFIT.getAmount());
 
     @DisplayName("날짜를 입력했을 때, 이벤트 날짜에 해당되지 않으면 0을 반환한다.")
     @Test
@@ -29,7 +31,7 @@ class ChristmasDDayDiscountTest {
 
         Integer discountAmount = christmasDDayDiscount.execute(overDate);
 
-        assertThat(discountAmount).isEqualTo(0);
+        assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
     }
 
     @ParameterizedTest
@@ -47,7 +49,7 @@ class ChristmasDDayDiscountTest {
         Stream.Builder<Arguments> streamBuilder = Stream.builder();
         for (int i = 1; i <= endDate.getDayOfMonth(); i++) {
             streamBuilder.add(Arguments.of(LocalDate.of(2023, Month.DECEMBER, i),
-                    DISCOUNT_START_AMOUNT + (i - 1) * DISCOUNT_INCREMENT_PER_DAY));
+                    BASIC_BENEFIT.getAmount() + (i - 1) * INCREASE_BENEFIT.getAmount()));
         }
         return streamBuilder.build();
     }

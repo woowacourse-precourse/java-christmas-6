@@ -1,7 +1,10 @@
 package christmas.event;
 
+import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
+import static christmas.enums.benefit.DiscountBenefit.WEEK_BENEFIT;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.enums.benefit.DiscountBenefit;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.event.weekdiscount.WeekdayDiscount;
@@ -14,7 +17,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.internal.matchers.Or;
 
-class WeekdayDiscountTest {
+class WeekdayDiscountBenefitTest {
     private final static LocalDate startDate = LocalDate.of(2023, Month.DECEMBER, 1);
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 31);
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
@@ -25,8 +28,6 @@ class WeekdayDiscountTest {
     private final static OrderMenu orderMenuWithMain = new OrderMenu(MainMenu.T_BONE_STEAK,2);
     private final static Orders ordersWithMain = new Orders(List.of(orderMenuWithMain));
     private final static Orders ordersWithDessert = new Orders(List.of(orderMenuWithDessert));
-    private final static Integer DISCOUNT_AMOUNT = 2023;
-    private final static Integer NO_DISCOUNT_AMOUNT =0;
 
     @DisplayName("평일이면 메인 수당 각각 2023원씩 할인한다.")
     @Test
@@ -35,7 +36,7 @@ class WeekdayDiscountTest {
         Integer discountAmount = weekDayDiscount.execute(weekday,ordersWithMain);
 
         //then
-        assertThat(discountAmount).isEqualTo(DISCOUNT_AMOUNT* orderMenuWithDessert.getOrderQuantity());
+        assertThat(discountAmount).isEqualTo(WEEK_BENEFIT.getAmount()* orderMenuWithDessert.getOrderQuantity());
     }
 
     @DisplayName("주말이면 할인받지 아니한다.")
@@ -45,7 +46,7 @@ class WeekdayDiscountTest {
         Integer discountAmount = weekDayDiscount.execute(weekend,ordersWithMain);
 
         //then
-        assertThat(discountAmount).isEqualTo(NO_DISCOUNT_AMOUNT);
+        assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
     }
 
     @DisplayName("평일이어도 다른 메뉴들은 해당되지 아니한다.")
@@ -55,7 +56,7 @@ class WeekdayDiscountTest {
         Integer discountAmount = weekDayDiscount.execute(weekday,ordersWithDessert);
 
         //then
-        assertThat(discountAmount).isEqualTo(NO_DISCOUNT_AMOUNT);
+        assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
     }
 
     @DisplayName("주말이어도 다른 메뉴들은 해당되지 아니한다.")
@@ -65,6 +66,6 @@ class WeekdayDiscountTest {
         Integer discountAmount = weekDayDiscount.execute(weekend,ordersWithDessert);
 
         //then
-        assertThat(discountAmount).isEqualTo(NO_DISCOUNT_AMOUNT);
+        assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
     }
 }

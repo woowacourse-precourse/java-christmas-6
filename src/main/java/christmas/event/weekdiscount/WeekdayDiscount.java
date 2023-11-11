@@ -1,5 +1,7 @@
 package christmas.event.weekdiscount;
 
+import static christmas.enums.benefit.DiscountBenefit.*;
+
 import christmas.enums.menu.MenuItem;
 import christmas.event.EventPeriod;
 import christmas.order.Orders;
@@ -21,7 +23,7 @@ public class WeekdayDiscount implements WeekDiscountEvent {
         for (MenuItem discountMenuItem : discountMenuItems) {
             return orders.findEventMenuCount(discountMenuItem) * discountAmount;
         }
-        return 0;
+        return NO_BENEFIT.getAmount();
     }
 
     private Boolean isWeekDay(LocalDate reservationDate) {
@@ -39,6 +41,6 @@ public class WeekdayDiscount implements WeekDiscountEvent {
         if (isEventActivate(reservationDate) && isWeekDay(reservationDate)) {
             return calculateDiscount(orders);
         }
-        return 0;
+        return NO_BENEFIT.getAmount();
     }
 }

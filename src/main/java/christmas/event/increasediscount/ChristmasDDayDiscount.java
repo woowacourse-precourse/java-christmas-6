@@ -1,5 +1,7 @@
 package christmas.event.increasediscount;
 
+import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
+
 import christmas.event.EventPeriod;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -31,6 +33,6 @@ public class ChristmasDDayDiscount implements IncreaseEverydayDiscountEvent {
         if (isEventActivate(reservationDate)) {
             return calculateDiscount(reservationDate);
         }
-        return 0;
+        return NO_BENEFIT.getAmount();
     }
 }

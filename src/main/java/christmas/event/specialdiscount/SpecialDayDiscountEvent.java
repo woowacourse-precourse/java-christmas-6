@@ -1,5 +1,7 @@
 package christmas.event.specialdiscount;
 
+import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
+
 import christmas.event.EventPeriod;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -18,7 +20,7 @@ public class SpecialDayDiscountEvent implements SpecialDiscountEvent {
         if(dayOfWeek == DayOfWeek.SUNDAY || reservationDate.getDayOfMonth() == 25){
             return discountAmount;
         }
-        return 0;
+        return NO_BENEFIT.getAmount();
     }
 
     @Override
@@ -31,6 +33,6 @@ public class SpecialDayDiscountEvent implements SpecialDiscountEvent {
         if (isEventActivate(reservationDate)) {
             return calculateDiscount(reservationDate);
         }
-        return 0;
+        return NO_BENEFIT.getAmount();
     }
 }

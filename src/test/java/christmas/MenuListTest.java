@@ -15,6 +15,7 @@ class MenuListTest {
     @DisplayName("메뉴명으로 enum 을 반환한다.")
     @Test
     void getItemByName() {
+        //given
         String CHAMPAGNE_NAME = CHAMPAGNE.getName();
         String SEAFOOD_PASTA_NAME = SEAFOOD_PASTA.getName();
         String CHOCOLATE_CAKE_NAME = CHOCOLATE_CAKE.getName();

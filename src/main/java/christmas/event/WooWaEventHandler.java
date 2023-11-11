@@ -1,5 +1,14 @@
 package christmas.event;
 
+import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
+import static christmas.enums.benefit.DiscountBenefit.GIFT_CONDITION_BENEFIT;
+import static christmas.enums.benefit.DiscountBenefit.INCREASE_BENEFIT;
+import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
+import static christmas.enums.benefit.DiscountBenefit.WEEK_BENEFIT;
+import static christmas.enums.date.decemberevent.DecemberEvent.END_OF_THE_CHRISTMAS;
+import static christmas.enums.date.decemberevent.DecemberEvent.MONTH;
+import static christmas.enums.date.decemberevent.DecemberEvent.START_OF_THE_MONTH;
+import static christmas.enums.date.decemberevent.DecemberEvent.YEAR;
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 
 import christmas.enums.menu.DessertMenu;
@@ -26,17 +35,19 @@ public class WooWaEventHandler {
     private final WeekDiscountEvent weekendDiscountEvent;
 
     public WooWaEventHandler() {
-        MainMenu[] weekdayDiscountMenus = MainMenu.values();
-        DessertMenu[] weekendDiscountMenus = DessertMenu.values();
+        final MainMenu[] weekdayDiscountMenus = MainMenu.values();
+        final DessertMenu[] weekendDiscountMenus = DessertMenu.values();
 
-        EventPeriod monthPeriod = EventPeriod.createMonthPeriod(2023, 12);
-        EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(2023, 12, 1, 25);
+        EventPeriod monthPeriod = EventPeriod.createMonthPeriod(YEAR.getDate(), MONTH.getDate());
+        EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(YEAR.getDate(), MONTH.getDate(),
+                START_OF_THE_MONTH.getDate(), END_OF_THE_CHRISTMAS.getDate());
 
-        this.increaseEverydayDiscountEvent = new ChristmasDDayDiscount(typicalPeriod, 1000, 100);
-        this.amountToGiftEvent = new AmountToAGiftEvent(monthPeriod, 120_000, CHAMPAGNE);
-        this.specialDiscountEvent = new SpecialDayDiscountEvent(monthPeriod, 1000);
-        this.weekdayDiscountEvent = new WeekdayDiscount(monthPeriod, weekdayDiscountMenus, 2023);
-        this.weekendDiscountEvent = new WeekendDiscount(monthPeriod, weekendDiscountMenus, 2023);
+        this.increaseEverydayDiscountEvent = new ChristmasDDayDiscount(typicalPeriod, BASIC_BENEFIT.getAmount(),
+                INCREASE_BENEFIT.getAmount());
+        this.amountToGiftEvent = new AmountToAGiftEvent(monthPeriod, GIFT_CONDITION_BENEFIT.getAmount(), CHAMPAGNE);
+        this.specialDiscountEvent = new SpecialDayDiscountEvent(monthPeriod, BASIC_BENEFIT.getAmount());
+        this.weekdayDiscountEvent = new WeekdayDiscount(monthPeriod, weekdayDiscountMenus, WEEK_BENEFIT.getAmount());
+        this.weekendDiscountEvent = new WeekendDiscount(monthPeriod, weekendDiscountMenus, WEEK_BENEFIT.getAmount());
     }
 
     public EventBenefit activateEvent(LocalDate reservationDate, Orders orders) {
@@ -54,8 +65,8 @@ public class WooWaEventHandler {
     }
 
     public Integer addGiftPriceToBenefitAmount(MenuItem menuItem) {
-        if(menuItem==null){
-            return 0;
+        if (menuItem == null) {
+            return NO_BENEFIT.getAmount();
         }
         return menuItem.getPrice();
     }
