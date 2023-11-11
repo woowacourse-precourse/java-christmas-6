@@ -50,12 +50,11 @@ public class Order {
             return false;
         }
         Order order = (Order) o;
-        return Objects.equals(menuItem, order.menuItem) && Objects.equals(orderQuantity,
-                order.orderQuantity);
+        return Objects.equals(menuItem, order.menuItem);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(menuItem, orderQuantity);
+        return Objects.hash(menuItem);
     }
 }
