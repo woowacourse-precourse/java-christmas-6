@@ -15,6 +15,9 @@ public class Planner {
     private Item item;
     private Order order;
     private Event event;
+    private int discountAmount;
+    private String badge;
+
 
     private List<Item> items = new ArrayList<>();
     private int date;
@@ -28,7 +31,7 @@ public class Planner {
     public void takeOrder() {
         takeDate();
         takeItem();
-        order = Order.getInstance(items, date);
+        order = new Order(items, date);
     }
 
     public void takeDate() {
@@ -48,7 +51,7 @@ public class Planner {
         String input = inputView.readItem();
         isComplete = Validation.validItems(input);
 
-        if(!isComplete) {
+        if (!isComplete) {
             takeItem();
             return;
         }
@@ -66,7 +69,9 @@ public class Planner {
     }
 
     public void applyEvent() {
-
+        event = new Event(date);
+        discountAmount = event.apply(order.getDessertCount(), order.getMainCount(), order.sumAmount());
+        badge = event.presentBadge(discountAmount);
     }
 
     public void printOrder() {
