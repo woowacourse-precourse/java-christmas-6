@@ -1,5 +1,8 @@
 package christmas.order;
 
+import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
+
+import christmas.enums.benefit.DiscountBenefit;
 import christmas.enums.menu.MenuItem;
 
 public class OrderMenu {
@@ -20,7 +23,7 @@ public class OrderMenu {
         if(this.menuItem.equals(eventMenu)){
             return orderQuantity;
         }
-        return 0;
+        return NO_BENEFIT.getAmount();
     }
 
     public Integer calculatePrice() {
