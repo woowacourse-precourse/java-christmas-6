@@ -176,7 +176,7 @@
 
 - 배운점
   - hashSet의 비교 로직을 변경하기 위해서는 equals 뿐만 아니라 hashCode도 로직을 수정해야 한다.
-  - 결국 hashSet은 hashCode를 기반으로 저장하기 때문에 ,동일한 hashCode일 때 eqauls 동등성을 비교하기 때문이다.
+  - 결국 hashSet은 hashCode를 기반으로 저장하기 때문에 ,동일한 hashCode 일 때에, 같은 버킷 내에 eqauls 동등성을 비교하기 때문이다.
 
 
 
