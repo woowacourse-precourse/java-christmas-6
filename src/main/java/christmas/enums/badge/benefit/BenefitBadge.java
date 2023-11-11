@@ -5,7 +5,8 @@ import christmas.enums.badge.Badge;
 public enum BenefitBadge implements Badge {
     STAR("별",5_000)
     , TREE("트리",10_000)
-    , SANTA("산타",20_000);
+    , SANTA("산타",20_000)
+    , NONE("NONE",0);
 
     private final String name;
     private final Integer benefitCondition;
@@ -21,7 +22,7 @@ public enum BenefitBadge implements Badge {
     }
 
     @Override
-    public Integer getCondition() {
+    public Integer getAmount() {
         return benefitCondition;
     }
 }
