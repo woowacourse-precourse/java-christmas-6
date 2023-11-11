@@ -1,4 +1,4 @@
-package christmas.event.amounttogift;
+package christmas.event.gift;
 
 import christmas.enums.menu.MenuItem;
 import christmas.event.EventPeriod;
@@ -29,9 +29,9 @@ public class AmountToAGiftEvent implements AmountToGiftEvent {
     }
 
     @Override
-    public String execute(LocalDate reservationDate, Orders orders) {
+    public String execute(LocalDate reservationDate, Integer totalPriceBeforeDiscount) {
         if (isEventActivate(reservationDate)) {
-            return isGiftAmountOver(orders.calculateTotalPrice());
+            return isGiftAmountOver(totalPriceBeforeDiscount);
         }
         return NONE;
     }

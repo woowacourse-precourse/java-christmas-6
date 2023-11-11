@@ -2,7 +2,6 @@ package christmas.event;
 
 import static christmas.enums.date.decemberevent.DecemberEvent.START_OF_THE_MONTH;
 
-import christmas.enums.date.decemberevent.DecemberEvent;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;

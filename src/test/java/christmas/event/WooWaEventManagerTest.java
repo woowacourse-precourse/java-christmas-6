@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.manangers.WooWaEventManager;
-import christmas.order.OrderMenu;
+import christmas.order.Order;
 import christmas.order.Orders;
 import java.time.LocalDate;
 import java.time.Month;
@@ -19,11 +19,11 @@ import org.junit.jupiter.api.Test;
 
 class WooWaEventManagerTest {
 
-    private final static OrderMenu orderMenuWithDessert = new OrderMenu(DessertMenu.CHOCOLATE_CAKE, 2);
-    private final static OrderMenu orderMenuWithMain = new OrderMenu(MainMenu.T_BONE_STEAK, 2);
-    private final static Orders ordersWithDessert = new Orders(List.of(orderMenuWithDessert));
-    private final static Orders ordersWithMain = new Orders(List.of(orderMenuWithMain));
-    private final static Orders ordersOver120_000 = new Orders(List.of(orderMenuWithDessert, orderMenuWithMain));
+    private final static Order ORDER_WITH_DESSERT = new Order(DessertMenu.CHOCOLATE_CAKE, 2);
+    private final static Order ORDER_WITH_MAIN = new Order(MainMenu.T_BONE_STEAK, 2);
+    private final static Orders ordersWithDessert = new Orders(List.of(ORDER_WITH_DESSERT));
+    private final static Orders ordersWithMain = new Orders(List.of(ORDER_WITH_MAIN));
+    private final static Orders ordersOver120_000 = new Orders(List.of(ORDER_WITH_DESSERT, ORDER_WITH_MAIN));
     private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 3);
     private final static Integer CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT = (BASIC_BENEFIT.getAmount() + (
             INCREASE_BENEFIT.getAmount() * 2));

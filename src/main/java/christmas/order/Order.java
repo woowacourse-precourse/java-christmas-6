@@ -3,20 +3,19 @@ package christmas.order;
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 
 import christmas.enums.menu.MenuItem;
-import christmas.manangers.MenuManager;
 
-public class OrderMenu {
+public class Order {
     private final MenuItem menuItem;
     private final Integer orderQuantity;
 
-    public OrderMenu(MenuItem menuItem, Integer orderQuantity) {
+    public Order(MenuItem menuItem, Integer orderQuantity) {
         this.menuItem = menuItem;
         this.orderQuantity = orderQuantity;
     }
 
-    public static OrderMenu createOrderMenu(String menuName, Integer orderQuantity) {
-        MenuItem menuByName = MenuManager.getMenuByName(menuName);
-        return new OrderMenu(menuByName, orderQuantity);
+    public static Order createOrderMenu(String menuName, Integer orderQuantity) {
+        MenuItem menuByName = MenuList.getMenuByName(menuName);
+        return new Order(menuByName, orderQuantity);
     }
 
     public Integer findEventMenuCount(MenuItem[] eventMenus) {

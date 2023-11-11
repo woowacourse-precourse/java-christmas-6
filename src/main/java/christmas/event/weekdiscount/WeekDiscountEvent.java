@@ -1,7 +1,6 @@
 package christmas.event.weekdiscount;
 
 import christmas.event.WooWaEvent;
-import christmas.order.OrderMenu;
 import christmas.order.Orders;
 import java.time.LocalDate;
 

@@ -6,23 +6,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
-import christmas.order.OrderMenu;
+import christmas.order.Order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class OrderMenuTest {
+class OrderTest {
     private final static String T_BONE_STEAK_NAME = "티본스테이크";
     private final static Integer TWO_ORDER = 2;
-    private final static OrderMenu orderMenu = new OrderMenu(T_BONE_STEAK, TWO_ORDER);
-    private final static OrderMenu twoSeafoodPastaOrderMenu =new OrderMenu(SEAFOOD_PASTA,TWO_ORDER);
+    private final static Order ORDER = new Order(T_BONE_STEAK, TWO_ORDER);
+    private final static Order TWO_SEAFOOD_PASTA_ORDER =new Order(SEAFOOD_PASTA,TWO_ORDER);
     private final static Integer TWO_T_BONE_STEAK_PRISE = T_BONE_STEAK.getPrice() * TWO_ORDER;
 
     @DisplayName("티본 스테이크 Enum 과 주문한 수량을 반환한다.")
     @Test
     void nameAndQuantityReturn() {
         //when
-        String menuName = orderMenu.getMenuItem().getName();
-        Integer orderQuantity = orderMenu.getOrderQuantity();
+        String menuName = ORDER.getMenuItem().getName();
+        Integer orderQuantity = ORDER.getOrderQuantity();
 
         //then
         assertThat(menuName).isEqualTo(T_BONE_STEAK_NAME);
@@ -34,7 +34,7 @@ class OrderMenuTest {
     @Test
     void calculatePrice() {
         //when
-        Integer price = orderMenu.calculatePrice();
+        Integer price = ORDER.calculatePrice();
 
         //then
         assertThat(price).isEqualTo(TWO_T_BONE_STEAK_PRISE);
@@ -44,12 +44,12 @@ class OrderMenuTest {
     @Test
     void createOrderMenu() {
         //given
-        OrderMenu findOrderMenu = OrderMenu.createOrderMenu(T_BONE_STEAK_NAME, TWO_ORDER);
+        Order findOrder = Order.createOrderMenu(T_BONE_STEAK_NAME, TWO_ORDER);
 
         //when
-        Integer price = findOrderMenu.calculatePrice();
-        Integer orderQuantity = findOrderMenu.getOrderQuantity();
-        MenuItem menuItem = findOrderMenu.getMenuItem();
+        Integer price = findOrder.calculatePrice();
+        Integer orderQuantity = findOrder.getOrderQuantity();
+        MenuItem menuItem = findOrder.getMenuItem();
 
         //then
         assertThat(price).isEqualTo(TWO_T_BONE_STEAK_PRISE);
@@ -61,7 +61,7 @@ class OrderMenuTest {
     @Test
     void findEventMenuCount() {
         //when
-        Integer eventMenuCount = twoSeafoodPastaOrderMenu.findEventMenuCount(MainMenu.values());
+        Integer eventMenuCount = TWO_SEAFOOD_PASTA_ORDER.findEventMenuCount(MainMenu.values());
 
         //then
         assertThat(eventMenuCount).isEqualTo(TWO_ORDER);

@@ -1,4 +1,4 @@
-package christmas.manangers;
+package christmas.order;
 
 import christmas.enums.menu.AppetizerMenu;
 import christmas.enums.menu.BeverageMenu;
@@ -8,7 +8,7 @@ import christmas.enums.menu.MenuItem;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MenuManager {
+public class MenuList {
     private final static Map<String, MenuItem> menuItems = new HashMap<>();
 
     static {
@@ -29,7 +29,7 @@ public class MenuManager {
         }
     }
 
-    private MenuManager() {
+    private MenuList() {
     }
 
     public static MenuItem getMenuByName(String name) {

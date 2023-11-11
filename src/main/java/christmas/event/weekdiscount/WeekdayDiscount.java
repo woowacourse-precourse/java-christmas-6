@@ -19,7 +19,7 @@ public class WeekdayDiscount implements WeekDiscountEvent {
         this.discountMenuItems = discountMenuItems;
     }
 
-    private int calculateDiscount(Orders orders) {
+    private Integer calculateDiscount(Orders orders) {
             return orders.findEventMenuCount(discountMenuItems) * discountAmount;
     }
 

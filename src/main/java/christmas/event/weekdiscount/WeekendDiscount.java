@@ -21,7 +21,6 @@ public class WeekendDiscount implements WeekDiscountEvent {
 
     private int calculateDiscount(Orders orders) {
         return orders.findEventMenuCount(discountMenuItems) * discountAmount;
-
     }
 
     private Boolean isWeekend(LocalDate reservationDate) {
