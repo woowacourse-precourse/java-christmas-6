@@ -20,10 +20,7 @@ public class WeekdayDiscount implements WeekDiscountEvent {
     }
 
     private int calculateDiscount(Orders orders) {
-        for (MenuItem discountMenuItem : discountMenuItems) {
-            return orders.findEventMenuCount(discountMenuItem) * discountAmount;
-        }
-        return NO_BENEFIT.getAmount();
+            return orders.findEventMenuCount(discountMenuItems) * discountAmount;
     }
 
     private Boolean isWeekDay(LocalDate reservationDate) {

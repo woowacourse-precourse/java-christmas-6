@@ -2,8 +2,8 @@ package christmas.order;
 
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 
-import christmas.enums.benefit.DiscountBenefit;
 import christmas.enums.menu.MenuItem;
+import christmas.manangers.MenuManager;
 
 public class OrderMenu {
     private final MenuItem menuItem;
@@ -15,13 +15,15 @@ public class OrderMenu {
     }
 
     public static OrderMenu createOrderMenu(String menuName, Integer orderQuantity) {
-        MenuItem menuByName = MenuList.getMenuByName(menuName);
+        MenuItem menuByName = MenuManager.getMenuByName(menuName);
         return new OrderMenu(menuByName, orderQuantity);
     }
 
-    public Integer findEventMenuCount(MenuItem eventMenu) {
-        if(this.menuItem.equals(eventMenu)){
-            return orderQuantity;
+    public Integer findEventMenuCount(MenuItem[] eventMenus) {
+        for (MenuItem eventMenu : eventMenus) {
+            if(this.menuItem.equals(eventMenu)){
+                return orderQuantity;
+            }
         }
         return NO_BENEFIT.getAmount();
     }
