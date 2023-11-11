@@ -174,6 +174,10 @@
 - [x] 만원 이하 결제 시 혜택 x 구현
 - [x] 문자열을 추출하여 주문으로 만들기 구현
 
+- 배운점
+  - hashSet의 비교 로직을 변경하기 위해서는 equals 뿐만 아니라 hashCode도 로직을 수정해야 한다.
+  - 결국 hashSet은 hashCode를 기반으로 저장하기 때문에 ,동일한 hashCode일 때 eqauls 동등성을 비교하기 때문이다.
+
 
 
 </details>
