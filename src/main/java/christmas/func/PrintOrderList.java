@@ -2,14 +2,19 @@ package christmas.func;
 
 import static christmas.view.MenuData.menuMap;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class PrintOrderList {
+    private Map<String, Integer> orderSummary;
+    private int totalBeforeDiscount;
 
     public void printOrderSummary(String orderMenu) {
         String[] menuItems = orderMenu.split(",");
-        Map<String, Integer> orderSummary = new HashMap<>();
+        orderSummary = new HashMap<>();
 
         System.out.println("<주문 메뉴>");
         for (String menuItem : menuItems) {
@@ -25,8 +30,12 @@ public class PrintOrderList {
         beforeDiscount(orderSummary);
     }
 
+    public Map<String, Integer> getOrderSummary() {
+        return orderSummary;
+    }
+
     private void beforeDiscount(Map<String, Integer> orderSummary) {
-        int totalBeforeDiscount = 0;
+        totalBeforeDiscount = 0;
         System.out.println("<할인 전 총주문 금액>");
         for (Map.Entry<String, Integer> entry : orderSummary.entrySet()) {
             String itemName = entry.getKey();
@@ -39,6 +48,30 @@ public class PrintOrderList {
         }
         System.out.println(totalBeforeDiscount + "원");
         serviceProduct(totalBeforeDiscount);
+    }
+
+    public boolean benefitPossible() {
+        if (totalBeforeDiscount >= 10000) {
+            Set<String> beverageItems = new HashSet<>(Arrays.asList("제로콜라", "레드와인", "샴페인"));
+            boolean hasNonBeverageItem = false;
+
+            for (Map.Entry<String, Integer> entry : orderSummary.entrySet()) {
+                String itemName = entry.getKey();
+                int quantity = entry.getValue();
+
+                if (!beverageItems.contains(itemName) && quantity > 0) {
+                    hasNonBeverageItem = true;
+                    break;
+                }
+            }
+
+            return hasNonBeverageItem;
+        }
+        return false;
+    }
+
+    public int getTotalBeforeDiscount() {
+        return totalBeforeDiscount;
     }
 
     private void serviceProduct(int totalBeforeDiscount) {
