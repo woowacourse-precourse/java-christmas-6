@@ -1,8 +1,19 @@
 package christmas.control;
 
 import christmas.model.FoodType;
+import christmas.model.Item;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Validation {
+    private static Set<String> usedItem = new HashSet<>();
+    private static final String DAY_ERROR_MEESAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
+    private static final String FOOD_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
+
+
     public static void validDate(String input) {
         final int START_DAY = 1;
         final int END_DAY = 31;
@@ -11,30 +22,36 @@ public class Validation {
         try {
             date = Integer.parseInt(input);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("[ERROR] : 숫자 형식으로 입력해 주세요. ");
+            throw new IllegalArgumentException(DAY_ERROR_MEESAGE);
         }
 
         if (date < START_DAY || date > END_DAY) {
-            throw new IllegalArgumentException("[ERROR] : 이벤트 시작일과 종료일을 확인해 주세요.");
+            throw new IllegalArgumentException(DAY_ERROR_MEESAGE);
         }
     }
 
-    public static void validItem(String input) {
+    public static boolean validItems(String input) {
+        usedItem.clear();
         int max = 0;
         try {
             String[] splitItems = input.split(",");
             for (String item : splitItems) {
-                String food = item.substring(0, item.indexOf("-"));
-                int count = Integer.parseInt(item.substring(item.indexOf("-") + 1));
-                max += count;
-
-                validFood(food);
-                validCount(count, max);
+                validItem(Item.extractItem(item), max);
             }
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new StringIndexOutOfBoundsException("[ERROR] : 잘못된 입력입니다. ");
+            return true;
+        } catch (StringIndexOutOfBoundsException | IllegalArgumentException e) {
+            System.out.println(FOOD_ERROR_MESSAGE);
+        }
+        return false;
+    }
+
+    public static void validItem(Item item, int max) {
+        try {
+            validFood(item.getFood());
+            validCount(item.getCount(), max);
+            validDuplication(item.getFood());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("[ERROR] : " + e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -42,7 +59,7 @@ public class Validation {
         try {
             FoodType.valueOf(food).getType();
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("[ERROR] : 잘못된 음식 이름이 포함되어 있습니다.");
+            throw new IllegalArgumentException();
         }
     }
 
@@ -50,10 +67,17 @@ public class Validation {
         final int MIN_COUNT = 1;
         final int MAX_COUNT = 20;
         if (count < MIN_COUNT || count > MAX_COUNT) {
-            throw new IllegalArgumentException("각 항목별 수량이 "+MIN_COUNT+"~"+MAX_COUNT+"개인지 확인해 주세요.");
+            throw new IllegalArgumentException();
         }
         if (max > MAX_COUNT) {
-            throw new IllegalArgumentException("총 수량은 "+MAX_COUNT+"개 까지만 허용됩니다.");
+            throw new IllegalArgumentException();
         }
+    }
+
+    public static void validDuplication(String food) {
+        if (usedItem.contains(food)) {
+            throw new IllegalArgumentException();
+        }
+        usedItem.add(food);
     }
 }

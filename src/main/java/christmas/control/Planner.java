@@ -44,15 +44,15 @@ public class Planner {
     }
 
     public void takeItem() {
-        try {
-            String input = inputView.readItem();
-            Validation.validItem(input);
+        boolean isComplete = false;
+        String input = inputView.readItem();
+        isComplete = Validation.validItems(input);
 
-            items = convertItem(input);
-        } catch (IllegalArgumentException | StringIndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
+        if(!isComplete) {
             takeItem();
+            return;
         }
+        items = convertItem(input);
     }
 
     public List<Item> convertItem(String input) {
@@ -60,10 +60,7 @@ public class Planner {
         String[] splitItems = input.split(",");
 
         for (String item : splitItems) {
-            String food = item.substring(0, item.indexOf("-"));
-            int count = Integer.parseInt(item.substring(item.indexOf("-") + 1));
-
-            items.add(new Item(food, count));
+            items.add(Item.extractItem(item));
         }
         return items;
     }
