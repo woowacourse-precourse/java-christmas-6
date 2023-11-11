@@ -1,4 +1,4 @@
-package christmas.event;
+package christmas.manangers;
 
 import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.GIFT_CONDITION_BENEFIT;
@@ -14,6 +14,8 @@ import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
+import christmas.event.EventBenefit;
+import christmas.event.EventPeriod;
 import christmas.event.amounttogift.AmountToAGiftEvent;
 import christmas.event.amounttogift.AmountToGiftEvent;
 import christmas.event.increasediscount.ChristmasDDayDiscount;
@@ -23,18 +25,17 @@ import christmas.event.specialdiscount.SpecialDiscountEvent;
 import christmas.event.weekdiscount.WeekDiscountEvent;
 import christmas.event.weekdiscount.WeekdayDiscount;
 import christmas.event.weekdiscount.WeekendDiscount;
-import christmas.order.MenuList;
 import christmas.order.Orders;
 import java.time.LocalDate;
 
-public class WooWaEventHandler {
+public class WooWaEventManager {
     private final AmountToGiftEvent amountToGiftEvent;
     private final IncreaseEverydayDiscountEvent increaseEverydayDiscountEvent;
     private final SpecialDiscountEvent specialDiscountEvent;
     private final WeekDiscountEvent weekdayDiscountEvent;
     private final WeekDiscountEvent weekendDiscountEvent;
 
-    public WooWaEventHandler() {
+    public WooWaEventManager() {
         final MainMenu[] weekdayDiscountMenus = MainMenu.values();
         final DessertMenu[] weekendDiscountMenus = DessertMenu.values();
 
@@ -57,14 +58,14 @@ public class WooWaEventHandler {
         Integer weekendDiscount = weekendDiscountEvent.execute(reservationDate, orders);
         String giftName = amountToGiftEvent.execute(reservationDate, orders);
 
-        MenuItem gift = MenuList.getMenuByName(giftName);
+        MenuItem gift = MenuManager.getMenuByName(giftName);
         Integer giftPrice = addGiftPriceToBenefitAmount(gift);
         int discountBenefit = christmasDiscount + specialDiscount + weekdayDiscount + weekendDiscount + giftPrice;
 
         return new EventBenefit(gift, discountBenefit);
     }
 
-    public Integer addGiftPriceToBenefitAmount(MenuItem menuItem) {
+    private Integer addGiftPriceToBenefitAmount(MenuItem menuItem) {
         if (menuItem == null) {
             return NO_BENEFIT.getAmount();
         }
