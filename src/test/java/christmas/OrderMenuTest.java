@@ -1,17 +1,20 @@
 package christmas;
 
+import static christmas.enums.menu.MainMenu.SEAFOOD_PASTA;
 import static christmas.enums.menu.MainMenu.T_BONE_STEAK;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.order.OrderMenu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class OrderSystemMenuTest {
+class OrderMenuTest {
     private final static String T_BONE_STEAK_NAME = "티본스테이크";
     private final static Integer TWO_ORDER = 2;
     private final static OrderMenu orderMenu = new OrderMenu(T_BONE_STEAK, TWO_ORDER);
+    private final static OrderMenu twoSeafoodPastaOrderMenu =new OrderMenu(SEAFOOD_PASTA,TWO_ORDER);
     private final static Integer TWO_T_BONE_STEAK_PRISE = T_BONE_STEAK.getPrice() * TWO_ORDER;
 
     @DisplayName("티본 스테이크 Enum 과 주문한 수량을 반환한다.")
@@ -53,5 +56,14 @@ class OrderSystemMenuTest {
         assertThat(orderQuantity).isEqualTo(TWO_ORDER);
         assertThat(menuItem).isEqualTo(T_BONE_STEAK);
 
+    }
+
+    @Test
+    void findEventMenuCount() {
+        //when
+        Integer eventMenuCount = twoSeafoodPastaOrderMenu.findEventMenuCount(MainMenu.values());
+
+        //then
+        assertThat(eventMenuCount).isEqualTo(TWO_ORDER);
     }
 }
