@@ -50,10 +50,10 @@ public class Validation {
         final int MIN_COUNT = 1;
         final int MAX_COUNT = 20;
         if (count < MIN_COUNT || count > MAX_COUNT) {
-            throw new IllegalArgumentException("각 항목별 수량이 1~20개인지 확인해 주세요.");
+            throw new IllegalArgumentException("각 항목별 수량이 "+MIN_COUNT+"~"+MAX_COUNT+"개인지 확인해 주세요.");
         }
         if (max > MAX_COUNT) {
-            throw new IllegalArgumentException("총 수량은 20개 까지만 허용됩니다.");
+            throw new IllegalArgumentException("총 수량은 "+MAX_COUNT+"개 까지만 허용됩니다.");
         }
     }
 }
