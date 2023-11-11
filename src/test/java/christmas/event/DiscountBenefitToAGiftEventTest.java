@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class DiscountBenefitToAGiftEventTest {
@@ -32,6 +33,7 @@ class DiscountBenefitToAGiftEventTest {
             new AmountToAGiftEvent(eventPeriod, GIFT_CONDITION_BENEFIT.getAmount(), CHAMPAGNE);
 
 
+    @DisplayName("120,000원 이상이면 증정품을 반환한다.")
     @Test
     void isGiftAmountOver() {
         //when
@@ -41,6 +43,7 @@ class DiscountBenefitToAGiftEventTest {
         Assertions.assertThat(giftName).isEqualTo(CHAMPAGNE.getName());
     }
 
+    @DisplayName("120,000원 미만이면 증정품을 반환하지 않는다.")
     @Test
     void isGiftAmountUnder() {
         //when
