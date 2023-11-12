@@ -15,7 +15,6 @@ import christmas.order.Order;
 import christmas.order.Orders;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,7 +41,7 @@ class WooWaEventManagerTest {
         //given
         final Integer totalBenefitAmount =
                 BASIC_BENEFIT.getAmount() + CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT + WEEK_BENEFIT_CONTAIN_TWO_MAIN
-                        + CHAMPAGNE.getPrice();
+                        + CHAMPAGNE.getAmount();
 
 
         //when

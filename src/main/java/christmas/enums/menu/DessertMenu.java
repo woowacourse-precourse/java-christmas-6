@@ -15,7 +15,7 @@ public enum DessertMenu implements MenuItem {
         return name;
     }
 
-    public Integer getPrice() {
+    public Integer getAmount() {
         return price;
     }
 }

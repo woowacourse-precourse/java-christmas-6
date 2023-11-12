@@ -4,5 +4,5 @@ package christmas.enums.menu;
 public interface MenuItem {
     String getName();
 
-    Integer getPrice();
+    Integer getAmount();
 }

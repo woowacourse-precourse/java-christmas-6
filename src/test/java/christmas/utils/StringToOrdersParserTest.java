@@ -1,4 +1,4 @@
-package christmas.io;
+package christmas.utils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -9,7 +9,6 @@ import christmas.exceptions.IllegalOnlyBeverageException;
 import christmas.exceptions.IllegalOrderFormatException;
 import christmas.exceptions.IllegalOutOfNumberMenuException;
 import christmas.order.Order;
-import christmas.utils.StringToOrdersParser;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,15 +36,22 @@ class StringToOrdersParserTest {
 
     @DisplayName("음료만 주문 시 예외가 발생한다.")
     @Test
-    void name() {
+    void whenOrderOnlyBeverage() {
         assertThatThrownBy(() -> StringToOrdersParser.parseInputToOrderSet("레드와인-2")).isInstanceOf(
                 IllegalOnlyBeverageException.class);
     }
 
     @DisplayName("음식을 0개 주문시 예외가 발생한다.")
     @Test
-    void n1ame() {
+    void whenOrderZeroMenu() {
         assertThatThrownBy(()->StringToOrdersParser.parseInputToOrderSet("티본스테이크-0")).isInstanceOf(
+                IllegalOrderFormatException.class);
+    }
+
+    @DisplayName("Intger 넘어서는 수량 주문시 예외가 발생한다.")
+    @Test
+    void whenOrderOvervalue() {
+        assertThatThrownBy(()->StringToOrdersParser.parseInputToOrderSet("티본스테이크-99999999999999999999999999")).isInstanceOf(
                 IllegalOrderFormatException.class);
     }
 

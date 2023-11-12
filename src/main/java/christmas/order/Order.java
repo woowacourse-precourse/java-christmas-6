@@ -30,7 +30,7 @@ public class Order {
     }
 
     public Integer calculatePrice() {
-        return this.menuItem.getPrice() * this.orderQuantity;
+        return this.menuItem.getAmount() * this.orderQuantity;
     }
 
     public Integer getOrderQuantity() {

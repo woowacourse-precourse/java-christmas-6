@@ -37,7 +37,7 @@ class StringToDateParserTest {
     @DisplayName("입력값이 해당 월에 대한 범위를 벗어나면 예외가 발생한다.")
     @Test
     public void whenOverMonthDate() {
-        assertThatThrownBy(()->StringToDateParser.makeReservation(2023,12,"-35")).isInstanceOf(
+        assertThatThrownBy(()->StringToDateParser.makeReservation(2023,12,"99999999999999999999935")).isInstanceOf(
                 IllegalDateFormatException.class);
     }
 }
