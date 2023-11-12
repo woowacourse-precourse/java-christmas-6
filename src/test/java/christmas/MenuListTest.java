@@ -4,9 +4,11 @@ import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 import static christmas.enums.menu.DessertMenu.CHOCOLATE_CAKE;
 import static christmas.enums.menu.MainMenu.SEAFOOD_PASTA;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.enums.menu.MenuItem;
-import christmas.order.MenuList;
+import christmas.exceptions.IllegalOrderFormatException;
+import christmas.utils.MenuList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,5 +36,11 @@ class MenuListTest {
         assertThat(seafoodPastaName).isEqualTo(SEAFOOD_PASTA_NAME);
         assertThat(chocolateCakeName).isEqualTo(CHOCOLATE_CAKE_NAME);
 
+    }
+
+    @DisplayName("존재하지 않는 메뉴를 찾으면 예외가 발생한다")
+    @Test
+    public void findNoDataCauseException() {
+        assertThatThrownBy(()->MenuList.getMenuByName("울랄라")).isInstanceOf(IllegalOrderFormatException.class);
     }
 }
