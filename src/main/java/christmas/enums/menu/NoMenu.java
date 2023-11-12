@@ -1,12 +1,12 @@
 package christmas.enums.menu;
 
-public enum None implements MenuItem{
-    NONE("NONE",0);
+public enum NoMenu implements MenuItem{
+    NO_MENU("없음",0);
 
     private final String name;
     private final Integer amount;
 
-    None(String name, Integer amount) {
+    NoMenu(String name, Integer amount) {
         this.name = name;
         this.amount = amount;
     }
