@@ -3,16 +3,14 @@ package christmas;
 import static christmas.enums.events.NoEvent.NO_EVENT;
 import static christmas.enums.menu.NoMenu.NO_MENU;
 
-import camp.nextstep.edu.missionutils.Console;
-import christmas.enums.events.NoEvent;
 import christmas.enums.menu.MenuItem;
-import christmas.enums.menu.NoMenu;
 import christmas.event.OneEventResult;
 import christmas.order.OrderSystem;
 import christmas.order.Orders;
 import christmas.order.Receipt;
 import christmas.utils.StringToDateParser;
 import christmas.utils.StringToOrdersParser;
+import christmas.views.InputView;
 import christmas.views.Messages;
 import christmas.views.OutputView;
 import java.time.LocalDate;
@@ -30,27 +28,57 @@ public class RestaurantInterface {
     }
 
     public void process(){
+        printAskDate();
+        String input = InputView.readLine();
+        LocalDate reservationDate = StringToDateParser.makeReservation(YEAR, MONTH, input);
+
+        printAskMenuAndQuantity();
+        input = InputView.readLine();
+        Orders orders = StringToOrdersParser.parseInputToOrderSet(input);
+        Receipt receipt = orderSystem.calculateOrderResult(reservationDate, orders);
+
+        printResult(reservationDate, orders, receipt);
+        InputView.close();
+    }
+
+    private static void printResult(LocalDate reservationDate, Orders orders, Receipt receipt) {
+        printBenefit(reservationDate);
+        printOrders(orders);
+        printAmountBeforeDiscount(receipt);
+        printGiftBenefit(receipt);
+        printEventBenefits(receipt);
+        printDiscountBenefit(receipt);
+        printAfterDiscount(receipt);
+        printBadge(reservationDate, receipt);
+    }
+
+    private static void printAskDate() {
         OutputView.printOut(Messages.announceHello(RESTAURANT_NAME, MONTH));
         OutputView.printOut(Messages.askDate(MONTH));
-        String input = this.readLine();
+    }
 
-        LocalDate reservationDate = StringToDateParser.makeReservation(YEAR, MONTH, input);
+    private static void printAskMenuAndQuantity() {
         OutputView.printOut(Messages.askMenuAndQuantity());
+    }
 
-        input = this.readLine();
-        Orders orders = StringToOrdersParser.parseInputToOrderSet(input);
-        OutputView.printOut(Messages.announceEventBenefit(RESTAURANT_NAME,reservationDate));
+    private static void printBenefit(LocalDate reservationDate) {
+        OutputView.printOut(Messages.announceEventBenefit(RESTAURANT_NAME, reservationDate));
         OutputView.printOut("");
+    }
+
+    private static void printOrders(Orders orders) {
         OutputView.printOut(Messages.announceOrders());
         OutputView.printOut(Messages.repeatAllOrders(orders));
+    }
 
-
+    private static void printAmountBeforeDiscount(Receipt receipt) {
         OutputView.printOut(Messages.announceBeforeDiscount());
-        Receipt receipt = orderSystem.calculateOrderResult(reservationDate, orders);
         Integer totalPriceBeforeDiscount = receipt.totalPriceBeforeDiscount();
         OutputView.printOut(Messages.showAmount(totalPriceBeforeDiscount));
         OutputView.printOut("");
+    }
 
+    private static void printGiftBenefit(Receipt receipt) {
         MenuItem gift = receipt.gift();
         OutputView.printOut(Messages.announceGift());
         String giftResult = NO_MENU.getName();
@@ -59,7 +87,9 @@ public class RestaurantInterface {
         }
         OutputView.printOut(giftResult);
         OutputView.printOut("");
+    }
 
+    private static void printEventBenefits(Receipt receipt) {
         OutputView.printOut(Messages.announceEventBenefits());
         List<OneEventResult> oneEventResults = receipt.oneEventResults();
         String oneEventResult = NO_EVENT.getName();
@@ -68,26 +98,22 @@ public class RestaurantInterface {
         }
         OutputView.printOut(oneEventResult);
         OutputView.printOut("");
+    }
 
+    private static void printDiscountBenefit(Receipt receipt) {
         OutputView.printOut(Messages.announceTotalDiscountBenefit());
         OutputView.printOut(Messages.showAmount(-receipt.discountBenefit()));
         OutputView.printOut("");
+    }
 
+    private static void printAfterDiscount(Receipt receipt) {
         OutputView.printOut(Messages.AfterDiscountAmount());
         OutputView.printOut(Messages.showAmount(receipt.totalPriceBeforeDiscount() - receipt.discountBenefit()));
         OutputView.printOut("");
+    }
 
+    private static void printBadge(LocalDate reservationDate, Receipt receipt) {
         OutputView.printOut(Messages.announceEventBadge(reservationDate.getMonthValue()));
         OutputView.printOut(receipt.badge().getName());
-
-        this.close();
-    }
-
-    private String readLine(){
-       return Console.readLine();
-    }
-
-    private void close(){
-        Console.close();
     }
 }
