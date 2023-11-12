@@ -177,13 +177,36 @@
 - 배운점
   - ```hashSet```의 비교 로직을 변경하기 위해서는 ```equals()``` 뿐만 아니라 ```hashCode()```도 로직을 수정해야 한다.
   - 결국 ```hashSet```은 ```hashCode()```를 기반으로 저장하기 때문에 ,동일한 ```hashCode()``` 일 때에, 같은 버킷 내에 ```equals()``` 동등성을 비교하기 때문이다.
-
-
-
 </details>
 
 <details>
 <summary>(23.11.12)</summary>
+
+- [x] hashMap에서 없는 단어를 입력해도 나오는 예외가 없는 문제
+  - 왜 hashMap에서 없는 키값을 입력해도 반환값이 나올까?
+    - hashMap은 기본적으로 null을 반환한다. 이를 제어하려면 추가적인 작업이 필요하다. 또한, null이 아닌 다른 처리를 위한 메서드도 존재한다.
+    - ```map.containsKey("key")``` : 키값이 존재할 때와 그렇지 않을 때를 설정한다.
+    - ```map.getOrDefault("key",return)``` : 특정 키를 입력했을 때 원하는 반환을 설정한다. 하지만 반환에 예외를 던질 수 없다.
+    - hashMap 반환이 null인 경우를 예외로 잡아 처리한다.
+  - 해결방안
+    - ```map.containsKey("key")``` 를 사용하여 예외를 추가한다. 
+      - null을 반환하는 경우에 대한 예외처리도 가능하나, 이런 예외는 특정값에 대한 예외지만, containsKey는 map에 키가 존재하지 않는지에 확인하는것에 대한 의도가 분명하므로 ```map.containsKey("key")```를 사용했다.
+
+- 배운점 
+  - HashMap
+    -존재하지 않는 키를 이용하여 값을 요청하면 null을 반환한다.
+    - 존재하지 않을 때의 예외를 추가적으로 설정해야한다.
+      - ```map.containsKey("key")```
+      - ```map.getOrDefault("key",return)```
+      - if(value==null) 조건문 
+</details>
+
+<details>
+<summary>(23.11.13)</summary>
+</details>
+
+<details>
+<summary>(23.11.14)</summary>
 </details>
 
 ## 플로우
