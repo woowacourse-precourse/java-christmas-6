@@ -1,9 +1,13 @@
 package christmas;
 
+import static christmas.enums.events.NoEvent.NO_EVENT;
+import static christmas.enums.menu.NoMenu.NO_MENU;
+
 import camp.nextstep.edu.missionutils.Console;
-import christmas.enums.badge.benefit.BenefitBadge;
+import christmas.enums.events.NoEvent;
 import christmas.enums.menu.MenuItem;
-import christmas.event.EventResult;
+import christmas.enums.menu.NoMenu;
+import christmas.event.OneEventResult;
 import christmas.order.OrderSystem;
 import christmas.order.Orders;
 import christmas.order.Receipt;
@@ -29,32 +33,49 @@ public class RestaurantInterface {
         OutputView.printOut(Messages.announceHello(RESTAURANT_NAME, MONTH));
         OutputView.printOut(Messages.askDate(MONTH));
         String input = this.readLine();
-        LocalDate reservationDate = StringToDateParser.makeReservation(YEAR, MONTH, input);
 
-        OutputView.printOut(Messages.announceEventBenefit(RESTAURANT_NAME,reservationDate));
+        LocalDate reservationDate = StringToDateParser.makeReservation(YEAR, MONTH, input);
         OutputView.printOut(Messages.askMenuAndQuantity());
 
         input = this.readLine();
         Orders orders = StringToOrdersParser.parseInputToOrderSet(input);
+        OutputView.printOut(Messages.announceEventBenefit(RESTAURANT_NAME,reservationDate));
+        OutputView.printOut("");
         OutputView.printOut(Messages.announceOrders());
         OutputView.printOut(Messages.repeatAllOrders(orders));
 
 
         OutputView.printOut(Messages.announceBeforeDiscount());
-        Receipt receipt = orderSystem.orderProcess(reservationDate, orders);
+        Receipt receipt = orderSystem.calculateOrderResult(reservationDate, orders);
         Integer totalPriceBeforeDiscount = receipt.totalPriceBeforeDiscount();
         OutputView.printOut(Messages.showAmount(totalPriceBeforeDiscount));
+        OutputView.printOut("");
 
         MenuItem gift = receipt.gift();
         OutputView.printOut(Messages.announceGift());
-        OutputView.printOut(Messages.gift(gift,1));
+        String giftResult = NO_MENU.getName();
+        if(!gift.equals(NO_MENU)){
+            giftResult = Messages.gift(gift, 1);
+        }
+        OutputView.printOut(giftResult);
+        OutputView.printOut("");
 
         OutputView.printOut(Messages.announceEventBenefits());
-        List<EventResult> eventResults = receipt.eventResults();
-        OutputView.printOut(Messages.perEventBenefit(eventResults));
+        List<OneEventResult> oneEventResults = receipt.oneEventResults();
+        String oneEventResult = NO_EVENT.getName();
+        if (!oneEventResults.isEmpty()){
+            oneEventResult = Messages.perEventBenefit(oneEventResults);
+        }
+        OutputView.printOut(oneEventResult);
+        OutputView.printOut("");
 
         OutputView.printOut(Messages.announceTotalDiscountBenefit());
         OutputView.printOut(Messages.showAmount(-receipt.discountBenefit()));
+        OutputView.printOut("");
+
+        OutputView.printOut(Messages.AfterDiscountAmount());
+        OutputView.printOut(Messages.showAmount(receipt.totalPriceBeforeDiscount() - receipt.discountBenefit()));
+        OutputView.printOut("");
 
         OutputView.printOut(Messages.announceEventBadge(reservationDate.getMonthValue()));
         OutputView.printOut(receipt.badge().getName());
