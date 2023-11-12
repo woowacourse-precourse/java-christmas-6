@@ -5,6 +5,7 @@ import static christmas.enums.menu.NoMenu.NO_MENU;
 
 import christmas.enums.menu.MenuItem;
 import christmas.event.OneEventResult;
+import christmas.exceptions.RestaurantException;
 import christmas.order.OrderSystem;
 import christmas.order.Orders;
 import christmas.order.Receipt;
@@ -16,6 +17,7 @@ import christmas.views.OutputView;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.function.Function;
 
 public class RestaurantInterface {
     private final static Integer YEAR = 2023;
@@ -29,12 +31,11 @@ public class RestaurantInterface {
 
     public void process(){
         printAskDate();
-        String input = InputView.readLine();
-        LocalDate reservationDate = StringToDateParser.makeReservation(YEAR, MONTH, input);
+        LocalDate reservationDate = getInputAndCatchException(
+                input -> StringToDateParser.makeReservation(YEAR, MONTH, input));
 
         printAskMenuAndQuantity();
-        input = InputView.readLine();
-        Orders orders = StringToOrdersParser.parseInputToOrderSet(input);
+        Orders orders = getInputAndCatchException(StringToOrdersParser::parseInputToOrderSet);
         Receipt receipt = orderSystem.calculateOrderResult(reservationDate, orders);
 
         printResult(reservationDate, orders, receipt);
@@ -115,5 +116,16 @@ public class RestaurantInterface {
     private static void printBadge(LocalDate reservationDate, Receipt receipt) {
         OutputView.printOut(Messages.announceEventBadge(reservationDate.getMonthValue()));
         OutputView.printOut(receipt.badge().getName());
+    }
+
+    private <T> T getInputAndCatchException(Function<String, T> processor) {
+        while (true) {
+            try {
+                String input = InputView.readLine();
+                return processor.apply(input);
+            } catch (RestaurantException e) {
+                OutputView.printException(e);
+            }
+        }
     }
 }
