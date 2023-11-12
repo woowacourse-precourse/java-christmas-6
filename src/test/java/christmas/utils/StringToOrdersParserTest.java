@@ -9,6 +9,7 @@ import christmas.exceptions.IllegalOnlyBeverageException;
 import christmas.exceptions.IllegalOrderFormatException;
 import christmas.exceptions.IllegalOutOfNumberMenuException;
 import christmas.order.Order;
+import christmas.order.Orders;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,10 +22,11 @@ class StringToOrdersParserTest {
     @Test
     void twoMenusToOrders() {
         //when
-        Set<Order> orders = StringToOrdersParser.parseInputToOrderSet("티본스테이크-1,아이스크림-2");
+        Orders orders = StringToOrdersParser.parseInputToOrderSet("티본스테이크-1,아이스크림-2");
+        Set<Order> orderSet = orders.getOrderSet();
 
         //then
-        assertThat(orders).contains(oneSteak, twoIceCream);
+        assertThat(orderSet).contains(oneSteak, twoIceCream);
     }
 
     @DisplayName("같은 메뉴를 입력하면 예외가 발생한다.")

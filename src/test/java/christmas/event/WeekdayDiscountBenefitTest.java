@@ -2,8 +2,10 @@ package christmas.event;
 
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.WEEK_BENEFIT;
+import static christmas.enums.events.decemberevent.DecemberEvents.WEEKDAY_DISCOUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.enums.events.decemberevent.DecemberEvents;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.event.weekdiscount.WeekdayDiscount;
@@ -22,7 +24,7 @@ class WeekdayDiscountBenefitTest {
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate weekday = LocalDate.of(2023, Month.DECEMBER, 3);
     private final static LocalDate weekend = LocalDate.of(2023, Month.DECEMBER, 2);
-    private final static WeekdayDiscount weekDayDiscount = new WeekdayDiscount(eventPeriod,MainMenu.values(),2023);
+    private final static WeekdayDiscount weekDayDiscount = new WeekdayDiscount(WEEKDAY_DISCOUNT, eventPeriod,MainMenu.values(),2023);
     private final static Order ORDER_WITH_DESSERT = new Order(DessertMenu.CHOCOLATE_CAKE,2);
     private final static Order ORDER_WITH_MAIN = new Order(MainMenu.T_BONE_STEAK,2);
     private final static Orders ordersWithMain = new Orders(Set.of(ORDER_WITH_MAIN));
@@ -32,7 +34,7 @@ class WeekdayDiscountBenefitTest {
     @Test
     void weekDaySituation() {
         //when
-        Integer discountAmount = weekDayDiscount.execute(weekday,ordersWithMain);
+        Integer discountAmount = weekDayDiscount.execute(weekday,ordersWithMain).discountBenefit();
 
         //then
         assertThat(discountAmount).isEqualTo(WEEK_BENEFIT.getAmount()* ORDER_WITH_DESSERT.getOrderQuantity());
@@ -42,7 +44,7 @@ class WeekdayDiscountBenefitTest {
     @Test
     void weekendSituation() {
         //when
-        Integer discountAmount = weekDayDiscount.execute(weekend,ordersWithMain);
+        Integer discountAmount = weekDayDiscount.execute(weekend,ordersWithMain).discountBenefit();
 
         //then
         assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
@@ -52,7 +54,7 @@ class WeekdayDiscountBenefitTest {
     @Test
     void weekDaySituationWithNoDessert() {
         //when
-        Integer discountAmount = weekDayDiscount.execute(weekday,ordersWithDessert);
+        Integer discountAmount = weekDayDiscount.execute(weekday,ordersWithDessert).discountBenefit();
 
         //then
         assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
@@ -62,7 +64,7 @@ class WeekdayDiscountBenefitTest {
     @Test
     void weekendSituationWithNoDessert() {
         //when
-        Integer discountAmount = weekDayDiscount.execute(weekend,ordersWithDessert);
+        Integer discountAmount = weekDayDiscount.execute(weekend,ordersWithDessert).discountBenefit();
 
         //then
         assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());

@@ -1,7 +1,9 @@
 package christmas.event;
 
 import static christmas.enums.benefit.DiscountBenefit.*;
+import static christmas.enums.events.decemberevent.DecemberEvents.SPECIAL_DISCOUNT;
 
+import christmas.enums.events.decemberevent.DecemberEvents;
 import christmas.event.specialdiscount.SpecialDayDiscountEvent;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
@@ -16,19 +18,20 @@ class SpecialDayDiscountBenefitEventTest {
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate specialDate = LocalDate.of(2023, Month.DECEMBER, 25);
     private final static LocalDate nonSpecialDate = LocalDate.of(2023, Month.DECEMBER, 26);
-    private final static SpecialDayDiscountEvent SPECIAL_DAY_DISCOUNT_EVENT = new SpecialDayDiscountEvent(eventPeriod,1000);
+    private final static SpecialDayDiscountEvent SPECIAL_DAY_DISCOUNT_EVENT = new SpecialDayDiscountEvent(
+            SPECIAL_DISCOUNT, eventPeriod,1000);
 
     @DisplayName("특별 할인이 적용되는 날은 1000원을 추가할인한다.")
     @Test
     void reservationSpecialDate() {
-        Integer discountAmount = SPECIAL_DAY_DISCOUNT_EVENT.execute(specialDate);
-        Assertions.assertThat(discountAmount).isEqualTo(BASIC_BENEFIT.getAmount());
+        EventResult eventResult = SPECIAL_DAY_DISCOUNT_EVENT.execute(specialDate);
+        Assertions.assertThat(eventResult.discountBenefit()).isEqualTo(BASIC_BENEFIT.getAmount());
     }
 
     @DisplayName("특별 할인이 적용되지 않는 날은 1000원을 추가할인하지 않는다.")
     @Test
     void reservationNoNSpecialDate() {
-        Integer discountAmount = SPECIAL_DAY_DISCOUNT_EVENT.execute(nonSpecialDate);
-        Assertions.assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
+        EventResult eventResult = SPECIAL_DAY_DISCOUNT_EVENT.execute(nonSpecialDate);
+        Assertions.assertThat(eventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
     }
 }

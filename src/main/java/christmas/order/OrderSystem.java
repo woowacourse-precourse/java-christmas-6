@@ -18,12 +18,11 @@ public class OrderSystem {
         this.badgeManager = badgeManager;
     }
 
-    public Receipt orderProcess(LocalDate reservationDate, Set<Order> unprocessedOrders){
-        Orders orders = new Orders(unprocessedOrders);
+    public Receipt orderProcess(LocalDate reservationDate, Orders orders){
         Integer totalPriceBeforeDiscount = orders.calculateTotalPrice();
 
         EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, orders);
-        Integer discountBenefit = eventBenefit.discountBenefit();
+        Integer discountBenefit = eventBenefit.showDiscountBenefits();
         MenuItem gift = eventBenefit.gift();
 
         BenefitBadge badge = badgeManager.isBadgeConditionSatisfied(discountBenefit);

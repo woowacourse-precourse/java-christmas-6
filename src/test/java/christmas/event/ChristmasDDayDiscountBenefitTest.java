@@ -3,8 +3,10 @@ package christmas.event;
 import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.INCREASE_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
+import static christmas.enums.events.decemberevent.DecemberEvents.CHRISTMAS_D_DAY_DISCOUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.enums.events.decemberevent.DecemberEvents;
 import christmas.event.increasediscount.ChristmasDDayDiscount;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
@@ -22,14 +24,15 @@ class ChristmasDDayDiscountBenefitTest {
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 25);
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate overDate = LocalDate.of(2023, Month.DECEMBER, 26);
-    private final static ChristmasDDayDiscount christmasDDayDiscount = new ChristmasDDayDiscount(eventPeriod,
+    private final static ChristmasDDayDiscount christmasDDayDiscount = new ChristmasDDayDiscount(
+            CHRISTMAS_D_DAY_DISCOUNT, eventPeriod,
             BASIC_BENEFIT.getAmount(), INCREASE_BENEFIT.getAmount());
 
     @DisplayName("날짜를 입력했을 때, 이벤트 날짜에 해당되지 않으면 0을 반환한다.")
     @Test
     void whenEventActivate() {
 
-        Integer discountAmount = christmasDDayDiscount.execute(overDate);
+        Integer discountAmount = christmasDDayDiscount.execute(overDate).discountBenefit();
 
         assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
     }
@@ -39,7 +42,7 @@ class ChristmasDDayDiscountBenefitTest {
     @DisplayName("1일부터 25일까지 할인가 검증")
     public void dummy(LocalDate reservationDate, Integer expectedDiscountAmount) {
         //when
-        Integer discountAmount = christmasDDayDiscount.execute(reservationDate);
+        Integer discountAmount = christmasDDayDiscount.execute(reservationDate).discountBenefit();
 
         //then
         assertThat(discountAmount).isEqualTo(expectedDiscountAmount);

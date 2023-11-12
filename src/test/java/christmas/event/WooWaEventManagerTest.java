@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
+import christmas.enums.menu.NoMenu;
 import christmas.manangers.WooWaEventManager;
 import christmas.order.Order;
 import christmas.order.Orders;
@@ -46,7 +47,7 @@ class WooWaEventManagerTest {
 
         //when
         EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, ordersOver120_000);
-        Integer totalBenefit = eventBenefit.discountBenefit();
+        Integer totalBenefit = eventBenefit.showDiscountBenefits();
 
         //then
         assertThat(totalBenefit).isEqualTo(totalBenefitAmount);
@@ -61,7 +62,7 @@ class WooWaEventManagerTest {
                 BASIC_BENEFIT.getAmount() + CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT + WEEK_BENEFIT_CONTAIN_TWO_MAIN;
         //when
         EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, ordersWithMain);
-        Integer totalBenefit = eventBenefit.discountBenefit();
+        Integer totalBenefit = eventBenefit.showDiscountBenefits();
 
         //then
         assertThat(totalBenefit).isEqualTo(totalBenefitAmount);
@@ -75,10 +76,10 @@ class WooWaEventManagerTest {
         EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, ordersOneIceCream);
 
         //then
-        Integer discountBenefit = eventBenefit.discountBenefit();
+        Integer discountBenefit = eventBenefit.showDiscountBenefits();
         MenuItem gift = eventBenefit.gift();
 
         assertThat(discountBenefit).isEqualTo(NO_BENEFIT.getAmount());
-        assertThat(gift).isEqualTo(null);
+        assertThat(gift).isEqualTo(NoMenu.NO_MENU);
     }
 }

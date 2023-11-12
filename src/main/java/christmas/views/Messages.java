@@ -4,6 +4,7 @@ import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.order.Order;
 import christmas.order.Orders;
+import java.time.LocalDate;
 import java.util.Set;
 
 public class Messages {
@@ -23,7 +24,9 @@ public class Messages {
         return "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)";
     }
 
-    public static String announceEventBenefit(Integer month, Integer date) {
+    public static String announceEventBenefit(LocalDate localDate) {
+        int date = localDate.getDayOfMonth();
+        int month = localDate.getMonthValue();
         return monthAndDate(month, date) + "에 " + restaurantName() + "에서 받을 이벤트 혜택 미리 보기!";
     }
 
@@ -33,6 +36,10 @@ public class Messages {
 
     public static String announceBeforeDiscount() {
         return "<할인 전 총주문 금액>";
+    }
+
+    public static String announceBenefits() {
+        return "<혜택 내역>";
     }
 
     public static String announceGift() {

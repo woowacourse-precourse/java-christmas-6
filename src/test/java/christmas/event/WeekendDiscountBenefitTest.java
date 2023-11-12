@@ -2,6 +2,7 @@ package christmas.event;
 
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.WEEK_BENEFIT;
+import static christmas.enums.events.decemberevent.DecemberEvents.GIFT_EVENT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.enums.menu.DessertMenu;
@@ -22,7 +23,8 @@ class WeekendDiscountBenefitTest {
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate weekDay = LocalDate.of(2023, Month.DECEMBER, 3);
     private final static LocalDate weekend = LocalDate.of(2023, Month.DECEMBER, 2);
-    private final static WeekendDiscount weekendDiscount = new WeekendDiscount(eventPeriod, DessertMenu.values(), 2023);
+    private final static WeekendDiscount weekendDiscount = new WeekendDiscount(GIFT_EVENT, eventPeriod,
+            DessertMenu.values(), 2023);
     private final static Order ORDER_WITH_DESSERT = new Order(DessertMenu.CHOCOLATE_CAKE, 2);
     private final static Order ORDER_WITH_MAIN = new Order(MainMenu.T_BONE_STEAK, 2);
     private final static Orders ordersWithDessert = new Orders(Set.of(ORDER_WITH_DESSERT));
@@ -32,30 +34,31 @@ class WeekendDiscountBenefitTest {
     @Test
     void weekDaySituationWithMain() {
         //when
-        Integer discountAmount = weekendDiscount.execute(weekend, ordersWithDessert);
+        EventResult eventResult = weekendDiscount.execute(weekend, ordersWithDessert);
 
         //then
-        assertThat(discountAmount).isEqualTo(WEEK_BENEFIT.getAmount() * ORDER_WITH_MAIN.getOrderQuantity());
+        assertThat(eventResult.discountBenefit()).isEqualTo(
+                WEEK_BENEFIT.getAmount() * ORDER_WITH_MAIN.getOrderQuantity());
     }
 
     @DisplayName("평일이면 할인하지 아니한다.")
     @Test
     void weekendSituationWithMain() {
         //when
-        Integer discountAmount = weekendDiscount.execute(weekDay, ordersWithDessert);
+        EventResult eventResult = weekendDiscount.execute(weekDay, ordersWithDessert);
 
         //then
-        assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
+        assertThat(eventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
     }
 
     @DisplayName("주말이어도 디저트가 아니라면 할인하지 아니한다.")
     @Test
     void weekendSituationWithDessert() {
         //when
-        Integer discountAmount = weekendDiscount.execute(weekend, ordersWithMain);
+        EventResult eventResult = weekendDiscount.execute(weekend, ordersWithMain);
 
         //then
-        assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
+        assertThat(eventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
 
     }
 
@@ -63,10 +66,10 @@ class WeekendDiscountBenefitTest {
     @Test
     void weekDaySituationWithDessert() {
         //when
-        Integer discountAmount = weekendDiscount.execute(weekDay, ordersWithMain);
+        EventResult eventResult = weekendDiscount.execute(weekDay, ordersWithMain);
 
         //then
-        assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
+        assertThat(eventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
 
     }
 }

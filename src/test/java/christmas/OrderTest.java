@@ -14,7 +14,7 @@ class OrderTest {
     private final static String T_BONE_STEAK_NAME = "티본스테이크";
     private final static Integer TWO_ORDER = 2;
     private final static Order ORDER = new Order(T_BONE_STEAK, TWO_ORDER);
-    private final static Order TWO_SEAFOOD_PASTA_ORDER =new Order(SEAFOOD_PASTA,TWO_ORDER);
+    private final static Order twoSeafoodPastaOrder =new Order(SEAFOOD_PASTA,TWO_ORDER);
     private final static Integer TWO_T_BONE_STEAK_PRISE = T_BONE_STEAK.getAmount() * TWO_ORDER;
 
     @DisplayName("티본 스테이크 Enum 과 주문한 수량을 반환한다.")
@@ -58,10 +58,11 @@ class OrderTest {
 
     }
 
+    @DisplayName("주문 수량을 반환한다.")
     @Test
     void findEventMenuCount() {
         //when
-        Integer eventMenuCount = TWO_SEAFOOD_PASTA_ORDER.findEventMenuCount(MainMenu.values());
+        Integer eventMenuCount = twoSeafoodPastaOrder.findEventMenuCount(MainMenu.values());
 
         //then
         assertThat(eventMenuCount).isEqualTo(TWO_ORDER);

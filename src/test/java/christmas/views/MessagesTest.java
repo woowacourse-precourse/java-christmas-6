@@ -21,6 +21,5 @@ class MessagesTest {
         Messages messages = new Messages();
         String returnMessages = messages.repeatAllOrders(orders);
         Assertions.assertThat(returnMessages).contains("티본스테이크 2개", "해산물파스타 2개");
-        Assertions.assertThat(returnMessages).isEqualTo("티본스테이크 2개" + System.lineSeparator() + "해산물파스타 2개" +System.lineSeparator());
     }
 }

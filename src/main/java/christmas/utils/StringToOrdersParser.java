@@ -5,12 +5,13 @@ import christmas.exceptions.IllegalOnlyBeverageException;
 import christmas.exceptions.IllegalOrderFormatException;
 import christmas.exceptions.IllegalOutOfNumberMenuException;
 import christmas.order.Order;
+import christmas.order.Orders;
 import java.util.HashSet;
 import java.util.Set;
 
 public class StringToOrdersParser {
 
-    public static Set<Order> parseInputToOrderSet(String input) {
+    public static Orders parseInputToOrderSet(String input) {
         Set<Order> menuSet = new HashSet<>();
         String[] inputs = input.split(",");
         for (String menu : inputs) {
@@ -18,7 +19,7 @@ public class StringToOrdersParser {
         }
         isNotOnlyBeverage(menuSet);
         isQuantityNotOver20(menuSet);
-        return menuSet;
+        return new Orders(menuSet);
     }
 
     private static void isQuantityNotOver20(Set<Order> menuSet) {

@@ -1,6 +1,6 @@
-package christmas.enums.date.decemberevent;
+package christmas.enums.events.decemberevent;
 
-public enum DecemberEvent {
+public enum DecemberEventPeriod {
     YEAR(2023)
     , MONTH(12)
     , START_OF_THE_MONTH(1)
@@ -8,7 +8,7 @@ public enum DecemberEvent {
     , END_OF_THE_CHRISTMAS(25);
     private final Integer date;
 
-    DecemberEvent(Integer date) {
+    DecemberEventPeriod(Integer date) {
         this.date = date;
     }
 

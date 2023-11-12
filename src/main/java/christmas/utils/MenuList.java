@@ -5,7 +5,7 @@ import christmas.enums.menu.BeverageMenu;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
-import christmas.enums.menu.None;
+import christmas.enums.menu.NoMenu;
 import christmas.exceptions.IllegalOrderFormatException;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +30,8 @@ public class MenuList {
             menuItems.put(mainMenu.getName(), mainMenu);
         }
 
-        for (None none : None.values()) {
-            menuItems.put(none.getName(), none);
+        for (NoMenu noMenu : NoMenu.values()) {
+            menuItems.put(noMenu.getName(), noMenu);
         }
     }
 

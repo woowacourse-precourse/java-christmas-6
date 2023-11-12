@@ -1,6 +1,6 @@
 package christmas.utils;
 
-import static christmas.enums.date.decemberevent.DecemberEvent.START_OF_THE_MONTH;
+import static christmas.enums.events.decemberevent.DecemberEventPeriod.START_OF_THE_MONTH;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

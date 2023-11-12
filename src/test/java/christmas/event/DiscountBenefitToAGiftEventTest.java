@@ -1,7 +1,8 @@
 package christmas.event;
 
 import static christmas.enums.benefit.DiscountBenefit.GIFT_CONDITION_BENEFIT;
-import static christmas.enums.menu.None.NONE;
+import static christmas.enums.events.decemberevent.DecemberEvents.GIFT_EVENT;
+import static christmas.enums.menu.NoMenu.NO_MENU;
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 
 import christmas.enums.menu.DessertMenu;
@@ -29,7 +30,7 @@ class DiscountBenefitToAGiftEventTest {
     private final static Integer OVER_120_000 = 120_000;
     private final static Integer UNDER_120_000 = 110_000;
     private final static AmountToAGiftEvent CHAMPAGNE_GIFT_EVENT =
-            new AmountToAGiftEvent(eventPeriod, GIFT_CONDITION_BENEFIT.getAmount(), CHAMPAGNE);
+            new AmountToAGiftEvent(GIFT_EVENT, eventPeriod, GIFT_CONDITION_BENEFIT.getAmount(), CHAMPAGNE);
 
 
     @DisplayName("120,000원 이상이면 증정품을 반환한다.")
@@ -49,6 +50,6 @@ class DiscountBenefitToAGiftEventTest {
         MenuItem gift = CHAMPAGNE_GIFT_EVENT.execute(reservationDate,UNDER_120_000 );
 
         //then
-        Assertions.assertThat(gift).isEqualTo(NONE);
+        Assertions.assertThat(gift).isEqualTo(NO_MENU);
     }
 }
