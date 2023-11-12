@@ -2,16 +2,20 @@ package christmas.event.increasediscount;
 
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 
+import christmas.enums.events.Events;
+import christmas.event.EventResult;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class ChristmasDDayDiscount implements IncreaseEverydayDiscountEvent {
+    private final Events event;
     private final int discountStartAmount;
     private final int discountIncrementPerDay;
     private final EventPeriod eventPeriod;
 
-    public ChristmasDDayDiscount(EventPeriod eventPeriod,int discountStartAmount, int discountIncrementPerDay ) {
+    public ChristmasDDayDiscount(Events event, EventPeriod eventPeriod, int discountStartAmount, int discountIncrementPerDay ) {
+        this.event = event;
         this.discountStartAmount = discountStartAmount;
         this.discountIncrementPerDay = discountIncrementPerDay;
         this.eventPeriod = eventPeriod;
@@ -29,10 +33,11 @@ public class ChristmasDDayDiscount implements IncreaseEverydayDiscountEvent {
     }
 
     @Override
-    public Integer execute(LocalDate reservationDate) {
+    public EventResult execute(LocalDate reservationDate) {
         if (isEventActivate(reservationDate)) {
-            return calculateDiscount(reservationDate);
+            int discountBenefit = calculateDiscount(reservationDate);
+            return new EventResult(event,discountBenefit);
         }
-        return NO_BENEFIT.getAmount();
+        return new EventResult(event,NO_BENEFIT.getAmount());
     }
 }

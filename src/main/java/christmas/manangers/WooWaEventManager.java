@@ -4,21 +4,23 @@ import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.GIFT_CONDITION_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.INCREASE_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.MINIMUM_REQUIRE_AMOUNT;
-import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.WEEK_BENEFIT;
-import static christmas.enums.date.decemberevent.DecemberEvent.END_OF_THE_CHRISTMAS;
-import static christmas.enums.date.decemberevent.DecemberEvent.MONTH;
-import static christmas.enums.date.decemberevent.DecemberEvent.START_OF_THE_MONTH;
-import static christmas.enums.date.decemberevent.DecemberEvent.YEAR;
+import static christmas.enums.events.decemberevent.DecemberEventPeriod.END_OF_THE_CHRISTMAS;
+import static christmas.enums.events.decemberevent.DecemberEventPeriod.MONTH;
+import static christmas.enums.events.decemberevent.DecemberEventPeriod.START_OF_THE_MONTH;
+import static christmas.enums.events.decemberevent.DecemberEventPeriod.YEAR;
+import static christmas.enums.events.decemberevent.DecemberEvents.CHRISTMAS_D_DAY_DISCOUNT;
+import static christmas.enums.events.decemberevent.DecemberEvents.GIFT_EVENT;
+import static christmas.enums.events.decemberevent.DecemberEvents.SPECIAL_DISCOUNT;
+import static christmas.enums.events.decemberevent.DecemberEvents.WEEKDAY_DISCOUNT;
+import static christmas.enums.events.decemberevent.DecemberEvents.WEEKEND_DISCOUNT;
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
-import static christmas.enums.menu.None.NONE;
 
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
-import christmas.enums.menu.None;
 import christmas.event.EventBenefit;
-import christmas.utils.EventPeriod;
+import christmas.event.EventResult;
 import christmas.event.gift.AmountToAGiftEvent;
 import christmas.event.gift.AmountToGiftEvent;
 import christmas.event.increasediscount.ChristmasDDayDiscount;
@@ -29,7 +31,9 @@ import christmas.event.weekdiscount.WeekDiscountEvent;
 import christmas.event.weekdiscount.WeekdayDiscount;
 import christmas.event.weekdiscount.WeekendDiscount;
 import christmas.order.Orders;
+import christmas.utils.EventPeriod;
 import java.time.LocalDate;
+import java.util.List;
 
 public class WooWaEventManager {
     private final AmountToGiftEvent amountToGiftEvent;
@@ -46,52 +50,32 @@ public class WooWaEventManager {
         EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(YEAR.getDate(), MONTH.getDate(),
                 START_OF_THE_MONTH.getDate(), END_OF_THE_CHRISTMAS.getDate());
 
-        this.increaseEverydayDiscountEvent = new ChristmasDDayDiscount(typicalPeriod, BASIC_BENEFIT.getAmount(),
+        increaseEverydayDiscountEvent = new ChristmasDDayDiscount(CHRISTMAS_D_DAY_DISCOUNT, typicalPeriod,
+                BASIC_BENEFIT.getAmount(),
                 INCREASE_BENEFIT.getAmount());
-        this.amountToGiftEvent = new AmountToAGiftEvent(monthPeriod, GIFT_CONDITION_BENEFIT.getAmount(), CHAMPAGNE);
-        this.specialDiscountEvent = new SpecialDayDiscountEvent(monthPeriod, BASIC_BENEFIT.getAmount());
-        this.weekdayDiscountEvent = new WeekdayDiscount(monthPeriod, weekdayMenus, WEEK_BENEFIT.getAmount());
-        this.weekendDiscountEvent = new WeekendDiscount(monthPeriod, weekendMenus, WEEK_BENEFIT.getAmount());
+        amountToGiftEvent = new AmountToAGiftEvent(GIFT_EVENT, monthPeriod, GIFT_CONDITION_BENEFIT.getAmount(), CHAMPAGNE);
+        specialDiscountEvent = new SpecialDayDiscountEvent(SPECIAL_DISCOUNT, monthPeriod, BASIC_BENEFIT.getAmount());
+        weekdayDiscountEvent = new WeekdayDiscount(WEEKDAY_DISCOUNT, monthPeriod, weekdayMenus, WEEK_BENEFIT.getAmount());
+        weekendDiscountEvent = new WeekendDiscount(WEEKEND_DISCOUNT, monthPeriod, weekendMenus, WEEK_BENEFIT.getAmount());
     }
 
-    private record activateWeekEvent(Integer weekdayDiscount, Integer weekendDiscount) {
-
-    }
-    private record activateDateEvent(Integer christmasDiscount, Integer specialDiscount) {
-
-    }
 
     public EventBenefit activateEvent(LocalDate reservationDate, Orders orders) {
         Integer totalPriceBeforeDiscount = orders.calculateTotalPrice();
-        if(totalPriceBeforeDiscount < MINIMUM_REQUIRE_AMOUNT.getAmount()){
-            return new EventBenefit(null,NO_BENEFIT.getAmount());
+
+        if (totalPriceBeforeDiscount < MINIMUM_REQUIRE_AMOUNT.getAmount()) {
+            return EventBenefit.NO_EVENT_BENEFIT();
         }
-        activateDateEvent dateEvent = this.getActivateDateEvent(reservationDate);
-        activateWeekEvent weekEvent = this.getActivateWeekEvent(reservationDate, orders);
-        MenuItem gift = this.giftEvent(reservationDate, totalPriceBeforeDiscount);
-        Integer giftPrice = gift.getAmount();
 
-        int discountBenefit = this.calculateTotalBenefit(dateEvent, weekEvent, giftPrice);
-        return new EventBenefit(gift, discountBenefit);
-    }
+        EventResult christmasDDayEventResult = increaseEverydayDiscountEvent.execute(reservationDate);
+        EventResult specialDiscountEventResult = specialDiscountEvent.execute(reservationDate);
+        EventResult weekdayEventResult = weekdayDiscountEvent.execute(reservationDate, orders);
+        EventResult weekendEventResult = weekendDiscountEvent.execute(reservationDate, orders);
+        MenuItem gift = amountToGiftEvent.execute(reservationDate, totalPriceBeforeDiscount);
 
-    private int calculateTotalBenefit(activateDateEvent dateEvent, activateWeekEvent weekEvent, Integer giftPrice) {
-        return dateEvent.christmasDiscount() + dateEvent.specialDiscount() + weekEvent.weekdayDiscount() + weekEvent.weekendDiscount()
-                + giftPrice;
-    }
+        List<EventResult> eventResults = List.of(christmasDDayEventResult, specialDiscountEventResult,
+                weekdayEventResult, weekendEventResult);
 
-    private MenuItem giftEvent(LocalDate reservationDate, Integer totalPriceBeforeDiscount) {
-        return amountToGiftEvent.execute(reservationDate, totalPriceBeforeDiscount);
-    }
-    private activateDateEvent getActivateDateEvent(LocalDate reservationDate) {
-        Integer christmasDiscount = increaseEverydayDiscountEvent.execute(reservationDate);
-        Integer specialDiscount = specialDiscountEvent.execute(reservationDate);
-        return new activateDateEvent(christmasDiscount, specialDiscount);
-    }
-
-    private activateWeekEvent getActivateWeekEvent(LocalDate reservationDate, Orders orders) {
-        Integer weekdayDiscount = weekdayDiscountEvent.execute(reservationDate, orders);
-        Integer weekendDiscount = weekendDiscountEvent.execute(reservationDate, orders);
-        return new activateWeekEvent(weekdayDiscount, weekendDiscount);
+        return new EventBenefit(eventResults,gift);
     }
 }
