@@ -12,15 +12,8 @@ import java.util.List;
 public class Planner {
     private final InputView inputView = InputView.getInstance();
     private final OutputView outputView = OutputView.getInstance();
-    private Item item;
     private Order order;
     private Event event;
-    private int discountAmount;
-    private String badge;
-
-
-    private List<Item> items = new ArrayList<>();
-    private int date;
 
     public void action() {
         takeOrder();
@@ -29,33 +22,29 @@ public class Planner {
     }
 
     public void takeOrder() {
-        takeDate();
-        takeItem();
-        order = new Order(items, date);
+        order = new Order(takeDate(), takeItem());
     }
 
-    public void takeDate() {
-        try {
-            String input = inputView.readDate();
-            Validation.validDate(input);
+    public int takeDate() {
+        boolean isComplete = false;
+        String input = inputView.readDate();
+        isComplete = Validation.validDate(input);
 
-            date = Integer.parseInt(input);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            takeDate();
+        if (!isComplete) {
+            return takeDate();
         }
+        return Integer.parseInt(input);
     }
 
-    public void takeItem() {
+    public List<Item> takeItem() {
         boolean isComplete = false;
         String input = inputView.readItem();
         isComplete = Validation.validItems(input);
 
         if (!isComplete) {
-            takeItem();
-            return;
+            return takeItem();
         }
-        items = convertItem(input);
+        return convertItem(input);
     }
 
     public List<Item> convertItem(String input) {
@@ -69,12 +58,11 @@ public class Planner {
     }
 
     public void applyEvent() {
-        event = new Event(date);
-        discountAmount = event.apply(order.getDessertCount(), order.getMainCount(), order.sumAmount());
-        badge = event.presentBadge(discountAmount);
+        event = new Event(order.getDate());
+        event.applyAll(order);
     }
 
     public void printOrder() {
-
+        outputView.printAll(order, event);
     }
 }

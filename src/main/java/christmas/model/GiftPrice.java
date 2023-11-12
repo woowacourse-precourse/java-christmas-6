@@ -1,11 +1,10 @@
 package christmas.model;
 
-public enum Badge {
-    산타(20000), 트리(10000), 스타(5000), 없음(0);
-
+public enum GiftPrice {
+    샴페인(25000), 없음(0);
     private final int price;
 
-    Badge(int price) {
+    GiftPrice(int price) {
         this.price = price;
     }
 

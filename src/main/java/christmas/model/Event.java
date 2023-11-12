@@ -26,21 +26,26 @@ public class Event {
         dayOfWeekNumber = dayOfWeek.getValue();
     }
 
-    public int apply(int dessertCount, int mainCount, int amount) {
-        discount += discountD_DAY();
-        discount += discountWeekday(dessertCount);
-        discount += discountWeekend(mainCount);
-        discount += discountSpecial();
-        discount += presentGift(amount);
+    public void applyAll(Order order) {
+        final int MIN_VALUE = 10000;
+        final int NO_DISCOUNT = 0;
 
-        return discount;
+        if (order.sumAmount() < MIN_VALUE) {
+            return;
+        }
+        discount += discountD_DAY();
+        discount += discountWeekday(order.getDessertCount());
+        discount += discountWeekend(order.getMainCount());
+        discount += discountSpecial();
+        discount += getGiftPrice(presentGift(order.sumAmount()));
     }
+
     public int discountD_DAY() {
         int max = 3400;
         int dDay = 25;
         int discountPerDay = 100;
 
-        if(DAY > dDay) {
+        if (DAY > dDay) {
             return 0;
         }
 
@@ -49,14 +54,14 @@ public class Event {
     }
 
     public int discountWeekday(int dessertCount) {
-        if (dayOfWeekNumber != FRIDAY && dayOfWeekNumber != SATURDAY && dayOfWeekNumber != SUNDAY) {
+        if (dayOfWeekNumber != FRIDAY && dayOfWeekNumber != SATURDAY) {
             return YEAR * dessertCount;
         }
         return 0;
     }
 
     public int discountWeekend(int mainCount) {
-        if (dayOfWeekNumber == FRIDAY && dayOfWeekNumber == SATURDAY) {
+        if (dayOfWeekNumber == FRIDAY || dayOfWeekNumber == SATURDAY) {
             return YEAR * mainCount;
         }
         return 0;
@@ -70,25 +75,34 @@ public class Event {
         return 0;
     }
 
-    public int presentGift(int amount) {
-        final int MIN_FOR_GIFT = 120000;
-        final int PRICE_OF_GIFT = 25000;
-        if(amount >= MIN_FOR_GIFT) {
-            return PRICE_OF_GIFT;
+    public String presentGift(int amount) {
+        final String CHAMPAGNE = "샴페인";
+        final String NO_GIFT = "없음";
+        final int MIN_FOR_CHAMPAGNE = 120000;
+        if (amount >= MIN_FOR_CHAMPAGNE) {
+            return CHAMPAGNE;
         }
-        return 0;
+        return NO_GIFT;
     }
 
     public String presentBadge(int discountAmount) {
-        if(discountAmount >= Badge.산타.getPrice()) {
+        if (discountAmount >= Badge.산타.getPrice()) {
             return Badge.산타.name();
         }
-        if(discountAmount >= Badge.트리.getPrice()) {
+        if (discountAmount >= Badge.트리.getPrice()) {
             return Badge.트리.name();
         }
-        if(discountAmount >= Badge.스타.getPrice()) {
+        if (discountAmount >= Badge.스타.getPrice()) {
             return Badge.스타.name();
         }
-        return null;
+        return Badge.없음.name();
+    }
+
+    public int getGiftPrice(String gift) {
+        return GiftPrice.valueOf(gift).getPrice();
+    }
+
+    public int getDiscountAmount() {
+        return discount;
     }
 }

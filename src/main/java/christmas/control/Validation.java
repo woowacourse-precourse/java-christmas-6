@@ -14,7 +14,7 @@ public class Validation {
     private static final String FOOD_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
 
 
-    public static void validDate(String input) {
+    public static boolean validDate(String input) {
         final int START_DAY = 1;
         final int END_DAY = 31;
         int date;
@@ -22,12 +22,15 @@ public class Validation {
         try {
             date = Integer.parseInt(input);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(DAY_ERROR_MEESAGE);
+            System.out.println(DAY_ERROR_MEESAGE);
+            return false;
         }
 
         if (date < START_DAY || date > END_DAY) {
-            throw new IllegalArgumentException(DAY_ERROR_MEESAGE);
+            System.out.println(DAY_ERROR_MEESAGE);
+            return false;
         }
+        return true;
     }
 
     public static boolean validItems(String input) {
