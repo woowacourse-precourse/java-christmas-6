@@ -196,9 +196,8 @@
   - HashMap
     -존재하지 않는 키를 이용하여 값을 요청하면 null을 반환한다.
     - 존재하지 않을 때의 예외를 추가적으로 설정해야한다.
-      - ```map.containsKey("key")```
-      - ```map.getOrDefault("key",return)```
-      - if(value==null) 조건문 
+      - ```map.containsKey("key")``` : 키의 존재여부를 확인한다.
+      - ```map.getOrDefault("key",return)``` : 키가 존재하지 않을 시, 원하는 값을 리턴한다.
 </details>
 
 <details>
