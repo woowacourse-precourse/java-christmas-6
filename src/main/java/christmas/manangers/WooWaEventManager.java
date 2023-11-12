@@ -11,10 +11,12 @@ import static christmas.enums.date.decemberevent.DecemberEvent.MONTH;
 import static christmas.enums.date.decemberevent.DecemberEvent.START_OF_THE_MONTH;
 import static christmas.enums.date.decemberevent.DecemberEvent.YEAR;
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
+import static christmas.enums.menu.None.NONE;
 
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
+import christmas.enums.menu.None;
 import christmas.event.EventBenefit;
 import christmas.utils.EventPeriod;
 import christmas.event.gift.AmountToAGiftEvent;
@@ -26,7 +28,6 @@ import christmas.event.specialdiscount.SpecialDiscountEvent;
 import christmas.event.weekdiscount.WeekDiscountEvent;
 import christmas.event.weekdiscount.WeekdayDiscount;
 import christmas.event.weekdiscount.WeekendDiscount;
-import christmas.utils.MenuList;
 import christmas.order.Orders;
 import java.time.LocalDate;
 
@@ -67,20 +68,19 @@ public class WooWaEventManager {
         }
         activateDateEvent dateEvent = this.getActivateDateEvent(reservationDate);
         activateWeekEvent weekEvent = this.getActivateWeekEvent(reservationDate, orders);
-        String giftName = this.giftEvent(reservationDate, totalPriceBeforeDiscount);
+        MenuItem gift = this.giftEvent(reservationDate, totalPriceBeforeDiscount);
+        Integer giftPrice = gift.getAmount();
 
-        MenuItem gift = MenuList.getMenuByName(giftName);
-        int discountBenefit = this.calculateTotalBenefit(dateEvent, weekEvent, gift);
+        int discountBenefit = this.calculateTotalBenefit(dateEvent, weekEvent, giftPrice);
         return new EventBenefit(gift, discountBenefit);
     }
 
-    private int calculateTotalBenefit(activateDateEvent dateEvent, activateWeekEvent weekEvent, MenuItem gift) {
-        Integer giftPrice = addGiftPriceToBenefitAmount(gift);
+    private int calculateTotalBenefit(activateDateEvent dateEvent, activateWeekEvent weekEvent, Integer giftPrice) {
         return dateEvent.christmasDiscount() + dateEvent.specialDiscount() + weekEvent.weekdayDiscount() + weekEvent.weekendDiscount()
                 + giftPrice;
     }
 
-    private String giftEvent(LocalDate reservationDate, Integer totalPriceBeforeDiscount) {
+    private MenuItem giftEvent(LocalDate reservationDate, Integer totalPriceBeforeDiscount) {
         return amountToGiftEvent.execute(reservationDate, totalPriceBeforeDiscount);
     }
     private activateDateEvent getActivateDateEvent(LocalDate reservationDate) {
@@ -93,12 +93,5 @@ public class WooWaEventManager {
         Integer weekdayDiscount = weekdayDiscountEvent.execute(reservationDate, orders);
         Integer weekendDiscount = weekendDiscountEvent.execute(reservationDate, orders);
         return new activateWeekEvent(weekdayDiscount, weekendDiscount);
-    }
-
-    private Integer addGiftPriceToBenefitAmount(MenuItem menuItem) {
-        if (menuItem == null) {
-            return NO_BENEFIT.getAmount();
-        }
-        return menuItem.getPrice();
     }
 }
