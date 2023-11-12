@@ -1,8 +1,10 @@
 package christmas.event.evnets.weekdiscount;
 
 import static christmas.enums.benefit.DiscountBenefit.*;
+import static christmas.enums.events.NoEvent.NO_EVENT;
 
 import christmas.enums.events.Events;
+import christmas.enums.events.NoEvent;
 import christmas.enums.menu.MenuItem;
 import christmas.event.EventResult;
 import christmas.utils.EventPeriod;
@@ -43,6 +45,6 @@ public class WeekdayDiscount implements WeekDiscountEvent {
             Integer discountBenefit = calculateDiscount(orders);
             return new EventResult(event,discountBenefit);
         }
-        return new EventResult(event,NO_BENEFIT.getAmount());
+        return new EventResult(NO_EVENT,NO_BENEFIT.getAmount());
     }
 }
