@@ -1,11 +1,13 @@
 package christmas.event.gift;
 
+import static christmas.enums.menu.None.NONE;
+
+import christmas.enums.menu.None;
 import christmas.enums.menu.MenuItem;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 
 public class AmountToAGiftEvent implements AmountToGiftEvent {
-    private final static String NONE = "NONE";
     private final Integer needAmountToGift;
     private final EventPeriod eventPeriod;
     private final MenuItem menuItem;
@@ -16,9 +18,9 @@ public class AmountToAGiftEvent implements AmountToGiftEvent {
         this.menuItem = menuItem;
     }
 
-    public String isGiftAmountOver(Integer totalOrderAmount) {
+    public MenuItem isGiftAmountOver(Integer totalOrderAmount) {
         if (totalOrderAmount >= needAmountToGift) {
-            return menuItem.getName();
+            return menuItem;
         }
         return NONE;
     }
@@ -28,7 +30,7 @@ public class AmountToAGiftEvent implements AmountToGiftEvent {
     }
 
     @Override
-    public String execute(LocalDate reservationDate, Integer totalPriceBeforeDiscount) {
+    public MenuItem execute(LocalDate reservationDate, Integer totalPriceBeforeDiscount) {
         if (isEventActivate(reservationDate)) {
             return isGiftAmountOver(totalPriceBeforeDiscount);
         }
