@@ -1,8 +1,7 @@
 package christmas.event.gift;
 
 import christmas.enums.menu.MenuItem;
-import christmas.event.EventPeriod;
-import christmas.order.Orders;
+import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 
 public class AmountToAGiftEvent implements AmountToGiftEvent {

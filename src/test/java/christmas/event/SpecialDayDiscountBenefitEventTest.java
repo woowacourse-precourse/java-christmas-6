@@ -2,8 +2,8 @@ package christmas.event;
 
 import static christmas.enums.benefit.DiscountBenefit.*;
 
-import christmas.enums.benefit.DiscountBenefit;
 import christmas.event.specialdiscount.SpecialDayDiscountEvent;
+import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
 import org.assertj.core.api.Assertions;

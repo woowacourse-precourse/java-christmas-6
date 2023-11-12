@@ -5,8 +5,8 @@ import static christmas.enums.benefit.DiscountBenefit.INCREASE_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.enums.benefit.DiscountBenefit;
 import christmas.event.increasediscount.ChristmasDDayDiscount;
+import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.stream.Stream;

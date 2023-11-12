@@ -16,7 +16,7 @@ import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.event.EventBenefit;
-import christmas.event.EventPeriod;
+import christmas.utils.EventPeriod;
 import christmas.event.gift.AmountToAGiftEvent;
 import christmas.event.gift.AmountToGiftEvent;
 import christmas.event.increasediscount.ChristmasDDayDiscount;

@@ -1,4 +1,4 @@
-package christmas.event;
+package christmas.utils;
 
 import static christmas.enums.date.decemberevent.DecemberEvent.START_OF_THE_MONTH;
 

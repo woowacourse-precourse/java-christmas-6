@@ -2,6 +2,7 @@ package christmas.event;
 
 import static org.assertj.core.api.Assertions.*;
 
+import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
 import org.junit.jupiter.api.DisplayName;

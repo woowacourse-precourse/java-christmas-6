@@ -2,7 +2,7 @@ package christmas.event.increasediscount;
 
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 
-import christmas.event.EventPeriod;
+import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
