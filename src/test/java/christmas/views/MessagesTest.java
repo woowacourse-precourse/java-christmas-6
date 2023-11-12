@@ -6,6 +6,7 @@ import static christmas.enums.menu.MainMenu.T_BONE_STEAK;
 import christmas.order.Order;
 import christmas.order.Orders;
 import java.util.List;
+import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ class MessagesTest {
 
     private final static Order twoTBoneSteak = new Order(T_BONE_STEAK, 2);
     private final static Order twoSeafoodPasta = new Order(SEAFOOD_PASTA, 2);
-    private final static Orders orders = new Orders(List.of(twoTBoneSteak, twoSeafoodPasta));
+    private final static Orders orders = new Orders(Set.of(twoTBoneSteak, twoSeafoodPasta));
 
     @Test
     void repeatAllOrders() {

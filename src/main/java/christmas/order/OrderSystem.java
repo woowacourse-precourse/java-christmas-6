@@ -7,6 +7,7 @@ import christmas.manangers.BadgeManager;
 import christmas.manangers.WooWaEventManager;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 public class OrderSystem {
     private final WooWaEventManager wooWaEventManager;
@@ -17,7 +18,7 @@ public class OrderSystem {
         this.badgeManager = badgeManager;
     }
 
-    public Receipt orderProcess(LocalDate reservationDate, List<Order> unprocessedOrders){
+    public Receipt orderProcess(LocalDate reservationDate, Set<Order> unprocessedOrders){
         Orders orders = new Orders(unprocessedOrders);
         Integer totalPriceBeforeDiscount = orders.calculateTotalPrice();
 

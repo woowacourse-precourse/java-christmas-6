@@ -12,6 +12,7 @@ import christmas.order.Orders;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +25,8 @@ class WeekdayDiscountBenefitTest {
     private final static WeekdayDiscount weekDayDiscount = new WeekdayDiscount(eventPeriod,MainMenu.values(),2023);
     private final static Order ORDER_WITH_DESSERT = new Order(DessertMenu.CHOCOLATE_CAKE,2);
     private final static Order ORDER_WITH_MAIN = new Order(MainMenu.T_BONE_STEAK,2);
-    private final static Orders ordersWithMain = new Orders(List.of(ORDER_WITH_MAIN));
-    private final static Orders ordersWithDessert = new Orders(List.of(ORDER_WITH_DESSERT));
+    private final static Orders ordersWithMain = new Orders(Set.of(ORDER_WITH_MAIN));
+    private final static Orders ordersWithDessert = new Orders(Set.of(ORDER_WITH_DESSERT));
 
     @DisplayName("평일이면 메인 수당 각각 2023원씩 할인한다.")
     @Test

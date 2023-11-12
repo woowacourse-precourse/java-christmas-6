@@ -16,6 +16,7 @@ import christmas.order.Orders;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,9 +25,9 @@ class WooWaEventManagerTest {
     private final static Order orderTwoDessert = new Order(DessertMenu.CHOCOLATE_CAKE, 2);
     private final static Order orderOneIceCream = new Order(DessertMenu.ICE_CREAM, 1);
     private final static Order oderTwoSteak = new Order(MainMenu.T_BONE_STEAK, 2);
-    private final static Orders ordersOneIceCream = new Orders(List.of(orderOneIceCream));
-    private final static Orders ordersWithMain = new Orders(List.of(oderTwoSteak));
-    private final static Orders ordersOver120_000 = new Orders(List.of(orderTwoDessert, oderTwoSteak));
+    private final static Orders ordersOneIceCream = new Orders(Set.of(orderOneIceCream));
+    private final static Orders ordersWithMain = new Orders(Set.of(oderTwoSteak));
+    private final static Orders ordersOver120_000 = new Orders(Set.of(orderTwoDessert, oderTwoSteak));
     private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 3);
     private final static Integer CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT = (BASIC_BENEFIT.getAmount() + (
             INCREASE_BENEFIT.getAmount() * 2));

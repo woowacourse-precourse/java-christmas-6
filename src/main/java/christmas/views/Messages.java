@@ -4,7 +4,7 @@ import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.order.Order;
 import christmas.order.Orders;
-import java.util.List;
+import java.util.Set;
 
 public class Messages {
     public static String announceHello(Integer month) {
@@ -54,7 +54,7 @@ public class Messages {
     }
 
     public static String repeatAllOrders(Orders orders) {
-        List<Order> orderList = orders.getOrderList();
+        Set<Order> orderList = orders.getOrderSet();
         StringBuilder stringBuilder = new StringBuilder();
         for (Order order : orderList) {
             stringBuilder.append(perOrder(order));

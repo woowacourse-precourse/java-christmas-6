@@ -1,26 +1,25 @@
 package christmas.order;
 
 import christmas.enums.menu.MenuItem;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 public class Orders {
-    private final List<Order> orderList;
+    private final Set<Order> orderSet;
 
-    public Orders(List<Order> orderList) {
-        this.orderList = orderList;
+    public Orders(Set<Order> orderSet) {
+        this.orderSet = orderSet;
     }
 
     public Integer calculateTotalPrice() {
-        return orderList.stream().mapToInt(Order::calculatePrice).sum();
+        return orderSet.stream().mapToInt(Order::calculatePrice).sum();
     }
 
     public Integer findEventMenuCount(MenuItem[] menuItems) {
-        return orderList.stream().mapToInt(menu -> menu.findEventMenuCount(menuItems)).sum();
+        return orderSet.stream().mapToInt(menu -> menu.findEventMenuCount(menuItems)).sum();
     }
 
-    public List<Order> getOrderList() {
-        return Collections.unmodifiableList(orderList);
+    public Set<Order> getOrderSet() {
+        return Collections.unmodifiableSet (orderSet);
     }
 }
