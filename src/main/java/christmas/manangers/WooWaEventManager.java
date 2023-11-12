@@ -4,6 +4,7 @@ import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.GIFT_CONDITION_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.INCREASE_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.MINIMUM_REQUIRE_AMOUNT;
+import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.WEEK_BENEFIT;
 import static christmas.enums.events.decemberevent.DecemberEventPeriod.END_OF_THE_CHRISTMAS;
 import static christmas.enums.events.decemberevent.DecemberEventPeriod.MONTH;
@@ -16,6 +17,7 @@ import static christmas.enums.events.decemberevent.DecemberEvents.WEEKDAY_DISCOU
 import static christmas.enums.events.decemberevent.DecemberEvents.WEEKEND_DISCOUNT;
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 
+import christmas.enums.events.NoEvent;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
@@ -34,6 +36,8 @@ import christmas.order.Orders;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 public class WooWaEventManager {
     private final AmountToGiftEvent amountToGiftEvent;
@@ -73,9 +77,9 @@ public class WooWaEventManager {
         EventResult weekendEventResult = weekendDiscountEvent.execute(reservationDate, orders);
         MenuItem gift = amountToGiftEvent.execute(reservationDate, totalPriceBeforeDiscount);
 
-        List<EventResult> eventResults = List.of(christmasDDayEventResult, specialDiscountEventResult,
-                weekdayEventResult, weekendEventResult);
+        List<EventResult> eventResults = Stream.of(christmasDDayEventResult, specialDiscountEventResult,
+                weekdayEventResult, weekendEventResult).filter(eventResult -> !eventResult.events().equals(NoEvent.NO_EVENT)).toList();
 
-        return new EventBenefit(eventResults,gift);
+        return new EventBenefit(eventResults, gift);
     }
 }
