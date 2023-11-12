@@ -34,10 +34,10 @@ class WeekendDiscountBenefitTest {
     @Test
     void weekDaySituationWithMain() {
         //when
-        EventResult eventResult = weekendDiscount.execute(weekend, ordersWithDessert);
+        OneEventResult oneEventResult = weekendDiscount.execute(weekend, ordersWithDessert);
 
         //then
-        assertThat(eventResult.discountBenefit()).isEqualTo(
+        assertThat(oneEventResult.discountBenefit()).isEqualTo(
                 WEEK_BENEFIT.getAmount() * ORDER_WITH_MAIN.getOrderQuantity());
     }
 
@@ -45,20 +45,20 @@ class WeekendDiscountBenefitTest {
     @Test
     void weekendSituationWithMain() {
         //when
-        EventResult eventResult = weekendDiscount.execute(weekDay, ordersWithDessert);
+        OneEventResult oneEventResult = weekendDiscount.execute(weekDay, ordersWithDessert);
 
         //then
-        assertThat(eventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
+        assertThat(oneEventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
     }
 
     @DisplayName("주말이어도 디저트가 아니라면 할인하지 아니한다.")
     @Test
     void weekendSituationWithDessert() {
         //when
-        EventResult eventResult = weekendDiscount.execute(weekend, ordersWithMain);
+        OneEventResult oneEventResult = weekendDiscount.execute(weekend, ordersWithMain);
 
         //then
-        assertThat(eventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
+        assertThat(oneEventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
 
     }
 
@@ -66,10 +66,10 @@ class WeekendDiscountBenefitTest {
     @Test
     void weekDaySituationWithDessert() {
         //when
-        EventResult eventResult = weekendDiscount.execute(weekDay, ordersWithMain);
+        OneEventResult oneEventResult = weekendDiscount.execute(weekDay, ordersWithMain);
 
         //then
-        assertThat(eventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
+        assertThat(oneEventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
 
     }
 }

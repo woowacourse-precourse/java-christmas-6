@@ -8,22 +8,17 @@ import static org.assertj.core.api.Assertions.*;
 
 import christmas.enums.badge.Badge;
 import christmas.enums.badge.benefit.BenefitBadge;
-import christmas.enums.benefit.DiscountBenefit;
-import christmas.enums.events.Events;
-import christmas.enums.events.decemberevent.DecemberEvents;
 import christmas.enums.menu.BeverageMenu;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
-import christmas.event.EventResult;
+import christmas.event.OneEventResult;
 import christmas.manangers.BadgeManager;
 import christmas.manangers.WooWaEventManager;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,21 +37,21 @@ class OrderSystemTest {
         WooWaEventManager wooWaEventManager = new WooWaEventManager();
         BadgeManager badgeManager = new BadgeManager();
         OrderSystem orderSystem = new OrderSystem(wooWaEventManager,badgeManager);
-        Receipt receipt = orderSystem.orderProcess(reservationDate, orderThreeSteak);
+        Receipt receipt = orderSystem.calculateOrderResult(reservationDate, orderThreeSteak);
 
         //when
         Badge badge = receipt.badge();
         Integer totalPriceBeforeDiscount = receipt.totalPriceBeforeDiscount();
         MenuItem gift = receipt.gift();
-        List<EventResult> eventResults = receipt.eventResults();
+        List<OneEventResult> oneEventResults = receipt.oneEventResults();
 
         //then
         assertThat(badge).isEqualTo(BenefitBadge.SANTA);
         assertThat(totalPriceBeforeDiscount).isEqualTo(orderThreeSteak.calculateTotalPrice());
         assertThat(gift).isEqualTo(BeverageMenu.CHAMPAGNE);
-        EventResult christmasEvent = new EventResult(CHRISTMAS_D_DAY_DISCOUNT, 1200);
-        EventResult specialDiscount = new EventResult(SPECIAL_DISCOUNT, BASIC_BENEFIT.getAmount());
-        EventResult weekdayEvent = new EventResult(WEEKDAY_DISCOUNT, 6069);
-        assertThat(eventResults).containsExactly(christmasEvent,specialDiscount,weekdayEvent);
+        OneEventResult christmasEvent = new OneEventResult(CHRISTMAS_D_DAY_DISCOUNT, 1200);
+        OneEventResult specialDiscount = new OneEventResult(SPECIAL_DISCOUNT, BASIC_BENEFIT.getAmount());
+        OneEventResult weekdayEvent = new OneEventResult(WEEKDAY_DISCOUNT, 6069);
+        assertThat(oneEventResults).containsExactly(christmasEvent,specialDiscount,weekdayEvent);
     }
 }

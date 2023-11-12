@@ -6,7 +6,7 @@ public enum BenefitBadge implements Badge {
     STAR("별",5_000)
     , TREE("트리",10_000)
     , SANTA("산타",20_000)
-    , NONE("NONE",0);
+    , NONE("없음",0);
 
     private final String name;
     private final Integer benefitCondition;

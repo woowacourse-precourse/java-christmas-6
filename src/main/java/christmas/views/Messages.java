@@ -1,7 +1,7 @@
 package christmas.views;
 
 import christmas.enums.menu.MenuItem;
-import christmas.event.EventResult;
+import christmas.event.OneEventResult;
 import christmas.order.Order;
 import christmas.order.Orders;
 import java.time.LocalDate;
@@ -39,10 +39,10 @@ public class Messages {
         return "<혜택 내역>";
     }
 
-    public static String perEventBenefit(List<EventResult> eventResults){
+    public static String perEventBenefit(List<OneEventResult> oneEventResults){
         StringBuilder stringBuilder = new StringBuilder();
-        for (EventResult eventResult : eventResults) {
-            String result = eventResult.events().getName() + " " + convertAmount(-eventResult.discountBenefit()) + System.lineSeparator();
+        for (OneEventResult oneEventResult : oneEventResults) {
+            String result = oneEventResult.events().getName() + " " + convertAmount(-oneEventResult.discountBenefit()) + System.lineSeparator();
             stringBuilder.append(result);
         }
         return stringBuilder.toString();
@@ -53,6 +53,10 @@ public class Messages {
     }
     public static String announceTotalDiscountBenefit() {
         return "<총혜택 금액>";
+    }
+
+    public static String AfterDiscountAmount() {
+        return "<할인 후 예상 결제 금액>";
     }
 
     public static String announceEventBadge(Integer month) {

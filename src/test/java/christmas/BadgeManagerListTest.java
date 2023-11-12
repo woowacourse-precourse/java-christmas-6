@@ -16,8 +16,7 @@ import org.junit.jupiter.api.Test;
 
 class BadgeManagerListTest {
 
-    private final static WooWaEventManager WOO_WA_EVENT_MANAGER = new WooWaEventManager();
-    private final static BadgeManager BADGE_MANAGER = new BadgeManager(WOO_WA_EVENT_MANAGER);
+    private final static BadgeManager BADGE_MANAGER = new BadgeManager();
     private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 7);
     private final static LocalDate reservationSpecialDate = LocalDate.of(2023, Month.DECEMBER, 10);
     private final static Integer UNDER_5000 = 4000;

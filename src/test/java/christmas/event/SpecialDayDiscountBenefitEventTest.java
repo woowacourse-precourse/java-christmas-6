@@ -23,14 +23,14 @@ class SpecialDayDiscountBenefitEventTest {
     @DisplayName("특별 할인이 적용되는 날은 1000원을 추가할인한다.")
     @Test
     void reservationSpecialDate() {
-        EventResult eventResult = SPECIAL_DAY_DISCOUNT_EVENT.execute(specialDate);
-        Assertions.assertThat(eventResult.discountBenefit()).isEqualTo(BASIC_BENEFIT.getAmount());
+        OneEventResult oneEventResult = SPECIAL_DAY_DISCOUNT_EVENT.execute(specialDate);
+        Assertions.assertThat(oneEventResult.discountBenefit()).isEqualTo(BASIC_BENEFIT.getAmount());
     }
 
     @DisplayName("특별 할인이 적용되지 않는 날은 1000원을 추가할인하지 않는다.")
     @Test
     void reservationNoNSpecialDate() {
-        EventResult eventResult = SPECIAL_DAY_DISCOUNT_EVENT.execute(nonSpecialDate);
-        Assertions.assertThat(eventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
+        OneEventResult oneEventResult = SPECIAL_DAY_DISCOUNT_EVENT.execute(nonSpecialDate);
+        Assertions.assertThat(oneEventResult.discountBenefit()).isEqualTo(NO_BENEFIT.getAmount());
     }
 }

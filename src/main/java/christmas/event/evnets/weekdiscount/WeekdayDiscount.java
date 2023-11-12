@@ -4,9 +4,8 @@ import static christmas.enums.benefit.DiscountBenefit.*;
 import static christmas.enums.events.NoEvent.NO_EVENT;
 
 import christmas.enums.events.Events;
-import christmas.enums.events.NoEvent;
 import christmas.enums.menu.MenuItem;
-import christmas.event.EventResult;
+import christmas.event.OneEventResult;
 import christmas.utils.EventPeriod;
 import christmas.order.Orders;
 import java.time.DayOfWeek;
@@ -40,11 +39,11 @@ public class WeekdayDiscount implements WeekDiscountEvent {
     }
 
     @Override
-    public EventResult execute(LocalDate reservationDate, Orders orders) {
+    public OneEventResult execute(LocalDate reservationDate, Orders orders) {
         if (isEventActivate(reservationDate) && isWeekDay(reservationDate)) {
             Integer discountBenefit = calculateDiscount(orders);
-            return new EventResult(event,discountBenefit);
+            return new OneEventResult(event,discountBenefit);
         }
-        return new EventResult(NO_EVENT,NO_BENEFIT.getAmount());
+        return new OneEventResult(NO_EVENT,NO_BENEFIT.getAmount());
     }
 }

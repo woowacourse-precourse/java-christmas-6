@@ -4,7 +4,7 @@ import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 import static christmas.enums.events.NoEvent.NO_EVENT;
 
 import christmas.enums.events.Events;
-import christmas.event.EventResult;
+import christmas.event.OneEventResult;
 import christmas.utils.EventPeriod;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -34,11 +34,11 @@ public class SpecialDayDiscountEvent implements SpecialDiscountEvent {
     }
 
     @Override
-    public EventResult execute(LocalDate reservationDate) {
+    public OneEventResult execute(LocalDate reservationDate) {
         if (isEventActivate(reservationDate)) {
             Integer discountBenefit = calculateDiscount(reservationDate);
-            return new EventResult(event,discountBenefit);
+            return new OneEventResult(event,discountBenefit);
         }
-        return new EventResult(NO_EVENT,NO_BENEFIT.getAmount());
+        return new OneEventResult(NO_EVENT,NO_BENEFIT.getAmount());
     }
 }
