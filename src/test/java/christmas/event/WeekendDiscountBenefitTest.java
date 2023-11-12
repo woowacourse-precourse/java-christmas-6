@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
-import christmas.event.weekdiscount.WeekendDiscount;
+import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.order.Order;
 import christmas.order.Orders;
 import christmas.utils.EventPeriod;

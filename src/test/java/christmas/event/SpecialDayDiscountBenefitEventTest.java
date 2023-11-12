@@ -3,8 +3,7 @@ package christmas.event;
 import static christmas.enums.benefit.DiscountBenefit.*;
 import static christmas.enums.events.decemberevent.DecemberEvents.SPECIAL_DISCOUNT;
 
-import christmas.enums.events.decemberevent.DecemberEvents;
-import christmas.event.specialdiscount.SpecialDayDiscountEvent;
+import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;

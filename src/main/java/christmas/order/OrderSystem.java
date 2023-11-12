@@ -3,11 +3,11 @@ package christmas.order;
 import christmas.enums.badge.benefit.BenefitBadge;
 import christmas.enums.menu.MenuItem;
 import christmas.event.EventBenefit;
+import christmas.event.EventResult;
 import christmas.manangers.BadgeManager;
 import christmas.manangers.WooWaEventManager;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 public class OrderSystem {
     private final WooWaEventManager wooWaEventManager;
@@ -22,12 +22,13 @@ public class OrderSystem {
         Integer totalPriceBeforeDiscount = orders.calculateTotalPrice();
 
         EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, orders);
+        List<EventResult> eventResults = eventBenefit.eventResults();
         Integer discountBenefit = eventBenefit.showDiscountBenefits();
         MenuItem gift = eventBenefit.gift();
 
         BenefitBadge badge = badgeManager.isBadgeConditionSatisfied(discountBenefit);
 
-        return new Receipt(orders,totalPriceBeforeDiscount,discountBenefit,gift,badge);
+        return new Receipt(eventResults,totalPriceBeforeDiscount,discountBenefit,gift,badge);
     }
 
 }

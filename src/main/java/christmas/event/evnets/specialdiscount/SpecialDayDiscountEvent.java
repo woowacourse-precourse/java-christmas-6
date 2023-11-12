@@ -1,4 +1,4 @@
-package christmas.event.specialdiscount;
+package christmas.event.evnets.specialdiscount;
 
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 

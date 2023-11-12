@@ -11,11 +11,6 @@ import christmas.order.Orders;
 import java.time.LocalDate;
 
 public class BadgeManager {
-    private final WooWaEventManager wooWaEventManager;
-
-    public BadgeManager(WooWaEventManager wooWaEventManager) {
-        this.wooWaEventManager = wooWaEventManager;
-    }
 
     public BenefitBadge isBadgeConditionSatisfied(Integer totalBenefitAmount){
         if(isSanta(totalBenefitAmount)){

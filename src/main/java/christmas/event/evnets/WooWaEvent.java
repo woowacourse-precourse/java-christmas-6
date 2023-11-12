@@ -1,4 +1,4 @@
-package christmas.event;
+package christmas.event.evnets;
 
 import java.time.LocalDate;
 

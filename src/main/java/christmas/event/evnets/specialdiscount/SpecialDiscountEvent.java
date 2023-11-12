@@ -1,8 +1,7 @@
-package christmas.event.specialdiscount;
+package christmas.event.evnets.specialdiscount;
 
-import christmas.enums.events.Events;
 import christmas.event.EventResult;
-import christmas.event.WooWaEvent;
+import christmas.event.evnets.WooWaEvent;
 import java.time.LocalDate;
 
 public interface SpecialDiscountEvent extends WooWaEvent {

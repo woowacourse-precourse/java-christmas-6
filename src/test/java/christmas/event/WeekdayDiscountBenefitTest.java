@@ -5,10 +5,9 @@ import static christmas.enums.benefit.DiscountBenefit.WEEK_BENEFIT;
 import static christmas.enums.events.decemberevent.DecemberEvents.WEEKDAY_DISCOUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.enums.events.decemberevent.DecemberEvents;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
-import christmas.event.weekdiscount.WeekdayDiscount;
+import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.order.Order;
 import christmas.order.Orders;
 import christmas.utils.EventPeriod;

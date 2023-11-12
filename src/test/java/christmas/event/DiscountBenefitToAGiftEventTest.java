@@ -8,7 +8,7 @@ import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
-import christmas.event.gift.AmountToAGiftEvent;
+import christmas.event.evnets.gift.AmountToAGiftEvent;
 import christmas.order.Order;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;

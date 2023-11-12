@@ -1,7 +1,7 @@
-package christmas.event.weekdiscount;
+package christmas.event.evnets.weekdiscount;
 
 import christmas.event.EventResult;
-import christmas.event.WooWaEvent;
+import christmas.event.evnets.WooWaEvent;
 import christmas.order.Orders;
 import java.time.LocalDate;
 

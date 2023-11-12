@@ -1,4 +1,4 @@
-package christmas.event.gift;
+package christmas.event.evnets.gift;
 
 import static christmas.enums.menu.NoMenu.NO_MENU;
 
