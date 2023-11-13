@@ -13,7 +13,8 @@ import christmas.enums.menu.MenuItem;
 import christmas.enums.menu.NoMenu;
 import christmas.order.Order;
 import christmas.order.Orders;
-import christmas.systems.EventSystem;
+import christmas.systems.event.EventInitializer;
+import christmas.systems.event.EventSystem;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Set;
@@ -32,7 +33,8 @@ class EventSystemTest {
     private final static Integer CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT = (BASIC_BENEFIT.getAmount() + (
             INCREASE_BENEFIT.getAmount() * 2));
     private final static Integer WEEK_BENEFIT_CONTAIN_TWO_MAIN = (WEEK_BENEFIT.getAmount() * 2);
-    private final static EventSystem EVENT_SYSTEM = new EventSystem();
+    private final static EventInitializer eventInitializer =new EventInitializer();
+    private final static EventSystem EVENT_SYSTEM = new EventSystem(eventInitializer);
     //TODO:추후 추가 테스트 필
 
 

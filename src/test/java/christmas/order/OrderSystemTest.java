@@ -14,7 +14,8 @@ import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.event.Gift;
 import christmas.event.OneEventResult;
-import christmas.systems.EventSystem;
+import christmas.systems.event.EventInitializer;
+import christmas.systems.event.EventSystem;
 import christmas.systems.OrderSystem;
 import java.time.LocalDate;
 import java.time.Month;
@@ -36,7 +37,8 @@ class OrderSystemTest {
     @Test
     void orderProcess() {
         //given
-        EventSystem eventSystem = new EventSystem();
+        EventInitializer eventInitializer = new EventInitializer();
+        EventSystem eventSystem = new EventSystem(eventInitializer);
         OrderSystem orderSystem = new OrderSystem(eventSystem);
         Receipt receipt = orderSystem.calculateOrderResult(reservationDate, orderThreeSteak);
 
