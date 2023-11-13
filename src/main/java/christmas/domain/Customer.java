@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.valid.Validator;
+
 public class Customer {
     private int visitedDate;
 
@@ -9,5 +11,6 @@ public class Customer {
     }
 
     private void validate(int visitedDate) {
+        Validator.checkDateValid(visitedDate);
     }
 }
