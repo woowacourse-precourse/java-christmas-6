@@ -16,6 +16,9 @@ public class Menu {
         this.price = price;
     }
 
+    public boolean checkMenu (String menuName) {
+        return menuName.equals(this.menuName);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

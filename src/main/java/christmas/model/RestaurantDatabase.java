@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DataLoader {
+public class RestaurantDatabase {
     private final String law_menu_data = """
             <애피타이저>
             양송이수프(6,000), 타파스(5,500), 시저샐러드(8,000)
@@ -24,16 +24,18 @@ public class DataLoader {
 
     private final List<Menu> menu;
 
-    public DataLoader () {
+    public RestaurantDatabase() {
         menu = new ArrayList<>();
     }
 
-    public void loadMenuData () {
+    public List<Menu> loadMenuData () {
         List<String> menusByCategory = Arrays.stream(law_menu_data.split("\n\n")).toList();
 
         for (int menuIdx = 0; menuIdx < menusByCategory.size(); menuIdx++) {
             divideMenuByCategory(menuIdx, menusByCategory.get(menuIdx));
         }
+
+        return menu;
     }
 
     //    category별 menu
@@ -61,5 +63,16 @@ public class DataLoader {
         this.menu.add(menuToSave);
     }
     // TODO : 변수명 어떡하죠?
+
+    private Menu get (String menuName) {
+        List<Menu> matchedMenu =  menu.stream()
+                .filter(el -> el.menuName.equals(menuName)).toList();
+
+        if (matchedMenu.size() == 0) {
+            return null;
+        }
+
+        return matchedMenu.get(0);
+    }
 
 }
