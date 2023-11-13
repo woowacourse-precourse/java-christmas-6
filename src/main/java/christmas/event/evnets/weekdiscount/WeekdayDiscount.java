@@ -1,13 +1,10 @@
 package christmas.event.evnets.weekdiscount;
 
-import static christmas.enums.benefit.DiscountBenefit.*;
-import static christmas.enums.events.NoEvent.NO_EVENT;
-
 import christmas.enums.events.Events;
 import christmas.enums.menu.MenuItem;
 import christmas.event.OneEventResult;
-import christmas.utils.EventPeriod;
 import christmas.order.Orders;
+import christmas.utils.EventPeriod;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
@@ -17,7 +14,8 @@ public class WeekdayDiscount implements WeekDiscountEvent {
     private final EventPeriod eventPeriod;
     private final MenuItem[] discountMenuItems;
 
-    public WeekdayDiscount(Events event, EventPeriod eventPeriod, MenuItem[] discountMenuItems, Integer discountAmount) {
+    public WeekdayDiscount(Events event, EventPeriod eventPeriod, MenuItem[] discountMenuItems,
+                           Integer discountAmount) {
         this.event = event;
         this.eventPeriod = eventPeriod;
         this.discountAmount = discountAmount;
@@ -25,7 +23,7 @@ public class WeekdayDiscount implements WeekDiscountEvent {
     }
 
     private Integer calculateDiscount(Orders orders) {
-            return orders.findEventMenuCount(discountMenuItems) * discountAmount;
+        return orders.findEventMenuCount(discountMenuItems) * discountAmount;
     }
 
     private Boolean isWeekDay(LocalDate reservationDate) {
@@ -42,7 +40,7 @@ public class WeekdayDiscount implements WeekDiscountEvent {
     public OneEventResult execute(LocalDate reservationDate, Orders orders) {
         if (isEventActivate(reservationDate) && isWeekDay(reservationDate)) {
             Integer discountBenefit = calculateDiscount(orders);
-            return new OneEventResult(event.getName(),discountBenefit);
+            return new OneEventResult(event.getName(), discountBenefit);
         }
         return OneEventResult.NO_EVENT_RESULT();
     }

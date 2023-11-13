@@ -46,14 +46,15 @@ class StringToOrdersParserTest {
     @DisplayName("음식을 0개 주문시 예외가 발생한다.")
     @Test
     void whenOrderZeroMenu() {
-        assertThatThrownBy(()->StringToOrdersParser.parseInputToOrderSet("티본스테이크-0")).isInstanceOf(
+        assertThatThrownBy(() -> StringToOrdersParser.parseInputToOrderSet("티본스테이크-0")).isInstanceOf(
                 IllegalOrderFormatException.class);
     }
 
     @DisplayName("Intger 넘어서는 수량 주문시 예외가 발생한다.")
     @Test
     void whenOrderOvervalue() {
-        assertThatThrownBy(()->StringToOrdersParser.parseInputToOrderSet("티본스테이크-99999999999999999999999999")).isInstanceOf(
+        assertThatThrownBy(
+                () -> StringToOrdersParser.parseInputToOrderSet("티본스테이크-99999999999999999999999999")).isInstanceOf(
                 IllegalOrderFormatException.class);
     }
 
@@ -73,8 +74,9 @@ class StringToOrdersParserTest {
 
     @DisplayName("총 메뉴의 수량이 20개가 넘어가면 예외가 발생한다.")
     @Test
-    void outOfNumberMenuException(){
-        assertThatThrownBy(() -> StringToOrdersParser.parseInputToOrderSet("티본스테이크-5,샴페인-2,레드와인-5,아이스크림-10")).isInstanceOf(
+    void outOfNumberMenuException() {
+        assertThatThrownBy(
+                () -> StringToOrdersParser.parseInputToOrderSet("티본스테이크-5,샴페인-2,레드와인-5,아이스크림-10")).isInstanceOf(
                 IllegalOutOfNumberMenuException.class);
     }
 }

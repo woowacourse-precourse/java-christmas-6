@@ -5,15 +5,17 @@ import static christmas.enums.events.decemberevent.DecemberEvents.CHRISTMAS_D_DA
 import static christmas.enums.events.decemberevent.DecemberEvents.SPECIAL_DISCOUNT;
 import static christmas.enums.events.decemberevent.DecemberEvents.WEEKDAY_DISCOUNT;
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.enums.badge.Badge;
 import christmas.enums.badge.benefit.BenefitBadge;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
+import christmas.event.Gift;
 import christmas.event.OneEventResult;
-import christmas.manangers.WooWaEventManager;
+import christmas.systems.EventSystem;
+import christmas.systems.OrderSystem;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
@@ -29,28 +31,32 @@ class OrderSystemTest {
     private final static Orders orderThreeSteak = new Orders(Set.of(oderThreeSteak));
     private final static Orders ordersOver120_000 = new Orders(Set.of(orderTwoDessert, oderThreeSteak));
     private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 3);
+
     @DisplayName("이벤트별 혜택, 총 혜택, 뱃지, 증정품 여부를 반환한다.")
     @Test
     void orderProcess() {
         //given
-        WooWaEventManager wooWaEventManager = new WooWaEventManager();
-        OrderSystem orderSystem = new OrderSystem(wooWaEventManager);
+        EventSystem eventSystem = new EventSystem();
+        OrderSystem orderSystem = new OrderSystem(eventSystem);
         Receipt receipt = orderSystem.calculateOrderResult(reservationDate, orderThreeSteak);
 
         //when
         Badge badge = receipt.badge();
         Integer totalPriceBeforeDiscount = receipt.totalPriceBeforeDiscount();
-        MenuItem gift = receipt.gift();
+        Gift gift = receipt.gift();
+        MenuItem menuItem = gift.menuItem();
+        Integer quantity = gift.quantity();
         List<OneEventResult> oneEventResults = receipt.oneEventResults();
 
         //then
         assertThat(badge).isEqualTo(BenefitBadge.SANTA);
         assertThat(totalPriceBeforeDiscount).isEqualTo(orderThreeSteak.calculateTotalPrice());
-        assertThat(gift).isEqualTo(CHAMPAGNE);
+        assertThat(menuItem).isEqualTo(CHAMPAGNE);
+        assertThat(quantity).isEqualTo(1);
         OneEventResult christmasEvent = new OneEventResult(CHRISTMAS_D_DAY_DISCOUNT.getName(), 1200);
         OneEventResult specialDiscount = new OneEventResult(SPECIAL_DISCOUNT.getName(), BASIC_BENEFIT.getAmount());
         OneEventResult weekdayEvent = new OneEventResult(WEEKDAY_DISCOUNT.getName(), 6069);
         OneEventResult giftEvent = new OneEventResult(CHAMPAGNE.getName(), CHAMPAGNE.getAmount());
-        assertThat(oneEventResults).containsExactly(christmasEvent,specialDiscount,weekdayEvent,giftEvent);
+        assertThat(oneEventResults).containsExactly(christmasEvent, specialDiscount, weekdayEvent, giftEvent);
     }
 }

@@ -24,6 +24,6 @@ public class Orders {
     }
 
     public Set<Order> getOrderSet() {
-        return Collections.unmodifiableSet (orderSet);
+        return Collections.unmodifiableSet(orderSet);
     }
 }

@@ -1,7 +1,7 @@
 package christmas.enums.menu;
 
-public enum NoMenu implements MenuItem{
-    NO_MENU("없음",0);
+public enum NoMenu implements MenuItem {
+    NO_MENU("없음", 0);
 
     private final String name;
     private final Integer amount;

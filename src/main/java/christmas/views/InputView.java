@@ -7,7 +7,7 @@ public class InputView {
         return Console.readLine();
     }
 
-    public static void close(){
+    public static void close() {
         Console.close();
     }
 }

@@ -1,13 +1,14 @@
 package christmas;
 
-import christmas.manangers.WooWaEventManager;
-import christmas.order.OrderSystem;
+import christmas.systems.EventSystem;
+import christmas.systems.OrderSystem;
+import christmas.systems.ReservationSystem;
 
 public class Application {
     public static void main(String[] args) {
-        WooWaEventManager wooWaEventManager = new WooWaEventManager();
-        OrderSystem orderSystem = new OrderSystem(wooWaEventManager);
-        RestaurantInterface restaurantInterface = new RestaurantInterface(orderSystem);
-        restaurantInterface.process();
+        EventSystem eventSystem = new EventSystem();
+        OrderSystem orderSystem = new OrderSystem(eventSystem);
+        ReservationSystem reservationSystem = new ReservationSystem(orderSystem);
+        reservationSystem.process();
     }
 }

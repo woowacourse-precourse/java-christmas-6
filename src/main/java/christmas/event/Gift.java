@@ -10,7 +10,15 @@ public record Gift(MenuItem menuItem, Integer quantity) {
         return new Gift(NoMenu.NO_MENU, NO_QUANTITY);
     }
 
+    public Boolean isNone() {
+        return this.menuItem.isNone();
+    }
+
     public Integer getGiftDiscountBenefit() {
         return menuItem.getAmount() * quantity;
+    }
+
+    public String getName() {
+        return menuItem.getName();
     }
 }

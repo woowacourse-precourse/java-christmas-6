@@ -1,7 +1,7 @@
 package christmas.enums.events;
 
-public enum NoEvent implements Events{
-    NO_EVENT("없음",0);
+public enum NoEvent implements Events {
+    NO_EVENT("없음", 0);
     private final String name;
     private final Integer amount;
 

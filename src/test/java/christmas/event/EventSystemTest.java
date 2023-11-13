@@ -11,16 +11,16 @@ import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.enums.menu.NoMenu;
-import christmas.manangers.WooWaEventManager;
 import christmas.order.Order;
 import christmas.order.Orders;
+import christmas.systems.EventSystem;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class WooWaEventManagerTest {
+class EventSystemTest {
 
     private final static Order orderTwoDessert = new Order(DessertMenu.CHOCOLATE_CAKE, 2);
     private final static Order orderOneIceCream = new Order(DessertMenu.ICE_CREAM, 1);
@@ -32,7 +32,7 @@ class WooWaEventManagerTest {
     private final static Integer CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT = (BASIC_BENEFIT.getAmount() + (
             INCREASE_BENEFIT.getAmount() * 2));
     private final static Integer WEEK_BENEFIT_CONTAIN_TWO_MAIN = (WEEK_BENEFIT.getAmount() * 2);
-    private final static WooWaEventManager wooWaEventManager = new WooWaEventManager();
+    private final static EventSystem EVENT_SYSTEM = new EventSystem();
     //TODO:추후 추가 테스트 필
 
 
@@ -44,9 +44,8 @@ class WooWaEventManagerTest {
                 BASIC_BENEFIT.getAmount() + CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT + WEEK_BENEFIT_CONTAIN_TWO_MAIN
                         + CHAMPAGNE.getAmount();
 
-
         //when
-        EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, ordersOver120_000);
+        EventBenefit eventBenefit = EVENT_SYSTEM.activateEvent(reservationDate, ordersOver120_000);
         Integer totalBenefit = eventBenefit.showTotalDiscount();
 
         //then
@@ -61,7 +60,7 @@ class WooWaEventManagerTest {
         final Integer totalBenefitAmount =
                 BASIC_BENEFIT.getAmount() + CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT + WEEK_BENEFIT_CONTAIN_TWO_MAIN;
         //when
-        EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, ordersWithMain);
+        EventBenefit eventBenefit = EVENT_SYSTEM.activateEvent(reservationDate, ordersWithMain);
         Integer totalBenefit = eventBenefit.showTotalDiscount();
 
         //then
@@ -73,11 +72,11 @@ class WooWaEventManagerTest {
     @Test
     void under10_000BenefitAndGiftIsNone() {
         //when
-        EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, ordersOneIceCream);
+        EventBenefit eventBenefit = EVENT_SYSTEM.activateEvent(reservationDate, ordersOneIceCream);
 
         //then
         Integer discountBenefit = eventBenefit.showTotalDiscount();
-        MenuItem gift = eventBenefit.gift();
+        MenuItem gift = eventBenefit.gift().menuItem();
 
         assertThat(discountBenefit).isEqualTo(NO_BENEFIT.getAmount());
         assertThat(gift).isEqualTo(NoMenu.NO_MENU);

@@ -41,6 +41,6 @@ class MenuListTest {
     @DisplayName("존재하지 않는 메뉴를 찾으면 예외가 발생한다")
     @Test
     public void findNoDataCauseException() {
-        assertThatThrownBy(()->MenuList.getMenuByName("울랄라")).isInstanceOf(IllegalOrderFormatException.class);
+        assertThatThrownBy(() -> MenuList.getMenuByName("울랄라")).isInstanceOf(IllegalOrderFormatException.class);
     }
 }

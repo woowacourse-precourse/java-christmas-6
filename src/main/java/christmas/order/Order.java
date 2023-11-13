@@ -22,7 +22,7 @@ public class Order {
 
     public Integer findEventMenuCount(MenuItem[] eventMenus) {
         for (MenuItem eventMenu : eventMenus) {
-            if(this.menuItem.equals(eventMenu)){
+            if (this.menuItem.equals(eventMenu)) {
                 return orderQuantity;
             }
         }

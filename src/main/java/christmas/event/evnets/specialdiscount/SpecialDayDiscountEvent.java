@@ -1,7 +1,6 @@
 package christmas.event.evnets.specialdiscount;
 
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
-import static christmas.enums.events.NoEvent.NO_EVENT;
 
 import christmas.enums.events.Events;
 import christmas.event.OneEventResult;
@@ -23,7 +22,7 @@ public class SpecialDayDiscountEvent implements SpecialDiscountEvent {
 
     private Integer calculateDiscount(LocalDate reservationDate) {
         DayOfWeek dayOfWeek = reservationDate.getDayOfWeek();
-        if(dayOfWeek == DayOfWeek.SUNDAY || reservationDate.getDayOfMonth() == CHRISTMAS_DAY){
+        if (dayOfWeek == DayOfWeek.SUNDAY || reservationDate.getDayOfMonth() == CHRISTMAS_DAY) {
             return discountAmount;
         }
         return NO_BENEFIT.getAmount();
@@ -38,7 +37,7 @@ public class SpecialDayDiscountEvent implements SpecialDiscountEvent {
     public OneEventResult execute(LocalDate reservationDate) {
         if (isEventActivate(reservationDate)) {
             Integer discountBenefit = calculateDiscount(reservationDate);
-            return new OneEventResult(event.getName(),discountBenefit);
+            return new OneEventResult(event.getName(), discountBenefit);
         }
         return OneEventResult.NO_EVENT_RESULT();
     }

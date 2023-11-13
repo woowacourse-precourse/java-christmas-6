@@ -1,12 +1,11 @@
-package christmas;
+package christmas.systems;
 
 import static christmas.enums.events.NoEvent.NO_EVENT;
 import static christmas.enums.menu.NoMenu.NO_MENU;
 
-import christmas.enums.menu.MenuItem;
+import christmas.event.Gift;
 import christmas.event.OneEventResult;
 import christmas.exceptions.RestaurantException;
-import christmas.order.OrderSystem;
 import christmas.order.Orders;
 import christmas.order.Receipt;
 import christmas.utils.StringToDateParser;
@@ -19,17 +18,17 @@ import java.time.Month;
 import java.util.List;
 import java.util.function.Function;
 
-public class RestaurantInterface {
+public class ReservationSystem {
     private final static Integer YEAR = 2023;
     private final static Integer MONTH = Month.DECEMBER.getValue();
     private final static String RESTAURANT_NAME = "우테코 식당";
     private final OrderSystem orderSystem;
 
-    public RestaurantInterface(OrderSystem orderSystem) {
+    public ReservationSystem(OrderSystem orderSystem) {
         this.orderSystem = orderSystem;
     }
 
-    public void process(){
+    public void process() {
         printAskDate();
         LocalDate reservationDate = getInputAndCatchException(
                 input -> StringToDateParser.makeReservation(YEAR, MONTH, input));
@@ -80,11 +79,11 @@ public class RestaurantInterface {
     }
 
     private static void printGiftBenefit(Receipt receipt) {
-        MenuItem gift = receipt.gift();
+        Gift gift = receipt.gift();
         OutputView.printOut(Messages.announceGift());
         String giftResult = NO_MENU.getName();
-        if(!gift.isNone()){
-            giftResult = Messages.gift(gift, 1);
+        if (!gift.isNone()) {
+            giftResult = Messages.gift(gift.menuItem(), gift.quantity());
         }
         OutputView.printOut(giftResult);
         OutputView.printOut("");
@@ -94,7 +93,7 @@ public class RestaurantInterface {
         OutputView.printOut(Messages.announceEventBenefits());
         List<OneEventResult> oneEventResults = receipt.oneEventResults();
         String oneEventResult = NO_EVENT.getName();
-        if (!oneEventResults.isEmpty()){
+        if (!oneEventResults.isEmpty()) {
             oneEventResult = Messages.perEventBenefit(oneEventResults);
         }
         OutputView.printOut(oneEventResult);

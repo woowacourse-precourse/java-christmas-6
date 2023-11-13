@@ -40,7 +40,7 @@ public class MenuList {
 
     public static MenuItem getMenuByName(String name) {
         MenuItem menuItem = menuItems.get(name);
-        if(!menuItems.containsKey(name)){
+        if (!menuItems.containsKey(name)) {
             throw new IllegalOrderFormatException();
         }
         return menuItem;

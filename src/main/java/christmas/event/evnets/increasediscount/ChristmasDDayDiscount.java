@@ -1,8 +1,5 @@
 package christmas.event.evnets.increasediscount;
 
-import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
-import static christmas.enums.events.NoEvent.NO_EVENT;
-
 import christmas.enums.events.Events;
 import christmas.event.OneEventResult;
 import christmas.utils.EventPeriod;
@@ -15,7 +12,8 @@ public class ChristmasDDayDiscount implements IncreaseEverydayDiscountEvent {
     private final int discountIncrementPerDay;
     private final EventPeriod eventPeriod;
 
-    public ChristmasDDayDiscount(Events event, EventPeriod eventPeriod, int discountStartAmount, int discountIncrementPerDay ) {
+    public ChristmasDDayDiscount(Events event, EventPeriod eventPeriod, int discountStartAmount,
+                                 int discountIncrementPerDay) {
         this.event = event;
         this.discountStartAmount = discountStartAmount;
         this.discountIncrementPerDay = discountIncrementPerDay;
@@ -37,7 +35,7 @@ public class ChristmasDDayDiscount implements IncreaseEverydayDiscountEvent {
     public OneEventResult execute(LocalDate reservationDate) {
         if (isEventActivate(reservationDate)) {
             int discountBenefit = calculateDiscount(reservationDate);
-            return new OneEventResult(event.getName(),discountBenefit);
+            return new OneEventResult(event.getName(), discountBenefit);
         }
         return OneEventResult.NO_EVENT_RESULT();
     }

@@ -5,7 +5,6 @@ import static christmas.enums.menu.MainMenu.T_BONE_STEAK;
 
 import christmas.order.Order;
 import christmas.order.Orders;
-import java.util.List;
 import java.util.Set;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ class MessagesTest {
     @Test
     void repeatAllOrders() {
         Messages messages = new Messages();
-        String returnMessages = messages.repeatAllOrders(orders);
+        String returnMessages = Messages.repeatAllOrders(orders);
         Assertions.assertThat(returnMessages).contains("티본스테이크 2개", "해산물파스타 2개");
     }
 }

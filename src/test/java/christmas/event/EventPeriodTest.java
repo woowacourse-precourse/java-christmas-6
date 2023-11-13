@@ -1,6 +1,6 @@
 package christmas.event;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
@@ -9,10 +9,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class EventPeriodTest {
-    private final static LocalDate startOfTheMonth = LocalDate.of(2023,Month.DECEMBER,1);
-    private final static LocalDate endOfTheMonth = LocalDate.of(2023,Month.DECEMBER,31);
-    private final static LocalDate endOfTheChristmas = LocalDate.of(2023,Month.DECEMBER,25);
-    private final static LocalDate oneWeekAfterDay = LocalDate.of(2023,Month.DECEMBER,7);
+    private final static LocalDate startOfTheMonth = LocalDate.of(2023, Month.DECEMBER, 1);
+    private final static LocalDate endOfTheMonth = LocalDate.of(2023, Month.DECEMBER, 31);
+    private final static LocalDate endOfTheChristmas = LocalDate.of(2023, Month.DECEMBER, 25);
+    private final static LocalDate oneWeekAfterDay = LocalDate.of(2023, Month.DECEMBER, 7);
 
     @DisplayName("년도와 달을 넣으면 한달 기간을 반환한다")
     @Test

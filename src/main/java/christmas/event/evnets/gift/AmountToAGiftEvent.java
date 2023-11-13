@@ -27,9 +27,6 @@ public class AmountToAGiftEvent implements AmountToGiftEvent {
         return NO_MENU;
     }
 
-    public Boolean isMenuExist(MenuItem menuItem){
-        return !menuItem.isNone();
-    }
     @Override
     public Boolean isEventActivate(LocalDate reservationDate) {
         return !(reservationDate.isBefore(eventPeriod.startDate()) || reservationDate.isAfter(eventPeriod.endDate()));
@@ -37,9 +34,12 @@ public class AmountToAGiftEvent implements AmountToGiftEvent {
 
     @Override
     public Gift execute(LocalDate reservationDate, Integer totalPriceBeforeDiscount) {
-        if (isEventActivate(reservationDate) && menuItem.isNone()) {
+
+        if (isEventActivate(reservationDate)) {
             MenuItem findMenuItem = isGiftAmountOver(totalPriceBeforeDiscount);
-            return new Gift(findMenuItem,quantity);
+            if (!findMenuItem.isNone()) {
+                return new Gift(findMenuItem, quantity);
+            }
         }
         return Gift.NO_GIFT();
     }

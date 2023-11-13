@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Messages {
-    public static String announceHello(String restaurantName ,Integer month) {
+    public static String announceHello(String restaurantName, Integer month) {
         return "안녕하세요! " + restaurantName + " " + convertMonth(month) + " 이벤트 플래너입니다.";
     }
 
@@ -22,7 +22,7 @@ public class Messages {
         return "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)";
     }
 
-    public static String announceEventBenefit(String restaurantName,LocalDate localDate) {
+    public static String announceEventBenefit(String restaurantName, LocalDate localDate) {
         int date = localDate.getDayOfMonth();
         int month = localDate.getMonthValue();
         return monthAndDate(month, date) + "에 " + restaurantName + "에서 받을 이벤트 혜택 미리 보기!";
@@ -40,10 +40,11 @@ public class Messages {
         return "<혜택 내역>";
     }
 
-    public static String perEventBenefit(List<OneEventResult> oneEventResults){
+    public static String perEventBenefit(List<OneEventResult> oneEventResults) {
         StringBuilder stringBuilder = new StringBuilder();
         for (OneEventResult oneEventResult : oneEventResults) {
-            String result = oneEventResult.eventName() + " " + convertAmount(-oneEventResult.discountBenefit()) + System.lineSeparator();
+            String result = oneEventResult.eventName() + " " + convertAmount(-oneEventResult.discountBenefit())
+                    + System.lineSeparator();
             stringBuilder.append(result);
         }
         return stringBuilder.toString();
@@ -52,6 +53,7 @@ public class Messages {
     public static String announceGift() {
         return "<증정 메뉴>";
     }
+
     public static String announceTotalDiscountBenefit() {
         return "<총혜택 금액>";
     }
@@ -61,15 +63,15 @@ public class Messages {
     }
 
     public static String announceEventBadge(Integer month) {
-        return "<"+month+"월 이벤트 배지>";
+        return "<" + month + "월 이벤트 배지>";
     }
 
-    public static String gift(MenuItem menuItem,Integer quantity){
-        return menuItem.getName()+" "+quantity+"개";
+    public static String gift(MenuItem menuItem, Integer quantity) {
+        return menuItem.getName() + " " + quantity + "개";
     }
 
-    public static String showAmount(Integer amount){
-        return  convertAmount(amount);
+    public static String showAmount(Integer amount) {
+        return convertAmount(amount);
     }
 
     private static String perOrder(Order order) {
@@ -95,8 +97,8 @@ public class Messages {
         return date + "일";
     }
 
-    private static String convertAmount(Integer amount){
-        return NumberFormatter.formatting(amount)+"원";
+    private static String convertAmount(Integer amount) {
+        return NumberFormatter.formatting(amount) + "원";
     }
 
     private static String monthAndDate(Integer month, Integer date) {

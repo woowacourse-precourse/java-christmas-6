@@ -6,7 +6,7 @@ public interface MenuItem {
 
     Integer getAmount();
 
-    default boolean isNone(){
-       return this.equals(NoMenu.NO_MENU);
+    default boolean isNone() {
+        return this.equals(NoMenu.NO_MENU);
     }
 }
