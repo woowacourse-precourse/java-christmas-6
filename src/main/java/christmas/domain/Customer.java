@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import christmas.valid.Validator;
+import christmas.utils.Validator;
 
 public class Customer {
     private int visitedDate;
