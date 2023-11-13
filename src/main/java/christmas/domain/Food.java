@@ -14,11 +14,5 @@ public class Food {
         this.count = count;
     }
 
-    private void validate(String foodName) {
-        boolean isExist = Arrays.stream(MenuType.values())
-                .anyMatch(v -> v.getFoodName().equals(foodName));
-        if (isExist) {
-            throw new IllegalArgumentException();
-        }
-    }
+
 }
