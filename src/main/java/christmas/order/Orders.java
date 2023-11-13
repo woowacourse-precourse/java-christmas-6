@@ -19,6 +19,10 @@ public class Orders {
         return orderSet.stream().mapToInt(menu -> menu.findEventMenuCount(menuItems)).sum();
     }
 
+    public boolean isEligibleForDiscount(int minimumAmount) {
+        return calculateTotalPrice() >= minimumAmount;
+    }
+
     public Set<Order> getOrderSet() {
         return Collections.unmodifiableSet (orderSet);
     }
