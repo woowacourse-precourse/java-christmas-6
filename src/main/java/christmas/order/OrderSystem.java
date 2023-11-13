@@ -25,7 +25,7 @@ public class OrderSystem {
         EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, orders);
 
         List<OneEventResult> oneEventResults = eventBenefit.oneEventResults();
-        Integer discountBenefit = eventBenefit.showDiscountBenefits();
+        Integer discountBenefit = eventBenefit.showTotalDiscount();
         MenuItem gift = eventBenefit.gift();
 
         BenefitBadge badge = badgeManager.isBadgeConditionSatisfied(discountBenefit);

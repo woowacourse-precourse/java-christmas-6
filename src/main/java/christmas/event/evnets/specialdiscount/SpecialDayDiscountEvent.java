@@ -10,6 +10,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class SpecialDayDiscountEvent implements SpecialDiscountEvent {
+    private final static Integer CHRISTMAS_DAY = 25;
     private final Events event;
     private final Integer discountAmount;
     private final EventPeriod eventPeriod;
@@ -22,7 +23,7 @@ public class SpecialDayDiscountEvent implements SpecialDiscountEvent {
 
     private Integer calculateDiscount(LocalDate reservationDate) {
         DayOfWeek dayOfWeek = reservationDate.getDayOfWeek();
-        if(dayOfWeek == DayOfWeek.SUNDAY || reservationDate.getDayOfMonth() == 25){
+        if(dayOfWeek == DayOfWeek.SUNDAY || reservationDate.getDayOfMonth() == CHRISTMAS_DAY){
             return discountAmount;
         }
         return NO_BENEFIT.getAmount();
@@ -37,8 +38,8 @@ public class SpecialDayDiscountEvent implements SpecialDiscountEvent {
     public OneEventResult execute(LocalDate reservationDate) {
         if (isEventActivate(reservationDate)) {
             Integer discountBenefit = calculateDiscount(reservationDate);
-            return new OneEventResult(event,discountBenefit);
+            return new OneEventResult(event.getName(),discountBenefit);
         }
-        return new OneEventResult(NO_EVENT,NO_BENEFIT.getAmount());
+        return OneEventResult.NO_EVENT_RESULT();
     }
 }

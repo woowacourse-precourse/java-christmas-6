@@ -4,6 +4,7 @@ import christmas.enums.menu.MenuItem;
 import christmas.event.OneEventResult;
 import christmas.order.Order;
 import christmas.order.Orders;
+import christmas.utils.NumberFormatter;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class Messages {
     public static String perEventBenefit(List<OneEventResult> oneEventResults){
         StringBuilder stringBuilder = new StringBuilder();
         for (OneEventResult oneEventResult : oneEventResults) {
-            String result = oneEventResult.events().getName() + " " + convertAmount(-oneEventResult.discountBenefit()) + System.lineSeparator();
+            String result = oneEventResult.eventName() + " " + convertAmount(-oneEventResult.discountBenefit()) + System.lineSeparator();
             stringBuilder.append(result);
         }
         return stringBuilder.toString();

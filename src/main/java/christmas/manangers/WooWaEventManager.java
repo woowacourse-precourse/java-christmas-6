@@ -63,7 +63,7 @@ public class WooWaEventManager {
     public EventBenefit activateEvent(LocalDate reservationDate, Orders orders) {
         Integer totalPriceBeforeDiscount = orders.calculateTotalPrice();
 
-        if (totalPriceBeforeDiscount < MINIMUM_REQUIRE_AMOUNT.getAmount()) {
+        if (!orders.isEligibleForDiscount(MINIMUM_REQUIRE_AMOUNT.getAmount())) {
             return EventBenefit.NO_EVENT_BENEFIT();
         }
 

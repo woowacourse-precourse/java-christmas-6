@@ -1,4 +1,4 @@
-package christmas.views;
+package christmas.utils;
 
 import java.text.NumberFormat;
 

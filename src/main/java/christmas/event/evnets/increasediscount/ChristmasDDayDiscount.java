@@ -37,8 +37,8 @@ public class ChristmasDDayDiscount implements IncreaseEverydayDiscountEvent {
     public OneEventResult execute(LocalDate reservationDate) {
         if (isEventActivate(reservationDate)) {
             int discountBenefit = calculateDiscount(reservationDate);
-            return new OneEventResult(event,discountBenefit);
+            return new OneEventResult(event.getName(),discountBenefit);
         }
-        return new OneEventResult(NO_EVENT,NO_BENEFIT.getAmount());
+        return OneEventResult.NO_EVENT_RESULT();
     }
 }

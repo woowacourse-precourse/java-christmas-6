@@ -4,6 +4,7 @@ import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
 import static christmas.enums.events.decemberevent.DecemberEvents.CHRISTMAS_D_DAY_DISCOUNT;
 import static christmas.enums.events.decemberevent.DecemberEvents.SPECIAL_DISCOUNT;
 import static christmas.enums.events.decemberevent.DecemberEvents.WEEKDAY_DISCOUNT;
+import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 import static org.assertj.core.api.Assertions.*;
 
 import christmas.enums.badge.Badge;
@@ -48,10 +49,11 @@ class OrderSystemTest {
         //then
         assertThat(badge).isEqualTo(BenefitBadge.SANTA);
         assertThat(totalPriceBeforeDiscount).isEqualTo(orderThreeSteak.calculateTotalPrice());
-        assertThat(gift).isEqualTo(BeverageMenu.CHAMPAGNE);
-        OneEventResult christmasEvent = new OneEventResult(CHRISTMAS_D_DAY_DISCOUNT, 1200);
-        OneEventResult specialDiscount = new OneEventResult(SPECIAL_DISCOUNT, BASIC_BENEFIT.getAmount());
-        OneEventResult weekdayEvent = new OneEventResult(WEEKDAY_DISCOUNT, 6069);
-        assertThat(oneEventResults).containsExactly(christmasEvent,specialDiscount,weekdayEvent);
+        assertThat(gift).isEqualTo(CHAMPAGNE);
+        OneEventResult christmasEvent = new OneEventResult(CHRISTMAS_D_DAY_DISCOUNT.getName(), 1200);
+        OneEventResult specialDiscount = new OneEventResult(SPECIAL_DISCOUNT.getName(), BASIC_BENEFIT.getAmount());
+        OneEventResult weekdayEvent = new OneEventResult(WEEKDAY_DISCOUNT.getName(), 6069);
+        OneEventResult giftEvent = new OneEventResult(CHAMPAGNE.getName(), CHAMPAGNE.getAmount());
+        assertThat(oneEventResults).containsExactly(christmasEvent,specialDiscount,weekdayEvent,giftEvent);
     }
 }

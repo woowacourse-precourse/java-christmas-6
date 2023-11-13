@@ -1,13 +1,13 @@
 package christmas.event;
 
+import static christmas.enums.events.NoEvent.NO_EVENT;
 import static christmas.enums.menu.NoMenu.NO_MENU;
 
-import christmas.enums.events.NoEvent;
 import christmas.enums.menu.MenuItem;
 import java.util.List;
 
 public record EventBenefit(List<OneEventResult> oneEventResults, MenuItem gift) {
-    public Integer showDiscountBenefits(){
+    public Integer showTotalDiscount(){
         Integer discountBenefits = 0;
         for (OneEventResult oneEventResult : oneEventResults) {
             discountBenefits += oneEventResult.discountBenefit();
@@ -16,7 +16,7 @@ public record EventBenefit(List<OneEventResult> oneEventResults, MenuItem gift) 
     }
 
     public EventBenefit(List<OneEventResult> oneEventResults, MenuItem gift) {
-        this.oneEventResults = oneEventResults.stream().filter(eventResult -> !eventResult.events().equals(NoEvent.NO_EVENT)).toList();
+        this.oneEventResults = oneEventResults.stream().filter(eventResult -> !eventResult.isNone()).toList();
         this.gift = gift;
     }
 

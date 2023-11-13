@@ -83,7 +83,7 @@ public class RestaurantInterface {
         MenuItem gift = receipt.gift();
         OutputView.printOut(Messages.announceGift());
         String giftResult = NO_MENU.getName();
-        if(!gift.equals(NO_MENU)){
+        if(!gift.isNone()){
             giftResult = Messages.gift(gift, 1);
         }
         OutputView.printOut(giftResult);

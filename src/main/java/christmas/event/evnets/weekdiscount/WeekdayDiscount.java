@@ -42,8 +42,8 @@ public class WeekdayDiscount implements WeekDiscountEvent {
     public OneEventResult execute(LocalDate reservationDate, Orders orders) {
         if (isEventActivate(reservationDate) && isWeekDay(reservationDate)) {
             Integer discountBenefit = calculateDiscount(orders);
-            return new OneEventResult(event,discountBenefit);
+            return new OneEventResult(event.getName(),discountBenefit);
         }
-        return new OneEventResult(NO_EVENT,NO_BENEFIT.getAmount());
+        return OneEventResult.NO_EVENT_RESULT();
     }
 }

@@ -47,7 +47,7 @@ class WooWaEventManagerTest {
 
         //when
         EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, ordersOver120_000);
-        Integer totalBenefit = eventBenefit.showDiscountBenefits();
+        Integer totalBenefit = eventBenefit.showTotalDiscount();
 
         //then
         assertThat(totalBenefit).isEqualTo(totalBenefitAmount);
@@ -62,7 +62,7 @@ class WooWaEventManagerTest {
                 BASIC_BENEFIT.getAmount() + CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT + WEEK_BENEFIT_CONTAIN_TWO_MAIN;
         //when
         EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, ordersWithMain);
-        Integer totalBenefit = eventBenefit.showDiscountBenefits();
+        Integer totalBenefit = eventBenefit.showTotalDiscount();
 
         //then
         assertThat(totalBenefit).isEqualTo(totalBenefitAmount);
@@ -76,7 +76,7 @@ class WooWaEventManagerTest {
         EventBenefit eventBenefit = wooWaEventManager.activateEvent(reservationDate, ordersOneIceCream);
 
         //then
-        Integer discountBenefit = eventBenefit.showDiscountBenefits();
+        Integer discountBenefit = eventBenefit.showTotalDiscount();
         MenuItem gift = eventBenefit.gift();
 
         assertThat(discountBenefit).isEqualTo(NO_BENEFIT.getAmount());
