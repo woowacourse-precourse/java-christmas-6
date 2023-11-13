@@ -9,16 +9,21 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import static christmas.type.MenuType.getPriceByName;
+
 public class Order {
     private List<Food> appetizerFoods = new ArrayList<>();
     private List<Food> mainFoods = new ArrayList<>();
     private List<Food> dessertFoods = new ArrayList<>();
     private List<Food> drinkFoods = new ArrayList<>();
 
+    private int totalPrice = 0;
+
     public void addOrder(String foodName, int count) {
         validate(foodName);
         FoodType foodType = findFoodType(foodName);
         distributeFood(foodName, count, foodType);
+        totalPrice += getPriceByName(foodName);
     }
 
     public HashMap<String, Integer> getTotalOrder() {
@@ -63,5 +68,9 @@ public class Order {
         if (isExist) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
     }
 }

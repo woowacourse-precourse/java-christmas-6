@@ -34,4 +34,13 @@ public enum MenuType {
     public int getPrice() {
         return price;
     }
+
+    public static int getPriceByName(String foodName) {
+        for (MenuType menu : MenuType.values()) {
+            if (menu.getFoodName().equals(foodName)) {
+                return menu.getPrice();
+            }
+        }
+        throw new IllegalArgumentException("Invalid food name: " + foodName);
+    }
 }
