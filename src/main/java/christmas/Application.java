@@ -12,15 +12,15 @@ public class Application {
 
     public static void main(String[] args) {
         db.loadMenuData();
-        app.Customer();
+
+        app.reserveRestaurant();
 
 
     }
 
-    public void Customer () {
+    public void reserveRestaurant () {
         print.welcome();
         reader.receiveReservationDate();
-
 
     }
 }

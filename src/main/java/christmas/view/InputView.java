@@ -5,7 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 import static java.lang.System.out;
 
 public class InputView {
-    private static String errorPrefix = "[ERROR]";
+    private InputValidator validator = new InputValidator();
     private int date;
 
 
@@ -19,7 +19,7 @@ public class InputView {
         String dateInput = Console.readLine();
 
         try {
-          validateDateInput(dateInput);
+          validator.validateDateInput(dateInput);
         } catch (IllegalArgumentException e) {
             out.println(e.getMessage());
             return false;
@@ -29,17 +29,6 @@ public class InputView {
         return true;
     }
 
-
-    private void validateDateInput (String input) throws IllegalArgumentException {
-        if (!input.matches("^-?\\d+$")) {
-            throw new IllegalArgumentException(errorPrefix + "정수 입력");
-        }
-
-        int dateToCheck = Integer.parseInt(input);
-
-        if (dateToCheck < 1 || dateToCheck > 31) {
-            throw new IllegalArgumentException(errorPrefix + "1부터 31 이내의 날짜 입력");
-        }
-    } // TODO : 날짜는 누가 가지고 있는 것이 좋을까
+    // TODO : 날짜는 누가 가지고 있는 것이 좋을까
 
 }
