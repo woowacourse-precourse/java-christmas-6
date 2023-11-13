@@ -9,7 +9,7 @@ public class Category {
         this.category = category;
     }
 
-    public boolean findSameCategory (int i ) {
+    public boolean findSameCategory (int i) {
         if (i == id) return true;
         return false;
     }
