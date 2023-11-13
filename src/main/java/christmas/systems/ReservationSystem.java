@@ -36,7 +36,6 @@ public class ReservationSystem {
         printAskMenuAndQuantity();
         Orders orders = getInputAndCatchException(StringToOrdersParser::parseInputToOrderSet);
         Receipt receipt = orderSystem.calculateOrderResult(reservationDate, orders);
-
         printResult(reservationDate, orders, receipt);
         InputView.close();
     }
@@ -82,7 +81,7 @@ public class ReservationSystem {
         Gift gift = receipt.gift();
         OutputView.printOut(Messages.announceGift());
         String giftResult = NO_MENU.getName();
-        if (!gift.isNone()) {
+        if (!receipt.isNoGift()) {
             giftResult = Messages.gift(gift.menuItem(), gift.quantity());
         }
         OutputView.printOut(giftResult);
@@ -93,7 +92,7 @@ public class ReservationSystem {
         OutputView.printOut(Messages.announceEventBenefits());
         List<OneEventResult> oneEventResults = receipt.oneEventResults();
         String oneEventResult = NO_EVENT.getName();
-        if (!oneEventResults.isEmpty()) {
+        if(receipt.isEligible()){
             oneEventResult = Messages.perEventBenefit(oneEventResults);
         }
         OutputView.printOut(oneEventResult);

@@ -34,7 +34,7 @@ class EventSystemTest {
             INCREASE_BENEFIT.getAmount() * 2));
     private final static Integer WEEK_BENEFIT_CONTAIN_TWO_MAIN = (WEEK_BENEFIT.getAmount() * 2);
     private final static EventInitializer eventInitializer =new EventInitializer();
-    private final static EventSystem EVENT_SYSTEM = new EventSystem(eventInitializer);
+    private final static EventSystem eventSystem = new EventSystem(eventInitializer);
     //TODO:추후 추가 테스트 필
 
 
@@ -47,7 +47,7 @@ class EventSystemTest {
                         + CHAMPAGNE.getAmount();
 
         //when
-        EventBenefit eventBenefit = EVENT_SYSTEM.activateEvent(reservationDate, ordersOver120_000);
+        EventBenefit eventBenefit = eventSystem.activateEvent(reservationDate, ordersOver120_000);
         Integer totalBenefit = eventBenefit.showTotalDiscount();
 
         //then
@@ -62,25 +62,11 @@ class EventSystemTest {
         final Integer totalBenefitAmount =
                 BASIC_BENEFIT.getAmount() + CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT + WEEK_BENEFIT_CONTAIN_TWO_MAIN;
         //when
-        EventBenefit eventBenefit = EVENT_SYSTEM.activateEvent(reservationDate, ordersWithMain);
+        EventBenefit eventBenefit = eventSystem.activateEvent(reservationDate, ordersWithMain);
         Integer totalBenefit = eventBenefit.showTotalDiscount();
 
         //then
         assertThat(totalBenefit).isEqualTo(totalBenefitAmount);
 
-    }
-
-    @DisplayName("총주문금액 10000원 이하 시 이벤트 무효")
-    @Test
-    void under10_000BenefitAndGiftIsNone() {
-        //when
-        EventBenefit eventBenefit = EVENT_SYSTEM.activateEvent(reservationDate, ordersOneIceCream);
-
-        //then
-        Integer discountBenefit = eventBenefit.showTotalDiscount();
-        MenuItem gift = eventBenefit.gift().menuItem();
-
-        assertThat(discountBenefit).isEqualTo(NO_BENEFIT.getAmount());
-        assertThat(gift).isEqualTo(NoMenu.NO_MENU);
     }
 }
