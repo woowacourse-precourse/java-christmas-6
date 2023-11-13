@@ -20,9 +20,6 @@ public class EventSystem {
     public EventBenefit activateEvent(LocalDate reservationDate, Orders orders) {
         Integer totalPriceBeforeDiscount = orders.calculateTotalPrice();
 
-        if (!orders.isEligibleForDiscount(MINIMUM_REQUIRE_AMOUNT.getAmount())) {
-            return EventBenefit.NO_EVENT_BENEFIT();
-        }
 
         OneEventResult christmasDDayOneEventResult = eventInitializer.christmasDDayDiscount(reservationDate);
         OneEventResult specialDiscountOneEventResult = eventInitializer.specialDayDiscountEvent(reservationDate);
