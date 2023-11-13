@@ -5,6 +5,7 @@ import christmas.service.PlannerService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class PlannerController {
@@ -12,6 +13,14 @@ public class PlannerController {
 
     public void run() {
         Customer customer = dateInit();
+        menuInit();
+        showBenefits(customer.getVisitedDate());
+    }
+
+    private void showBenefits(int date) {
+        OutputView.printPreviewOutputMessage(date);
+        HashMap<String, Integer> orderMap = plannerService.getOrder();
+        OutputView.printOrderMenuOutputMessage(orderMap);
     }
 
     private Customer dateInit() {

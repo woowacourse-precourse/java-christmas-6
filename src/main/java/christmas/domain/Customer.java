@@ -10,6 +10,10 @@ public class Customer {
         this.visitedDate = visitedDate;
     }
 
+    public int getVisitedDate() {
+        return visitedDate;
+    }
+
     private void validate(int visitedDate) {
         Validator.checkDateValid(visitedDate);
     }

@@ -1,6 +1,10 @@
 package christmas.utils;
 
+import christmas.domain.Food;
+
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -22,4 +26,11 @@ public class Parser {
                 .map(s -> s.split("-"))
                 .collect(Collectors.toMap(a -> a[0], a -> Integer.parseInt(a[1])));
     }
+
+    public static void convertListToMap(HashMap<String, Integer> orderMap, List<Food> foodList) {
+        for (Food food : foodList) {
+            orderMap.put(food.getFoodName(), food.getCount());
+        }
+    }
+
 }

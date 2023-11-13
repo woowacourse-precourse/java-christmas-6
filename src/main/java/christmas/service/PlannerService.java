@@ -3,6 +3,7 @@ package christmas.service;
 import christmas.domain.Customer;
 import christmas.domain.Order;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class PlannerService {
@@ -17,5 +18,10 @@ public class PlannerService {
         for (String foodName : menuMap.keySet()) {
             order.addOrder(foodName, menuMap.get(foodName));
         }
+    }
+
+    public HashMap<String, Integer> getOrder() {
+        HashMap<String, Integer> orderMap = order.getTotalOrder();
+        return orderMap;
     }
 }

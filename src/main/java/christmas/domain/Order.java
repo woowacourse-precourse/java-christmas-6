@@ -2,9 +2,11 @@ package christmas.domain;
 
 import christmas.type.FoodType;
 import christmas.type.MenuType;
+import christmas.utils.Parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Order {
@@ -17,6 +19,15 @@ public class Order {
         validate(foodName);
         FoodType foodType = findFoodType(foodName);
         distributeFood(foodName, count, foodType);
+    }
+
+    public HashMap<String, Integer> getTotalOrder() {
+        HashMap<String, Integer> orderMap = new HashMap<>();
+        Parser.convertListToMap(orderMap, appetizerFoods);
+        Parser.convertListToMap(orderMap, mainFoods);
+        Parser.convertListToMap(orderMap, dessertFoods);
+        Parser.convertListToMap(orderMap, drinkFoods);
+        return orderMap;
     }
 
     private void distributeFood(String foodName, int count, FoodType foodType) {

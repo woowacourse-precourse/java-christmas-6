@@ -13,4 +13,11 @@ public class Food {
         this.count = count;
     }
 
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public int getCount() {
+        return count;
+    }
 }
