@@ -1,5 +1,7 @@
 package christmas.order;
 
+import static christmas.enums.benefit.DiscountBenefit.MINIMUM_REQUIRE_AMOUNT;
+
 import christmas.enums.badge.Badge;
 import christmas.event.Gift;
 import christmas.event.OneEventResult;
@@ -9,6 +11,7 @@ import java.util.stream.Collectors;
 
 public record Receipt(List<OneEventResult> oneEventResults, Integer totalPriceBeforeDiscount, Integer discountBenefit,
                       Gift gift, Badge badge) {
+
     public Receipt(List<OneEventResult> oneEventResults, Integer totalPriceBeforeDiscount, Integer discountBenefit,
                    Gift gift, Badge badge) {
         this.totalPriceBeforeDiscount = totalPriceBeforeDiscount;
@@ -22,4 +25,19 @@ public record Receipt(List<OneEventResult> oneEventResults, Integer totalPriceBe
         this.oneEventResults = oneEventResults;
         this.badge = badge;
     }
+
+    public Boolean isEligible(){
+        if (totalPriceBeforeDiscount > MINIMUM_REQUIRE_AMOUNT.getAmount()) {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean isNoGift(){
+        if (gift.isNone()) {
+            return true;
+        }
+        return false;
+    }
+
 }
