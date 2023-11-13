@@ -9,6 +9,7 @@ public class OutputView {
     public static final String ENTER = "\n";
     public static final String SPACE = " ";
     public static final String COUNT = "개";
+    public static final String WON = "원";
 
     public static void printStartMessageOutputMessage() {
         System.out.println(TextType.START_MESSAGE.getText());
@@ -23,5 +24,10 @@ public class OutputView {
         for (String key : orderMap.keySet()) {
             System.out.println(key + SPACE + orderMap.get(key) + COUNT);
         }
+    }
+
+    public static void printTotalPriceMessage(int totalPrice) {
+        System.out.println(TextType.BEFORE_DISCOUNT_ORDER_PRICE);
+        System.out.printf("%,d" + WON + ENTER, totalPrice);
     }
 }

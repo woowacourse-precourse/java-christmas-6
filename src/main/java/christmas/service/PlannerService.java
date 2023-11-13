@@ -24,4 +24,8 @@ public class PlannerService {
         HashMap<String, Integer> orderMap = order.getTotalOrder();
         return orderMap;
     }
+
+    public int getTotalPrice() {
+        return order.getTotalPrice();
+    }
 }

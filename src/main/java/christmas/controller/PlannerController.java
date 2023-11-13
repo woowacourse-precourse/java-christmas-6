@@ -17,6 +17,11 @@ public class PlannerController {
         showBenefits(customer.getVisitedDate());
     }
 
+    private void showTotalPrice() {
+        int totalPrice = plannerService.getTotalPrice();
+        OutputView.printTotalPriceMessage(totalPrice);
+    }
+
     private void showBenefits(int date) {
         OutputView.printPreviewOutputMessage(date);
         HashMap<String, Integer> orderMap = plannerService.getOrder();
