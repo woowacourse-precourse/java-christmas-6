@@ -236,6 +236,9 @@
 - [x] 뱃지 매니저 제거, BenfitBadge enum에 로직 이동
 - [x] 증정 이벤트에서 수량을 지정할 수 있도록 수정
 - [x] EventSystem, EventInitializer -> 초기화, 실행 책임 분리
+- [x] EventSystem 내부의 EventBenefit 설정여부 로직 분리
+- [ ] ReservationSystem 코드 정리
+
 
 - [x] 할인 혜택에 증정품 추가 시 문제
   - 문제점
@@ -258,6 +261,21 @@
     - 뱃지 매니저 제거, BenefitBadgeManager 내부에 로직 이동
     - 뱃지 enum 필드에 상/하한선 금액을 지정하도록 설정
     - 상/하한선 조건에 따라 뱃지 지정
+- [x] EventSystem 의 책임 문제
+  - 문제점
+    - activateEvent 메서드에 이벤트 실행과, 이벤트 혜택의 상태를 결정하는 책임이 존재
+  - 해결 방안
+    - EventBenefit(이벤트 혜택) 상태 결정 로직을 EventBenefit 내부로 이주
+      - EventBenefit의 파라미터에 주문 혹은 총주문금액을 추가하더라도 자신의 상태를 결정하는 로직 이외에는 사용처가 없다.
+      - 문제는 EventBenefit의 조건이 Orders의 조건에 따라서 변하기 때문
+      - Orders의 조건에 따라 EventBenefit의 상태를 변경하는것이 아니라, 스스로 변경하게 해야함
+      - 스스로 변경하려면, 현재 파라미터를 받는 조건으로 참/거짓 유무를 판단할수있어야 한다.
+    - EventBenefit 상태 결정 로직 제거, Receipt 객체에서 상태결정 로직 설정
+      - Receipt 객체는 총주문금액을 파라미터로 가지며, 12월 이벤트의 최종 정보들을 포함한다
+      - Receipt 내부의 총주문금액을 비교하여 참/거짓을 반환하는 메서드 구현
+  - 결과
+    - EventSystem에서 EventBenefit 상태설정 책임 제거 
+    - Receipt 자체에서 총주문금액을 비교하여 참/거짓을 반환 
 - 배운점
   - 사이드 이펙트
     - 증정 이벤트에서 증정 상품과 증정 상품의 개수를 지정하도록 변경하고자 했다.
