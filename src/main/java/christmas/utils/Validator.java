@@ -1,4 +1,4 @@
-package christmas.valid;
+package christmas.utils;
 
 public class Validator {
     public static void checkDateValid(int date) {
