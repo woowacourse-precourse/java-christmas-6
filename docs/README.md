@@ -248,6 +248,11 @@
   - 결정 
     - OneEventResult를 구성하는것은, 이벤트 enum과, 할인혜택인데, 이 enum은 사실 이름으로써의 역할 외에는 없다.
     - 변수타입을 Events 에서 String 으로 변환하여 이름과 할인가만 받도록 로직을 변경한다.
+
+- 배운점
+  - Stream 
+    - Stream 객체는 불변 리스트를 수정 할 수 있는데, 이는 사실 수정한다기보다는 새로운 list를 만드는것이다.
+  - 
 </details>
 
 <details>
