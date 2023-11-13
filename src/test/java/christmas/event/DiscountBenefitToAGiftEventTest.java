@@ -23,10 +23,6 @@ class DiscountBenefitToAGiftEventTest {
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 31);
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 15);
-    private final static Order ORDER_WITH_DESSERT = new Order(DessertMenu.CHOCOLATE_CAKE, 2);
-    private final static Order ORDER_WITH_MAIN = new Order(MainMenu.T_BONE_STEAK, 2);
-    private final static List<Order> ORDER_MENUS_OVER_GIFT_AMOUNT = List.of(ORDER_WITH_DESSERT, ORDER_WITH_MAIN);
-    private final static List<Order> ORDER_MENUS_UNDER_GIFT_AMOUNT = List.of(ORDER_WITH_DESSERT);
     private final static Integer OVER_120_000 = 120_000;
     private final static Integer UNDER_120_000 = 110_000;
     private final static AmountToAGiftEvent CHAMPAGNE_GIFT_EVENT =

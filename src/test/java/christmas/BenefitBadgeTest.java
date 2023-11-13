@@ -7,25 +7,18 @@ import static christmas.enums.badge.benefit.BenefitBadge.TREE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.enums.badge.benefit.BenefitBadge;
-import christmas.manangers.BadgeManager;
-import christmas.manangers.WooWaEventManager;
-import java.time.LocalDate;
-import java.time.Month;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class BadgeManagerListTest {
+class BenefitBadgeTest {
 
-    private final static BadgeManager BADGE_MANAGER = new BadgeManager();
-    private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 7);
-    private final static LocalDate reservationSpecialDate = LocalDate.of(2023, Month.DECEMBER, 10);
     private final static Integer UNDER_5000 = 4000;
 
     @DisplayName("총 혜택이 20_000원 이상이면 산타 뱃지를 부여한다.")
     @Test
     void returnSantaBadge() {
         //when
-        BenefitBadge badgeConditionSatisfied = BADGE_MANAGER.isBadgeConditionSatisfied(SANTA.getAmount());
+        BenefitBadge badgeConditionSatisfied = BenefitBadge.determineBadge(SANTA.getAmount());
 
         //then
         assertThat(badgeConditionSatisfied).isEqualTo(SANTA);
@@ -36,7 +29,7 @@ class BadgeManagerListTest {
     void returnTreeBadge() {
 
         //when
-        BenefitBadge badgeConditionSatisfied = BADGE_MANAGER.isBadgeConditionSatisfied(TREE.getAmount());
+        BenefitBadge badgeConditionSatisfied = BenefitBadge.determineBadge(TREE.getAmount());
 
         //then
         assertThat(badgeConditionSatisfied).isEqualTo(TREE);
@@ -46,7 +39,7 @@ class BadgeManagerListTest {
     @Test
     void returnStarBadge() {
         //when
-        BenefitBadge badgeConditionSatisfied = BADGE_MANAGER.isBadgeConditionSatisfied(STAR.getAmount());
+        BenefitBadge badgeConditionSatisfied = BenefitBadge.determineBadge(STAR.getAmount());
 
         //then
         assertThat(badgeConditionSatisfied).isEqualTo(STAR);
@@ -57,7 +50,7 @@ class BadgeManagerListTest {
     @Test
     void returnNoneBadge() {
         //when
-        BenefitBadge badgeConditionSatisfied = BADGE_MANAGER.isBadgeConditionSatisfied(UNDER_5000);
+        BenefitBadge badgeConditionSatisfied = BenefitBadge.determineBadge(UNDER_5000);
 
         //then
         assertThat(badgeConditionSatisfied).isEqualTo(NONE);

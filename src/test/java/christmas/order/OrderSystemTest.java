@@ -9,12 +9,10 @@ import static org.assertj.core.api.Assertions.*;
 
 import christmas.enums.badge.Badge;
 import christmas.enums.badge.benefit.BenefitBadge;
-import christmas.enums.menu.BeverageMenu;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.event.OneEventResult;
-import christmas.manangers.BadgeManager;
 import christmas.manangers.WooWaEventManager;
 import java.time.LocalDate;
 import java.time.Month;
@@ -36,8 +34,7 @@ class OrderSystemTest {
     void orderProcess() {
         //given
         WooWaEventManager wooWaEventManager = new WooWaEventManager();
-        BadgeManager badgeManager = new BadgeManager();
-        OrderSystem orderSystem = new OrderSystem(wooWaEventManager,badgeManager);
+        OrderSystem orderSystem = new OrderSystem(wooWaEventManager);
         Receipt receipt = orderSystem.calculateOrderResult(reservationDate, orderThreeSteak);
 
         //when
