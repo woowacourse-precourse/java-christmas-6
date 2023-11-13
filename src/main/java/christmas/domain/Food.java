@@ -9,10 +9,8 @@ public class Food {
     private int count;
 
     public Food(String foodName, int count) {
-        validate(foodName);
         this.foodName = foodName;
         this.count = count;
     }
-
 
 }
