@@ -3,6 +3,7 @@ package christmas.view.input;
 import christmas.constant.errorMessage.exception.CustomNullPointAmountException;
 import christmas.constant.errorMessage.exception.CustomNumberFormatAmountException;
 import christmas.constant.errorMessage.input.ReadExceptionStatus;
+import christmas.utils.Delimiter;
 import christmas.view.input.reader.Reader;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,8 @@ public class InputView {
 
     private static final String PRINT_READ_DATE_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.\n"
             + "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)";
+    private static final String PRINT_READ_MENU_MESSAGE = "주문하실 메뉴를 메뉴와 개수를 알려 주세요. "
+            + "(e.g. 해산물파스타-2,레드와인-1,초코케이크-1)";
 
     private final Reader reader;
 
@@ -24,7 +27,12 @@ public class InputView {
 
     public int readDate() {
         System.out.println(PRINT_READ_DATE_MESSAGE);
-        return parseNumber(readLine());
+        return parseDate(readLine());
+    }
+
+    public List<String> readMenu() {
+        System.out.println(PRINT_READ_MENU_MESSAGE);
+        return parseMenu(readLine());
     }
 
     private String checkReadIsNull(final String input) {
@@ -35,11 +43,17 @@ public class InputView {
         }
     }
 
-    private int parseNumber(final String input) {
+    private int parseDate(final String date) {
         try {
-            return Integer.parseInt(checkReadIsNull(input));
+            return Integer.parseInt(checkReadIsNull(date));
         } catch (NumberFormatException e) {
             throw new CustomNumberFormatAmountException(ReadExceptionStatus.DATE_IS_NOT_CORRECT);
         }
+    }
+
+    private List<String> parseMenu(final String menu) {
+        return Arrays.stream(Delimiter.splitWithComma(checkReadIsNull(menu)))
+                .map(String::trim)
+                .toList();
     }
 }

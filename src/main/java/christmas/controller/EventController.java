@@ -12,5 +12,6 @@ public class EventController {
 
     public void run() {
         inputView.readDate();
+        inputView.readMenu();
     }
 }

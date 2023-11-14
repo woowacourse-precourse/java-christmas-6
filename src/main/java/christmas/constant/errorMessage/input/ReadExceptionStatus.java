@@ -4,7 +4,8 @@ import christmas.constant.errorMessage.ExceptionStatus;
 
 public enum ReadExceptionStatus implements ExceptionStatus {
 
-    DATE_IS_NOT_CORRECT("유효하지 않은 날짜입니다.");
+    DATE_IS_NOT_CORRECT("유효하지 않은 날짜입니다."),
+    MENU_IS_NOT_CORRECT("유효하지 않은 주문입니다.");
 
 
     private static final String MESSAGE_PREFIX = "[ERROR] ";
