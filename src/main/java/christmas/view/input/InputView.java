@@ -1,12 +1,9 @@
 package christmas.view.input;
 
-import christmas.constant.errorMessage.exception.CustomNullPointAmountException;
-import christmas.constant.errorMessage.exception.CustomNumberFormatAmountException;
-import christmas.constant.errorMessage.input.EventExceptionStatus;
-import christmas.utils.Delimiter;
 import christmas.view.input.reader.Reader;
-import java.util.Arrays;
-import java.util.List;
+import christmas.view.input.validator.DateValidator;
+import christmas.view.input.validator.OrderValidator;
+import java.util.Map;
 
 public class InputView {
 
@@ -27,33 +24,11 @@ public class InputView {
 
     public int readDate() {
         System.out.println(PRINT_READ_DATE_MESSAGE);
-        return parseDate(readLine());
+        return DateValidator.validateDate(readLine());
     }
 
-    public List<String> readMenu() {
+    public Map<String, Integer> readOrder() {
         System.out.println(PRINT_READ_MENU_MESSAGE);
-        return parseMenu(readLine());
-    }
-
-    private String checkReadIsNull(final String input) {
-        try {
-            return input.trim();
-        } catch (NullPointerException e) {
-            throw new CustomNullPointAmountException(EventExceptionStatus.DATE_IS_NOT_CORRECT);
-        }
-    }
-
-    private int parseDate(final String date) {
-        try {
-            return Integer.parseInt(checkReadIsNull(date));
-        } catch (NumberFormatException e) {
-            throw new CustomNumberFormatAmountException(EventExceptionStatus.DATE_IS_NOT_CORRECT);
-        }
-    }
-
-    private List<String> parseMenu(final String menu) {
-        return Arrays.stream(Delimiter.splitWithComma(checkReadIsNull(menu)))
-                .map(String::trim)
-                .toList();
+        return OrderValidator.validateOrder(readLine());
     }
 }
