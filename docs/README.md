@@ -287,11 +287,11 @@
 
 - [x] 원하는 이벤트만 시행할수 있게끔 구현
 - [x] RestaurantSystem - >RestaurantSystem, RestaurantProcessor 로 분리
+- [x] 이벤트 인스턴스 Enum화
 - [ ] EventSystem 테스트 코드 구현
 - [ ] RestaurantSystem 테스트 코드 구현
 - [ ] RestaurantProcessor 테스트 코드 구현
 - [ ] RestaurantReservation 테스트코드 구현
-- [x] 이벤트 생성조건 Enum화 - Period, MenuItem, discountBenefit 등등
 
 - [x] 재사용성에 대한 고민
   - 크리스마스 이벤트 뿐만 아니라, 내가 원할 때의 이벤트를 내가 설정하는 프로그램을 만들고 싶다.
@@ -325,6 +325,7 @@
 ### 0.유연한 이벤트 추가 기능
 - [x] EventFactory 를 이용해 이벤트명, 혜택 내용, 기간 등을 정해 이벤트를 구현한다
 - [x] EventInitializer 를 이용해 이벤트들을 추가한다.
+- [x] 이벤트 인스턴스 Enum화
 
 ### 1. 주문 입력 및 유효성 검증 기능
 
