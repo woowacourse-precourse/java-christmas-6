@@ -12,7 +12,7 @@ import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.event.evnets.gift.AmountToAGiftEvent;
-import christmas.event.evnets.increasediscount.IncreaseDiscountUntilTypicalDay;
+import christmas.event.evnets.increasediscount.linearIncreaseDiscountEvent;
 import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
@@ -37,7 +37,7 @@ class ReceiptTest {
     private final static EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(2023, 12, 1, 25);
     private final static MenuItem[] weekdayMenus = MainMenu.values();
     private final static MenuItem[] weekendMenus = DessertMenu.values();
-    private final static IncreaseDiscountUntilTypicalDay linearDiscount = EventFactory.createLinearDiscount(
+    private final static linearIncreaseDiscountEvent linearDiscount = EventFactory.createLinearDiscount(
             CHRISTMAS_D_DAY_DISCOUNT,
             typicalPeriod, 1000, 100);
     private final static SpecialDayDiscountEvent specialDayDiscountEvent = EventFactory.createSpecialDayDiscountEvent(

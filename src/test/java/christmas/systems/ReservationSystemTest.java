@@ -1,4 +1,4 @@
-package christmas;
+package christmas.systems;
 
 import static christmas.enums.events.decemberevent.DecemberEvents.CHRISTMAS_D_DAY_DISCOUNT;
 import static christmas.enums.events.decemberevent.DecemberEvents.SPECIAL_DISCOUNT;
@@ -6,6 +6,7 @@ import static christmas.enums.events.decemberevent.DecemberEvents.WEEKDAY_DISCOU
 import static christmas.enums.events.decemberevent.DecemberEvents.WEEKEND_DISCOUNT;
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 
+import christmas.EventFactory;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
@@ -14,19 +15,13 @@ import christmas.event.evnets.increasediscount.linearIncreaseDiscountEvent;
 import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
-import christmas.systems.OrderSystem;
-import christmas.systems.ReservationProcessor;
-import christmas.systems.ReservationSystem;
 import christmas.systems.eventSystem.EventInitializer;
 import christmas.systems.eventSystem.EventSystem;
 import christmas.utils.EventPeriod;
-import java.time.Month;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
-public class RestaurantReservation {
-    private final ReservationProcessor reservationProcessor;
-    private final static Integer YEAR = 2023;
-    private final static Integer MONTH = Month.DECEMBER.getValue();
-    private final static String RESTAURANT_NAME = "우테코 식당";
+class ReservationSystemTest {
     //한달 진행이벤트
     private final static EventPeriod monthPeriod = EventPeriod.createMonthPeriod(2023, 12);
     //특정기간 진행 이벤트
@@ -35,7 +30,9 @@ public class RestaurantReservation {
     private final static MenuItem[] weekdayMenus = MainMenu.values();
     private final static MenuItem[] weekendMenus = DessertMenu.values();
 
-    public RestaurantReservation() {
+    @DisplayName("이벤트 추가에 따라 혜택 내역이 달라진다")
+    @Test
+    void name() {
         linearIncreaseDiscountEvent linearDiscount = EventFactory.createLinearDiscount(CHRISTMAS_D_DAY_DISCOUNT,
                 typicalPeriod, 1000, 100);
         SpecialDayDiscountEvent specialDayDiscountEvent = EventFactory.createSpecialDayDiscountEvent(
@@ -57,10 +54,7 @@ public class RestaurantReservation {
         EventSystem eventSystem = new EventSystem(eventInitializer);
         OrderSystem orderSystem = new OrderSystem(eventSystem);
         ReservationSystem reservationSystem = new ReservationSystem(orderSystem);
-        this. reservationProcessor =new ReservationProcessor(reservationSystem);
-    }
 
-    public void run(){
-        reservationProcessor.process(RESTAURANT_NAME,YEAR,MONTH);
+        //reservationSystem.process();
     }
 }

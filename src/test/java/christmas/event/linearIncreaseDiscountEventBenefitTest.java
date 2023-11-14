@@ -6,7 +6,7 @@ import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 import static christmas.enums.events.decemberevent.DecemberEvents.CHRISTMAS_D_DAY_DISCOUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.event.evnets.increasediscount.IncreaseDiscountUntilTypicalDay;
+import christmas.event.evnets.increasediscount.linearIncreaseDiscountEvent;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
@@ -17,13 +17,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class IncreaseDiscountUntilTypicalDayBenefitTest {
+class linearIncreaseDiscountEventBenefitTest {
 
     private final static LocalDate startDate = LocalDate.of(2023, Month.DECEMBER, 1);
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 25);
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate overDate = LocalDate.of(2023, Month.DECEMBER, 26);
-    private final static IncreaseDiscountUntilTypicalDay INCREASE_DISCOUNT_UNTIL_TYPICAL_DAY = new IncreaseDiscountUntilTypicalDay(
+    private final static linearIncreaseDiscountEvent INCREASE_DISCOUNT_UNTIL_TYPICAL_DAY = new linearIncreaseDiscountEvent(
             CHRISTMAS_D_DAY_DISCOUNT, eventPeriod,
             BASIC_BENEFIT.getAmount(), INCREASE_BENEFIT.getAmount());
 

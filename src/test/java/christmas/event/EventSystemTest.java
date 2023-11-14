@@ -15,7 +15,7 @@ import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.event.evnets.gift.AmountToAGiftEvent;
-import christmas.event.evnets.increasediscount.IncreaseDiscountUntilTypicalDay;
+import christmas.event.evnets.increasediscount.linearIncreaseDiscountEvent;
 import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
@@ -45,7 +45,7 @@ class EventSystemTest {
     private final static Integer CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT = (BASIC_BENEFIT.getAmount() + (
             INCREASE_BENEFIT.getAmount() * 2));
     private final static Integer WEEK_BENEFIT_CONTAIN_TWO_MAIN = (WEEK_BENEFIT.getAmount() * 2);
-    private final static IncreaseDiscountUntilTypicalDay linearDiscount = EventFactory.createLinearDiscount(
+    private final static linearIncreaseDiscountEvent linearDiscount = EventFactory.createLinearDiscount(
             CHRISTMAS_D_DAY_DISCOUNT,
             typicalPeriod, 1000, 100);
     private final static SpecialDayDiscountEvent specialDayDiscountEvent = EventFactory.createSpecialDayDiscountEvent(
