@@ -88,4 +88,8 @@ public class OutputView {
         }
         System.out.println(TextType.NONE.getText());
     }
+
+    public static void printError(IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+    }
 }
