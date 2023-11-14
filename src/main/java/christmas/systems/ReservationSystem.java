@@ -92,7 +92,7 @@ public class ReservationSystem {
         OutputView.printOut(Messages.announceEventBenefits());
         List<OneEventResult> oneEventResults = receipt.oneEventResults();
         String oneEventResult = NO_EVENT.getName() + System.lineSeparator();
-        if(receipt.isEligible()){
+        if (receipt.isEligible()) {
             oneEventResult = Messages.perEventBenefit(oneEventResults);
         }
         OutputView.printOut(oneEventResult);

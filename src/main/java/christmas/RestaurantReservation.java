@@ -54,7 +54,7 @@ public class RestaurantReservation {
         this.reservationSystem = new ReservationSystem(orderSystem);
     }
 
-    public void run(){
+    public void run() {
         reservationSystem.process();
     }
 }

@@ -45,6 +45,8 @@ public class EventSystem {
             Gift execute = amountToGiftEvent.execute(reservationDate, totalPriceBeforeDiscount);
             gifts.add(execute);
         }
+
+        //TODO : 추가구현필요
         Gift gift = Gift.NO_GIFT();
         if (!gifts.isEmpty()) {
             gift = gifts.get(0);

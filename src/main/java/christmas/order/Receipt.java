@@ -26,18 +26,12 @@ public record Receipt(List<OneEventResult> oneEventResults, Integer totalPriceBe
         this.badge = badge;
     }
 
-    public Boolean isEligible(){
-        if (totalPriceBeforeDiscount > MINIMUM_REQUIRE_AMOUNT.getAmount()) {
-            return true;
-        }
-        return false;
+    public Boolean isEligible() {
+        return totalPriceBeforeDiscount > MINIMUM_REQUIRE_AMOUNT.getAmount();
     }
 
-    public Boolean isNoGift(){
-        if (gift.isNone()) {
-            return true;
-        }
-        return false;
+    public Boolean isNoGift() {
+        return gift.isNone();
     }
 
 }

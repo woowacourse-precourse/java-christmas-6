@@ -7,6 +7,7 @@ import static christmas.enums.events.decemberevent.DecemberEvents.WEEKDAY_DISCOU
 import static christmas.enums.events.decemberevent.DecemberEvents.WEEKEND_DISCOUNT;
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 
+import christmas.EventFactory;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
@@ -16,7 +17,6 @@ import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.systems.OrderSystem;
-import christmas.EventFactory;
 import christmas.systems.eventSystem.EventInitializer;
 import christmas.systems.eventSystem.EventSystem;
 import christmas.utils.EventPeriod;
@@ -37,15 +37,19 @@ class ReceiptTest {
     private final static EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(2023, 12, 1, 25);
     private final static MenuItem[] weekdayMenus = MainMenu.values();
     private final static MenuItem[] weekendMenus = DessertMenu.values();
-    private final static IncreaseDiscountUntilTypicalDay linearDiscount = EventFactory.createLinearDiscount(CHRISTMAS_D_DAY_DISCOUNT,
+    private final static IncreaseDiscountUntilTypicalDay linearDiscount = EventFactory.createLinearDiscount(
+            CHRISTMAS_D_DAY_DISCOUNT,
             typicalPeriod, 1000, 100);
     private final static SpecialDayDiscountEvent specialDayDiscountEvent = EventFactory.createSpecialDayDiscountEvent(
             SPECIAL_DISCOUNT, monthPeriod, 1000);
-    private final static AmountToAGiftEvent amountToAGiftEvent = EventFactory.createAmountToAGiftEvent(monthPeriod, 120_000, CHAMPAGNE,
+    private final static AmountToAGiftEvent amountToAGiftEvent = EventFactory.createAmountToAGiftEvent(monthPeriod,
+            120_000, CHAMPAGNE,
             1);
-    private final static WeekdayDiscount weekdayDiscount = EventFactory.createWeekdayDiscount(WEEKDAY_DISCOUNT, monthPeriod,
+    private final static WeekdayDiscount weekdayDiscount = EventFactory.createWeekdayDiscount(WEEKDAY_DISCOUNT,
+            monthPeriod,
             weekdayMenus, 2023);
-    private final static WeekendDiscount weekendDiscount = EventFactory.createWeekendDiscount(WEEKEND_DISCOUNT, monthPeriod,
+    private final static WeekendDiscount weekendDiscount = EventFactory.createWeekendDiscount(WEEKEND_DISCOUNT,
+            monthPeriod,
             weekendMenus, 2023);
 
 
