@@ -15,6 +15,10 @@ public class Order {
         this.visitDate = visitDate;
     }
 
+    public static void emptyMap(){
+        orderMap.clear();
+    }
+
     public void putOrderMap(String menu, Integer count){
         validateMenuIsExist(menu);
         validateMenuIsDuplicated(menu);
