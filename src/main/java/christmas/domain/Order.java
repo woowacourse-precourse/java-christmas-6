@@ -23,7 +23,7 @@ public class Order {
         validate(foodName);
         FoodType foodType = findFoodType(foodName);
         distributeFood(foodName, count, foodType);
-        totalPrice += getPriceByName(foodName);
+        totalPrice += getPriceByName(foodName) * count;
     }
 
     public HashMap<String, Integer> getTotalOrder() {
