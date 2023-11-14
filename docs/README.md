@@ -285,7 +285,10 @@
 <details>
 <summary>(23.11.14)</summary>
 
-- [x] 원하는 이벤트만 시행할수 있게끔구현
+- [x] 원하는 이벤트만 시행할수 있게끔 구현
+- [x] RestaurantSystem - >RestaurantSystem, RestaurantProcessor 로 분리
+- [ ] RestaurantSystem 테스트 코드 구현
+- [ ] RestaurantProcessor 테스트 코드 구현
 - [ ] RestaurantReservation 테스트코드 구현
 
 - [x] 재사용성에 대한 고민
