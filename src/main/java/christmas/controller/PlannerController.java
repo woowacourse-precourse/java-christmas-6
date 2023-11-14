@@ -15,6 +15,37 @@ public class PlannerController {
         Customer customer = dateInit();
         menuInit();
         showBenefits(customer.getVisitedDate());
+        showTotalPrice();
+        showPresent();
+        showBenefitsContent(customer.getVisitedDate());
+        showTotalDiscountPrice();
+        showResultPrice();
+        showEventBadge();
+    }
+
+    private void showEventBadge() {
+        int totalDiscount = plannerService.getTotalDiscount();
+        OutputView.printBadgeOutputMessage(totalDiscount);
+    }
+
+    private void showResultPrice() {
+        int totalDiscount = plannerService.getTotalDiscount();
+        int totalPrice = plannerService.getTotalPrice();
+        OutputView.printResultPriceOutputMessage(totalPrice -  totalDiscount);
+    }
+
+    private void showTotalDiscountPrice() {
+        int totalDiscount = plannerService.getTotalDiscount();
+        OutputView.printTotalDiscountPriceOutputMessage(totalDiscount);
+    }
+
+    private void showPresent() {
+        OutputView.printPresentOutputMessage(plannerService.isBiggerThanPricePresent());
+    }
+
+    private void showBenefitsContent(int date) {
+        Map<String, Integer> discountMap = plannerService.calculateDiscount(date);
+        OutputView.printBenefitsOutputMessage(discountMap);
     }
 
     private void showTotalPrice() {
