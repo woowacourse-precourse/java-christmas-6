@@ -33,8 +33,6 @@ public class Menu {
         return this.category.isSame(category);
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

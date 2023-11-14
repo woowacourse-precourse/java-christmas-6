@@ -8,15 +8,11 @@ import christmas.validate.InputValidator;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
 
-import static java.lang.System.console;
 import static java.lang.System.out;
 
 public class InputView {
-    private static final String ERROR_PREFIX = "[ERROR]";
     private InputValidator validator = new InputValidator();
     private final RestaurantDatabase db = new RestaurantDatabase();
     private int date;
@@ -64,9 +60,8 @@ public class InputView {
 
             result = makeMenuOrderedList(menu, menuOrdered);
 
-            if(!validator.checkCategory(result)) {
-                throw new IllegalArgumentException(ERROR_PREFIX + " 디저트류만 이용하실 수 없습니다.");
-            }
+            validator.checkCategory(result);
+
         }catch ( IllegalArgumentException e ) {
             result = null;
             out.println(e.getMessage());

@@ -12,7 +12,7 @@ public class InputValidator {
     private static final String INTEGER_REGEX = "^-?\\d+$";
     private static final int MAX_ORDER_PLATE = 20;
     private static final String FORMAT_TO_ORDER_MENU_REX = "([가-힣]+)-(\\d+)";
-    private static final String DESSERT = "디저트";
+    private static final String DRINK = "음료";
 
     public void validateDateInput (String input) throws IllegalArgumentException {
         boolean isInteger = isInteger(input);
@@ -42,7 +42,6 @@ public class InputValidator {
         Matcher matcher = pattern.matcher(menuOrdered);
 
         if (!matcher.find()) {
-            System.out.println("여기 들어오니?");
             throw new IllegalArgumentException(ERROR_PREFIX + " 메뉴 입력 형식에 올바르게 작성해주세요.");
         }
 
@@ -68,8 +67,11 @@ public class InputValidator {
         }
     }
 
-    public boolean checkCategory (List<SimpleEntry<Menu, Integer>> orderedList) {
-        return orderedList.stream().anyMatch(el -> !el.getKey().checkCategory(DESSERT));
+    public void checkCategory (List<SimpleEntry<Menu, Integer>> orderedList) throws IllegalArgumentException {
+        boolean isAnyMatchedExceptDrink =  orderedList.stream().anyMatch(el -> !el.getKey().checkCategory(DRINK));
+        if (!isAnyMatchedExceptDrink) {
+            throw new IllegalArgumentException(ERROR_PREFIX + " 디저트류만 이용하실 수 없습니다.");
+        }
     }
 
 }
