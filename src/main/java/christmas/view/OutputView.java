@@ -3,6 +3,7 @@ package christmas.view;
 import christmas.type.TextType;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class OutputView {
 
@@ -10,6 +11,8 @@ public class OutputView {
     public static final String SPACE = " ";
     public static final String COUNT = "개";
     public static final String WON = "원";
+    public static final String PRESNET = "샴페인 1 개";
+    public static final String COLON = ":";
 
     public static void printStartMessageOutputMessage() {
         System.out.println(TextType.START_MESSAGE.getText());
@@ -29,5 +32,26 @@ public class OutputView {
     public static void printTotalPriceMessage(int totalPrice) {
         System.out.println(TextType.BEFORE_DISCOUNT_ORDER_PRICE);
         System.out.printf("%,d" + WON + ENTER, totalPrice);
+    }
+
+    public static void printBenefitsOutputMessage(Map<String, Integer> discountMap) {
+        if (discountMap.size() == 0) {
+            System.out.println(TextType.NONE);
+            return;
+        }
+
+        for (String key : discountMap.keySet()) {
+            String formattedPrice = String.format("-%,d원", discountMap.get(key));
+            System.out.println(key + COLON + SPACE  + formattedPrice);
+        }
+    }
+
+    public static void printPresentOutputMessage(boolean isGiven) {
+        String menu = TextType.NONE.getText();
+        if (isGiven) {
+            menu = PRESNET;
+        }
+        System.out.println(TextType.PRESENTATION_MENU);
+        System.out.println(menu);
     }
 }
