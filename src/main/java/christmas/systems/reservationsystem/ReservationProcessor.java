@@ -18,15 +18,18 @@ public class ReservationProcessor {
     }
 
     public void process(String restaurantName, Integer year, Integer month){
-        ReservationSystem.printAskDate(restaurantName,month);
+        String printAskDate = ReservationSystem.printAskDate(restaurantName, month);
+        OutputView.printOut(printAskDate);
         LocalDate reservationDate = getInputAndCatchException(
                 input -> StringToDateParser.makeReservation(year, month, input));
 
-        ReservationSystem.printAskMenuAndQuantity();
+        String printAskMenuAndQuantity = ReservationSystem.printAskMenuAndQuantity();
+        OutputView.printOut(printAskMenuAndQuantity);
         Orders orders = getInputAndCatchException(StringToOrdersParser::parseInputToOrderSet);
         Receipt receipt = reservationSystem.calculateOrderResult(reservationDate, orders);
 
-        ReservationSystem.printResult(restaurantName,reservationDate, orders, receipt);
+        String result = ReservationSystem.printResult(restaurantName, reservationDate, orders, receipt);
+        OutputView.printOut(result);
         InputView.close();
     }
 
