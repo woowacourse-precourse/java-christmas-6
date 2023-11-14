@@ -5,6 +5,7 @@ public enum MenuType {
     TAPAS(FoodType.APPETIZER, "타파스", 5000),
     SALAD(FoodType.APPETIZER, "시저샐러드", 8000),
     STEAK(FoodType.MAIN, "티본스테이크", 55000),
+    BBQ(FoodType.MAIN, "바비큐립", 54000),
     SEA_FOOD_PASTA(FoodType.MAIN, "해산물파스타", 35000),
     CHRIST_MAS_PASTA(FoodType.MAIN, "크리스마스파스타", 25000),
     CAKE(FoodType.DESSERT, "초코케이크", 15000),
