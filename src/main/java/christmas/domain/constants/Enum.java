@@ -1,4 +1,4 @@
-package christmas.constants;
+package christmas.domain.constants;
 
 public class Enum {
     public enum MenuCategory{

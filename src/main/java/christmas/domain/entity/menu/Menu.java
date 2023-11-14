@@ -1,11 +1,11 @@
-package christmas.enrtity.menu;
+package christmas.domain.entity.menu;
 
-import christmas.constants.Enum;
+import christmas.domain.constants.Enum;
 
 public class Menu {
-    private String name;
-    private Enum.MenuCategory menuCategory;
-    private int price;
+    public String name;
+    public Enum.MenuCategory menuCategory;
+    public int price;
 
     public Menu(String name, Enum.MenuCategory menuCategory, int price) {
         this.name = name;

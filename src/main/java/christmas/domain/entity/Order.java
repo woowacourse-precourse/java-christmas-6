@@ -1,6 +1,8 @@
-package christmas.enrtity;
+package christmas.domain.entity;
 
-import christmas.enrtity.menu.MenuBoard;
+import christmas.domain.constants.Enum;
+import christmas.domain.entity.menu.MenuBoard;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +24,15 @@ public class Order {
 
     public Map<String, Integer> getOrderMap(){
         return orderMap;
+    }
+
+    public void validateNotOnlyBeverage(){
+        for(String key : orderMap.keySet()){
+            if(!(MenuBoard.menus.get(key).menuCategory.equals(Enum.MenuCategory.BEVERAGE))){
+                return;
+            }
+        }
+        throw new IllegalArgumentException("[ERROR] 음료만 주문할 시, 주문할 수 없습니다.");
     }
 
     private void validateMenuIsExist(String menu){

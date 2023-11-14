@@ -1,4 +1,4 @@
-package christmas.enrtity;
+package christmas.domain.entity;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -17,10 +17,11 @@ public class Day {
 
     DayOfWeek dayOfWeek = LocalDate.of(PRESENT_YEAR, DECEMBER, day).getDayOfWeek();
 
-    private void validateIsNumber(){
-
+    private void validateIsNumber(int day){
+        if(day>31||day<=0){
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+        }
     }
-
 
     public boolean isWeekend(){
         return dayOfWeek==DayOfWeek.FRIDAY||dayOfWeek==DayOfWeek.SATURDAY;
