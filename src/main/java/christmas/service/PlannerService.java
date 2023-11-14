@@ -12,7 +12,7 @@ import java.util.Map;
 public class PlannerService {
     public static final int CHRISTMAS_DAY = 25;
     public static final int BASE_MONEY = 1000;
-    public static final int INCREASEMENT_MONEY = 100;
+    public static final int INCREMENT_MONEY = 100;
     public static final int EVENT_PRICE = 120000;
     private Customer customer;
     private Order order = new Order();
@@ -50,7 +50,7 @@ public class PlannerService {
 
     private void setChristmasDayDiscount(int date) {
         if (date <= CHRISTMAS_DAY) {
-            int money = BASE_MONEY + date * INCREASEMENT_MONEY;
+            int money = BASE_MONEY + date * INCREMENT_MONEY;
             customer.setChristmasDiscountPrice(money);
         }
     }
