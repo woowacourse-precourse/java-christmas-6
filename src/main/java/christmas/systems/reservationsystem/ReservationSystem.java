@@ -24,79 +24,100 @@ public class ReservationSystem {
         return orderSystem.calculateOrderResult(reservationDate, orders);
     }
 
-    public static void printResult(String restaurantName, LocalDate reservationDate, Orders orders, Receipt receipt) {
-        printBenefit(restaurantName,reservationDate);
-        printOrders(orders);
-        printAmountBeforeDiscount(receipt);
-        printGiftBenefit(receipt);
-        printEventBenefits(receipt);
-        printDiscountBenefit(receipt);
-        printAfterDiscount(receipt);
-        printBadge(reservationDate, receipt);
+    public static String printResult(String restaurantName, LocalDate reservationDate, Orders orders, Receipt receipt) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String printBenefit = printBenefit(restaurantName, reservationDate);
+        String printOrders = printOrders(orders);
+        String printAmountBeforeDiscount = printAmountBeforeDiscount(receipt);
+        String printGiftBenefit = printGiftBenefit(receipt);
+        String printEventBenefits = printEventBenefits(receipt);
+        String printDiscountBenefit = printDiscountBenefit(receipt);
+        String printAfterDiscount = printAfterDiscount(receipt);
+        String printBadge = printBadge(reservationDate, receipt);
+
+        combineString(stringBuilder, printBenefit, printOrders, printAmountBeforeDiscount, printGiftBenefit,
+                printEventBenefits,
+                printDiscountBenefit, printAfterDiscount, printBadge);
+
+        return stringBuilder.toString();
     }
 
-    public static void printAskDate(String restaurantName, Integer month) {
-        OutputView.printOut(Messages.announceHello(restaurantName, month));
-        OutputView.printOut(Messages.askDate(month));
+    private static void combineString(StringBuilder stringBuilder, String printBenefit, String printOrders,
+                                  String printAmountBeforeDiscount, String printGiftBenefit, String printEventBenefits,
+                                  String printDiscountBenefit, String printAfterDiscount, String printBadge) {
+        stringBuilder.append(printBenefit).append(System.lineSeparator());
+        stringBuilder.append(printOrders).append(System.lineSeparator());
+        stringBuilder.append(printAmountBeforeDiscount).append(System.lineSeparator()).append(System.lineSeparator());
+        stringBuilder.append(printGiftBenefit).append(System.lineSeparator()).append(System.lineSeparator());
+        stringBuilder.append(printEventBenefits).append(System.lineSeparator());
+        stringBuilder.append(printDiscountBenefit).append(System.lineSeparator()).append(System.lineSeparator());
+        stringBuilder.append(printAfterDiscount).append(System.lineSeparator()).append(System.lineSeparator());
+        stringBuilder.append(printBadge).append(System.lineSeparator());
     }
 
-    public static void printAskMenuAndQuantity() {
-        OutputView.printOut(Messages.askMenuAndQuantity());
+    public static String printAskDate(String restaurantName, Integer month) {
+        String announceHello = Messages.announceHello(restaurantName, month);
+        String askDate = Messages.askDate(month);
+        return announceHello + System.lineSeparator() + askDate;
     }
 
-    private static void printBenefit( String restaurantName, LocalDate reservationDate) {
-        OutputView.printOut(Messages.announceEventBenefit(restaurantName, reservationDate));
-        OutputView.printOut("");
+    public static String printAskMenuAndQuantity() {
+        return Messages.askMenuAndQuantity();
     }
 
-    private static void printOrders(Orders orders) {
-        OutputView.printOut(Messages.announceOrders());
-        OutputView.printOut(Messages.repeatAllOrders(orders));
+    private static String printBenefit(String restaurantName, LocalDate reservationDate) {
+        return Messages.announceEventBenefit(restaurantName, reservationDate);
     }
 
-    private static void printAmountBeforeDiscount(Receipt receipt) {
-        OutputView.printOut(Messages.announceBeforeDiscount());
+    private static String printOrders(Orders orders) {
+        String ordersAnnounce = Messages.announceOrders();
+        String orderContext = Messages.repeatAllOrders(orders);
+        return ordersAnnounce + System.lineSeparator() + orderContext;
+    }
+
+    private static String printAmountBeforeDiscount(Receipt receipt) {
+        String announceBeforeDiscount = Messages.announceBeforeDiscount();
         Integer totalPriceBeforeDiscount = receipt.totalPriceBeforeDiscount();
-        OutputView.printOut(Messages.showAmount(totalPriceBeforeDiscount));
-        OutputView.printOut("");
+        String showAmount = Messages.showAmount(totalPriceBeforeDiscount);
+        return announceBeforeDiscount +System.lineSeparator()+ showAmount;
     }
 
-    private static void printGiftBenefit(Receipt receipt) {
+    private static String printGiftBenefit(Receipt receipt) {
         Gift gift = receipt.gift();
-        OutputView.printOut(Messages.announceGift());
+        String announceGift = Messages.announceGift();
         String giftResult = NO_MENU.getName();
         if (!receipt.isNoGift()) {
             giftResult = Messages.gift(gift.menuItem(), gift.quantity());
         }
-        OutputView.printOut(giftResult);
-        OutputView.printOut("");
+        return announceGift + System.lineSeparator() + giftResult;
     }
 
-    private static void printEventBenefits(Receipt receipt) {
-        OutputView.printOut(Messages.announceEventBenefits());
+    private static String printEventBenefits(Receipt receipt) {
+        String announceEventBenefits = Messages.announceEventBenefits();
         List<OneEventResult> oneEventResults = receipt.oneEventResults();
         String oneEventResult = NO_EVENT.getName() + System.lineSeparator();
         if (receipt.isEligible()) {
             oneEventResult = Messages.perEventBenefit(oneEventResults);
         }
-        OutputView.printOut(oneEventResult);
+        return announceEventBenefits +System.lineSeparator() + oneEventResult;
     }
 
-    private static void printDiscountBenefit(Receipt receipt) {
-        OutputView.printOut(Messages.announceTotalDiscountBenefit());
-        OutputView.printOut(Messages.showAmount(-receipt.discountBenefit()));
-        OutputView.printOut("");
+    private static String printDiscountBenefit(Receipt receipt) {
+        String announceTotalDiscountBenefit = Messages.announceTotalDiscountBenefit();
+        String showAmount = Messages.showAmount(-receipt.discountBenefit());
+        return announceTotalDiscountBenefit + System.lineSeparator() + showAmount;
     }
 
-    private static void printAfterDiscount(Receipt receipt) {
-        OutputView.printOut(Messages.AfterDiscountAmount());
-        OutputView.printOut(Messages.showAmount(receipt.totalPriceBeforeDiscount() - receipt.discountBenefit()));
-        OutputView.printOut("");
+    private static String printAfterDiscount(Receipt receipt) {
+        String afterDiscountAmount = Messages.AfterDiscountAmount();
+        String showAmount = Messages.showAmount(receipt.totalPriceBeforeDiscount() - receipt.discountBenefit());
+        return afterDiscountAmount + System.lineSeparator() + showAmount;
     }
 
-    private static void printBadge(LocalDate reservationDate, Receipt receipt) {
-        OutputView.printOut(Messages.announceEventBadge(reservationDate.getMonthValue()));
-        OutputView.printOut(receipt.badge().getName());
+    private static String printBadge(LocalDate reservationDate, Receipt receipt) {
+        String announceEventBadge = Messages.announceEventBadge(reservationDate.getMonthValue());
+        String badgeName = receipt.badge().getName();
+        return announceEventBadge +System.lineSeparator() +badgeName;
     }
 
 }
