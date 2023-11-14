@@ -14,6 +14,7 @@ public class PlannerService {
     public static final int BASE_MONEY = 1000;
     public static final int INCREMENT_MONEY = 100;
     public static final int EVENT_PRICE = 120000;
+    public static final int EVENT_DISCOUNT_VALUE = 2023;
     private Customer customer;
     private Order order = new Order();
     public Customer setVisitedDate(int date) {
@@ -63,21 +64,19 @@ public class PlannerService {
 
     private void setNormalDayDiscount(int date) {
         if (!WeekDateType.isDateIncluded(date)) {
-            customer.setSpecialDiscountPrice(
-                    order.getDessertFoods().stream()
-                            .mapToInt(f -> f.getCount())
-                            .sum()
-            );
+            int price = order.getDessertFoods().stream()
+                    .mapToInt(f -> f.getCount())
+                    .sum();
+            customer.setSpecialDiscountPrice(price * EVENT_DISCOUNT_VALUE);
         }
     }
 
     private void setSpecialDayDiscount(int date) {
         if (WeekDateType.isDateIncluded(date)) {
-            customer.setSpecialDiscountPrice(
-                    order.getMainFoods().stream()
-                            .mapToInt(f -> f.getCount())
-                            .sum()
-            );
+            int price = order.getMainFoods().stream()
+                    .mapToInt(f -> f.getCount())
+                    .sum();
+            customer.setNormalDiscountPrice(price * EVENT_DISCOUNT_VALUE);
         }
     }
 

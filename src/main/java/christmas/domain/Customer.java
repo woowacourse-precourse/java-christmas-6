@@ -33,6 +33,10 @@ public class Customer {
         discount.setSpecialDiscount(money);
     }
 
+    public void setNormalDiscountPrice(int money) {
+        discount.setNormalDiscount(money);
+    }
+
 
     public void setGivingEventDiscount(int price) {
         discount.setGivingEventDiscount(price);
@@ -41,10 +45,10 @@ public class Customer {
     public Discount getDiscount() {
         return discount;
     }
-
     public void changeIsGiven() {
         isGiven = !isGiven;
     }
+
     public boolean isGiven() {
         return isGiven;
     }
