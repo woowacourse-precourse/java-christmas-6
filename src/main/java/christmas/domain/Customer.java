@@ -37,6 +37,9 @@ public class Customer {
         discount.setNormalDiscount(money);
     }
 
+    public void setWeekDiscountPrice(int money) {
+        discount.setWeekDiscount(money);
+    }
 
     public void setGivingEventDiscount(int price) {
         discount.setGivingEventDiscount(price);

@@ -3,6 +3,7 @@ package christmas.domain;
 public class Discount {
     private int christmasDiscount = 0;
     private int normalDiscount = 0;
+    private int weekDiscount = 0;
     private int specialDiscount = 0;
     private int givingEventDiscount = 0;
 
@@ -20,6 +21,14 @@ public class Discount {
 
     public void setGivingEventDiscount(int givingEventDiscount) {
         this.givingEventDiscount = givingEventDiscount;
+    }
+
+    public int getWeekDiscount() {
+        return weekDiscount;
+    }
+
+    public void setWeekDiscount(int weekDiscount) {
+        this.weekDiscount = weekDiscount;
     }
 
     public int getChristmasDiscount() {

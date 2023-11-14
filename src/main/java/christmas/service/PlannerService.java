@@ -4,6 +4,7 @@ import christmas.domain.Customer;
 import christmas.domain.Order;
 import christmas.dto.DiscountInfoDto;
 import christmas.type.MenuType;
+import christmas.type.SpecialDateType;
 import christmas.type.WeekDateType;
 
 import java.util.HashMap;
@@ -67,16 +68,18 @@ public class PlannerService {
             int price = order.getDessertFoods().stream()
                     .mapToInt(f -> f.getCount())
                     .sum();
-            customer.setSpecialDiscountPrice(price * EVENT_DISCOUNT_VALUE);
+            customer.setNormalDiscountPrice(price * EVENT_DISCOUNT_VALUE);
+            return;
         }
+        int price = order.getMainFoods().stream()
+                .mapToInt(f -> f.getCount())
+                .sum();
+        customer.setWeekDiscountPrice(price * EVENT_DISCOUNT_VALUE);
     }
 
     private void setSpecialDayDiscount(int date) {
-        if (WeekDateType.isDateIncluded(date)) {
-            int price = order.getMainFoods().stream()
-                    .mapToInt(f -> f.getCount())
-                    .sum();
-            customer.setNormalDiscountPrice(price * EVENT_DISCOUNT_VALUE);
+        if (SpecialDateType.isDateIncluded(date)) {
+            customer.setSpecialDiscountPrice(BASE_MONEY);
         }
     }
 
