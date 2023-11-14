@@ -14,9 +14,9 @@ public class PlannerController {
     public void run() {
         Customer customer = dateInit();
         menuInit();
+        showBenefits(customer.getVisitedDate());
         showTotalPrice();
         showPresent();
-        showBenefits(customer.getVisitedDate());
         showBenefitsContent(customer.getVisitedDate());
         showTotalDiscountPrice();
         showResultPrice();
@@ -74,6 +74,7 @@ public class PlannerController {
             Map<String, Integer> menuMap = InputView.printMenuInitInputMessage();
             plannerService.setOrder(menuMap);
         } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
             menuInit();
         }
     }
