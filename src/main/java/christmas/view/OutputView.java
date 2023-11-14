@@ -60,9 +60,9 @@ public class OutputView {
 
     public static void printTotalBenefitPriceOutputMessage(int totalDiscount) {
         System.out.println(ENTER + TextType.TOTAL_BENEFIT_PRICE.getText());
-        String formattedPrice = String.format(MINUS + "%,d" + WON + ENTER, totalDiscount);
+        String formattedPrice = String.format(MINUS + "%,d" + WON, totalDiscount);
         if (totalDiscount == 0) {
-            formattedPrice = String.format("%d" + WON + ENTER, totalDiscount);
+            formattedPrice = String.format("%d" + WON, totalDiscount);
         }
         System.out.println(formattedPrice);
     }
