@@ -65,7 +65,7 @@ public class Order {
     private void validate(String foodName) {
         boolean isExist = Arrays.stream(MenuType.values())
                 .anyMatch(v -> v.getFoodName().equals(foodName));
-        if (isExist) {
+        if (!isExist) {
             throw new IllegalArgumentException();
         }
     }
