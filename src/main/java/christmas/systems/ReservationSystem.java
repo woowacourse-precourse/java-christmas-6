@@ -19,29 +19,18 @@ import java.util.List;
 import java.util.function.Function;
 
 public class ReservationSystem {
-    private final static Integer YEAR = 2023;
-    private final static Integer MONTH = Month.DECEMBER.getValue();
-    private final static String RESTAURANT_NAME = "우테코 식당";
     private final OrderSystem orderSystem;
 
     public ReservationSystem(OrderSystem orderSystem) {
         this.orderSystem = orderSystem;
     }
 
-    public void process() {
-        printAskDate();
-        LocalDate reservationDate = getInputAndCatchException(
-                input -> StringToDateParser.makeReservation(YEAR, MONTH, input));
-
-        printAskMenuAndQuantity();
-        Orders orders = getInputAndCatchException(StringToOrdersParser::parseInputToOrderSet);
-        Receipt receipt = orderSystem.calculateOrderResult(reservationDate, orders);
-        printResult(reservationDate, orders, receipt);
-        InputView.close();
+    public Receipt calculateOrderResult(LocalDate reservationDate, Orders orders) {
+        return orderSystem.calculateOrderResult(reservationDate, orders);
     }
 
-    private static void printResult(LocalDate reservationDate, Orders orders, Receipt receipt) {
-        printBenefit(reservationDate);
+    public static void printResult(String restaurantName, LocalDate reservationDate, Orders orders, Receipt receipt) {
+        printBenefit(restaurantName,reservationDate);
         printOrders(orders);
         printAmountBeforeDiscount(receipt);
         printGiftBenefit(receipt);
@@ -51,17 +40,17 @@ public class ReservationSystem {
         printBadge(reservationDate, receipt);
     }
 
-    private static void printAskDate() {
-        OutputView.printOut(Messages.announceHello(RESTAURANT_NAME, MONTH));
-        OutputView.printOut(Messages.askDate(MONTH));
+    public static void printAskDate(String restaurantName, Integer month) {
+        OutputView.printOut(Messages.announceHello(restaurantName, month));
+        OutputView.printOut(Messages.askDate(month));
     }
 
-    private static void printAskMenuAndQuantity() {
+    public static void printAskMenuAndQuantity() {
         OutputView.printOut(Messages.askMenuAndQuantity());
     }
 
-    private static void printBenefit(LocalDate reservationDate) {
-        OutputView.printOut(Messages.announceEventBenefit(RESTAURANT_NAME, reservationDate));
+    private static void printBenefit( String restaurantName, LocalDate reservationDate) {
+        OutputView.printOut(Messages.announceEventBenefit(restaurantName, reservationDate));
         OutputView.printOut("");
     }
 
@@ -115,14 +104,4 @@ public class ReservationSystem {
         OutputView.printOut(receipt.badge().getName());
     }
 
-    private <T> T getInputAndCatchException(Function<String, T> processor) {
-        while (true) {
-            try {
-                String input = InputView.readLine();
-                return processor.apply(input);
-            } catch (RestaurantException e) {
-                OutputView.printException(e);
-            }
-        }
-    }
 }
