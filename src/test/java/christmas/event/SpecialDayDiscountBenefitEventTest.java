@@ -2,7 +2,7 @@ package christmas.event;
 
 import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
-import static christmas.enums.events.decemberevent.DecemberEvents.SPECIAL_DISCOUNT;
+import static christmas.enums.events.decemberevent.SpecialDiscount.SPECIAL_DISCOUNT;
 
 import christmas.event.evnets.specialdiscount.SpecialDayDayDiscount;
 import christmas.utils.EventPeriod;

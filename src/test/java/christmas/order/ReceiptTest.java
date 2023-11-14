@@ -1,10 +1,10 @@
 package christmas.order;
 
 
-import static christmas.enums.events.decemberevent.DecemberEvents.CHRISTMAS_D_DAY_DISCOUNT;
-import static christmas.enums.events.decemberevent.DecemberEvents.SPECIAL_DISCOUNT;
-import static christmas.enums.events.decemberevent.DecemberEvents.WEEKDAY_DISCOUNT;
-import static christmas.enums.events.decemberevent.DecemberEvents.WEEKEND_DISCOUNT;
+import static christmas.enums.events.decemberevent.LinearDiscountEvents.CHRISTMAS_D_DAY_DISCOUNT;
+import static christmas.enums.events.decemberevent.SpecialDiscount.SPECIAL_DISCOUNT;
+import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKDAY_DISCOUNT;
+import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKEND_DISCOUNT;
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 
 import christmas.EventFactory;
@@ -12,13 +12,13 @@ import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.event.evnets.gift.AmountToAGiftEvent;
-import christmas.event.evnets.increasediscount.LinerIncreaseDiscount;
+import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscount;
 import christmas.event.evnets.specialdiscount.SpecialDayDayDiscount;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
-import christmas.systems.ordersystem.OrderSystem;
 import christmas.systems.eventSystem.EventInitializer;
 import christmas.systems.eventSystem.EventSystem;
+import christmas.systems.ordersystem.OrderSystem;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
@@ -37,7 +37,7 @@ class ReceiptTest {
     private final static EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(2023, 12, 1, 25);
     private final static MenuItem[] weekdayMenus = MainMenu.values();
     private final static MenuItem[] weekendMenus = DessertMenu.values();
-    private final static LinerIncreaseDiscount linearDiscount = EventFactory.createLinearDiscount(
+    private final static LinearIncreaseDiscount linearDiscount = EventFactory.createLinearDiscount(
             CHRISTMAS_D_DAY_DISCOUNT,
             typicalPeriod, 1000, 100);
     private final static SpecialDayDayDiscount SPECIAL_DAY_DISCOUNT = EventFactory.createSpecialDayDiscountEvent(

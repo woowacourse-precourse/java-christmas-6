@@ -3,10 +3,10 @@ package christmas.event;
 import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.INCREASE_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
-import static christmas.enums.events.decemberevent.DecemberEvents.CHRISTMAS_D_DAY_DISCOUNT;
+import static christmas.enums.events.decemberevent.LinearDiscountEvents.CHRISTMAS_D_DAY_DISCOUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.event.evnets.increasediscount.LinerIncreaseDiscount;
+import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscount;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
@@ -23,7 +23,7 @@ class LinearIncreaseDiscountEventBenefitTest {
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 25);
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate overDate = LocalDate.of(2023, Month.DECEMBER, 26);
-    private final static LinerIncreaseDiscount INCREASE_DISCOUNT_UNTIL_TYPICAL_DAY = new LinerIncreaseDiscount(
+    private final static LinearIncreaseDiscount INCREASE_DISCOUNT_UNTIL_TYPICAL_DAY = new LinearIncreaseDiscount(
             CHRISTMAS_D_DAY_DISCOUNT, eventPeriod,
             BASIC_BENEFIT.getAmount(), INCREASE_BENEFIT.getAmount());
 

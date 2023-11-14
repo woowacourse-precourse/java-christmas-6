@@ -4,7 +4,7 @@ import christmas.event.EventBenefit;
 import christmas.event.Gift;
 import christmas.event.OneEventResult;
 import christmas.event.evnets.gift.AmountToGiftEvent;
-import christmas.event.evnets.increasediscount.LinerIncreaseDiscountEvent;
+import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscountEvent;
 import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
 import christmas.event.evnets.weekdiscount.WeekDiscountEvent;
 import christmas.order.Orders;
@@ -25,9 +25,9 @@ public class EventSystem {
         List<OneEventResult> oneEventResults = new ArrayList<>();
         List<Gift> gifts = new ArrayList<>();
 
-        List<LinerIncreaseDiscountEvent> linerIncreaseDiscountEvents = eventInitializer.getIncreaseEverydayDiscountEvents();
-        for (LinerIncreaseDiscountEvent linerIncreaseDiscountEvent : linerIncreaseDiscountEvents) {
-            OneEventResult execute = linerIncreaseDiscountEvent.execute(reservationDate);
+        List<LinearIncreaseDiscountEvent> linearIncreaseDiscountEvents = eventInitializer.getIncreaseEverydayDiscountEvents();
+        for (LinearIncreaseDiscountEvent linearIncreaseDiscountEvent : linearIncreaseDiscountEvents) {
+            OneEventResult execute = linearIncreaseDiscountEvent.execute(reservationDate);
             oneEventResults.add(execute);
         }
         List<SpecialDayDiscountEvent> specialDayDiscountEvents = eventInitializer.getSpecialDiscountEvents();

@@ -2,7 +2,7 @@ package christmas.event;
 
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.WEEK_BENEFIT;
-import static christmas.enums.events.decemberevent.DecemberEvents.GIFT_EVENT;
+import static christmas.enums.events.decemberevent.GiftEvents.GIFT_EVENT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.enums.menu.DessertMenu;

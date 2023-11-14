@@ -1,4 +1,4 @@
-package christmas.event.evnets.increasediscount;
+package christmas.event.evnets.linearincreasediscount;
 
 import christmas.enums.events.Events;
 import christmas.event.OneEventResult;
@@ -6,14 +6,14 @@ import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class LinerIncreaseDiscount implements LinerIncreaseDiscountEvent {
+public class LinearIncreaseDiscount implements LinearIncreaseDiscountEvent {
     private final Events event;
     private final int discountStartAmount;
     private final int discountIncrementPerDay;
     private final EventPeriod eventPeriod;
 
-    public LinerIncreaseDiscount(Events event, EventPeriod eventPeriod, int discountStartAmount,
-                                 int discountIncrementPerDay) {
+    public LinearIncreaseDiscount(Events event, EventPeriod eventPeriod, int discountStartAmount,
+                                  int discountIncrementPerDay) {
         this.event = event;
         this.discountStartAmount = discountStartAmount;
         this.discountIncrementPerDay = discountIncrementPerDay;

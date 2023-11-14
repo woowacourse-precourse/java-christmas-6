@@ -1,21 +1,21 @@
 package christmas.systems.eventSystem;
 
 import christmas.event.evnets.gift.AmountToGiftEvent;
-import christmas.event.evnets.increasediscount.LinerIncreaseDiscountEvent;
+import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscountEvent;
 import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
 import christmas.event.evnets.weekdiscount.WeekDiscountEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EventInitializer {
-    private final List<LinerIncreaseDiscountEvent> linerIncreaseDiscountEvents = new ArrayList<>();
+    private final List<LinearIncreaseDiscountEvent> linearIncreaseDiscountEvents = new ArrayList<>();
     private final List<AmountToGiftEvent> amountToGiftEvents = new ArrayList<>();
     private final List<SpecialDayDiscountEvent> specialDayDiscountEvents = new ArrayList<>();
     private final List<WeekDiscountEvent> weekDiscountEvents = new ArrayList<>();
 
 
-    public void increaseEverydayDiscountEventsAdd(LinerIncreaseDiscountEvent linerIncreaseDiscountEvent) {
-        linerIncreaseDiscountEvents.add(linerIncreaseDiscountEvent);
+    public void increaseEverydayDiscountEventsAdd(LinearIncreaseDiscountEvent linearIncreaseDiscountEvent) {
+        linearIncreaseDiscountEvents.add(linearIncreaseDiscountEvent);
     }
 
 
@@ -32,8 +32,8 @@ public class EventInitializer {
         weekDiscountEvents.add(weekDiscountEvent);
     }
 
-    public List<LinerIncreaseDiscountEvent> getIncreaseEverydayDiscountEvents() {
-        return linerIncreaseDiscountEvents;
+    public List<LinearIncreaseDiscountEvent> getIncreaseEverydayDiscountEvents() {
+        return linearIncreaseDiscountEvents;
     }
 
     public List<AmountToGiftEvent> getAmountToGiftEvents() {
