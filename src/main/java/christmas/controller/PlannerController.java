@@ -24,8 +24,8 @@ public class PlannerController {
     }
 
     private void showEventBadge() {
-        int totalDiscount = plannerService.getTotalDiscount();
-        OutputView.printBadgeOutputMessage(totalDiscount);
+        int totalBenefit = plannerService.getTotalBenefit();
+        OutputView.printBadgeOutputMessage(totalBenefit);
     }
 
     private void showResultPrice() {
