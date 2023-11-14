@@ -287,6 +287,8 @@
 
 - [x] 원하는 이벤트만 시행할수 있게끔 구현
 - [x] RestaurantSystem - >RestaurantSystem, RestaurantProcessor 로 분리
+- [ ] EventInitializer 테스트 코드 구현
+- [ ] EventSystem 테스트 코드 구현
 - [ ] RestaurantSystem 테스트 코드 구현
 - [ ] RestaurantProcessor 테스트 코드 구현
 - [ ] RestaurantReservation 테스트코드 구현
