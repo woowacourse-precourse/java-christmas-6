@@ -1,6 +1,5 @@
 package christmas.event.evnets.weekdiscount;
 
-import christmas.enums.events.Events;
 import christmas.enums.menu.MenuItem;
 import christmas.event.OneEventResult;
 import christmas.order.Orders;

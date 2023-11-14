@@ -1,6 +1,5 @@
 package christmas.event.evnets.linearincreasediscount;
 
-import christmas.enums.events.Events;
 import christmas.event.OneEventResult;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;

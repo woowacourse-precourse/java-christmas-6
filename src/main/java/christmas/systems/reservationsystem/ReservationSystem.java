@@ -9,7 +9,6 @@ import christmas.order.Orders;
 import christmas.order.Receipt;
 import christmas.systems.ordersystem.OrderSystem;
 import christmas.views.Messages;
-import christmas.views.OutputView;
 import java.time.LocalDate;
 import java.util.List;
 

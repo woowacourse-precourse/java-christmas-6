@@ -11,16 +11,10 @@ import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKEND_DI
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.EventFactory;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.event.EventBenefit;
-import christmas.event.evnets.gift.GiftBenefit;
-import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscount;
-import christmas.event.evnets.specialdiscount.SpecialDayDiscount;
-import christmas.event.evnets.weekdiscount.WeekdayDiscount;
-import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.order.Order;
 import christmas.order.Orders;
 import christmas.utils.EventPeriod;
@@ -31,10 +25,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class EventSystemTest {
-    private final static EventPeriod monthPeriod = EventPeriod.createMonthPeriod(2023, 12);
-    private final static EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(2023, 12, 1, 25);
-    private final static MenuItem[] weekdayMenus = MainMenu.values();
-    private final static MenuItem[] weekendMenus = DessertMenu.values();
     private final static Order orderTwoDessert = new Order(DessertMenu.CHOCOLATE_CAKE, 2);
     private final static Order orderOneIceCream = new Order(DessertMenu.ICE_CREAM, 1);
     private final static Order oderTwoSteak = new Order(MainMenu.T_BONE_STEAK, 2);

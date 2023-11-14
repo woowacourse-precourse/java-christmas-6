@@ -5,7 +5,6 @@ import static christmas.enums.events.decemberevent.GiftEvents.GIFT_EVENT;
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.enums.events.decemberevent.GiftEvents;
 import christmas.enums.menu.MenuItem;
 import christmas.event.evnets.gift.GiftBenefit;
 import christmas.utils.EventPeriod;

@@ -4,7 +4,6 @@ import christmas.enums.events.Events;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
-import christmas.event.evnets.WooWaEvent;
 import christmas.event.evnets.weekdiscount.WeekDiscountEvent;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;

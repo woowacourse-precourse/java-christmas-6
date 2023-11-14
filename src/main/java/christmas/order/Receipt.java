@@ -8,7 +8,6 @@ import christmas.event.Gift;
 import christmas.event.OneEventResult;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public record Receipt(List<OneEventResult> oneEventResults, Integer totalPriceBeforeDiscount, Integer discountBenefit,
                       Gift gift, Badge badge) {

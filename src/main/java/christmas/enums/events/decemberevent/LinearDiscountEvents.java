@@ -1,7 +1,6 @@
 package christmas.enums.events.decemberevent;
 
 import christmas.enums.events.Events;
-import christmas.event.evnets.WooWaEvent;
 import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscount;
 import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscountEvent;
 import christmas.utils.EventPeriod;

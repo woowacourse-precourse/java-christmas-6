@@ -3,7 +3,6 @@ package christmas.systems.reservationsystem;
 import christmas.exceptions.RestaurantException;
 import christmas.order.Orders;
 import christmas.order.Receipt;
-import christmas.systems.reservationsystem.ReservationSystem;
 import christmas.utils.StringToDateParser;
 import christmas.utils.StringToOrdersParser;
 import christmas.views.InputView;

@@ -1,16 +1,11 @@
 package christmas;
 
-import static christmas.enums.events.decemberevent.SpecialDiscount.SPECIAL_DISCOUNT;
 import static christmas.enums.events.decemberevent.GiftEvents.GIFT_EVENT;
 import static christmas.enums.events.decemberevent.LinearDiscountEvents.CHRISTMAS_D_DAY_DISCOUNT;
+import static christmas.enums.events.decemberevent.SpecialDiscount.SPECIAL_DISCOUNT;
 import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKDAY_DISCOUNT;
 import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKEND_DISCOUNT;
 
-import christmas.event.evnets.gift.GiftBenefit;
-import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscount;
-import christmas.event.evnets.specialdiscount.SpecialDayDiscount;
-import christmas.event.evnets.weekdiscount.WeekdayDiscount;
-import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.systems.eventSystem.EventInitializer;
 import christmas.systems.eventSystem.EventSystem;
 import christmas.systems.ordersystem.OrderSystem;

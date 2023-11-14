@@ -8,25 +8,16 @@ import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKEND_DI
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.EventFactory;
 import christmas.enums.badge.Badge;
 import christmas.enums.badge.benefit.BenefitBadge;
 import christmas.enums.events.decemberevent.GiftEvents;
-import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.event.Gift;
 import christmas.event.OneEventResult;
-import christmas.event.evnets.gift.GiftBenefit;
-import christmas.event.evnets.gift.GiftBenefitEvent;
-import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscount;
-import christmas.event.evnets.specialdiscount.SpecialDayDiscount;
-import christmas.event.evnets.weekdiscount.WeekdayDiscount;
-import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.systems.eventSystem.EventInitializer;
 import christmas.systems.eventSystem.EventSystem;
 import christmas.systems.ordersystem.OrderSystem;
-import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
