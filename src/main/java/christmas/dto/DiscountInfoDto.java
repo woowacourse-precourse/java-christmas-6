@@ -16,6 +16,9 @@ public class DiscountInfoDto {
         if (discount.getNormalDiscount() != 0) {
             discountMap.put(DiscountType.NORMAL_DISCOUNT.getDiscountText(), discount.getNormalDiscount());
         }
+        if (discount.getWeekDiscount() != 0) {
+            discountMap.put(DiscountType.WEEK_DISCOUNT.getDiscountText(), discount.getWeekDiscount());
+        }
         if (discount.getSpecialDiscount() != 0) {
             discountMap.put(DiscountType.SPECIAL_DISCOUNT.getDiscountText(), discount.getSpecialDiscount());
         }
