@@ -1,4 +1,4 @@
-package christmas.systems.event;
+package christmas.systems.eventSystem;
 
 import christmas.event.EventBenefit;
 import christmas.event.Gift;
@@ -45,7 +45,10 @@ public class EventSystem {
             Gift execute = amountToGiftEvent.execute(reservationDate, totalPriceBeforeDiscount);
             gifts.add(execute);
         }
-        Gift gift = gifts.get(0);
+        Gift gift = Gift.NO_GIFT();
+        if (!gifts.isEmpty()) {
+            gift = gifts.get(0);
+        }
 
         return new EventBenefit(oneEventResults, gift);
     }

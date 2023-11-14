@@ -21,13 +21,12 @@ import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.order.Order;
 import christmas.order.Orders;
-import christmas.systems.event.EventInitializer;
-import christmas.systems.event.EventSystem;
+import christmas.systems.eventSystem.EventInitializer;
+import christmas.systems.eventSystem.EventSystem;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Set;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

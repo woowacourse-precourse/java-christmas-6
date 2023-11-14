@@ -1,15 +1,12 @@
 package christmas;
 
 import christmas.enums.events.Events;
-import christmas.enums.menu.DessertMenu;
-import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.event.evnets.gift.AmountToAGiftEvent;
 import christmas.event.evnets.increasediscount.IncreaseDiscountUntilTypicalDay;
 import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
-import christmas.systems.event.EventInitializer;
 import christmas.utils.EventPeriod;
 
 public class EventFactory {

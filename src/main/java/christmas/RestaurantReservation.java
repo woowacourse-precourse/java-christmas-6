@@ -16,23 +16,16 @@ import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.systems.OrderSystem;
 import christmas.systems.ReservationSystem;
-import christmas.systems.event.EventInitializer;
-import christmas.systems.event.EventSystem;
+import christmas.systems.eventSystem.EventInitializer;
+import christmas.systems.eventSystem.EventSystem;
 import christmas.utils.EventPeriod;
 
 public class RestaurantReservation {
     private final ReservationSystem reservationSystem;
-    private final static Integer YEAR = 2023;
-    private final static Integer MONTH = 12;
-    private final static Integer TYPICAL_START_DATE = 1;
-    private final static Integer TYPICAL_END_DATE = 25;
     //한달 진행이벤트
-    private final static EventPeriod monthPeriod = EventPeriod.createMonthPeriod(YEAR, MONTH);
-
+    private final static EventPeriod monthPeriod = EventPeriod.createMonthPeriod(2023, 12);
     //특정기간 진행 이벤트
-    private final static EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(YEAR, MONTH, TYPICAL_START_DATE,
-            TYPICAL_END_DATE);
-
+    private final static EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(2023, 12, 1, 25);
     //주말/주간 할인 메뉴
     private final static MenuItem[] weekdayMenus = MainMenu.values();
     private final static MenuItem[] weekendMenus = DessertMenu.values();

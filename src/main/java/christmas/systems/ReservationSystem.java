@@ -8,8 +8,6 @@ import christmas.event.OneEventResult;
 import christmas.exceptions.RestaurantException;
 import christmas.order.Orders;
 import christmas.order.Receipt;
-import christmas.systems.event.EventInitializer;
-import christmas.systems.event.EventSystem;
 import christmas.utils.StringToDateParser;
 import christmas.utils.StringToOrdersParser;
 import christmas.views.InputView;
@@ -93,12 +91,11 @@ public class ReservationSystem {
     private static void printEventBenefits(Receipt receipt) {
         OutputView.printOut(Messages.announceEventBenefits());
         List<OneEventResult> oneEventResults = receipt.oneEventResults();
-        String oneEventResult = NO_EVENT.getName();
+        String oneEventResult = NO_EVENT.getName() + System.lineSeparator();
         if(receipt.isEligible()){
             oneEventResult = Messages.perEventBenefit(oneEventResults);
         }
         OutputView.printOut(oneEventResult);
-        OutputView.printOut("");
     }
 
     private static void printDiscountBenefit(Receipt receipt) {

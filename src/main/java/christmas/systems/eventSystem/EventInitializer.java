@@ -1,4 +1,4 @@
-package christmas.systems.event;
+package christmas.systems.eventSystem;
 
 import christmas.event.evnets.gift.AmountToGiftEvent;
 import christmas.event.evnets.increasediscount.IncreaseEverydayDiscountEvent;
@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventInitializer {
-    private List<IncreaseEverydayDiscountEvent> increaseEverydayDiscountEvents =new ArrayList<>();
-    private List<AmountToGiftEvent> amountToGiftEvents =new ArrayList<>();
-    private List<SpecialDiscountEvent> specialDiscountEvents =new ArrayList<>();
-    private List<WeekDiscountEvent> weekDiscountEvents =new ArrayList<>();
+    private final List<IncreaseEverydayDiscountEvent> increaseEverydayDiscountEvents =new ArrayList<>();
+    private final List<AmountToGiftEvent> amountToGiftEvents =new ArrayList<>();
+    private final List<SpecialDiscountEvent> specialDiscountEvents =new ArrayList<>();
+    private final List<WeekDiscountEvent> weekDiscountEvents =new ArrayList<>();
 
 
     public void increaseEverydayDiscountEventsAdd(IncreaseEverydayDiscountEvent increaseEverydayDiscountEvent){
