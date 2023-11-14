@@ -17,8 +17,8 @@ import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.systems.ordersystem.OrderSystem;
 import christmas.systems.reservationsystem.ReservationProcessor;
 import christmas.systems.reservationsystem.ReservationSystem;
-import christmas.systems.eventsystem.EventInitializer;
-import christmas.systems.eventsystem.EventSystem;
+import christmas.systems.eventSystem.EventInitializer;
+import christmas.systems.eventSystem.EventSystem;
 import christmas.utils.EventPeriod;
 import java.time.Month;
 

@@ -1,4 +1,4 @@
-package christmas.systems.eventsystem;
+package christmas.systems.eventSystem;
 
 import christmas.event.EventBenefit;
 import christmas.event.Gift;

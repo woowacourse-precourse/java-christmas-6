@@ -1,4 +1,4 @@
-package christmas.systems.eventsystem;
+package christmas.systems.eventSystem;
 
 import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.INCREASE_BENEFIT;

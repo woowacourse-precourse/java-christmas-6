@@ -21,9 +21,9 @@ import christmas.event.evnets.increasediscount.LinerIncreaseDiscount;
 import christmas.event.evnets.specialdiscount.SpecialDayDayDiscount;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
+import christmas.systems.eventSystem.EventInitializer;
+import christmas.systems.eventSystem.EventSystem;
 import christmas.systems.ordersystem.OrderSystem;
-import christmas.systems.eventsystem.EventInitializer;
-import christmas.systems.eventsystem.EventSystem;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
@@ -34,12 +34,8 @@ import org.junit.jupiter.api.Test;
 
 class OrderSystemTest {
 
-    private final static Order orderTwoDessert = new Order(DessertMenu.CHOCOLATE_CAKE, 2);
-    private final static Order orderOneIceCream = new Order(DessertMenu.ICE_CREAM, 1);
     private final static Order oderThreeSteak = new Order(MainMenu.T_BONE_STEAK, 3);
-    private final static Orders ordersOneIceCream = new Orders(Set.of(orderOneIceCream));
     private final static Orders orderThreeSteak = new Orders(Set.of(oderThreeSteak));
-    private final static Orders ordersOver120_000 = new Orders(Set.of(orderTwoDessert, oderThreeSteak));
     private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 3);
     private final static EventPeriod monthPeriod = EventPeriod.createMonthPeriod(2023, 12);
     private final static EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(2023, 12, 1, 25);
