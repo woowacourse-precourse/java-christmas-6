@@ -16,10 +16,16 @@ public class Customer {
         return visitedDate;
     }
 
-    public int getTotalDiscountPrice() {
-        return discount.getChristmasDiscount() + discount.getNormalDiscount()
+    public int getTotalBenefitPrice() {
+        return discount.getChristmasDiscount() + discount.getNormalDiscount() + discount.getWeekDiscount()
                 + discount.getSpecialDiscount() + discount.getGivingEventDiscount();
     }
+
+    public int getTotalDiscountPrice() {
+        return discount.getChristmasDiscount() + discount.getNormalDiscount() + discount.getWeekDiscount()
+                + discount.getSpecialDiscount();
+    }
+
 
     private void validate(int visitedDate) {
         Validator.checkDateValid(visitedDate);

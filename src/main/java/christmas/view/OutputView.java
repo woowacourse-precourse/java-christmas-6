@@ -58,7 +58,7 @@ public class OutputView {
         System.out.println(menu);
     }
 
-    public static void printTotalDiscountPriceOutputMessage(int totalDiscount) {
+    public static void printTotalBenefitPriceOutputMessage(int totalDiscount) {
         System.out.println(ENTER + TextType.TOTAL_BENEFIT_PRICE.getText());
         String formattedPrice = String.format(MINUS + "%,d" + WON + ENTER, totalDiscount);
         if (totalDiscount == 0) {

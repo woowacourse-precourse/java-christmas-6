@@ -50,6 +50,10 @@ public class PlannerService {
         return customer.getTotalDiscountPrice();
     }
 
+    public int getTotalBenefit() {
+        return customer.getTotalBenefitPrice();
+    }
+
     private void setChristmasDayDiscount(int date) {
         if (date <= CHRISTMAS_DAY) {
             int money = BASE_MONEY + (date - 1) * INCREMENT_MONEY;

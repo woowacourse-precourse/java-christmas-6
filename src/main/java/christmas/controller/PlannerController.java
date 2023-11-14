@@ -18,7 +18,7 @@ public class PlannerController {
         showTotalPrice();
         showPresent();
         showBenefitsContent(customer.getVisitedDate());
-        showTotalDiscountPrice();
+        showTotalBenefitPrice();
         showResultPrice();
         showEventBadge();
     }
@@ -34,9 +34,9 @@ public class PlannerController {
         OutputView.printResultPriceOutputMessage(totalPrice -  totalDiscount);
     }
 
-    private void showTotalDiscountPrice() {
-        int totalDiscount = plannerService.getTotalDiscount();
-        OutputView.printTotalDiscountPriceOutputMessage(totalDiscount);
+    private void showTotalBenefitPrice() {
+        int totalDiscount = plannerService.getTotalBenefit();
+        OutputView.printTotalBenefitPriceOutputMessage(totalDiscount);
     }
 
     private void showPresent() {
