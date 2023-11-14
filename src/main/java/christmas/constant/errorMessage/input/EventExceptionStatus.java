@@ -2,7 +2,7 @@ package christmas.constant.errorMessage.input;
 
 import christmas.constant.errorMessage.ExceptionStatus;
 
-public enum ReadExceptionStatus implements ExceptionStatus {
+public enum EventExceptionStatus implements ExceptionStatus {
 
     DATE_IS_NOT_CORRECT("유효하지 않은 날짜입니다."),
     MENU_IS_NOT_CORRECT("유효하지 않은 주문입니다.");
@@ -13,7 +13,7 @@ public enum ReadExceptionStatus implements ExceptionStatus {
 
     private final String message;
 
-    ReadExceptionStatus(final String message) {
+    EventExceptionStatus(final String message) {
         this.message = MESSAGE_PREFIX + message + MESSAGE_SUFFIX;
     }
 

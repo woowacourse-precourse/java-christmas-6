@@ -16,6 +16,6 @@ public class Application {
     }
 
     public void run() {
-        eventController.run();
+        eventController.initEvent();
     }
 }

@@ -1,6 +1,7 @@
 package christmas;
 
 import christmas.controller.EventController;
+import christmas.service.EventService;
 import christmas.view.input.InputView;
 import christmas.view.input.reader.DefaultReader;
 import christmas.view.input.reader.Reader;
@@ -9,14 +10,16 @@ public class AppConfig {
 
     private static final AppConfig APP_CONFIG = new AppConfig();
 
-    public final DefaultReader reader;
-    public final InputView inputView;
     public final EventController eventController;
+    public final EventService eventService;
+    public final InputView inputView;
+    public final DefaultReader reader;
 
     private AppConfig() {
         this.reader = initReader();
         this.inputView = initInputView(reader);
-        this.eventController = initEventController(inputView);
+        this.eventService = initEventService();
+        this.eventController = initEventController(eventService, inputView);
     }
 
     public static AppConfig getInstance() {
@@ -31,7 +34,12 @@ public class AppConfig {
         return new InputView(reader);
     }
 
-    private EventController initEventController(final InputView inputView) {
-        return new EventController(inputView);
+    private EventService initEventService() {
+        return new EventService();
+    }
+
+    private EventController initEventController(final EventService eventService,
+                                                final InputView inputView) {
+        return new EventController(eventService, inputView);
     }
 }

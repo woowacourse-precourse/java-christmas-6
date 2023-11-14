@@ -2,7 +2,7 @@ package christmas.view.input;
 
 import christmas.constant.errorMessage.exception.CustomNullPointAmountException;
 import christmas.constant.errorMessage.exception.CustomNumberFormatAmountException;
-import christmas.constant.errorMessage.input.ReadExceptionStatus;
+import christmas.constant.errorMessage.input.EventExceptionStatus;
 import christmas.utils.Delimiter;
 import christmas.view.input.reader.Reader;
 import java.util.Arrays;
@@ -39,7 +39,7 @@ public class InputView {
         try {
             return input.trim();
         } catch (NullPointerException e) {
-            throw new CustomNullPointAmountException(ReadExceptionStatus.DATE_IS_NOT_CORRECT);
+            throw new CustomNullPointAmountException(EventExceptionStatus.DATE_IS_NOT_CORRECT);
         }
     }
 
@@ -47,7 +47,7 @@ public class InputView {
         try {
             return Integer.parseInt(checkReadIsNull(date));
         } catch (NumberFormatException e) {
-            throw new CustomNumberFormatAmountException(ReadExceptionStatus.DATE_IS_NOT_CORRECT);
+            throw new CustomNumberFormatAmountException(EventExceptionStatus.DATE_IS_NOT_CORRECT);
         }
     }
 
