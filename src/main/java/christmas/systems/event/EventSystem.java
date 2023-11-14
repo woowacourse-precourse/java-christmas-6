@@ -1,12 +1,15 @@
 package christmas.systems.event;
 
-import static christmas.enums.benefit.DiscountBenefit.MINIMUM_REQUIRE_AMOUNT;
-
 import christmas.event.EventBenefit;
 import christmas.event.Gift;
 import christmas.event.OneEventResult;
+import christmas.event.evnets.gift.AmountToGiftEvent;
+import christmas.event.evnets.increasediscount.IncreaseEverydayDiscountEvent;
+import christmas.event.evnets.specialdiscount.SpecialDiscountEvent;
+import christmas.event.evnets.weekdiscount.WeekDiscountEvent;
 import christmas.order.Orders;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventSystem {
@@ -19,16 +22,30 @@ public class EventSystem {
 
     public EventBenefit activateEvent(LocalDate reservationDate, Orders orders) {
         Integer totalPriceBeforeDiscount = orders.calculateTotalPrice();
+        List<OneEventResult> oneEventResults = new ArrayList<>();
+        List<Gift> gifts = new ArrayList<>();
 
-
-        OneEventResult christmasDDayOneEventResult = eventInitializer.christmasDDayDiscount(reservationDate);
-        OneEventResult specialDiscountOneEventResult = eventInitializer.specialDayDiscountEvent(reservationDate);
-        OneEventResult weekdayEventResult = eventInitializer.weekdayDiscount(reservationDate, orders);
-        OneEventResult weekendEventResult = eventInitializer.weekendDiscount(reservationDate, orders);
-        Gift gift = eventInitializer.amountToAGiftEvent(reservationDate, totalPriceBeforeDiscount);
-
-        List<OneEventResult> oneEventResults = List.of(christmasDDayOneEventResult, specialDiscountOneEventResult,
-                weekdayEventResult, weekendEventResult);
+        List<IncreaseEverydayDiscountEvent> increaseEverydayDiscountEvents = eventInitializer.getIncreaseEverydayDiscountEvents();
+        for (IncreaseEverydayDiscountEvent increaseEverydayDiscountEvent : increaseEverydayDiscountEvents) {
+            OneEventResult execute = increaseEverydayDiscountEvent.execute(reservationDate);
+            oneEventResults.add(execute);
+        }
+        List<SpecialDiscountEvent> specialDiscountEvents = eventInitializer.getSpecialDiscountEvents();
+        for (SpecialDiscountEvent specialDiscountEvent : specialDiscountEvents) {
+            OneEventResult execute = specialDiscountEvent.execute(reservationDate);
+            oneEventResults.add(execute);
+        }
+        List<WeekDiscountEvent> weekDiscountEvents = eventInitializer.getWeekDiscountEvents();
+        for (WeekDiscountEvent weekDiscountEvent : weekDiscountEvents) {
+            OneEventResult execute = weekDiscountEvent.execute(reservationDate, orders);
+            oneEventResults.add(execute);
+        }
+        List<AmountToGiftEvent> amountToGiftEvents = eventInitializer.getAmountToGiftEvents();
+        for (AmountToGiftEvent amountToGiftEvent : amountToGiftEvents) {
+            Gift execute = amountToGiftEvent.execute(reservationDate, totalPriceBeforeDiscount);
+            gifts.add(execute);
+        }
+        Gift gift = gifts.get(0);
 
         return new EventBenefit(oneEventResults, gift);
     }
