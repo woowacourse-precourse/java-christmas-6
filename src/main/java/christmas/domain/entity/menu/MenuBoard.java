@@ -6,9 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MenuBoard {
-    public static Map<String, Menu> menus = initMenus();
+    private static Map<String, Menu> menus = initMenus();
 
-    public static Map<String, Menu> initMenus(){
+    public static Map<String, Menu> getMenus() {
+        return menus;
+    }
+
+    private static Map<String, Menu> initMenus(){
         Map<String, Menu> menuMap = new HashMap<>();
         menuMap.put("양송이수프", new Menu("양송이수프", Enum.MenuCategory.APPETIZER, 6000));
         menuMap.put("타파스", new Menu("타파스", Enum.MenuCategory.APPETIZER, 5000));

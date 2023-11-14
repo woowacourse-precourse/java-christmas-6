@@ -3,12 +3,11 @@ package christmas.controller;
 import christmas.domain.entity.Day;
 import christmas.domain.entity.Order;
 import christmas.domain.generators.OrderGenerator;
+import christmas.domain.services.BenefitApplication;
 import christmas.domain.util.Printer;
 import christmas.domain.view.InputView;
 import christmas.domain.view.OutputView;
 
-
-import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class ChristmasController {
 
@@ -46,7 +45,8 @@ public class ChristmasController {
             }
         }
 
-
         outputView.printMenu(order);
+        BenefitApplication discountApplication = new BenefitApplication(order);
+        discountApplication.benefitApplication();
     }
 }
