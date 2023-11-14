@@ -1,4 +1,4 @@
-package christmas.event;
+package christmas.systems.eventsystem;
 
 import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.INCREASE_BENEFIT;
@@ -14,15 +14,14 @@ import christmas.EventFactory;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
+import christmas.event.EventBenefit;
 import christmas.event.evnets.gift.AmountToAGiftEvent;
-import christmas.event.evnets.increasediscount.linearIncreaseDiscountEvent;
-import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
+import christmas.event.evnets.increasediscount.LinerIncreaseDiscount;
+import christmas.event.evnets.specialdiscount.SpecialDayDayDiscount;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.order.Order;
 import christmas.order.Orders;
-import christmas.systems.eventsystem.EventInitializer;
-import christmas.systems.eventsystem.EventSystem;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
@@ -45,10 +44,10 @@ class EventSystemTest {
     private final static Integer CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT = (BASIC_BENEFIT.getAmount() + (
             INCREASE_BENEFIT.getAmount() * 2));
     private final static Integer WEEK_BENEFIT_CONTAIN_TWO_MAIN = (WEEK_BENEFIT.getAmount() * 2);
-    private final static linearIncreaseDiscountEvent linearDiscount = EventFactory.createLinearDiscount(
+    private final static LinerIncreaseDiscount linearDiscount = EventFactory.createLinearDiscount(
             CHRISTMAS_D_DAY_DISCOUNT,
             typicalPeriod, 1000, 100);
-    private final static SpecialDayDiscountEvent specialDayDiscountEvent = EventFactory.createSpecialDayDiscountEvent(
+    private final static SpecialDayDayDiscount SPECIAL_DAY_DISCOUNT = EventFactory.createSpecialDayDiscountEvent(
             SPECIAL_DISCOUNT, monthPeriod, 1000);
     private final static AmountToAGiftEvent amountToAGiftEvent = EventFactory.createAmountToAGiftEvent(monthPeriod,
             120_000, CHAMPAGNE,
@@ -63,7 +62,7 @@ class EventSystemTest {
     public EventSystem eventSystem() {
         final EventInitializer eventInitializer = new EventInitializer();
         eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
-        eventInitializer.specialDiscountEventAdd(specialDayDiscountEvent);
+        eventInitializer.specialDiscountEventAdd(SPECIAL_DAY_DISCOUNT);
         eventInitializer.amountToGiftEventsAdd(amountToAGiftEvent);
         eventInitializer.weekDiscountEventAdd(weekdayDiscount);
         eventInitializer.weekDiscountEventAdd(weekendDiscount);

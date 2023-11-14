@@ -4,7 +4,7 @@ import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 import static christmas.enums.events.decemberevent.DecemberEvents.SPECIAL_DISCOUNT;
 
-import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
+import christmas.event.evnets.specialdiscount.SpecialDayDayDiscount;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
@@ -18,7 +18,7 @@ class SpecialDayDiscountBenefitEventTest {
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate specialDate = LocalDate.of(2023, Month.DECEMBER, 25);
     private final static LocalDate nonSpecialDate = LocalDate.of(2023, Month.DECEMBER, 26);
-    private final static SpecialDayDiscountEvent SPECIAL_DAY_DISCOUNT_EVENT = new SpecialDayDiscountEvent(
+    private final static SpecialDayDayDiscount SPECIAL_DAY_DISCOUNT_EVENT = new SpecialDayDayDiscount(
             SPECIAL_DISCOUNT, eventPeriod, 1000);
 
     @DisplayName("특별 할인이 적용되는 날은 1000원을 추가할인한다.")

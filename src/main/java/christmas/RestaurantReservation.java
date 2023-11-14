@@ -10,8 +10,8 @@ import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.event.evnets.gift.AmountToAGiftEvent;
-import christmas.event.evnets.increasediscount.linearIncreaseDiscountEvent;
-import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
+import christmas.event.evnets.increasediscount.LinerIncreaseDiscount;
+import christmas.event.evnets.specialdiscount.SpecialDayDayDiscount;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.systems.ordersystem.OrderSystem;
@@ -36,9 +36,9 @@ public class RestaurantReservation {
     private final static MenuItem[] weekendMenus = DessertMenu.values();
 
     public RestaurantReservation() {
-        linearIncreaseDiscountEvent linearDiscount = EventFactory.createLinearDiscount(CHRISTMAS_D_DAY_DISCOUNT,
+        LinerIncreaseDiscount linearDiscount = EventFactory.createLinearDiscount(CHRISTMAS_D_DAY_DISCOUNT,
                 typicalPeriod, 1000, 100);
-        SpecialDayDiscountEvent specialDayDiscountEvent = EventFactory.createSpecialDayDiscountEvent(
+        SpecialDayDayDiscount specialDayDiscount = EventFactory.createSpecialDayDiscountEvent(
                 SPECIAL_DISCOUNT, monthPeriod, 1000);
         AmountToAGiftEvent amountToAGiftEvent = EventFactory.createAmountToAGiftEvent(monthPeriod, 120_000, CHAMPAGNE,
                 1);
@@ -49,7 +49,7 @@ public class RestaurantReservation {
 
         EventInitializer eventInitializer = new EventInitializer();
         eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
-        eventInitializer.specialDiscountEventAdd(specialDayDiscountEvent);
+        eventInitializer.specialDiscountEventAdd(specialDayDiscount);
         eventInitializer.amountToGiftEventsAdd(amountToAGiftEvent);
         eventInitializer.weekDiscountEventAdd(weekdayDiscount);
         eventInitializer.weekDiscountEventAdd(weekendDiscount);

@@ -4,8 +4,8 @@ import christmas.event.EventBenefit;
 import christmas.event.Gift;
 import christmas.event.OneEventResult;
 import christmas.event.evnets.gift.AmountToGiftEvent;
-import christmas.event.evnets.increasediscount.IncreaseEverydayDiscountEvent;
-import christmas.event.evnets.specialdiscount.SpecialDiscountEvent;
+import christmas.event.evnets.increasediscount.LinerIncreaseDiscountEvent;
+import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
 import christmas.event.evnets.weekdiscount.WeekDiscountEvent;
 import christmas.order.Orders;
 import java.time.LocalDate;
@@ -25,14 +25,14 @@ public class EventSystem {
         List<OneEventResult> oneEventResults = new ArrayList<>();
         List<Gift> gifts = new ArrayList<>();
 
-        List<IncreaseEverydayDiscountEvent> increaseEverydayDiscountEvents = eventInitializer.getIncreaseEverydayDiscountEvents();
-        for (IncreaseEverydayDiscountEvent increaseEverydayDiscountEvent : increaseEverydayDiscountEvents) {
-            OneEventResult execute = increaseEverydayDiscountEvent.execute(reservationDate);
+        List<LinerIncreaseDiscountEvent> linerIncreaseDiscountEvents = eventInitializer.getIncreaseEverydayDiscountEvents();
+        for (LinerIncreaseDiscountEvent linerIncreaseDiscountEvent : linerIncreaseDiscountEvents) {
+            OneEventResult execute = linerIncreaseDiscountEvent.execute(reservationDate);
             oneEventResults.add(execute);
         }
-        List<SpecialDiscountEvent> specialDiscountEvents = eventInitializer.getSpecialDiscountEvents();
-        for (SpecialDiscountEvent specialDiscountEvent : specialDiscountEvents) {
-            OneEventResult execute = specialDiscountEvent.execute(reservationDate);
+        List<SpecialDayDiscountEvent> specialDayDiscountEvents = eventInitializer.getSpecialDiscountEvents();
+        for (SpecialDayDiscountEvent specialDayDiscountEvent : specialDayDiscountEvents) {
+            OneEventResult execute = specialDayDiscountEvent.execute(reservationDate);
             oneEventResults.add(execute);
         }
         List<WeekDiscountEvent> weekDiscountEvents = eventInitializer.getWeekDiscountEvents();

@@ -17,8 +17,8 @@ import christmas.enums.menu.MenuItem;
 import christmas.event.Gift;
 import christmas.event.OneEventResult;
 import christmas.event.evnets.gift.AmountToAGiftEvent;
-import christmas.event.evnets.increasediscount.linearIncreaseDiscountEvent;
-import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
+import christmas.event.evnets.increasediscount.LinerIncreaseDiscount;
+import christmas.event.evnets.specialdiscount.SpecialDayDayDiscount;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.systems.ordersystem.OrderSystem;
@@ -45,10 +45,10 @@ class OrderSystemTest {
     private final static EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(2023, 12, 1, 25);
     private final static MenuItem[] weekdayMenus = MainMenu.values();
     private final static MenuItem[] weekendMenus = DessertMenu.values();
-    private final static linearIncreaseDiscountEvent linearDiscount = EventFactory.createLinearDiscount(
+    private final static LinerIncreaseDiscount linearDiscount = EventFactory.createLinearDiscount(
             CHRISTMAS_D_DAY_DISCOUNT,
             typicalPeriod, 1000, 100);
-    private final static SpecialDayDiscountEvent specialDayDiscountEvent = EventFactory.createSpecialDayDiscountEvent(
+    private final static SpecialDayDayDiscount SPECIAL_DAY_DISCOUNT = EventFactory.createSpecialDayDiscountEvent(
             SPECIAL_DISCOUNT, monthPeriod, 1000);
     private final static AmountToAGiftEvent amountToAGiftEvent = EventFactory.createAmountToAGiftEvent(monthPeriod,
             120_000, CHAMPAGNE,
@@ -63,7 +63,7 @@ class OrderSystemTest {
     public EventSystem eventSystem() {
         final EventInitializer eventInitializer = new EventInitializer();
         eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
-        eventInitializer.specialDiscountEventAdd(specialDayDiscountEvent);
+        eventInitializer.specialDiscountEventAdd(SPECIAL_DAY_DISCOUNT);
         eventInitializer.amountToGiftEventsAdd(amountToAGiftEvent);
         eventInitializer.weekDiscountEventAdd(weekdayDiscount);
         eventInitializer.weekDiscountEventAdd(weekendDiscount);

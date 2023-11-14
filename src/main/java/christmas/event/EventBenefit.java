@@ -15,8 +15,4 @@ public record EventBenefit(List<OneEventResult> oneEventResults, Gift gift) {
         }
         return discountBenefits + gift.getGiftDiscountBenefit();
     }
-
-    public static EventBenefit NO_EVENT_BENEFIT() {
-        return new EventBenefit(List.of(OneEventResult.NO_EVENT_RESULT()), Gift.NO_GIFT());
-    }
 }

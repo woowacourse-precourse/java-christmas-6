@@ -3,17 +3,17 @@ package christmas;
 import christmas.enums.events.Events;
 import christmas.enums.menu.MenuItem;
 import christmas.event.evnets.gift.AmountToAGiftEvent;
-import christmas.event.evnets.increasediscount.linearIncreaseDiscountEvent;
-import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
+import christmas.event.evnets.increasediscount.LinerIncreaseDiscount;
+import christmas.event.evnets.specialdiscount.SpecialDayDayDiscount;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.utils.EventPeriod;
 
 public class EventFactory {
 
-    public static linearIncreaseDiscountEvent createLinearDiscount(Events events, EventPeriod eventPeriod,
-                                                                   Integer discountStart, Integer increasePerDay) {
-        return new linearIncreaseDiscountEvent(events, eventPeriod, discountStart, increasePerDay);
+    public static LinerIncreaseDiscount createLinearDiscount(Events events, EventPeriod eventPeriod,
+                                                             Integer discountStart, Integer increasePerDay) {
+        return new LinerIncreaseDiscount(events, eventPeriod, discountStart, increasePerDay);
     }
 
     public static AmountToAGiftEvent createAmountToAGiftEvent(EventPeriod eventPeriod, Integer giftCondition,
@@ -21,9 +21,9 @@ public class EventFactory {
         return new AmountToAGiftEvent(eventPeriod, giftCondition, gift, giftQuantity);
     }
 
-    public static SpecialDayDiscountEvent createSpecialDayDiscountEvent(Events events, EventPeriod eventPeriod,
-                                                                        Integer discountAmount) {
-        return new SpecialDayDiscountEvent(events, eventPeriod, discountAmount);
+    public static SpecialDayDayDiscount createSpecialDayDiscountEvent(Events events, EventPeriod eventPeriod,
+                                                                      Integer discountAmount) {
+        return new SpecialDayDayDiscount(events, eventPeriod, discountAmount);
     }
 
     public static WeekdayDiscount createWeekdayDiscount(Events events, EventPeriod eventPeriod, MenuItem[] menuItems,
