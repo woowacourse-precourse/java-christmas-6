@@ -12,8 +12,9 @@ public class OutputView {
     public static final String SPACE = " ";
     public static final String COUNT = "개";
     public static final String WON = "원";
-    public static final String PRESNET = "샴페인 1 개";
+    public static final String PRESENT = "샴페인 1개";
     public static final String COLON = ":";
+    public static final String MINUS = "-";
 
     public static void printStartMessageOutputMessage() {
         System.out.println(TextType.START_MESSAGE.getText());
@@ -43,7 +44,7 @@ public class OutputView {
         }
 
         for (String key : discountMap.keySet()) {
-            String formattedPrice = String.format("-%,d원", discountMap.get(key));
+            String formattedPrice = String.format(MINUS + "%,d원", discountMap.get(key));
             System.out.println(key + COLON + SPACE  + formattedPrice);
         }
     }
@@ -51,7 +52,7 @@ public class OutputView {
     public static void printPresentOutputMessage(boolean isGiven) {
         String menu = TextType.NONE.getText();
         if (isGiven) {
-            menu = PRESNET;
+            menu = PRESENT;
         }
         System.out.println(TextType.PRESENTATION_MENU);
         System.out.println(menu);
@@ -59,9 +60,9 @@ public class OutputView {
 
     public static void printTotalDiscountPriceOutputMessage(int totalDiscount) {
         System.out.println(TextType.TOTAL_BENEFIT_PRICE.getText());
-        String formattedPrice = String.format("-%,d원\n", totalDiscount);
+        String formattedPrice = String.format(MINUS + "%,d" + WON + ENTER, totalDiscount);
         if (totalDiscount == 0) {
-            formattedPrice = String.format("%d원\n", totalDiscount);
+            formattedPrice = String.format("%d" + WON + ENTER, totalDiscount);
         }
         System.out.println(formattedPrice);
     }
