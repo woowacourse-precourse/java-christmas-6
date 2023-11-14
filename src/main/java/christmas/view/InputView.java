@@ -8,12 +8,15 @@ import christmas.validate.InputValidator;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import static java.lang.System.console;
 import static java.lang.System.out;
 
 public class InputView {
+    private static final String ERROR_PREFIX = "[ERROR]";
     private InputValidator validator = new InputValidator();
     private final RestaurantDatabase db = new RestaurantDatabase();
     private int date;
@@ -47,42 +50,40 @@ public class InputView {
         do {
             out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
             result = promptMenuToOrder(menu);
+            out.println(result);
         } while (result == null);
 
         return result;
     }
 
-    public List<SimpleEntry<Menu, Integer>> promptMenuToOrder (List<Menu> menu) {
+    private List<SimpleEntry<Menu, Integer>> promptMenuToOrder (List<Menu> menu) {
         List<SimpleEntry<Menu, Integer>> result = null;
         try {
             String customerOrderState = Console.readLine().trim();
             List<String> menuOrdered = Arrays.stream(customerOrderState.split(",")).toList();
 
             result = makeMenuOrderedList(menu, menuOrdered);
-            return result;
-        }catch ( IllegalStateException e) {
+
+            if(!validator.checkCategory(result)) {
+                throw new IllegalArgumentException(ERROR_PREFIX + " 디저트류만 이용하실 수 없습니다.");
+            }
+        }catch ( IllegalArgumentException e ) {
+            result = null;
             out.println(e.getMessage());
-            return result;
         }
-    }
-
-    public List<SimpleEntry<Menu, Integer>> makeMenuOrderedList (List<Menu> menu, List<String> menuOrdered) throws  IllegalStateException{
-        List<SimpleEntry<Menu, Integer>> result = new ArrayList<>();
-
-        for (String ordered : menuOrdered) {
-           Matcher matcher = validator.validateOrderStateFormat(ordered);
-           String menuName = matcher.group(1);
-           int cnt = Integer.parseInt(matcher.group(2));
-
-           Menu menuMatched = menu.stream().filter(el -> el.checkMenu(menuName)).toList().get(0);
-           result.add(new SimpleEntry<>(menuMatched, cnt));
-        }
-
-        validator.hasReachedMaxOrderItems(result);
         return result;
     }
 
+    private List<SimpleEntry<Menu, Integer>> makeMenuOrderedList (List<Menu> menu, List<String> menuOrdered) throws  IllegalArgumentException{
+        List<SimpleEntry<Menu, Integer>> result = new ArrayList<>();
 
+            for (String ordered : menuOrdered) {
+                SimpleEntry<Menu, Integer> menuMatched = validator.validateOrderStateFormat(menu, ordered);
+                result.add(menuMatched);
+            }
+            validator.hasReachedMaxOrderItems(result);
+            return result;
+    }
 
 
 }

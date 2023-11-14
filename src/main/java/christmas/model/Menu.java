@@ -1,5 +1,7 @@
 package christmas.model;
 
+import java.util.AbstractMap;
+import java.util.List;
 import java.util.Objects;
 
 public class Menu {
@@ -10,6 +12,12 @@ public class Menu {
 
     int price;
 
+    public static int checkBill (List<AbstractMap.SimpleEntry<Menu, Integer>> orderedMenu) {
+        return orderedMenu.stream()
+                .mapToInt(el -> el.getKey().price)
+                .sum();
+    }
+
     public Menu(Category category, String menuName, int price) {
         this.category = category;
         this.menuName = menuName;
@@ -19,6 +27,14 @@ public class Menu {
     public boolean checkMenu (String menuName) {
         return menuName.equals(this.menuName);
     }
+
+
+    public boolean checkCategory (String category) {
+        return this.category.isSame(category);
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

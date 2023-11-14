@@ -14,8 +14,14 @@ public class Category {
         return false;
     }
 
+
+
     @Override
     public String toString() {
-        return  ""+ category;
+        return category;
+    }
+
+    public boolean isSame(String category) {
+        return this.category.equals(category);
     }
 }
