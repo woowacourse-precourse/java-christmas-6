@@ -1,22 +1,14 @@
-package christmas.systems;
+package christmas.systems.reservationsystem;
 
-import static christmas.enums.events.NoEvent.NO_EVENT;
-import static christmas.enums.menu.NoMenu.NO_MENU;
-
-import christmas.event.Gift;
-import christmas.event.OneEventResult;
 import christmas.exceptions.RestaurantException;
 import christmas.order.Orders;
 import christmas.order.Receipt;
+import christmas.systems.reservationsystem.ReservationSystem;
 import christmas.utils.StringToDateParser;
 import christmas.utils.StringToOrdersParser;
 import christmas.views.InputView;
-import christmas.views.Messages;
 import christmas.views.OutputView;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
-import java.util.List;
 import java.util.function.Function;
 
 public class ReservationProcessor {

@@ -1,4 +1,4 @@
-package christmas.systems;
+package christmas.systems.ordersystem;
 
 import christmas.enums.badge.benefit.BenefitBadge;
 import christmas.event.EventBenefit;
@@ -6,7 +6,7 @@ import christmas.event.Gift;
 import christmas.event.OneEventResult;
 import christmas.order.Orders;
 import christmas.order.Receipt;
-import christmas.systems.eventSystem.EventSystem;
+import christmas.systems.eventsystem.EventSystem;
 import java.time.LocalDate;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package christmas.systems.eventSystem;
+package christmas.systems.eventsystem;
 
 import christmas.event.evnets.gift.AmountToGiftEvent;
 import christmas.event.evnets.increasediscount.IncreaseEverydayDiscountEvent;
