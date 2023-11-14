@@ -3,7 +3,7 @@ package christmas.systems.eventSystem;
 import christmas.event.EventBenefit;
 import christmas.event.Gift;
 import christmas.event.OneEventResult;
-import christmas.event.evnets.gift.AmountToGiftEvent;
+import christmas.event.evnets.gift.GiftBenefitEvent;
 import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscountEvent;
 import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
 import christmas.event.evnets.weekdiscount.WeekDiscountEvent;
@@ -40,9 +40,9 @@ public class EventSystem {
             OneEventResult execute = weekDiscountEvent.execute(reservationDate, orders);
             oneEventResults.add(execute);
         }
-        List<AmountToGiftEvent> amountToGiftEvents = eventInitializer.getAmountToGiftEvents();
-        for (AmountToGiftEvent amountToGiftEvent : amountToGiftEvents) {
-            Gift execute = amountToGiftEvent.execute(reservationDate, totalPriceBeforeDiscount);
+        List<GiftBenefitEvent> giftBenefitEvents = eventInitializer.getAmountToGiftEvents();
+        for (GiftBenefitEvent giftBenefitEvent : giftBenefitEvents) {
+            Gift execute = giftBenefitEvent.execute(reservationDate, totalPriceBeforeDiscount);
             gifts.add(execute);
         }
 

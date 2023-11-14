@@ -9,14 +9,14 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 public class WeekendDiscount implements WeekDiscountEvent {
-    private final Events event;
+    private final String eventName;
     private final Integer discountAmount;
     private final EventPeriod eventPeriod;
     private final MenuItem[] discountMenuItems;
 
-    public WeekendDiscount(Events event, EventPeriod eventPeriod, MenuItem[] discountMenuItems,
+    public WeekendDiscount(String eventName, EventPeriod eventPeriod, MenuItem[] discountMenuItems,
                            Integer discountAmount) {
-        this.event = event;
+        this.eventName = eventName;
         this.eventPeriod = eventPeriod;
         this.discountMenuItems = discountMenuItems;
         this.discountAmount = discountAmount;
@@ -40,7 +40,7 @@ public class WeekendDiscount implements WeekDiscountEvent {
     public OneEventResult execute(LocalDate reservationDate, Orders orders) {
         if (isEventActivate(reservationDate) && isWeekend(reservationDate)) {
             int discountBenefit = calculateDiscount(orders);
-            return new OneEventResult(event.getName(), discountBenefit);
+            return new OneEventResult(eventName, discountBenefit);
         }
         return OneEventResult.NO_EVENT_RESULT();
     }

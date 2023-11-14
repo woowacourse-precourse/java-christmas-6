@@ -24,7 +24,7 @@ class LinearIncreaseDiscountEventBenefitTest {
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate overDate = LocalDate.of(2023, Month.DECEMBER, 26);
     private final static LinearIncreaseDiscount INCREASE_DISCOUNT_UNTIL_TYPICAL_DAY = new LinearIncreaseDiscount(
-            CHRISTMAS_D_DAY_DISCOUNT, eventPeriod,
+            CHRISTMAS_D_DAY_DISCOUNT.getName(), eventPeriod,
             BASIC_BENEFIT.getAmount(), INCREASE_BENEFIT.getAmount());
 
     @DisplayName("날짜를 입력했을 때, 이벤트 날짜에 해당되지 않으면 0을 반환한다.")

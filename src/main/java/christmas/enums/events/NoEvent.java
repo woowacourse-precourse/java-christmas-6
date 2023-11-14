@@ -1,5 +1,8 @@
 package christmas.enums.events;
 
+import christmas.event.evnets.WooWaEvent;
+import christmas.utils.EventPeriod;
+
 public enum NoEvent implements Events {
     NO_EVENT("없음", 0);
     private final String name;
@@ -13,6 +16,16 @@ public enum NoEvent implements Events {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public EventPeriod getEventPeriod() {
+        return null;
+    }
+
+    @Override
+    public WooWaEvent getInstance() {
+        return null;
     }
 
     public Integer getAmount() {

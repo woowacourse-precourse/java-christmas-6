@@ -3,6 +3,7 @@ package christmas.systems.eventSystem;
 import static christmas.enums.benefit.DiscountBenefit.BASIC_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.INCREASE_BENEFIT;
 import static christmas.enums.benefit.DiscountBenefit.WEEK_BENEFIT;
+import static christmas.enums.events.decemberevent.GiftEvents.GIFT_EVENT;
 import static christmas.enums.events.decemberevent.LinearDiscountEvents.CHRISTMAS_D_DAY_DISCOUNT;
 import static christmas.enums.events.decemberevent.SpecialDiscount.SPECIAL_DISCOUNT;
 import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKDAY_DISCOUNT;
@@ -15,9 +16,9 @@ import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
 import christmas.event.EventBenefit;
-import christmas.event.evnets.gift.AmountToAGiftEvent;
+import christmas.event.evnets.gift.GiftBenefit;
 import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscount;
-import christmas.event.evnets.specialdiscount.SpecialDayDayDiscount;
+import christmas.event.evnets.specialdiscount.SpecialDayDiscount;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.order.Order;
@@ -44,28 +45,15 @@ class EventSystemTest {
     private final static Integer CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT = (BASIC_BENEFIT.getAmount() + (
             INCREASE_BENEFIT.getAmount() * 2));
     private final static Integer WEEK_BENEFIT_CONTAIN_TWO_MAIN = (WEEK_BENEFIT.getAmount() * 2);
-    private final static LinearIncreaseDiscount linearDiscount = EventFactory.createLinearDiscount(
-            CHRISTMAS_D_DAY_DISCOUNT,
-            typicalPeriod, 1000, 100);
-    private final static SpecialDayDayDiscount SPECIAL_DAY_DISCOUNT = EventFactory.createSpecialDayDiscountEvent(
-            SPECIAL_DISCOUNT, monthPeriod, 1000);
-    private final static AmountToAGiftEvent amountToAGiftEvent = EventFactory.createAmountToAGiftEvent(monthPeriod,
-            120_000, CHAMPAGNE,
-            1);
-    private final static WeekdayDiscount weekdayDiscount = EventFactory.createWeekdayDiscount(WEEKDAY_DISCOUNT,
-            monthPeriod,
-            weekdayMenus, 2023);
-    private final static WeekendDiscount weekendDiscount = EventFactory.createWeekendDiscount(WEEKEND_DISCOUNT,
-            monthPeriod,
-            weekendMenus, 2023);
+
 
     public EventSystem eventSystem() {
-        final EventInitializer eventInitializer = new EventInitializer();
-        eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
-        eventInitializer.specialDiscountEventAdd(SPECIAL_DAY_DISCOUNT);
-        eventInitializer.amountToGiftEventsAdd(amountToAGiftEvent);
-        eventInitializer.weekDiscountEventAdd(weekdayDiscount);
-        eventInitializer.weekDiscountEventAdd(weekendDiscount);
+        EventInitializer eventInitializer = new EventInitializer();
+        eventInitializer.increaseEverydayDiscountEventsAdd(CHRISTMAS_D_DAY_DISCOUNT.getInstance());
+        eventInitializer.specialDiscountEventAdd(SPECIAL_DISCOUNT.getInstance());
+        eventInitializer.amountToGiftEventsAdd(GIFT_EVENT.getInstance());
+        eventInitializer.weekDiscountEventAdd(WEEKDAY_DISCOUNT.getInstance());
+        eventInitializer.weekDiscountEventAdd(WEEKEND_DISCOUNT.getInstance());
 
         return new EventSystem(eventInitializer);
     }

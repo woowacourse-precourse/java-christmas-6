@@ -23,7 +23,7 @@ class WeekendDiscountBenefitTest {
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate weekDay = LocalDate.of(2023, Month.DECEMBER, 3);
     private final static LocalDate weekend = LocalDate.of(2023, Month.DECEMBER, 2);
-    private final static WeekendDiscount weekendDiscount = new WeekendDiscount(GIFT_EVENT, eventPeriod,
+    private final static WeekendDiscount weekendDiscount = new WeekendDiscount(GIFT_EVENT.getName(), eventPeriod,
             DessertMenu.values(), 2023);
     private final static Order ORDER_WITH_DESSERT = new Order(DessertMenu.CHOCOLATE_CAKE, 2);
     private final static Order ORDER_WITH_MAIN = new Order(MainMenu.T_BONE_STEAK, 2);

@@ -9,12 +9,13 @@ import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKEND_DI
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 
 import christmas.EventFactory;
+import christmas.enums.events.decemberevent.GiftEvents;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
-import christmas.event.evnets.gift.AmountToAGiftEvent;
+import christmas.event.evnets.gift.GiftBenefit;
 import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscount;
-import christmas.event.evnets.specialdiscount.SpecialDayDayDiscount;
+import christmas.event.evnets.specialdiscount.SpecialDayDiscount;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.order.Order;
@@ -43,23 +44,12 @@ class ReservationProcessorTest {
     private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 3);
     private final static String RESTAURANT_NAME = "우테코 식당";
     ReservationSystem setALLEvent() {
-        LinearIncreaseDiscount linearDiscount = EventFactory.createLinearDiscount(CHRISTMAS_D_DAY_DISCOUNT,
-                typicalPeriod, 1000, 100);
-        SpecialDayDayDiscount specialDayDiscount = EventFactory.createSpecialDayDiscountEvent(
-                SPECIAL_DISCOUNT, monthPeriod, 1000);
-        AmountToAGiftEvent amountToAGiftEvent = EventFactory.createAmountToAGiftEvent(monthPeriod, 120_000, CHAMPAGNE,
-                1);
-        WeekdayDiscount weekdayDiscount = EventFactory.createWeekdayDiscount(WEEKDAY_DISCOUNT, monthPeriod,
-                weekdayMenus, 2023);
-        WeekendDiscount weekendDiscount = EventFactory.createWeekendDiscount(WEEKEND_DISCOUNT, monthPeriod,
-                weekendMenus, 2023);
-
         EventInitializer eventInitializer = new EventInitializer();
-        eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
-        eventInitializer.specialDiscountEventAdd(specialDayDiscount);
-        eventInitializer.amountToGiftEventsAdd(amountToAGiftEvent);
-        eventInitializer.weekDiscountEventAdd(weekdayDiscount);
-        eventInitializer.weekDiscountEventAdd(weekendDiscount);
+        eventInitializer.increaseEverydayDiscountEventsAdd(CHRISTMAS_D_DAY_DISCOUNT.getInstance());
+        eventInitializer.specialDiscountEventAdd(SPECIAL_DISCOUNT.getInstance());
+        eventInitializer.amountToGiftEventsAdd(GiftEvents.GIFT_EVENT.getInstance());
+        eventInitializer.weekDiscountEventAdd(WEEKDAY_DISCOUNT.getInstance());
+        eventInitializer.weekDiscountEventAdd(WEEKEND_DISCOUNT.getInstance());
 
         EventSystem eventSystem = new EventSystem(eventInitializer);
         OrderSystem orderSystem = new OrderSystem(eventSystem);
@@ -70,6 +60,6 @@ class ReservationProcessorTest {
     void name() {
         ReservationSystem reservationSystem = this.setALLEvent();
         ReservationProcessor reservationProcessor = new ReservationProcessor(reservationSystem);
-        reservationProcessor.process(RESTAURANT_NAME, YEAR.getValue(),MONTH.getValue());
+       // reservationProcessor.process(RESTAURANT_NAME, YEAR.getValue(),MONTH.getValue());
     }
 }

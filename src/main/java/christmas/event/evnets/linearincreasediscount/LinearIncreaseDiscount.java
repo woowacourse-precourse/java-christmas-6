@@ -7,14 +7,14 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class LinearIncreaseDiscount implements LinearIncreaseDiscountEvent {
-    private final Events event;
+    private final String eventName;
     private final int discountStartAmount;
     private final int discountIncrementPerDay;
     private final EventPeriod eventPeriod;
 
-    public LinearIncreaseDiscount(Events event, EventPeriod eventPeriod, int discountStartAmount,
+    public LinearIncreaseDiscount(String eventName, EventPeriod eventPeriod, int discountStartAmount,
                                   int discountIncrementPerDay) {
-        this.event = event;
+        this.eventName = eventName;
         this.discountStartAmount = discountStartAmount;
         this.discountIncrementPerDay = discountIncrementPerDay;
         this.eventPeriod = eventPeriod;
@@ -35,7 +35,7 @@ public class LinearIncreaseDiscount implements LinearIncreaseDiscountEvent {
     public OneEventResult execute(LocalDate reservationDate) {
         if (isEventActivate(reservationDate)) {
             int discountBenefit = calculateDiscount(reservationDate);
-            return new OneEventResult(event.getName(), discountBenefit);
+            return new OneEventResult(eventName, discountBenefit);
         }
         return OneEventResult.NO_EVENT_RESULT();
     }

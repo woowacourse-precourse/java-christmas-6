@@ -7,13 +7,15 @@ import christmas.event.Gift;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 
-public class AmountToAGiftEvent implements AmountToGiftEvent {
+public class GiftBenefit implements GiftBenefitEvent {
+    private final String eventName;
     private final Integer needAmountToGift;
     private final EventPeriod eventPeriod;
     private final MenuItem menuItem;
     private final Integer quantity;
 
-    public AmountToAGiftEvent(EventPeriod eventPeriod, Integer needAmountToGift, MenuItem menuItem, Integer quantity) {
+    public GiftBenefit(String eventName, EventPeriod eventPeriod, Integer needAmountToGift, MenuItem menuItem, Integer quantity) {
+        this.eventName = eventName;
         this.eventPeriod = eventPeriod;
         this.needAmountToGift = needAmountToGift;
         this.menuItem = menuItem;
@@ -42,5 +44,9 @@ public class AmountToAGiftEvent implements AmountToGiftEvent {
             }
         }
         return Gift.NO_GIFT();
+    }
+
+    public String getEventName() {
+        return eventName;
     }
 }

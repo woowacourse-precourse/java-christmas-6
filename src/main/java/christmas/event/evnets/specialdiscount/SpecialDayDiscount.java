@@ -2,20 +2,19 @@ package christmas.event.evnets.specialdiscount;
 
 import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 
-import christmas.enums.events.Events;
 import christmas.event.OneEventResult;
 import christmas.utils.EventPeriod;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
-public class SpecialDayDayDiscount implements SpecialDayDiscountEvent {
+public class SpecialDayDiscount implements SpecialDayDiscountEvent {
     private final static Integer CHRISTMAS_DAY = 25;
-    private final Events event;
+    private final String eventName;
     private final Integer discountAmount;
     private final EventPeriod eventPeriod;
 
-    public SpecialDayDayDiscount(Events event, EventPeriod eventPeriod, Integer discountAmount) {
-        this.event = event;
+    public SpecialDayDiscount(String eventName, EventPeriod eventPeriod, Integer discountAmount) {
+        this.eventName = eventName;
         this.eventPeriod = eventPeriod;
         this.discountAmount = discountAmount;
     }
@@ -37,7 +36,7 @@ public class SpecialDayDayDiscount implements SpecialDayDiscountEvent {
     public OneEventResult execute(LocalDate reservationDate) {
         if (isEventActivate(reservationDate)) {
             Integer discountBenefit = calculateDiscount(reservationDate);
-            return new OneEventResult(event.getName(), discountBenefit);
+            return new OneEventResult(eventName, discountBenefit);
         }
         return OneEventResult.NO_EVENT_RESULT();
     }

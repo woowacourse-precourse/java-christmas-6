@@ -6,9 +6,9 @@ import static christmas.enums.events.decemberevent.LinearDiscountEvents.CHRISTMA
 import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKDAY_DISCOUNT;
 import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKEND_DISCOUNT;
 
-import christmas.event.evnets.gift.AmountToAGiftEvent;
+import christmas.event.evnets.gift.GiftBenefit;
 import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscount;
-import christmas.event.evnets.specialdiscount.SpecialDayDayDiscount;
+import christmas.event.evnets.specialdiscount.SpecialDayDiscount;
 import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.systems.eventSystem.EventInitializer;
@@ -24,24 +24,12 @@ public class RestaurantReservation {
     private final static Integer MONTH = 12;
 
     public RestaurantReservation() {
-        LinearIncreaseDiscount linearDiscount = EventFactory.createLinearDiscount(CHRISTMAS_D_DAY_DISCOUNT,
-                CHRISTMAS_D_DAY_DISCOUNT.getEventPeriod(), CHRISTMAS_D_DAY_DISCOUNT.getStartDiscountBenefit(),
-                CHRISTMAS_D_DAY_DISCOUNT.getIncreaseBenefitPerDay());
-        SpecialDayDayDiscount specialDayDiscount = EventFactory.createSpecialDayDiscountEvent(
-                SPECIAL_DISCOUNT, SPECIAL_DISCOUNT.getEventPeriod(), SPECIAL_DISCOUNT.getDiscountBenefit());
-        AmountToAGiftEvent amountToAGiftEvent = EventFactory.createAmountToAGiftEvent(GIFT_EVENT.getEventPeriod(), GIFT_EVENT.getGiftCondition(),
-                GIFT_EVENT.getMenuItem(), GIFT_EVENT.getQuantity());
-        WeekdayDiscount weekdayDiscount = EventFactory.createWeekdayDiscount(WEEKDAY_DISCOUNT, WEEKDAY_DISCOUNT.getEventPeriod(),
-                WEEKDAY_DISCOUNT.getMenuItems(), WEEKDAY_DISCOUNT.getDiscountBenefit());
-        WeekendDiscount weekendDiscount = EventFactory.createWeekendDiscount(WEEKEND_DISCOUNT, WEEKEND_DISCOUNT.getEventPeriod(),
-                WEEKEND_DISCOUNT.getMenuItems(), WEEKEND_DISCOUNT.getDiscountBenefit());
-
         EventInitializer eventInitializer = new EventInitializer();
-        eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
-        eventInitializer.specialDiscountEventAdd(specialDayDiscount);
-        eventInitializer.amountToGiftEventsAdd(amountToAGiftEvent);
-        eventInitializer.weekDiscountEventAdd(weekdayDiscount);
-        eventInitializer.weekDiscountEventAdd(weekendDiscount);
+        eventInitializer.increaseEverydayDiscountEventsAdd(CHRISTMAS_D_DAY_DISCOUNT.getInstance());
+        eventInitializer.specialDiscountEventAdd(SPECIAL_DISCOUNT.getInstance());
+        eventInitializer.amountToGiftEventsAdd(GIFT_EVENT.getInstance());
+        eventInitializer.weekDiscountEventAdd(WEEKDAY_DISCOUNT.getInstance());
+        eventInitializer.weekDiscountEventAdd(WEEKEND_DISCOUNT.getInstance());
 
         EventSystem eventSystem = new EventSystem(eventInitializer);
         OrderSystem orderSystem = new OrderSystem(eventSystem);

@@ -1,26 +1,28 @@
 package christmas.event;
 
 import static christmas.enums.benefit.DiscountBenefit.GIFT_CONDITION_BENEFIT;
+import static christmas.enums.events.decemberevent.GiftEvents.GIFT_EVENT;
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.enums.events.decemberevent.GiftEvents;
 import christmas.enums.menu.MenuItem;
-import christmas.event.evnets.gift.AmountToAGiftEvent;
+import christmas.event.evnets.gift.GiftBenefit;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class AmountToAGiftEventTest {
+class GiftDiscountTest {
     private final static LocalDate startDate = LocalDate.of(2023, Month.DECEMBER, 1);
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 31);
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 15);
     private final static Integer OVER_120_000 = 120_000;
     private final static Integer UNDER_120_000 = 110_000;
-    private final static AmountToAGiftEvent champagneGiftEvent =
-            new AmountToAGiftEvent(eventPeriod, GIFT_CONDITION_BENEFIT.getAmount(), CHAMPAGNE, 2);
+    private final static GiftBenefit champagneGiftEvent =
+            new GiftBenefit(GIFT_EVENT.getName(), eventPeriod, GIFT_CONDITION_BENEFIT.getAmount(), CHAMPAGNE, 2);
     private final static Integer DOUBLE_CHAMPAGNE = CHAMPAGNE.getAmount() * 2;
 
 
