@@ -50,7 +50,7 @@ public class PlannerService {
 
     private void setChristmasDayDiscount(int date) {
         if (date <= CHRISTMAS_DAY) {
-            int money = BASE_MONEY + date * INCREMENT_MONEY;
+            int money = BASE_MONEY + (date - 1) * INCREMENT_MONEY;
             customer.setChristmasDiscountPrice(money);
         }
     }
