@@ -4,6 +4,7 @@ import christmas.utils.Validator;
 
 public class Customer {
     private int visitedDate;
+    private boolean flag = false;
     private Discount discount = new Discount();
 
     public Customer(int visitedDate) {
@@ -23,4 +24,16 @@ public class Customer {
         discount.setChristmasDiscount(money);
     }
 
+    public void setSpecialDiscountPrice(int money) {
+        discount.setSpecialDiscount(money);
+    }
+
+
+    public void setGivingEventDiscount(int price) {
+        discount.setGivingEventDiscount(price);
+    }
+
+    public Discount getDiscount() {
+        return discount;
+    }
 }

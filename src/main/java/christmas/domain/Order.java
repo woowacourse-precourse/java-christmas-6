@@ -73,4 +73,12 @@ public class Order {
     public int getTotalPrice() {
         return totalPrice;
     }
+
+    public List<Food> getMainFoods() {
+        return mainFoods;
+    }
+
+    public List<Food> getDessertFoods() {
+        return dessertFoods;
+    }
 }
