@@ -23,6 +23,10 @@ public class Order {
         validate(foodName);
         FoodType foodType = findFoodType(foodName);
         distributeFood(foodName, count, foodType);
+        addTotalPrice(foodName, count);
+    }
+
+    private void addTotalPrice(String foodName, int count) {
         totalPrice += getPriceByName(foodName) * count;
     }
 
