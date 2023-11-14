@@ -20,24 +20,24 @@ public class OutputView {
     }
 
     public static void printPreviewOutputMessage(int date) {
-        System.out.println("12월 " + date + TextType.SHOW_BENEFIT_OUTPUT_MESSAGE + ENTER);
+        System.out.println("12월 " + date + TextType.SHOW_BENEFIT_OUTPUT_MESSAGE.getText() + ENTER);
     }
 
     public static void printOrderMenuOutputMessage(HashMap<String, Integer> orderMap) {
-        System.out.println(TextType.ORDER_MENU_OUTPUT_MESSAGE);
+        System.out.println(TextType.ORDER_MENU_OUTPUT_MESSAGE.getText());
         for (String key : orderMap.keySet()) {
             System.out.println(key + SPACE + orderMap.get(key) + COUNT);
         }
     }
 
     public static void printTotalPriceMessage(int totalPrice) {
-        System.out.println(TextType.BEFORE_DISCOUNT_ORDER_PRICE);
+        System.out.println(TextType.BEFORE_DISCOUNT_ORDER_PRICE.getText());
         System.out.printf("%,d" + WON + ENTER, totalPrice);
     }
 
     public static void printBenefitsOutputMessage(Map<String, Integer> discountMap) {
         if (discountMap.size() == 0) {
-            System.out.println(TextType.NONE);
+            System.out.println(TextType.NONE.getText());
             return;
         }
 
@@ -57,7 +57,7 @@ public class OutputView {
     }
 
     public static void printTotalDiscountPriceOutputMessage(int totalDiscount) {
-        System.out.println(TextType.TOTAL_BENEFIT_PRICE);
+        System.out.println(TextType.TOTAL_BENEFIT_PRICE.getText());
         String formattedPrice = String.format("-%,d원\n", totalDiscount);
         if (totalDiscount == 0) {
             formattedPrice = String.format("%d원\n", totalDiscount);
