@@ -54,7 +54,7 @@ public class OutputView {
         if (isGiven) {
             menu = PRESENT;
         }
-        System.out.println(TextType.PRESENTATION_MENU);
+        System.out.println(TextType.PRESENTATION_MENU.getText());
         System.out.println(menu);
     }
 
