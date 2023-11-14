@@ -10,10 +10,18 @@ public class DiscountInfoDto {
 
     public static Map<String, Integer> of(Discount discount) {
         Map<String, Integer> discountMap = new HashMap<>();
-        discountMap.put(DiscountType.CHRISTMAS_DISCOUNT.getDiscountText(), discount.getChristmasDiscount());
-        discountMap.put(DiscountType.NORMAL_DISCOUNT.getDiscountText(), discount.getNormalDiscount());
-        discountMap.put(DiscountType.SPECIAL_DISCOUNT.getDiscountText(), discount.getSpecialDiscount());
-        discountMap.put(DiscountType.GIVING_DISCOUNT.getDiscountText(), discount.getGivingEventDiscount());
+        if (discount.getChristmasDiscount() != 0) {
+            discountMap.put(DiscountType.CHRISTMAS_DISCOUNT.getDiscountText(), discount.getChristmasDiscount());
+        }
+        if (discount.getNormalDiscount() != 0) {
+            discountMap.put(DiscountType.NORMAL_DISCOUNT.getDiscountText(), discount.getNormalDiscount());
+        }
+        if (discount.getSpecialDiscount() != 0) {
+            discountMap.put(DiscountType.SPECIAL_DISCOUNT.getDiscountText(), discount.getSpecialDiscount());
+        }
+        if (discount.getGivingEventDiscount() != 0) {
+            discountMap.put(DiscountType.GIVING_DISCOUNT.getDiscountText(), discount.getGivingEventDiscount());
+        }
         return discountMap;
     }
 }
