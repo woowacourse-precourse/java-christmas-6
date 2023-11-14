@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.type.BadgeType;
 import christmas.type.TextType;
 
 import java.util.HashMap;
@@ -53,5 +54,36 @@ public class OutputView {
         }
         System.out.println(TextType.PRESENTATION_MENU);
         System.out.println(menu);
+    }
+
+    public static void printTotalDiscountPriceOutputMessage(int totalDiscount) {
+        System.out.println(TextType.TOTAL_BENEFIT_PRICE);
+        String formattedPrice = String.format("-%,d원\n", totalDiscount);
+        if (totalDiscount == 0) {
+            formattedPrice = String.format("%d원\n", totalDiscount);
+        }
+        System.out.println(formattedPrice);
+    }
+
+    public static void printResultPriceOutputMessage(int price) {
+        System.out.println(TextType.AFTER_DISCOUNT_PRICE.getText());
+        System.out.printf("%,d" + WON + ENTER, price);
+    }
+
+    public static void printBadgeOutputMessage(int totalDiscount) {
+        System.out.println(TextType.EVENT_BADGE.getText());
+        if (totalDiscount >= BadgeType.SANTA.getPrice()) {
+            System.out.println(BadgeType.SANTA.getBadgeName());
+            return;
+        }
+        if (totalDiscount >= BadgeType.TREE.getPrice()) {
+            System.out.println(BadgeType.TREE.getBadgeName());
+            return;
+        }
+        if (totalDiscount >= BadgeType.STAR.getPrice()) {
+            System.out.println(BadgeType.STAR.getBadgeName());
+            return;
+        }
+        System.out.println(TextType.NONE.getText());
     }
 }
