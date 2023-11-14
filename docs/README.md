@@ -306,10 +306,11 @@
         - EventSystem에서 각 인터페이스별 OneEventResult 를 받아 리스트에 저장한다.
   - 결과
     - RestaurantReservation 에서 초기화 시 EventInitializer, EventFactory 로 이벤트를 추가하여 시행
-- [ ] 필요성이 사라진 EventFactory의 제거여부
+- [x] 필요성이 사라진 EventFactory의 제거여부
   - 이벤트 인스턴스를 Enum에 연결하면서 EventFactory의 필요성이 사라졌다.
   - 명확성을 위해서는 삭제하는게 맞지만, 추후에 Enum에 인스턴스 연결을 제거해야 할 수도 있다면, 제거하지 않는것도 좋을것같다.
-  - 
+  - 결론
+    - 현재 불필요한 코드이므로 제거한다.
 </details>
 
 ## 플로우
@@ -327,9 +328,8 @@
 ## 구현 기능 목록
 
 ### 0.유연한 이벤트 추가 기능
-- [x] EventFactory 를 이용해 이벤트명, 혜택 내용, 기간 등을 정해 이벤트를 구현한다
+- [x] 이벤트 인스턴스를 Enum에 연결하여 Enum에서 바로 해당 이벤트 인스턴스를 반환받는다.
 - [x] EventInitializer 를 이용해 이벤트들을 추가한다.
-- [x] 이벤트 인스턴스 Enum화
 
 ### 1. 주문 입력 및 유효성 검증 기능
 
