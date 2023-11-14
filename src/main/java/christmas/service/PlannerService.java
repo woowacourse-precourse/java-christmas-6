@@ -58,7 +58,7 @@ public class PlannerService {
     private void setGivingEventDiscount(int totalPrice) {
         if (totalPrice >= EVENT_PRICE) {
             customer.setGivingEventDiscount(MenuType.CHAMPAGNE.getPrice());
-            customer.isGiven
+            customer.isGiven();
         }
     }
 
