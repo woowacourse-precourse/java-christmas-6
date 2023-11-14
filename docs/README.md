@@ -294,7 +294,7 @@
       - 이벤트의 날짜, 금액 등을 변경가능하게 구현했으나, 이벤트 수를 줄이거나 늘릴수는 없다.
       - 해결방안
         - EventInitializer에서 필드값을 List<하위이벤트인터페이스>로 받는다.
-        - EventSystem에서 각 인터페이스별 OneEventResult 를받아 리스터에 저장한다.
+        - EventSystem에서 각 인터페이스별 OneEventResult 를 받아 리스트에 저장한다.
   - 결과
     - RestaurantReservation 에서 초기화 시 이벤트를 추가하여 시행
 </details>
