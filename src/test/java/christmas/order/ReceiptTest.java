@@ -1,10 +1,25 @@
 package christmas.order;
 
 
+import static christmas.enums.events.decemberevent.DecemberEvents.CHRISTMAS_D_DAY_DISCOUNT;
+import static christmas.enums.events.decemberevent.DecemberEvents.SPECIAL_DISCOUNT;
+import static christmas.enums.events.decemberevent.DecemberEvents.WEEKDAY_DISCOUNT;
+import static christmas.enums.events.decemberevent.DecemberEvents.WEEKEND_DISCOUNT;
+import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
+
 import christmas.enums.menu.DessertMenu;
+import christmas.enums.menu.MainMenu;
+import christmas.enums.menu.MenuItem;
+import christmas.event.evnets.gift.AmountToAGiftEvent;
+import christmas.event.evnets.increasediscount.IncreaseDiscountUntilTypicalDay;
+import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
+import christmas.event.evnets.weekdiscount.WeekdayDiscount;
+import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.systems.OrderSystem;
+import christmas.EventFactory;
 import christmas.systems.event.EventInitializer;
 import christmas.systems.event.EventSystem;
+import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Set;
@@ -18,12 +33,28 @@ class ReceiptTest {
     private final static Orders ordersOneIceReam = new Orders(Set.of(oneIceCream));
 
     private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 3);
+    private final static EventPeriod monthPeriod = EventPeriod.createMonthPeriod(2023, 12);
+    private final static EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(2023, 12, 1, 25);
+    private final static MenuItem[] weekdayMenus = MainMenu.values();
+    private final static MenuItem[] weekendMenus = DessertMenu.values();
+    private final static IncreaseDiscountUntilTypicalDay linearDiscount = EventFactory.createLinearDiscount(CHRISTMAS_D_DAY_DISCOUNT,
+            typicalPeriod, 1000, 100);
+    private final static SpecialDayDiscountEvent specialDayDiscountEvent = EventFactory.createSpecialDayDiscountEvent(
+            SPECIAL_DISCOUNT, monthPeriod, 1000);
+    private final static AmountToAGiftEvent amountToAGiftEvent = EventFactory.createAmountToAGiftEvent(monthPeriod, 120_000, CHAMPAGNE,
+            1);
+    private final static WeekdayDiscount weekdayDiscount = EventFactory.createWeekdayDiscount(WEEKDAY_DISCOUNT, monthPeriod,
+            weekdayMenus, 2023);
+    private final static WeekendDiscount weekendDiscount = EventFactory.createWeekendDiscount(WEEKEND_DISCOUNT, monthPeriod,
+            weekendMenus, 2023);
+
+    private final static EventInitializer eventInitializer = new EventInitializer(amountToAGiftEvent, linearDiscount,
+            specialDayDiscountEvent, weekdayDiscount, weekendDiscount);
 
     @DisplayName("총주문금액 10000원 이하 시 이벤트 무효")
     @Test
     void name() {
         //given
-        EventInitializer eventInitializer = new EventInitializer();
         EventSystem eventSystem = new EventSystem(eventInitializer);
         OrderSystem orderSystem = new OrderSystem(eventSystem);
 

@@ -17,7 +17,6 @@ class MessagesTest {
 
     @Test
     void repeatAllOrders() {
-        Messages messages = new Messages();
         String returnMessages = Messages.repeatAllOrders(orders);
         Assertions.assertThat(returnMessages).contains("티본스테이크 2개", "해산물파스타 2개");
     }

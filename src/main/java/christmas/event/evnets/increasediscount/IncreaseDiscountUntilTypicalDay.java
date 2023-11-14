@@ -6,14 +6,14 @@ import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class ChristmasDDayDiscount implements IncreaseEverydayDiscountEvent {
+public class IncreaseDiscountUntilTypicalDay implements IncreaseEverydayDiscountEvent {
     private final Events event;
     private final int discountStartAmount;
     private final int discountIncrementPerDay;
     private final EventPeriod eventPeriod;
 
-    public ChristmasDDayDiscount(Events event, EventPeriod eventPeriod, int discountStartAmount,
-                                 int discountIncrementPerDay) {
+    public IncreaseDiscountUntilTypicalDay(Events event, EventPeriod eventPeriod, int discountStartAmount,
+                                           int discountIncrementPerDay) {
         this.event = event;
         this.discountStartAmount = discountStartAmount;
         this.discountIncrementPerDay = discountIncrementPerDay;

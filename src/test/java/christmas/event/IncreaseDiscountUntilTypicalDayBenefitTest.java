@@ -6,7 +6,7 @@ import static christmas.enums.benefit.DiscountBenefit.NO_BENEFIT;
 import static christmas.enums.events.decemberevent.DecemberEvents.CHRISTMAS_D_DAY_DISCOUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.event.evnets.increasediscount.ChristmasDDayDiscount;
+import christmas.event.evnets.increasediscount.IncreaseDiscountUntilTypicalDay;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
@@ -17,13 +17,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class ChristmasDDayDiscountBenefitTest {
+class IncreaseDiscountUntilTypicalDayBenefitTest {
 
     private final static LocalDate startDate = LocalDate.of(2023, Month.DECEMBER, 1);
     private final static LocalDate endDate = LocalDate.of(2023, Month.DECEMBER, 25);
     private final static EventPeriod eventPeriod = new EventPeriod(startDate, endDate);
     private final static LocalDate overDate = LocalDate.of(2023, Month.DECEMBER, 26);
-    private final static ChristmasDDayDiscount christmasDDayDiscount = new ChristmasDDayDiscount(
+    private final static IncreaseDiscountUntilTypicalDay INCREASE_DISCOUNT_UNTIL_TYPICAL_DAY = new IncreaseDiscountUntilTypicalDay(
             CHRISTMAS_D_DAY_DISCOUNT, eventPeriod,
             BASIC_BENEFIT.getAmount(), INCREASE_BENEFIT.getAmount());
 
@@ -31,7 +31,7 @@ class ChristmasDDayDiscountBenefitTest {
     @Test
     void whenEventActivate() {
 
-        Integer discountAmount = christmasDDayDiscount.execute(overDate).discountBenefit();
+        Integer discountAmount = INCREASE_DISCOUNT_UNTIL_TYPICAL_DAY.execute(overDate).discountBenefit();
 
         assertThat(discountAmount).isEqualTo(NO_BENEFIT.getAmount());
     }
@@ -41,7 +41,7 @@ class ChristmasDDayDiscountBenefitTest {
     @DisplayName("1일부터 25일까지 할인가 검증")
     public void dummy(LocalDate reservationDate, Integer expectedDiscountAmount) {
         //when
-        Integer discountAmount = christmasDDayDiscount.execute(reservationDate).discountBenefit();
+        Integer discountAmount = INCREASE_DISCOUNT_UNTIL_TYPICAL_DAY.execute(reservationDate).discountBenefit();
 
         //then
         assertThat(discountAmount).isEqualTo(expectedDiscountAmount);

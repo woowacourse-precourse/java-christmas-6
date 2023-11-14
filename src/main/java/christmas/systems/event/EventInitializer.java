@@ -21,7 +21,7 @@ import christmas.event.Gift;
 import christmas.event.OneEventResult;
 import christmas.event.evnets.gift.AmountToAGiftEvent;
 import christmas.event.evnets.gift.AmountToGiftEvent;
-import christmas.event.evnets.increasediscount.ChristmasDDayDiscount;
+import christmas.event.evnets.increasediscount.IncreaseDiscountUntilTypicalDay;
 import christmas.event.evnets.increasediscount.IncreaseEverydayDiscountEvent;
 import christmas.event.evnets.specialdiscount.SpecialDayDiscountEvent;
 import christmas.event.evnets.specialdiscount.SpecialDiscountEvent;
@@ -31,7 +31,6 @@ import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.order.Orders;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
-import org.mockito.internal.matchers.Or;
 
 public class EventInitializer {
     private final static Integer GIFT_QUANTITY = 1;
@@ -41,24 +40,15 @@ public class EventInitializer {
     private final WeekDiscountEvent weekdayDiscountEvent;
     private final WeekDiscountEvent weekendDiscountEvent;
 
-    public EventInitializer() {
-        final MenuItem[] weekdayMenus = MainMenu.values();
-        final MenuItem[] weekendMenus = DessertMenu.values();
-
-        EventPeriod monthPeriod = EventPeriod.createMonthPeriod(YEAR.getDate(), MONTH.getDate());
-        EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(YEAR.getDate(), MONTH.getDate(),
-                START_OF_THE_MONTH.getDate(), END_OF_THE_CHRISTMAS.getDate());
-
-        increaseEverydayDiscountEvent = new ChristmasDDayDiscount(CHRISTMAS_D_DAY_DISCOUNT, typicalPeriod,
-                BASIC_BENEFIT.getAmount(),
-                INCREASE_BENEFIT.getAmount());
-        amountToGiftEvent = new AmountToAGiftEvent(monthPeriod, GIFT_CONDITION_BENEFIT.getAmount(), CHAMPAGNE,
-                GIFT_QUANTITY);
-        specialDiscountEvent = new SpecialDayDiscountEvent(SPECIAL_DISCOUNT, monthPeriod, BASIC_BENEFIT.getAmount());
-        weekdayDiscountEvent = new WeekdayDiscount(WEEKDAY_DISCOUNT, monthPeriod, weekdayMenus,
-                WEEK_BENEFIT.getAmount());
-        weekendDiscountEvent = new WeekendDiscount(WEEKEND_DISCOUNT, monthPeriod, weekendMenus,
-                WEEK_BENEFIT.getAmount());
+    public EventInitializer(AmountToGiftEvent amountToGiftEvent,
+                            IncreaseEverydayDiscountEvent increaseEverydayDiscountEvent,
+                            SpecialDiscountEvent specialDiscountEvent, WeekDiscountEvent weekdayDiscountEvent,
+                            WeekDiscountEvent weekendDiscountEvent) {
+        this.amountToGiftEvent = amountToGiftEvent;
+        this.increaseEverydayDiscountEvent = increaseEverydayDiscountEvent;
+        this.specialDiscountEvent = specialDiscountEvent;
+        this.weekdayDiscountEvent = weekdayDiscountEvent;
+        this.weekendDiscountEvent = weekendDiscountEvent;
     }
 
     public OneEventResult christmasDDayDiscount(LocalDate reservationDate){

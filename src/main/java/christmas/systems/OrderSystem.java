@@ -17,7 +17,6 @@ public class OrderSystem {
         this.eventSystem = eventSystem;
     }
 
-    //TODO: 문제점
     public Receipt calculateOrderResult(LocalDate reservationDate, Orders orders) {
         Integer totalPriceBeforeDiscount = orders.calculateTotalPrice();
 
