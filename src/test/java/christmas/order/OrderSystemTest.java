@@ -56,14 +56,22 @@ class OrderSystemTest {
     private final static WeekendDiscount weekendDiscount = EventFactory.createWeekendDiscount(WEEKEND_DISCOUNT, monthPeriod,
             weekendMenus, 2023);
 
-    private final static EventInitializer eventInitializer = new EventInitializer(amountToAGiftEvent, linearDiscount,
-            specialDayDiscountEvent, weekdayDiscount, weekendDiscount);
+    public EventSystem eventSystem() {
+        final EventInitializer eventInitializer = new EventInitializer();
+        eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
+        eventInitializer.specialDiscountEventAdd(specialDayDiscountEvent);
+        eventInitializer.amountToGiftEventsAdd(amountToAGiftEvent);
+        eventInitializer.weekDiscountEventAdd(weekdayDiscount);
+        eventInitializer.weekDiscountEventAdd(weekendDiscount);
+
+        return new EventSystem(eventInitializer);
+    }
 
     @DisplayName("이벤트별 혜택, 총 혜택, 뱃지, 증정품 여부를 반환한다.")
     @Test
     void orderProcess() {
         //given
-        EventSystem eventSystem = new EventSystem(eventInitializer);
+        EventSystem eventSystem = eventSystem();
         OrderSystem orderSystem = new OrderSystem(eventSystem);
         Receipt receipt = orderSystem.calculateOrderResult(reservationDate, orderThreeSteak);
 

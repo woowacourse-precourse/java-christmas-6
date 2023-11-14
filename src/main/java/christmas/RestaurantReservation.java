@@ -49,8 +49,13 @@ public class RestaurantReservation {
         WeekendDiscount weekendDiscount = EventFactory.createWeekendDiscount(WEEKEND_DISCOUNT, monthPeriod,
                 weekendMenus, 2023);
 
-        EventInitializer eventInitializer = new EventInitializer(amountToAGiftEvent, linearDiscount,
-                specialDayDiscountEvent, weekdayDiscount, weekendDiscount);
+        EventInitializer eventInitializer = new EventInitializer();
+        eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
+        eventInitializer.specialDiscountEventAdd(specialDayDiscountEvent);
+        eventInitializer.amountToGiftEventsAdd(amountToAGiftEvent);
+        eventInitializer.weekDiscountEventAdd(weekdayDiscount);
+        eventInitializer.weekDiscountEventAdd(weekendDiscount);
+
         EventSystem eventSystem = new EventSystem(eventInitializer);
         OrderSystem orderSystem = new OrderSystem(eventSystem);
         this.reservationSystem = new ReservationSystem(orderSystem);

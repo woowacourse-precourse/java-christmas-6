@@ -10,6 +10,7 @@ import static christmas.enums.events.decemberevent.DecemberEvents.WEEKEND_DISCOU
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.EventFactory;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
@@ -20,13 +21,13 @@ import christmas.event.evnets.weekdiscount.WeekdayDiscount;
 import christmas.event.evnets.weekdiscount.WeekendDiscount;
 import christmas.order.Order;
 import christmas.order.Orders;
-import christmas.EventFactory;
 import christmas.systems.event.EventInitializer;
 import christmas.systems.event.EventSystem;
 import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Set;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -45,27 +46,37 @@ class EventSystemTest {
     private final static Integer CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT = (BASIC_BENEFIT.getAmount() + (
             INCREASE_BENEFIT.getAmount() * 2));
     private final static Integer WEEK_BENEFIT_CONTAIN_TWO_MAIN = (WEEK_BENEFIT.getAmount() * 2);
-    private final static IncreaseDiscountUntilTypicalDay linearDiscount = EventFactory.createLinearDiscount(CHRISTMAS_D_DAY_DISCOUNT,
+    private final static IncreaseDiscountUntilTypicalDay linearDiscount = EventFactory.createLinearDiscount(
+            CHRISTMAS_D_DAY_DISCOUNT,
             typicalPeriod, 1000, 100);
     private final static SpecialDayDiscountEvent specialDayDiscountEvent = EventFactory.createSpecialDayDiscountEvent(
             SPECIAL_DISCOUNT, monthPeriod, 1000);
-    private final static AmountToAGiftEvent amountToAGiftEvent = EventFactory.createAmountToAGiftEvent(monthPeriod, 120_000, CHAMPAGNE,
+    private final static AmountToAGiftEvent amountToAGiftEvent = EventFactory.createAmountToAGiftEvent(monthPeriod,
+            120_000, CHAMPAGNE,
             1);
-    private final static WeekdayDiscount weekdayDiscount = EventFactory.createWeekdayDiscount(WEEKDAY_DISCOUNT, monthPeriod,
+    private final static WeekdayDiscount weekdayDiscount = EventFactory.createWeekdayDiscount(WEEKDAY_DISCOUNT,
+            monthPeriod,
             weekdayMenus, 2023);
-    private final static WeekendDiscount weekendDiscount = EventFactory.createWeekendDiscount(WEEKEND_DISCOUNT, monthPeriod,
+    private final static WeekendDiscount weekendDiscount = EventFactory.createWeekendDiscount(WEEKEND_DISCOUNT,
+            monthPeriod,
             weekendMenus, 2023);
 
-    private final static EventInitializer eventInitializer = new EventInitializer(amountToAGiftEvent, linearDiscount,
-            specialDayDiscountEvent, weekdayDiscount, weekendDiscount);
-    private final static EventSystem eventSystem = new EventSystem(eventInitializer);
-    //TODO:추후 추가 테스트 필
+    public EventSystem eventSystem() {
+        final EventInitializer eventInitializer = new EventInitializer();
+        eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
+        eventInitializer.specialDiscountEventAdd(specialDayDiscountEvent);
+        eventInitializer.amountToGiftEventsAdd(amountToAGiftEvent);
+        eventInitializer.weekDiscountEventAdd(weekdayDiscount);
+        eventInitializer.weekDiscountEventAdd(weekendDiscount);
 
+        return new EventSystem(eventInitializer);
+    }
 
     @DisplayName("특별할인, 주중할인(2), 증정이벤트, 크리스마스할인 당첨시")
     @Test
     void whenSpecialChristmasWeekdayGiftEvent() {
         //given
+        final EventSystem eventSystem = eventSystem();
         final Integer totalBenefitAmount =
                 BASIC_BENEFIT.getAmount() + CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT + WEEK_BENEFIT_CONTAIN_TWO_MAIN
                         + CHAMPAGNE.getAmount();
@@ -83,6 +94,7 @@ class EventSystemTest {
     @Test
     void whenSpecialChristmasWeekdayEvent() {
         //given
+        final EventSystem eventSystem = eventSystem();
         final Integer totalBenefitAmount =
                 BASIC_BENEFIT.getAmount() + CHRIST_MAS_EVENT_AFTER_TWO_DAYS_BENEFIT + WEEK_BENEFIT_CONTAIN_TWO_MAIN;
         //when

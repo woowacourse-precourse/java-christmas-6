@@ -48,14 +48,23 @@ class ReceiptTest {
     private final static WeekendDiscount weekendDiscount = EventFactory.createWeekendDiscount(WEEKEND_DISCOUNT, monthPeriod,
             weekendMenus, 2023);
 
-    private final static EventInitializer eventInitializer = new EventInitializer(amountToAGiftEvent, linearDiscount,
-            specialDayDiscountEvent, weekdayDiscount, weekendDiscount);
+
+    public EventSystem eventSystem() {
+        final EventInitializer eventInitializer = new EventInitializer();
+        eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
+        eventInitializer.specialDiscountEventAdd(specialDayDiscountEvent);
+        eventInitializer.amountToGiftEventsAdd(amountToAGiftEvent);
+        eventInitializer.weekDiscountEventAdd(weekdayDiscount);
+        eventInitializer.weekDiscountEventAdd(weekendDiscount);
+
+        return new EventSystem(eventInitializer);
+    }
 
     @DisplayName("총주문금액 10000원 이하 시 이벤트 무효")
     @Test
     void name() {
         //given
-        EventSystem eventSystem = new EventSystem(eventInitializer);
+        EventSystem eventSystem = eventSystem();
         OrderSystem orderSystem = new OrderSystem(eventSystem);
 
         //when
