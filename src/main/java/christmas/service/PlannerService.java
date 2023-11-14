@@ -48,5 +48,41 @@ public class PlannerService {
         return customer.getTotalDiscountPrice();
     }
 
+    private void setChristmasDayDiscount(int date) {
+        if (date <= CHRISTMAS_DAY) {
+            int money = BASE_MONEY + date * INCREASEMENT_MONEY;
+            customer.setChristmasDiscountPrice(money);
+        }
+    }
 
+    private void setGivingEventDiscount(int totalPrice) {
+        if (totalPrice >= EVENT_PRICE) {
+            customer.setGivingEventDiscount(MenuType.CHAMPAGNE.getPrice());
+            customer.isGiven
+        }
+    }
+
+    private void setNormalDayDiscount(int date) {
+        if (!WeekDateType.isDateIncluded(date)) {
+            customer.setSpecialDiscountPrice(
+                    order.getDessertFoods().stream()
+                            .mapToInt(f -> f.getCount())
+                            .sum()
+            );
+        }
+    }
+
+    private void setSpecialDayDiscount(int date) {
+        if (WeekDateType.isDateIncluded(date)) {
+            customer.setSpecialDiscountPrice(
+                    order.getMainFoods().stream()
+                            .mapToInt(f -> f.getCount())
+                            .sum()
+            );
+        }
+    }
+
+    public boolean isBiggerThanPricePresent() {
+        return customer.isGiven();
+    }
 }
