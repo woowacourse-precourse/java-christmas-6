@@ -36,6 +36,7 @@ public class OutputView {
     }
 
     public static void printBenefitsOutputMessage(Map<String, Integer> discountMap) {
+        System.out.println(TextType.BENEFIT_HISTORY.getText());
         if (discountMap.size() == 0) {
             System.out.println(TextType.NONE.getText());
             return;
