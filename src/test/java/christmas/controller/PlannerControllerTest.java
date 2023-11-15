@@ -40,6 +40,15 @@ class PlannerControllerTest extends NsTest {
         });
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"레드와인-1", "레드와인-1,제로콜라-2"})
+    void 음료만_입력_예외_테스트(String input) {
+        assertSimpleTest(() -> {
+            runException("5", input);
+            assertThat(output()).contains("[ERROR] 음료만 주문할 수 없습니다. 다시 입력해 주세요.");
+        });
+    }
+
     @Test
     void 주문_메뉴_정상_출력() {
         assertSimpleTest(() -> {
@@ -53,6 +62,8 @@ class PlannerControllerTest extends NsTest {
             );
         });
     }
+
+
 
 
 
