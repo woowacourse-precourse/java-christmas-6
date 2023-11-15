@@ -1,6 +1,8 @@
 package christmas.domain.services;
 
-import christmas.domain.constants.Enum;
+import christmas.domain.constants.DiscountPolicyEnum;
+import christmas.domain.constants.MenuCategoryEnum;
+import christmas.domain.constants.MenuEnum;
 import christmas.domain.entity.Benefits;
 import christmas.domain.entity.Order;
 import christmas.domain.entity.menu.Menu;
@@ -14,14 +16,19 @@ public class DiscountPolicy {
     }
 
     public void dDayDiscount(){
-        Benefits.setdDayDiscountAmount(900 + order.getVisitDate() * 100);
+        Benefits.setdDayDiscountAmount(
+                DiscountPolicyEnum.Discount.D_DAY_START_DISCOUNTING_AMOUNT.getValue()
+                        + order.getVisitDate()
+                        * DiscountPolicyEnum.Discount.D_DAY_DAILY_DISCOUNTING_AMOUNT.getValue());
     }
 
     public void weekDayDiscount(){
         for(Menu menu : order.getOrderMap().keySet()){
-            if(menu.getMenuCategory().equals(Enum.MenuCategory.DESSERT)){
-                Benefits.setWeekdayDiscountAmount
-                        (Benefits.getWeekdayDiscountAmount() + order.getOrderMap().get(menu)*2023
+            if(menu.getMenuCategory().equals(MenuCategoryEnum.MenuCategory.DESSERT)){
+                Benefits.setWeekdayDiscountAmount(
+                        Benefits.getWeekdayDiscountAmount()
+                                + order.getOrderMap().get(menu)
+                                * DiscountPolicyEnum.Discount.WEEKLY_DISCOUNTING_AMOUNT.getValue()
                         );
             }
         }
@@ -29,35 +36,36 @@ public class DiscountPolicy {
 
     public void weekendDiscount(){
         for(Menu menu : order.getOrderMap().keySet()){
-            if(menu.getMenuCategory().equals(Enum.MenuCategory.MAIN)){
+            if(menu.getMenuCategory().equals(MenuCategoryEnum.MenuCategory.MAIN)){
                 Benefits.setWeekendDiscountAmount(
-                        Benefits.getWeekendDiscountAmount() + order.getOrderMap().get(menu)*2023
+                        Benefits.getWeekendDiscountAmount()
+                                + order.getOrderMap().get(menu)
+                                * DiscountPolicyEnum.Discount.WEEKLY_DISCOUNTING_AMOUNT.getValue()
                 );
             }
         }
     }
 
     public void specialDiscount(){
-        Benefits.setSpecialDayDiscountAmount(1000);
+        Benefits.setSpecialDayDiscountAmount(DiscountPolicyEnum.Discount.SPECIAL_DISCOUNTING_AMOUNT.getValue());
     }
 
     public void giftEvent(){
-        Benefits.setGiftMenu("샴페인");
-        Benefits.setGiftEventBenefitAmount(25000);
+        Benefits.setGiftMenu(MenuEnum.Menus.CHAMPAGNE.getName());
+        Benefits.setGiftEventBenefitAmount(MenuEnum.Menus.CHAMPAGNE.getPrice());
     }
 
     public void getDecemberEventBadge(){
-        if(Benefits.getTotalBenefitAmount()>=20000){
-            Benefits.setDecemberEventBadge("산타");
+        if(Benefits.getTotalBenefitAmount()>=DiscountPolicyEnum.Discount.APPLIED_DISCOUNT_AMOUNT_GET_SANTA.getValue()){
+            Benefits.setDecemberEventBadge(DiscountPolicyEnum.Badge.SANTA_BADGE.getName());
             return;
         }
-        if(Benefits.getTotalBenefitAmount()>=10000){
-            Benefits.setDecemberEventBadge("트리");
+        if(Benefits.getTotalBenefitAmount()>=DiscountPolicyEnum.Discount.APPLIED_DISCOUNT_AMOUNT_GET_TREE.getValue()){
+            Benefits.setDecemberEventBadge(DiscountPolicyEnum.Badge.TREE_BADGE.getName());
             return;
         }
-        if(Benefits.getTotalBenefitAmount()>=5000){
-            Benefits.setDecemberEventBadge("별");
-            return;
+        if(Benefits.getTotalBenefitAmount()>=DiscountPolicyEnum.Discount.APPLIED_DISCOUNT_AMOUNT_GET_STAR.getValue()){
+            Benefits.setDecemberEventBadge(DiscountPolicyEnum.Badge.STAR_BADGE.getName());
         }
     }
 }

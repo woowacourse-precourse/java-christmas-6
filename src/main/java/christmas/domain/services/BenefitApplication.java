@@ -1,7 +1,8 @@
 package christmas.domain.services;
 
+import christmas.domain.constants.DiscountPolicyEnum;
 import christmas.domain.entity.Benefits;
-import christmas.domain.entity.Day;
+import christmas.domain.util.DayUtil;
 import christmas.domain.entity.Order;
 
 public class BenefitApplication {
@@ -16,19 +17,19 @@ public class BenefitApplication {
     public void benefitApplication(){
         Benefits.setTotalAmountBeforeDiscount(Order.getTotalOrderAmount());
 
-        if(Day.isBeforeDday(order.getVisitDate()) && isAvailableDiscount()){
+        if(DayUtil.isBeforeDday(order.getVisitDate()) && isAvailableDiscount()){
             discountPolicy.dDayDiscount();
         }
-        if(Day.isWeekday(order.getVisitDate()) && isAvailableDiscount()){
+        if(DayUtil.isWeekday(order.getVisitDate()) && isAvailableDiscount()){
             discountPolicy.weekDayDiscount();
         }
-        if(Day.isWeekend(order.getVisitDate()) && isAvailableDiscount()){
+        if(DayUtil.isWeekend(order.getVisitDate()) && isAvailableDiscount()){
             discountPolicy.weekendDiscount();
         }
-        if(Day.isSpecialDay(order.getVisitDate()) && isAvailableDiscount()){
+        if(DayUtil.isSpecialDay(order.getVisitDate()) && isAvailableDiscount()){
             discountPolicy.specialDiscount();
         }
-        if(Benefits.getTotalAmountBeforeDiscount()>=120000){
+        if(Benefits.getTotalAmountBeforeDiscount()>= DiscountPolicyEnum.Discount.APPLIED_AMOUNT_GET_GIFT.getValue()){
             discountPolicy.giftEvent();
         }
         if(isAvailableDiscount()){
@@ -39,7 +40,9 @@ public class BenefitApplication {
     }
 
     private boolean isAvailableDiscount(){
-        return Benefits.getTotalAmountBeforeDiscount() >= 10000;
+        if(Benefits.getTotalAmountBeforeDiscount()>=DiscountPolicyEnum.Discount.MINIMUM_AMOUNT_TO_DISCOUNT.getValue()){
+            return true;
+        }
+        return false;
     }
-
 }

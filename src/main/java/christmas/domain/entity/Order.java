@@ -1,6 +1,6 @@
 package christmas.domain.entity;
 
-import christmas.domain.constants.Enum;
+import christmas.domain.constants.MenuCategoryEnum;
 import christmas.domain.entity.menu.Menu;
 import christmas.domain.entity.menu.MenuBoard;
 
@@ -48,7 +48,7 @@ public class Order {
 
     public void validateNotOnlyBeverage(){
         for(Menu menu : orderMap.keySet()){
-            if(menu.getMenuCategory().equals(Enum.MenuCategory.BEVERAGE)){
+            if(menu.getMenuCategory().equals(MenuCategoryEnum.MenuCategory.BEVERAGE)){
                 return;
             }
         }

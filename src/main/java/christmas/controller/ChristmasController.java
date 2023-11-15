@@ -1,6 +1,6 @@
 package christmas.controller;
 
-import christmas.domain.entity.Day;
+import christmas.domain.util.DayUtil;
 import christmas.domain.entity.Order;
 import christmas.domain.generators.OrderGenerator;
 import christmas.domain.services.BenefitApplication;
@@ -25,7 +25,7 @@ public class ChristmasController {
         while (true) {
             try {
                 visitDate = inputView.readDate();
-                Day.validateIsDate(visitDate);
+                DayUtil.validateIsDate(visitDate);
                 break;
             } catch (IllegalArgumentException e) {
                 printer.println(e.getMessage());

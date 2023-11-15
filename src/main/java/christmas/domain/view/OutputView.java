@@ -1,5 +1,6 @@
 package christmas.domain.view;
 
+import christmas.domain.constants.DiscountPolicyEnum;
 import christmas.domain.entity.Benefits;
 import christmas.domain.entity.Order;
 import christmas.domain.util.Printer;
@@ -102,7 +103,7 @@ public class OutputView {
     }
 
     private boolean isToTalDiscountZero(){
-        if(Benefits.getTotalAmountBeforeDiscount()<10000){
+        if(Benefits.getTotalAmountBeforeDiscount()< DiscountPolicyEnum.Discount.MINIMUM_AMOUNT_TO_DISCOUNT.getValue()){
             return true;
         }
         int totalDiscount = Benefits.getdDayDiscountAmount()
