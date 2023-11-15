@@ -44,10 +44,7 @@ public class Parser {
     }
 
     private static void checkMenuInput(Map<String, Integer> resultMap, String key, int value) {
-        if (value < 1) {
-            throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
-        }
-
+        Validator.checkMenuCountValid(resultMap, value);
         if (resultMap.containsKey(key)) {
             throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
         }

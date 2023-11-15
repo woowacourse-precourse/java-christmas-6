@@ -6,6 +6,7 @@ import christmas.type.ErrorType;
 import christmas.type.MenuType;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public class Validator {
 
@@ -23,6 +24,23 @@ public class Validator {
                 .anyMatch(v -> v.getFoodName().equals(foodName));
         if (!isExist) {
             throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
+        }
+    }
+
+    public static void checkMenuCountValid(Map<String, Integer> resultMap, int value) {
+        if (value < 1) {
+            throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
+        }
+        checkMenuSumValid(resultMap);
+    }
+
+    private static void checkMenuSumValid(Map<String, Integer> resultMap) {
+        int sum = 0;
+        for (String key : resultMap.keySet()) {
+            sum += resultMap.get(key);
+            if (sum > 20) {
+                throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
+            }
         }
     }
 }
