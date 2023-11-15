@@ -1,5 +1,7 @@
 package christmas;
 
+import christmas.controller.PromotionChecker;
+import christmas.model.Promotion;
 import christmas.model.Reservation;
 import christmas.model.RestaurantDatabase;
 import christmas.model.Menu;
@@ -14,6 +16,7 @@ public class Application {
     static RestaurantDatabase db = new RestaurantDatabase();
     static InputView reader = new InputView();
     static OutputView print = new OutputView();
+    static PromotionChecker checker = new PromotionChecker();
 
     private List<Menu> menu;
     private Reservation reservation;
@@ -23,7 +26,7 @@ public class Application {
         app.menu = db.loadMenuData();
 
         app.reserveRestaurant();
-
+        app.applyPromotions();
     }
 
     public void reserveRestaurant () {
@@ -33,7 +36,11 @@ public class Application {
         reservation = new Reservation(date);
 
         List<SimpleEntry<Menu, Integer>> orderedMenu = reader.receiveMenuToOrder(menu);
-        app.reservation.orderMenu(orderedMenu);
+        reservation.orderMenu(orderedMenu);
+    }
+
+    private void applyPromotions() {
+        reservation.applyPromotion();
     }
 
 

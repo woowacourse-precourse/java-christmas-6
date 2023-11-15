@@ -3,7 +3,7 @@ package christmas.view;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.model.Menu;
 import christmas.model.RestaurantDatabase;
-import christmas.validate.InputValidator;
+import christmas.validator.InputValidator;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package christmas.validate;
+package christmas.validator;
 
 import christmas.model.Menu;
 

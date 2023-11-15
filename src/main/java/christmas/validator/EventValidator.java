@@ -1,9 +1,4 @@
-package christmas.validate;
-
-import christmas.model.Menu;
-
-import java.util.AbstractMap.SimpleEntry;
-import java.util.List;
+package christmas.validator;
 
 public class EventValidator {
     private static final String ERROR_PREFIX = "[ERROR]";
