@@ -76,7 +76,9 @@ class PlannerControllerTest extends NsTest {
     void 증정_이하_출력_테스트() {
         assertSimpleTest(() -> {
             run("5", "아이스크림-1,제로콜라-2");
-            assertThat(output()).contains("<혜택 내역>" + LINE_SEPARATOR + "크리스마스 디데이 할인");
+            assertThat(output()).contains(
+                    "<혜택 내역>" + LINE_SEPARATOR + "크리스마스 디데이 할인",
+                    "<12월 이벤트 배지>" + LINE_SEPARATOR + "없음");
         });
     }
 
@@ -85,8 +87,9 @@ class PlannerControllerTest extends NsTest {
         assertSimpleTest(() -> {
             run("5", "티본스테이크-5,제로콜라-10");
             assertThat(output()).contains(
-                    "<혜택 내역>" + LINE_SEPARATOR + "증정 이벤트: -25,000원"
-                    , "<증정 메뉴>" + LINE_SEPARATOR + "샴페인 1개");
+                    "<혜택 내역>" + LINE_SEPARATOR + "증정 이벤트: -25,000원",
+                    "<증정 메뉴>" + LINE_SEPARATOR + "샴페인 1개",
+                    "<12월 이벤트 배지>" + LINE_SEPARATOR + "산타");
         });
     }
 
