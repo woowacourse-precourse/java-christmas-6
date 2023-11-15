@@ -3,6 +3,7 @@ package christmas.domain.order;
 import christmas.constant.errorMessage.exception.CustomIllegalArgumentException;
 import christmas.constant.errorMessage.input.EventExceptionStatus;
 import christmas.domain.category.Category;
+import christmas.domain.order.validator.OrderValidator;
 import christmas.dto.OrderDto;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +16,9 @@ public class Order {
     private final int totalPrice;
 
     public Order(final Map<String, Integer> menus) {
+        OrderValidator.validateOrder(menus);
         this.menus = menus;
-        this.totalPrice = calculateTotalPrice(checkOrderIsValid());
+        this.totalPrice = calculateTotalPrice(checkOrderIsValidMenu());
     }
 
     private List<Category> searchCategory() {
@@ -36,7 +38,7 @@ public class Order {
         return category;
     }
 
-    private List<Category> checkOrderIsValid() {
+    private List<Category> checkOrderIsValidMenu() {
         final List<Category> totalOrder = searchCategory();
         final String parentCategory = totalOrder.get(0).getParentCategory();
         if (totalOrder.size() == 1 && parentCategory.equals("음료")) {
@@ -52,7 +54,7 @@ public class Order {
     }
 
     private int getQuantity(final String menu) {
-        return getOrder().get(menu);
+        return menus.get(menu);
     }
 
     public OrderDto toDto() {

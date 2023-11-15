@@ -1,8 +1,8 @@
 package christmas.view.input;
 
 import christmas.view.input.reader.Reader;
-import christmas.view.input.validator.DateValidator;
-import christmas.view.input.validator.OrderValidator;
+import christmas.view.input.validator.DateReadValidator;
+import christmas.view.input.validator.OrderReadValidator;
 import java.util.Map;
 
 public class InputView {
@@ -24,11 +24,11 @@ public class InputView {
 
     public int readDate() {
         System.out.println(PRINT_READ_DATE_MESSAGE);
-        return DateValidator.validateDate(readLine());
+        return DateReadValidator.validateDate(readLine());
     }
 
     public Map<String, Integer> readOrder() {
         System.out.println(PRINT_READ_MENU_MESSAGE);
-        return OrderValidator.validateOrder(readLine());
+        return OrderReadValidator.validateOrder(readLine());
     }
 }

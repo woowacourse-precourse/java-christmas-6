@@ -11,11 +11,11 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class OrderValidator {
+public class OrderReadValidator {
 
-    private static final OrderValidator ORDER_VALIDATOR = new OrderValidator();
+    private static final OrderReadValidator ORDER_VALIDATOR = new OrderReadValidator();
 
-    private OrderValidator() {
+    private OrderReadValidator() {
     }
 
     public static Map<String, Integer> validateOrder(final String order) {

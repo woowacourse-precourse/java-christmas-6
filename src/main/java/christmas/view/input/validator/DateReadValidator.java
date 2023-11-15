@@ -4,11 +4,11 @@ import christmas.constant.errorMessage.exception.CustomNullPointException;
 import christmas.constant.errorMessage.exception.CustomNumberFormatException;
 import christmas.constant.errorMessage.input.EventExceptionStatus;
 
-public class DateValidator {
+public class DateReadValidator {
 
-    private static final DateValidator DATE_VALIDATOR = new DateValidator();
+    private static final DateReadValidator DATE_VALIDATOR = new DateReadValidator();
 
-    private DateValidator() {
+    private DateReadValidator() {
     }
 
     public static int validateDate(final String date) {
