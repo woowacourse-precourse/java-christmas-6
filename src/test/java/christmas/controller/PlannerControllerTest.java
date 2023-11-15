@@ -65,6 +65,18 @@ class PlannerControllerTest extends NsTest {
     }
 
     @Test
+    void 무_혜택_테스트() {
+        assertSimpleTest(() -> {
+            run("5", "양송이수프-1,제로콜라-1");
+            assertThat(output()).contains(
+                    "<증정 메뉴>" + LINE_SEPARATOR + "없음",
+                    "<혜택 내역>" + LINE_SEPARATOR + "없음",
+                    "<총혜택 금액>" + LINE_SEPARATOR + "0원",
+                    "<12월 이벤트 배지>" + LINE_SEPARATOR + "없음");
+        });
+    }
+
+    @Test
     void 기준_금액_이하_출력_테스트() {
         assertSimpleTest(() -> {
             run("5", "아이스크림-1,제로콜라-1");
