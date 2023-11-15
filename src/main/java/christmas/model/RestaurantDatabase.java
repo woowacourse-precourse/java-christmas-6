@@ -1,11 +1,9 @@
 package christmas.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class RestaurantDatabase {
-    private final String law_menu_data = """
+    private static final String LAW_MENU_DATA = """
             <애피타이저>
             양송이수프(6,000), 타파스(5,500), 시저샐러드(8,000)
                         
@@ -19,8 +17,8 @@ public class RestaurantDatabase {
             제로콜라(3,000), 레드와인(60,000), 샴페인(25,000)
             """;
 
-    private final int categoryIdx = 0;
-    private final int menuOffsetIdx = 1;
+    private static final int CATEGORY_IDX = 0;
+    private static final int MENU_OFFSET_IDX = 1;
 
     private final List<Menu> menu;
 
@@ -29,23 +27,23 @@ public class RestaurantDatabase {
     }
 
     public List<Menu> loadMenuData () {
-        List<String> menusByCategory = Arrays.stream(law_menu_data.split("\n\n")).toList();
+        List<String> menusByCategory = Arrays.stream(LAW_MENU_DATA.split("\n\n")).toList();
 
         for (int menuIdx = 0; menuIdx < menusByCategory.size(); menuIdx++) {
             divideMenuByCategory(menuIdx, menusByCategory.get(menuIdx));
         }
 
-        return menu;
+        return Collections.unmodifiableList(menu);
     }
 
     //    category별 menu
     private void divideMenuByCategory (int menu, String menusByCategory) {
         String[] categoryAndMenu = menusByCategory.split("\n");
 
-        String categoryName = categoryAndMenu[categoryIdx];
+        String categoryName = categoryAndMenu[CATEGORY_IDX];
         categoryName = categoryName.substring(1, categoryName.length() - 1);
 
-        String[] menus = categoryAndMenu[menuOffsetIdx].split(", ");
+        String[] menus = categoryAndMenu[MENU_OFFSET_IDX].split(", ");
         Category category = new Category(menu, categoryName);
 
         for (int i = 0; i < menus.length; i++ ){
@@ -63,16 +61,5 @@ public class RestaurantDatabase {
         this.menu.add(menuToSave);
     }
     // TODO : 변수명 어떡하죠?
-
-    private Menu get (String menuName) {
-        List<Menu> matchedMenu =  menu.stream()
-                .filter(el -> el.menuName.equals(menuName)).toList();
-
-        if (matchedMenu.size() == 0) {
-            return null;
-        }
-
-        return matchedMenu.get(0);
-    }
 
 }
