@@ -3,9 +3,9 @@ package christmas.domain;
 import christmas.type.FoodType;
 import christmas.type.MenuType;
 import christmas.utils.Parser;
+import christmas.utils.Validator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class Order {
 
     public void addOrder(String foodName, int count) {
         validate(foodName);
-        FoodType foodType = findFoodType(foodName);
+        FoodType foodType = MenuType.findFoodType(foodName);
         distributeFood(foodName, count, foodType);
         addTotalPrice(foodName, count);
     }
@@ -57,21 +57,9 @@ public class Order {
         }
     }
 
-    private FoodType findFoodType(String foodName) {
-        for (MenuType menuType : MenuType.values()) {
-            if (menuType.getFoodName().equals(foodName)) {
-                return menuType.getType();
-            }
-        }
-        return null;
-    }
 
     private void validate(String foodName) {
-        boolean isExist = Arrays.stream(MenuType.values())
-                .anyMatch(v -> v.getFoodName().equals(foodName));
-        if (!isExist) {
-            throw new IllegalArgumentException();
-        }
+        Validator.checkFoodValid(foodName);
     }
 
     public int getTotalPrice() {
