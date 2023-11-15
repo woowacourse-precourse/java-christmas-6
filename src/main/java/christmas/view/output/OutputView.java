@@ -10,17 +10,16 @@ public class OutputView {
     private static final String PRINT_ORDER_RESULT_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n";
     private static final String PRINT_TOTAL_ORDER_MESSAGE = "\n<주문 메뉴>";
     private static final String PRINT_TOTAL_ORDER = "%s %d개\n";
-    private static final String PRINT_TOTAL_PRICE_MESSAGE = "\n<할인 전 총주문 금액>\n%s원";
-    private static final String PRINT_GIFT_MENU_BENEFIT_MESSAGE = "\n\n<증정 메뉴>\n%s";
-    private static final String PRINT_GIFT_MENU_BENEFIT_APPLICABLE = "샴페인 1개\n";
-    private static final String PRINT_BENEFIT_NOT_APPLICABLE = "없음\n";
+    private static final String PRINT_TOTAL_PRICE_MESSAGE = "\n<할인 전 총주문 금액>\n%s원\n";
+    private static final String PRINT_GIFT_MENU_BENEFIT_MESSAGE = "\n<증정 메뉴>\n%s\n";
+    private static final String PRINT_GIFT_MENU_BENEFIT_APPLICABLE = "샴페인 1개";
+    private static final String PRINT_BENEFIT_NOT_APPLICABLE = "없음";
     private static final String PRINT_TOTAL_BENEFIT_MESSAGE = "\n<혜택 내역>";
     private static final String PRINT_TOTAL_BENEFIT = "%s: -%s원\n";
     private static final String PRINT_TOTAL_DISCOUNT_MESSAGE = "\n<총혜택 금액>";
     private static final String PRINT_TOTAL_DISCOUNT = "-%s원\n";
     private static final String PRINT_DISCOUNT_NOT_APPLICABLE = "%s원\n";
-    private static final String PRINT_DISCOUNTED_TOTAL_PRICE_MESSAGE = "\n<할인 후 예상 결제 금액>";
-    private static final String PRINT_DISCOUNTED_TOTAL_PRICE = "%s원\n";
+    private static final String PRINT_DISCOUNTED_TOTAL_PRICE_MESSAGE = "\n<할인 후 예상 결제 금액>\n%s원\n";
     private static final DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 
     public void printOrderResult(final int date) {
@@ -89,6 +88,6 @@ public class OutputView {
 
     public void printDiscountedTotalPrice(final BenefitDto benefitDto) {
         final int DiscountTotalPrice = benefitDto.getDiscountedTotalPrice();
-        System.out.printf(PRINT_TOTAL_PRICE_MESSAGE, formatter.format(DiscountTotalPrice));
+        System.out.printf(PRINT_DISCOUNTED_TOTAL_PRICE_MESSAGE, formatter.format(DiscountTotalPrice));
     }
 }

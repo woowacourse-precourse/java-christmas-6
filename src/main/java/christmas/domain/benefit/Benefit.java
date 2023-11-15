@@ -6,7 +6,7 @@ import christmas.domain.order.Order;
 import christmas.dto.BenefitDto;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +14,7 @@ public class Benefit {
 
     private final Date date;
     private final Order order;
-    private final Map<String, Integer> benefit = new HashMap<>();
+    private final Map<String, Integer> benefit = new LinkedHashMap<>();
     private int totalDiscount;
 
     public Benefit(final Date date, final Order order) {
@@ -29,6 +29,7 @@ public class Benefit {
             weekDayBenefit();
             weekendBenefit();
             specialBenefit();
+            giftBenefit();
         }
     }
 
@@ -104,8 +105,17 @@ public class Benefit {
         }
     }
 
+    private void giftBenefit() {
+        if (order.getTotalPrice() >= 120_000) {
+            final int giftDiscount = 25_000;
+            this.totalDiscount += giftDiscount;
+            benefit.put("증정 이벤트", giftDiscount);
+        }
+    }
+
     private int calculateDiscountedTotalPrice() {
-        final int discountedTotalPrice = order.getTotalPrice() - this.totalDiscount;
+        final int discountedTotalPrice = (order.getTotalPrice() - this.totalDiscount)
+                + 25_000;
         return Math.max(discountedTotalPrice, 0);
     }
 
