@@ -2,9 +2,9 @@ package christmas.constant.errorMessage.exception;
 
 import christmas.constant.errorMessage.ExceptionStatus;
 
-public class CustomNumberFormatAmountException extends NumberFormatException {
+public class CustomNullPointException extends NullPointerException {
 
-    public CustomNumberFormatAmountException(ExceptionStatus exceptionStatus) {
+    public CustomNullPointException(ExceptionStatus exceptionStatus) {
         super(exceptionStatus.getMessage());
     }
 }

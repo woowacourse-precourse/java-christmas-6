@@ -2,8 +2,9 @@ package christmas.view.input.validator;
 
 import christmas.constant.errorMessage.exception.CustomArrayIndexOutOfBoundsException;
 import christmas.constant.errorMessage.exception.CustomIllegalArgumentException;
-import christmas.constant.errorMessage.exception.CustomNullPointAmountException;
-import christmas.constant.errorMessage.exception.CustomNumberFormatAmountException;
+import christmas.constant.errorMessage.exception.CustomIllegalStateException;
+import christmas.constant.errorMessage.exception.CustomNullPointException;
+import christmas.constant.errorMessage.exception.CustomNumberFormatException;
 import christmas.constant.errorMessage.input.EventExceptionStatus;
 import christmas.utils.Delimiter;
 import java.util.Arrays;
@@ -23,9 +24,17 @@ public class OrderValidator {
 
     private Map<String, Integer> validateOrderIsCorrect(final String order) {
         try {
-            return parseOrder(order);
+            return validateOrderIsDuplicated(order);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new CustomArrayIndexOutOfBoundsException(EventExceptionStatus.MENU_IS_NOT_CORRECT);
+        }
+    }
+
+    private Map<String, Integer> validateOrderIsDuplicated(final String order) {
+        try {
+            return parseOrder(order);
+        } catch (IllegalStateException e) {
+            throw new CustomIllegalStateException(EventExceptionStatus.MENU_IS_NOT_CORRECT);
         }
     }
 
@@ -42,7 +51,7 @@ public class OrderValidator {
         try {
             return order.trim();
         } catch (NullPointerException e) {
-            throw new CustomNullPointAmountException(EventExceptionStatus.MENU_IS_NOT_CORRECT);
+            throw new CustomNullPointException(EventExceptionStatus.MENU_IS_NOT_CORRECT);
         }
     }
 
@@ -50,7 +59,7 @@ public class OrderValidator {
         try {
             return Integer.parseInt(order);
         } catch (NumberFormatException e) {
-            throw new CustomNumberFormatAmountException(EventExceptionStatus.MENU_IS_NOT_CORRECT);
+            throw new CustomNumberFormatException(EventExceptionStatus.MENU_IS_NOT_CORRECT);
         }
     }
 

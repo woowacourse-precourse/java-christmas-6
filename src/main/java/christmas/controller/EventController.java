@@ -1,26 +1,26 @@
 package christmas.controller;
 
+import christmas.dto.OrderDto;
 import christmas.service.EventService;
 import christmas.view.input.InputView;
+import christmas.view.output.OutputView;
 import java.util.Map;
 
 public class EventController {
 
+    private final OutputView outputView;
     private final InputView inputView;
     private final EventService eventService;
 
-    public EventController(final EventService eventService, final InputView inputView) {
+    public EventController(final EventService eventService, final InputView inputView, final OutputView outputView) {
         this.eventService = eventService;
         this.inputView = inputView;
-    }
-
-    public void run() {
-
+        this.outputView = outputView;
     }
 
     public void initEvent() {
         initDate();
-        initMenu();
+        initOrder();
     }
 
     private void initDate() {
@@ -28,8 +28,24 @@ public class EventController {
         eventService.initDate(date);
     }
 
-    private void initMenu() {
+    private void initOrder() {
         final Map<String, Integer> menus = inputView.readOrder();
-        eventService.initMenu(menus);
+        eventService.initOrder(menus);
+    }
+
+    public void playEvent() {
+        announceOrderResult();
+        announceTotalOrder();
+    }
+
+    private void announceOrderResult() {
+        final int date = eventService.getEventDate();
+        outputView.printOrderResult(date);
+    }
+
+    private void announceTotalOrder() {
+        final OrderDto orderDto = eventService.getOrderDto();
+        outputView.printTotalMenu(orderDto);
+        outputView.printTotalPrice(orderDto);
     }
 }

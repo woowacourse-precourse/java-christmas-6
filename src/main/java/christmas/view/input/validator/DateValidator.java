@@ -1,7 +1,7 @@
 package christmas.view.input.validator;
 
-import christmas.constant.errorMessage.exception.CustomNullPointAmountException;
-import christmas.constant.errorMessage.exception.CustomNumberFormatAmountException;
+import christmas.constant.errorMessage.exception.CustomNullPointException;
+import christmas.constant.errorMessage.exception.CustomNumberFormatException;
 import christmas.constant.errorMessage.input.EventExceptionStatus;
 
 public class DateValidator {
@@ -19,7 +19,7 @@ public class DateValidator {
         try {
             return date.trim();
         } catch (NullPointerException e) {
-            throw new CustomNullPointAmountException(EventExceptionStatus.DATE_IS_NOT_CORRECT);
+            throw new CustomNullPointException(EventExceptionStatus.DATE_IS_NOT_CORRECT);
         }
     }
 
@@ -27,7 +27,7 @@ public class DateValidator {
         try {
             return Integer.parseInt(validateDateIsNull(date));
         } catch (NumberFormatException e) {
-            throw new CustomNumberFormatAmountException(EventExceptionStatus.DATE_IS_NOT_CORRECT);
+            throw new CustomNumberFormatException(EventExceptionStatus.DATE_IS_NOT_CORRECT);
         }
     }
 }

@@ -17,5 +17,6 @@ public class Application {
 
     public void run() {
         eventController.initEvent();
+        eventController.playEvent();
     }
 }

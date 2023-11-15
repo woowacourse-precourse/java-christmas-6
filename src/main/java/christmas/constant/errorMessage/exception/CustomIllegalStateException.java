@@ -2,9 +2,9 @@ package christmas.constant.errorMessage.exception;
 
 import christmas.constant.errorMessage.ExceptionStatus;
 
-public class CustomNullPointAmountException extends NullPointerException {
+public class CustomIllegalStateException extends IllegalStateException {
 
-    public CustomNullPointAmountException(ExceptionStatus exceptionStatus) {
+    public CustomIllegalStateException(ExceptionStatus exceptionStatus) {
         super(exceptionStatus.getMessage());
     }
 }
