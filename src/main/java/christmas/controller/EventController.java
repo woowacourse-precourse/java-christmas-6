@@ -21,6 +21,7 @@ public class EventController {
     public void initEvent() {
         initDate();
         initOrder();
+        initBenefit();
     }
 
     private void initDate() {
@@ -31,6 +32,10 @@ public class EventController {
     private void initOrder() {
         final Map<String, Integer> menus = inputView.readOrder();
         eventService.initOrder(menus);
+    }
+
+    private void initBenefit() {
+        eventService.initBenefit();
     }
 
     public void playEvent() {
@@ -47,5 +52,6 @@ public class EventController {
         final OrderDto orderDto = eventService.getOrderDto();
         outputView.printTotalMenu(orderDto);
         outputView.printTotalPrice(orderDto);
+        outputView.printGiftMenuBenefit(orderDto);
     }
 }
