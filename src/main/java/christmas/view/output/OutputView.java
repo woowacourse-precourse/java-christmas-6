@@ -1,5 +1,6 @@
 package christmas.view.output;
 
+import christmas.dto.BenefitDto;
 import christmas.dto.OrderDto;
 import java.text.DecimalFormat;
 import java.util.Map;
@@ -11,8 +12,11 @@ public class OutputView {
     private static final String PRINT_TOTAL_ORDER = "%s %d개\n";
     private static final String PRINT_TOTAL_PRICE_MESSAGE = "\n<할인 전 총주문 금액>\n%s원";
     private static final String PRINT_GIFT_MENU_BENEFIT_MESSAGE = "\n\n<증정 메뉴>\n%s";
-    private static final String PRINT_GIFT_MENU_BENEFIT_APPLICABLE = "샴페인 1개";
-    private static final String PRINT_GIFT_MENU_BENEFIT_NOT_APPLICABLE = "없음";
+    private static final String PRINT_GIFT_MENU_BENEFIT_APPLICABLE = "샴페인 1개\n";
+    private static final String PRINT_BENEFIT_NOT_APPLICABLE = "없음\n";
+    private static final String PRINT_TOTAL_BENEFIT_MESSAGE = "\n<혜택 내역>";
+    private static final String PRINT_TOTAL_BENEFIT = "%s: -%s원\n";
+    private static final DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 
     public void printOrderResult(final int date) {
         System.out.printf(PRINT_ORDER_RESULT_MESSAGE, date);
@@ -29,21 +33,38 @@ public class OutputView {
     }
 
     public void printTotalPrice(final OrderDto orderDto) {
-        DecimalFormat formatter = new DecimalFormat("###,###,###,###");
         final int totalPrice = orderDto.getTotalPrice();
         System.out.printf(PRINT_TOTAL_PRICE_MESSAGE, formatter.format(totalPrice));
     }
 
     public void printGiftMenuBenefit(final OrderDto orderDto) {
         final int totalPrice = orderDto.getTotalPrice();
-        final String messageFormat = checkForGiftMenuBenefit(totalPrice);
+        final String messageFormat = checkGiftMenuIsApplicable(totalPrice);
         System.out.printf(PRINT_GIFT_MENU_BENEFIT_MESSAGE, messageFormat);
     }
 
-    private String checkForGiftMenuBenefit(final int totalPrice) {
+    private String checkGiftMenuIsApplicable(final int totalPrice) {
         if (totalPrice >= 120_000) {
             return PRINT_GIFT_MENU_BENEFIT_APPLICABLE;
         }
-        return PRINT_GIFT_MENU_BENEFIT_NOT_APPLICABLE;
+        return PRINT_BENEFIT_NOT_APPLICABLE;
+    }
+
+    public void printTotalBenefit(final BenefitDto benefitDto) {
+        final Map<String, Integer> totalBenefit = benefitDto.getBenefit();
+        System.out.println(PRINT_TOTAL_BENEFIT_MESSAGE);
+        checkDiscountIsApplicable(totalBenefit);
+    }
+
+    private void checkDiscountIsApplicable(final Map<String, Integer> totalBenefit) {
+        if (totalBenefit.isEmpty()) {
+            System.out.println(PRINT_BENEFIT_NOT_APPLICABLE);
+            return;
+        }
+        for (Map.Entry<String, Integer> entry : totalBenefit.entrySet()) {
+            final String benefit = entry.getKey();
+            final int discount = entry.getValue();
+            System.out.printf(PRINT_TOTAL_BENEFIT, benefit,  formatter.format(discount));
+        }
     }
 }

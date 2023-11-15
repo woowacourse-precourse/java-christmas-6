@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.dto.BenefitDto;
 import christmas.dto.OrderDto;
 import christmas.service.EventService;
 import christmas.view.input.InputView;
@@ -41,6 +42,7 @@ public class EventController {
     public void playEvent() {
         announceOrderResult();
         announceTotalOrder();
+        announceTotalBenefit();
     }
 
     private void announceOrderResult() {
@@ -53,5 +55,10 @@ public class EventController {
         outputView.printTotalMenu(orderDto);
         outputView.printTotalPrice(orderDto);
         outputView.printGiftMenuBenefit(orderDto);
+    }
+
+    private void announceTotalBenefit() {
+        final BenefitDto benefitDto = eventService.getBenefitDto();
+        outputView.printTotalBenefit(benefitDto);
     }
 }

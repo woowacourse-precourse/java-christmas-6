@@ -12,13 +12,14 @@ import java.util.Optional;
 public class Order {
 
     private final Map<String, Integer> menus;
-
+    private final List<Category> totalOrder;
     private final int totalPrice;
 
     public Order(final Map<String, Integer> menus) {
         OrderValidator.validateOrder(menus);
         this.menus = menus;
-        this.totalPrice = calculateTotalPrice(checkOrderIsValidMenu());
+        this.totalOrder = checkOrderIsValidMenu();
+        this.totalPrice = calculateTotalPrice();
     }
 
     private List<Category> searchCategory() {
@@ -47,13 +48,13 @@ public class Order {
         return totalOrder;
     }
 
-    private int calculateTotalPrice(List<Category> categories) {
-        return categories.stream()
+    private int calculateTotalPrice() {
+        return totalOrder.stream()
                 .mapToInt(menu -> (menu.getPrice() * getQuantity(menu.getMenu())))
                 .sum();
     }
 
-    private int getQuantity(final String menu) {
+    public int getQuantity(final String menu) {
         return menus.get(menu);
     }
 
@@ -63,6 +64,10 @@ public class Order {
 
     public Map<String, Integer> getOrder() {
         return this.menus;
+    }
+
+    public List<Category> getTotalOrder() {
+        return this.totalOrder;
     }
 
     public int getTotalPrice() {
