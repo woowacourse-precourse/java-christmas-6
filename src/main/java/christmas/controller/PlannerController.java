@@ -65,6 +65,7 @@ public class PlannerController {
             int date = InputView.printVisitedDateInputMessage();
             return plannerService.setVisitedDate(date);
         } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
             return dateInit();
         }
     }
