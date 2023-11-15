@@ -9,7 +9,7 @@ public enum Category {
     ROOT("메뉴판", null),
         APPETIZER("애피타이저", ROOT),
             MUSHROOM_SOUP("양송이수프", 6_000, APPETIZER),
-            TAPAS("타바스", 5_500, APPETIZER),
+            TAPAS("타파스", 5_500, APPETIZER),
             CAESAR_SALAD("시저샐러드", 8_000, APPETIZER),
 
         MAIN("메인", ROOT),
@@ -25,7 +25,7 @@ public enum Category {
         BEVERAGE("음료", ROOT),
             ZERO_COLA("제로콜라", 3_000, BEVERAGE),
             RED_WINE("레드와인", 60_000, BEVERAGE),
-                CHAMPAGNE("샴페인", 25_000, BEVERAGE);
+            CHAMPAGNE("샴페인", 25_000, BEVERAGE);
 
     private final String menu;
     private final int price;

@@ -15,12 +15,11 @@ public class Benefit {
     private final Date date;
     private final Order order;
     private final Map<String, Integer> benefit = new HashMap<>();
-    private int discountedTotalPrice;
+    private int totalDiscount;
 
     public Benefit(final Date date, final Order order) {
         this.date = date;
         this.order = order;
-        this.discountedTotalPrice = order.getTotalPrice();
         applyEventBenefit();
     }
 
@@ -37,6 +36,7 @@ public class Benefit {
         final int eventDate = date.getDate();
         if (eventDate <= 25) {
             final int christmasBenefit = 1000 + ((eventDate - 1) * 100);
+            this.totalDiscount += christmasBenefit;
             benefit.put("크리스마스 디데이 할인", christmasBenefit);
         }
     }
@@ -62,8 +62,8 @@ public class Benefit {
 
     private void applyWeekDayDiscount(final int weekDayDiscount) {
         if (weekDayDiscount > 0) {
+            this.totalDiscount += weekDayDiscount;
             benefit.put("평일 할인", weekDayDiscount);
-            this.discountedTotalPrice -= weekDayDiscount;
         }
     }
 
@@ -88,8 +88,8 @@ public class Benefit {
 
     private void applyWeekendDiscount(final int weekendDiscount) {
         if (weekendDiscount > 0) {
+            this.totalDiscount += weekendDiscount;
             benefit.put("주말 할인", weekendDiscount);
-            this.discountedTotalPrice -= weekendDiscount;
         }
     }
 
@@ -99,11 +99,24 @@ public class Benefit {
         final int eventDate = dayOfWeek.getValue();
         if (eventDate == 7 || date.getDate() == 25) {
             final int specialDiscount = 1000;
+            this.totalDiscount += specialDiscount;
             benefit.put("특별 할인", specialDiscount);
         }
     }
 
+    private int calculateDiscountedTotalPrice() {
+        final int discountedTotalPrice = order.getTotalPrice() - this.totalDiscount;
+        return Math.max(discountedTotalPrice, 0);
+    }
+
     public BenefitDto toDto() {
-        return new BenefitDto(benefit);
+        return new BenefitDto(
+                this.benefit,
+                this.totalDiscount,
+                calculateDiscountedTotalPrice());
+    }
+
+    public int getDiscount() {
+        return this.totalDiscount;
     }
 }

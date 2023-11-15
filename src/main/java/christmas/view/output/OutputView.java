@@ -16,6 +16,11 @@ public class OutputView {
     private static final String PRINT_BENEFIT_NOT_APPLICABLE = "없음\n";
     private static final String PRINT_TOTAL_BENEFIT_MESSAGE = "\n<혜택 내역>";
     private static final String PRINT_TOTAL_BENEFIT = "%s: -%s원\n";
+    private static final String PRINT_TOTAL_DISCOUNT_MESSAGE = "\n<총혜택 금액>";
+    private static final String PRINT_TOTAL_DISCOUNT = "-%s원\n";
+    private static final String PRINT_DISCOUNT_NOT_APPLICABLE = "%s원\n";
+    private static final String PRINT_DISCOUNTED_TOTAL_PRICE_MESSAGE = "\n<할인 후 예상 결제 금액>";
+    private static final String PRINT_DISCOUNTED_TOTAL_PRICE = "%s원\n";
     private static final DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 
     public void printOrderResult(final int date) {
@@ -53,12 +58,12 @@ public class OutputView {
     public void printTotalBenefit(final BenefitDto benefitDto) {
         final Map<String, Integer> totalBenefit = benefitDto.getBenefit();
         System.out.println(PRINT_TOTAL_BENEFIT_MESSAGE);
-        checkDiscountIsApplicable(totalBenefit);
+        checkBenefitIsApplicable(totalBenefit);
     }
 
-    private void checkDiscountIsApplicable(final Map<String, Integer> totalBenefit) {
+    private void checkBenefitIsApplicable(final Map<String, Integer> totalBenefit) {
         if (totalBenefit.isEmpty()) {
-            System.out.println(PRINT_BENEFIT_NOT_APPLICABLE);
+            System.out.print(PRINT_BENEFIT_NOT_APPLICABLE);
             return;
         }
         for (Map.Entry<String, Integer> entry : totalBenefit.entrySet()) {
@@ -66,5 +71,24 @@ public class OutputView {
             final int discount = entry.getValue();
             System.out.printf(PRINT_TOTAL_BENEFIT, benefit,  formatter.format(discount));
         }
+    }
+
+    public void printTotalDiscount(final BenefitDto benefitDto) {
+        final int totalDiscount = benefitDto.getTotalDiscount();
+        System.out.println(PRINT_TOTAL_DISCOUNT_MESSAGE);
+        final String messageFormat = checkDiscountIsApplicable(totalDiscount);
+        System.out.printf(messageFormat, formatter.format(totalDiscount));
+    }
+
+    private String checkDiscountIsApplicable(final int totalDiscount) {
+        if (totalDiscount > 0) {
+            return PRINT_TOTAL_DISCOUNT;
+        }
+        return PRINT_DISCOUNT_NOT_APPLICABLE;
+    }
+
+    public void printDiscountedTotalPrice(final BenefitDto benefitDto) {
+        final int DiscountTotalPrice = benefitDto.getDiscountedTotalPrice();
+        System.out.printf(PRINT_TOTAL_PRICE_MESSAGE, formatter.format(DiscountTotalPrice));
     }
 }

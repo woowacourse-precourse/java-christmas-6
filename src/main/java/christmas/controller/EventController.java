@@ -60,5 +60,7 @@ public class EventController {
     private void announceTotalBenefit() {
         final BenefitDto benefitDto = eventService.getBenefitDto();
         outputView.printTotalBenefit(benefitDto);
+        outputView.printTotalDiscount(benefitDto);
+        outputView.printDiscountedTotalPrice(benefitDto);
     }
 }
