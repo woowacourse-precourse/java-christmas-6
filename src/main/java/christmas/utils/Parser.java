@@ -2,6 +2,7 @@ package christmas.utils;
 
 import christmas.domain.Food;
 import christmas.exception.NotValidDateException;
+import christmas.exception.NotValidMenuInputException;
 import christmas.type.ErrorType;
 
 import java.util.Arrays;
@@ -26,13 +27,13 @@ public class Parser {
 
     public static Map<String, Integer> convertToMap(String input) {
         if (!Pattern.matches(COMMA_REGEX, input)) {
-            throw new IllegalArgumentException(ErrorType.NOT_VALID_ORDER.getText());
+            throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
         }
 
         String[] commaSplits = input.split(",");
         for (String commaSplit : commaSplits) {
             if (!Pattern.matches(MENU_COUNT_REGEX, commaSplit)) {
-                throw new IllegalArgumentException(ErrorType.NOT_VALID_ORDER.getText());
+                throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
             }
         }
 
