@@ -70,7 +70,7 @@ class PlannerServiceTest {
 
     @ParameterizedTest
     @CsvSource(value = {"10, 4923, 1", "7, 3623, 1", "6, 64937, 19"})
-    void 평일_날짜_할인_금액_테스트(int date, int value, int count) {
+    void 평일_날짜_혜택_금액_테스트(int date, int value, int count) {
         // given
         HashMap<String, Integer> menuMap = new HashMap<>();
         menuMap.put(MenuType.CHRIST_MAS_PASTA.getFoodName(), 1);
@@ -88,7 +88,7 @@ class PlannerServiceTest {
 
     @ParameterizedTest
     @CsvSource(value = {"9, 3823, 1", "16, 4523, 1", "23, 38315, 5"})
-    void 주말_날짜_할인_금액_테스트(int date, int value, int count) {
+    void 주말_날짜_혜택_금액_테스트(int date, int value, int count) {
         // given
         HashMap<String, Integer> menuMap = new HashMap<>();
         menuMap.put(MenuType.CHRIST_MAS_PASTA.getFoodName(), count);
@@ -104,4 +104,21 @@ class PlannerServiceTest {
         Assertions.assertEquals(value, totalBenefit);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {"10, 23130, 10", "6, 39937, 19"})
+    void 할인_금액_테스트(int date, int value, int count) {
+        // given
+        HashMap<String, Integer> menuMap = new HashMap<>();
+        menuMap.put(MenuType.CHRIST_MAS_PASTA.getFoodName(), 1);
+        menuMap.put(MenuType.ICE_CREAM.getFoodName(), count);
+        plannerService.setVisitedDate(date);
+        plannerService.setOrder(menuMap);
+
+        // when
+        plannerService.calculateDiscount(date);
+        int totalDiscount = plannerService.getTotalDiscount();
+
+        //then
+        Assertions.assertEquals(value, totalDiscount);
+    }
 }
