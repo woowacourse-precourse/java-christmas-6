@@ -14,16 +14,17 @@ public enum EventBadge {
     }
 
     public EventBadge giveEventBadge (int totalAmount) {
+        EventBadge result = null;
         if (totalAmount >= SANTA.minTotalAmount) {
-            return SANTA;
+            result = SANTA;
         }
-        if (totalAmount >= TREE.minTotalAmount) {
-            return TREE;
+        else if (totalAmount >= STAR.minTotalAmount) {
+            result = STAR;
         }
-        if (totalAmount >= STAR.minTotalAmount) {
-            return STAR;
+        else if (totalAmount >= TREE.minTotalAmount) {
+            result = TREE;
         }
-        return null;
+        return result;
     }
 
 }

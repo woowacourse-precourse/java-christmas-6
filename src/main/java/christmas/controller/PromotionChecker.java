@@ -22,7 +22,8 @@ public class PromotionChecker {
     // TODO :   10000원 이상인가 체크하는 메서드
 
     public boolean canPromotionAppliable (Reservation reservation) {
-        return reservation.checkBill() >= MIN_TOTAL_TO_APPLY_PROMOTION;
+        boolean res= reservation.checkBill() >= MIN_TOTAL_TO_APPLY_PROMOTION;
+        return res;
     }
 
     public Map<Promotion, Integer> applyPromotion (Reservation reservation) {
@@ -44,6 +45,7 @@ public class PromotionChecker {
         }
     }
     private void checkSpecialPromotionAppliable(Reservation reservation, Map<Promotion, Integer> promotionApplied) {
+        System.out.println(reservation.checkReservedDate().getDayOfWeek());
         if (reservation.checkReservedDate().getDayOfMonth() == 25 || reservation.checkReservedDate().getDayOfWeek() == DayOfWeek.SUNDAY) {
             promotionApplied.put(Promotion.SPECIAL_PROMOTION, Promotion.SPECIAL_PROMOTION.checkPromotionDefaultBenefit());
         }

@@ -17,7 +17,7 @@ public class Reservation {
     private List<SimpleEntry<Menu, Integer>> orderedMenu;
     private boolean isSpecialPromotionDate = false;
     private int totalAmount = 0;
-    private Map<Promotion, Integer> promotionApplied = new TreeMap<>();
+    public Map<Promotion, Integer> promotionApplied = new TreeMap<>();
     private int discountedPrice = 0;
 
     public Reservation(int date) {
@@ -34,8 +34,8 @@ public class Reservation {
     }
 
     public void applyPromotion () {
-        if (checker.canPromotionAppliable(this)) {
-            this.promotionApplied = new HashMap<Promotion, Integer>();
+        if (!checker.canPromotionAppliable(this)) {
+            this.promotionApplied = new HashMap<>();
             return;
         }
         this.promotionApplied = checker.applyPromotion(this);
