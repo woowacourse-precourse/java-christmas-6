@@ -60,9 +60,11 @@ class PlannerServiceTest {
 
         // when
         plannerService.setOrder(menuMap);
+        HashMap<String, Integer> orderMap = plannerService.getOrder();
 
         //then
-        Assertions.assertEquals(order.getTotalOrder().size(), 1);
+        Assertions.assertEquals(1, order.getTotalOrder().size());
+        Assertions.assertEquals(1, orderMap.get(MenuType.CHRIST_MAS_PASTA.getFoodName()));
     }
 
 }
