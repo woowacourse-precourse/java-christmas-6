@@ -15,9 +15,9 @@ public class MenuBoard {
     private static Map<String, Menu> initMenus(){
         Map<String, Menu> menuMap = new HashMap<>();
         menuMap.put("양송이수프", new Menu("양송이수프", Enum.MenuCategory.APPETIZER, 6000));
-        menuMap.put("타파스", new Menu("타파스", Enum.MenuCategory.APPETIZER, 5000));
+        menuMap.put("타파스", new Menu("타파스", Enum.MenuCategory.APPETIZER, 5500));
         menuMap.put("시저샐러드", new Menu("시저샐러드", Enum.MenuCategory.APPETIZER, 8000));
-        menuMap.put("티본스테이크", new Menu("티본스테이크", Enum.MenuCategory.MAIN, 5500));
+        menuMap.put("티본스테이크", new Menu("티본스테이크", Enum.MenuCategory.MAIN, 55000));
         menuMap.put("바비큐립", new Menu("바비큐립", Enum.MenuCategory.MAIN, 54000));
         menuMap.put("해산물파스타", new Menu("해산물파스타", Enum.MenuCategory.MAIN, 35000));
         menuMap.put("크리스마스파스타", new Menu("크리스마스파스타", Enum.MenuCategory.MAIN, 25000));

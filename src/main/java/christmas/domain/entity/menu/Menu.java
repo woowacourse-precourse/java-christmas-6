@@ -15,6 +15,10 @@ public class Menu {
         return price;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Menu(String name, Enum.MenuCategory menuCategory, int price) {
         this.name = name;
         this.menuCategory = menuCategory;

@@ -111,7 +111,8 @@ public class Benefits {
     public static int accountTotalAmountAfterDiscount(){
         totalAmountAfterDiscount =
                 totalAmountBeforeDiscount
-                - totalBenefitAmount;
+                - totalBenefitAmount
+                + giftEventBenefitAmount;
         return totalAmountAfterDiscount;
     }
 

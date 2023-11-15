@@ -48,5 +48,6 @@ public class ChristmasController {
         outputView.printMenu(order);
         BenefitApplication discountApplication = new BenefitApplication(order);
         discountApplication.benefitApplication();
+        outputView.printBenefit();
     }
 }
