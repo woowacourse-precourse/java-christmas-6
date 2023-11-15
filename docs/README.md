@@ -288,10 +288,9 @@
 - [x] 원하는 이벤트만 시행할수 있게끔 구현
 - [x] RestaurantSystem - >RestaurantSystem, RestaurantProcessor 로 분리
 - [x] 이벤트 인스턴스 Enum화
-- [ ] EventSystem 테스트 코드 구현
-- [ ] RestaurantSystem 테스트 코드 구현
-- [ ] RestaurantProcessor 테스트 코드 구현
-- [ ] RestaurantReservation 테스트코드 구현
+- [x] EventSystem 테스트 코드 구현
+- [x] RestaurantSystem 테스트 코드 구현
+
 
 - [x] 재사용성에 대한 고민
   - 크리스마스 이벤트 뿐만 아니라, 내가 원할 때의 이벤트를 내가 설정하는 프로그램을 만들고 싶다.
@@ -313,6 +312,12 @@
     - 현재 불필요한 코드이므로 제거한다.
 </details>
 
+<details>
+<summary>(23.11.15)</summary>
+- [x] RestaurantProcessor 테스트 코드 구현
+- [ ] RestaurantReservation 테스트코드 구현
+</details>
+
 ## 플로우
 1. 사용자 - 예약 방문 날짜 입력
 2. 사용자 - 주문 메뉴와 개수를 입력
@@ -329,7 +334,7 @@
 
 ### 0.유연한 이벤트 추가 기능
 - [x] 이벤트 인스턴스를 Enum에 연결하여 Enum에서 바로 해당 이벤트 인스턴스를 반환받는다.
-- [x] EventInitializer 를 이용해 이벤트들을 추가한다.
+- [x] EventInitializer 를 이용해 이벤트들을 변경한다.
 
 ### 1. 주문 입력 및 유효성 검증 기능
 
@@ -341,7 +346,7 @@
 
 ### 2. 결제 금액 계산 기능
 
--[x] 할인 전 총주문 금액을 계산한다.
+-[x] 할인 전 총 주문 금액을 계산한다.
 -[x] 할인 금액을 적용하여 할인 후 예상 결제 금액을 도출한다.
 
 ### 3. 날짜 입력 및 유효성 검증 기능
