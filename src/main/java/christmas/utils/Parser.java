@@ -29,14 +29,28 @@ public class Parser {
         if (!Pattern.matches(COMMA_REGEX, input)) {
             throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
         }
+        Map<String, Integer> resultMap = new HashMap<>();
         String[] commaSplits = checkSplit(input);
 
-        return Arrays.stream(commaSplits)
-                .map(s -> s.split("-"))
-                .collect(Collectors.toMap(a -> a[0], a -> Integer.parseInt(a[1]),
-                        (oldValue, newValue) -> {
-                            throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
-                        }));
+        for (String s : commaSplits) {
+            String[] split = s.split("-");
+            String key = split[0];
+            int value = Integer.parseInt(split[1]);
+            checkMenuInput(resultMap, key, value);
+            resultMap.put(key, value);
+        }
+
+        return resultMap;
+    }
+
+    private static void checkMenuInput(Map<String, Integer> resultMap, String key, int value) {
+        if (value < 1) {
+            throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
+        }
+
+        if (resultMap.containsKey(key)) {
+            throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
+        }
     }
 
     private static String[] checkSplit(String input) {
