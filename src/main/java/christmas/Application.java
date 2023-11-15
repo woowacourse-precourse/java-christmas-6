@@ -1,10 +1,9 @@
 package christmas;
 
-import christmas.controller.PromotionChecker;
-import christmas.model.Promotion;
+import christmas.model.Menu;
 import christmas.model.Reservation;
 import christmas.model.RestaurantDatabase;
-import christmas.model.Menu;
+
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -12,12 +11,10 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
 
 public class Application {
-    static Application app = new Application();
-    static RestaurantDatabase db = new RestaurantDatabase();
-    static InputView reader = new InputView();
-    static OutputView print = new OutputView();
-    static PromotionChecker checker = new PromotionChecker();
-
+    private static final Application app = new Application();
+    private static final RestaurantDatabase db = new RestaurantDatabase();
+    private InputView reader = new InputView();
+    private OutputView print = new OutputView();
     private List<Menu> menu;
     private Reservation reservation;
 
@@ -26,7 +23,8 @@ public class Application {
         app.menu = db.loadMenuData();
 
         app.reserveRestaurant();
-        app.applyPromotions();
+        app.applyPromotion();
+        app.previewReservation();
     }
 
     public void reserveRestaurant () {
@@ -39,9 +37,22 @@ public class Application {
         reservation.orderMenu(orderedMenu);
     }
 
-    private void applyPromotions() {
+    private void applyPromotion() {
         reservation.applyPromotion();
     }
 
+    private void previewReservation () {
+        print.notifyReservationPreview(reservation);
+
+        print.previewOrderedMenu(reservation);
+        print.previewTotalAmountBeforeApplying(reservation);
+
+        print.notifyPresentMenu(reservation);
+        print.notifyPromotionApplied (reservation);
+
+        print.notifyTotalBenefit(reservation);
+        print.notifyPaymentAmountAfterPromotion(reservation);
+        print.notifyEventBadge(reservation);
+    }
 
 }

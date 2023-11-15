@@ -13,19 +13,23 @@ public enum EventBadge {
         this.minTotalAmount = minTotalAmount;
     }
 
-    public EventBadge giveEventBadge (int totalAmount) {
+    public static EventBadge giveEventBadge (int totalBenefit) {
         EventBadge result = null;
-        if (totalAmount >= SANTA.minTotalAmount) {
+        if (totalBenefit >= SANTA.minTotalAmount) {
             result = SANTA;
         }
-        else if (totalAmount >= STAR.minTotalAmount) {
+        else if (totalBenefit >= STAR.minTotalAmount) {
             result = STAR;
         }
-        else if (totalAmount >= TREE.minTotalAmount) {
+        else if (totalBenefit >= TREE.minTotalAmount) {
             result = TREE;
         }
         return result;
     }
 
+    @Override
+    public String toString() {
+        return description;
+    }
 }
 // TODO: 이벤트 배지의 경우 다른 프로모션들과 다른 금액 조건을 가지고 있음

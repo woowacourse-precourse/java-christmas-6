@@ -1,20 +1,20 @@
 package christmas.model;
 
-import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
 import java.util.Objects;
 
 public class Menu {
 
-    Category category;
+    private final Category category;
 
-    String menuName;
+    private final String menuName;
 
-    int price;
+    private final int price;
 
-    public static int checkBill (List<AbstractMap.SimpleEntry<Menu, Integer>> orderedMenu) {
+    public static int checkBill (List<SimpleEntry<Menu, Integer>> orderedMenu) {
         return orderedMenu.stream()
-                .mapToInt(el -> el.getKey().price)
+                .mapToInt(el -> el.getKey().price * el.getValue())
                 .sum();
     }
 
@@ -47,11 +47,7 @@ public class Menu {
 
     @Override
     public String toString() {
-        return "Menu{" +
-                "category=" + category +
-                ", menuName='" + menuName + '\'' +
-                ", price=" + price +
-                '}';
+        return menuName;
     }
 }
 

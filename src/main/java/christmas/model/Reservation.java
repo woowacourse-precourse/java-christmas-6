@@ -15,10 +15,9 @@ public class Reservation {
     private PromotionChecker checker = new PromotionChecker();
     private LocalDate reservedDate;
     private List<SimpleEntry<Menu, Integer>> orderedMenu;
-    private boolean isSpecialPromotionDate = false;
     private int totalAmount = 0;
-    public Map<Promotion, Integer> promotionApplied = new TreeMap<>();
-    private int discountedPrice = 0;
+    private Map<Promotion, Integer> promotionApplied;
+    private EventBadge eventBadge;
 
     public Reservation(int date) {
         reservedDate = LocalDate.of(PROMOTION_YEAR, PROMOTION_MONTH, date);
@@ -33,12 +32,23 @@ public class Reservation {
         return totalAmount;
     }
 
+    public int checkAppliedPromotionBenefit () {
+        if (promotionApplied.isEmpty()) {
+            return 0;
+        }
+
+        return promotionApplied.values()
+                .stream()
+                .reduce(0, (a, b) -> a+b);
+    }
+
     public void applyPromotion () {
         if (!checker.canPromotionAppliable(this)) {
             this.promotionApplied = new HashMap<>();
             return;
         }
         this.promotionApplied = checker.applyPromotion(this);
+        this.eventBadge = EventBadge.giveEventBadge(checkAppliedPromotionBenefit());
     }
 
     public boolean isIncludedPromotionPeriod (Promotion promotion) {
@@ -55,8 +65,20 @@ public class Reservation {
                 .toList();
     }
 
-    public boolean isIncludedPresentPromotion () {
-        return promotionApplied.containsKey(Promotion.PRESENT_PROMOTION);
+
+    public boolean checkPromotionContained (Promotion promotion) {
+        return promotionApplied.containsKey(promotion);
     }
 
+    public List<SimpleEntry<Menu, Integer>> checkOrderedMenu () {
+        return orderedMenu;
+    }
+
+    public Map<Promotion, Integer> checkPromotionApplied () {
+        return promotionApplied;
+    }
+
+    public EventBadge checkEventBadge ( ) {
+        return eventBadge;
+    }
 }
