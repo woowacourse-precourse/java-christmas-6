@@ -69,7 +69,7 @@ class PlannerServiceTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"10, 4923, 1", "71000, 3623, 1", "6, 64937, 19"})
+    @CsvSource(value = {"10, 4923, 1", "7, 3623, 1", "6, 64937, 19"})
     void 평일_날짜_할인_금액_테스트(int date, int value, int count) {
         // given
         HashMap<String, Integer> menuMap = new HashMap<>();
