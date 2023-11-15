@@ -75,9 +75,9 @@ public class InputView {
                 SimpleEntry<Menu, Integer> menuMatched = validator.validateOrderStateFormat(menu, ordered);
                 result.add(menuMatched);
             }
+
+            validator.checkDuplicatedMenus(result);
             validator.hasReachedMaxOrderItems(result);
             return result;
     }
-
-
 }

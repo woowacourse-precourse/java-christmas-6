@@ -8,7 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidator {
-    private static final String ERROR_PREFIX = "[ERROR]";
+    private static final String ERROR_CAUSED_BY_DATE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
+    private static final String ERROR_CAUSED_BY_ORDER =  "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private static final String INTEGER_REGEX = "^-?\\d+$";
     private static final int MAX_ORDER_PLATE = 20;
     private static final String FORMAT_TO_ORDER_MENU_REX = "([가-힣]+)-(\\d+)";
@@ -17,13 +18,13 @@ public class InputValidator {
     public void validateDateInput (String input) throws IllegalArgumentException {
         boolean isInteger = isInteger(input);
         if (!isInteger) {
-            throw new IllegalArgumentException(ERROR_PREFIX + "정수 입력");
+            throw new IllegalArgumentException(ERROR_CAUSED_BY_DATE);
         }
 
         int date = Integer.parseInt(input);
         boolean isDateInDecember = isDateInDecember(date);
         if(!isDateInDecember) {
-            throw new IllegalArgumentException(ERROR_PREFIX + "1부터 31 이내의 날짜 입력");
+            throw new IllegalArgumentException(ERROR_CAUSED_BY_DATE);
         }
     }
 
@@ -42,7 +43,7 @@ public class InputValidator {
         Matcher matcher = pattern.matcher(menuOrdered);
 
         if (!matcher.find()) {
-            throw new IllegalArgumentException(ERROR_PREFIX + " 메뉴 입력 형식에 올바르게 작성해주세요.");
+            throw new IllegalArgumentException(ERROR_CAUSED_BY_ORDER);
         }
 
         int cnt = Integer.parseInt(matcher.group(2));
@@ -52,10 +53,19 @@ public class InputValidator {
 
     }
 
-    public void hasReachedMaxOrderItems (List<SimpleEntry<Menu, Integer>> orderedList) {
+    public void checkDuplicatedMenus (List<SimpleEntry<Menu, Integer>> orderedList) throws IllegalArgumentException {
+        int distictedMenuList = orderedList.stream().distinct().toList().size();
+        int originMenuList = orderedList.size();
+
+        if (distictedMenuList != originMenuList) {
+            throw new IllegalStateException(ERROR_CAUSED_BY_ORDER);
+        }
+    }
+
+    public void hasReachedMaxOrderItems (List<SimpleEntry<Menu, Integer>> orderedList) throws IllegalArgumentException {
         int numberOfOrderedMenu = orderedList.stream().mapToInt(SimpleEntry::getValue).sum();
         if (numberOfOrderedMenu > MAX_ORDER_PLATE) {
-            throw new IllegalStateException(ERROR_PREFIX + "주문가능한 메뉴는 총 20개 이하입니다.");
+            throw new IllegalStateException(ERROR_CAUSED_BY_ORDER);
         }
     }
 
@@ -63,14 +73,14 @@ public class InputValidator {
         try {
             return menu.stream().filter(el -> el.checkMenu(menuName)).toList().get(0);
         } catch (IndexOutOfBoundsException e) {
-            throw  new IllegalArgumentException(ERROR_PREFIX + " 메뉴판에 있는 메뉴를 선택해주세요.");
+            throw  new IllegalArgumentException(ERROR_CAUSED_BY_ORDER);
         }
     }
 
     public void checkCategory (List<SimpleEntry<Menu, Integer>> orderedList) throws IllegalArgumentException {
         boolean isAnyMatchedExceptDrink =  orderedList.stream().anyMatch(el -> !el.getKey().checkCategory(DRINK));
         if (!isAnyMatchedExceptDrink) {
-            throw new IllegalArgumentException(ERROR_PREFIX + " 디저트류만 이용하실 수 없습니다.");
+            throw new IllegalArgumentException(ERROR_CAUSED_BY_ORDER);
         }
     }
 
