@@ -46,10 +46,10 @@ public class RestaurantDatabase {
         String[] menus = categoryAndMenu[MENU_OFFSET_IDX].split(", ");
         Category category = new Category(menu, categoryName);
 
-        for (int i = 0; i < menus.length; i++ ){
-            saveMenu(category, menus[i]);
+        for (String menuInfoToStore : menus) {
+            saveMenu(category, menuInfoToStore);
         }
-    } // TODO : split해서 넘기기만 하는데 굳이 Collection을 사용할 이유가 있을까?에 대한 고민
+    }
 
     private void saveMenu(Category category, String menus) {
         String menuName = menus.substring(0, menus.indexOf("("));
@@ -60,6 +60,4 @@ public class RestaurantDatabase {
         Menu menuToSave = new Menu(category, menuName, price);
         this.menu.add(menuToSave);
     }
-    // TODO : 변수명 어떡하죠?
-
 }

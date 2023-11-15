@@ -13,17 +13,14 @@ import java.util.Map;
 
 public class PromotionChecker {
     public static final int MIN_TOTAL_TO_APPLY_PROMOTION = 10_000;
-    private final static DayOfWeek[] WEEKDAYS = {DayOfWeek.SUNDAY, DayOfWeek.MONDAY,DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY,DayOfWeek.TUESDAY};
-    private final static DayOfWeek[] WEEKENDS = {DayOfWeek.FRIDAY, DayOfWeek.SATURDAY};
+    private static final DayOfWeek[] WEEKDAYS = {DayOfWeek.SUNDAY, DayOfWeek.MONDAY,DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY,DayOfWeek.TUESDAY};
+    private static final DayOfWeek[] WEEKENDS = {DayOfWeek.FRIDAY, DayOfWeek.SATURDAY};
 
     private static final  String WEEKDAY_PROMOTION_CATEGORY = "디저트";
     private static final String WEEKEND_PROMOTION_CATEGORY = "메인";
 
-    // TODO :   10000원 이상인가 체크하는 메서드
-
-    public boolean canPromotionAppliable (Reservation reservation) {
-        boolean res= reservation.checkBill() >= MIN_TOTAL_TO_APPLY_PROMOTION;
-        return res;
+    public boolean canPromotionAppliable(Reservation reservation) {
+        return reservation.checkBill() >= MIN_TOTAL_TO_APPLY_PROMOTION;
     }
 
     public Map<Promotion, Integer> applyPromotion (Reservation reservation) {
@@ -68,7 +65,7 @@ public class PromotionChecker {
                 .contains(reservation.checkReservedDate().getDayOfWeek())) {
             List<SimpleEntry<Menu, Integer>> menuPromotionApplied = reservation.checkMenuByCategory(WEEKDAY_PROMOTION_CATEGORY);
 
-            int matchedMenuByPromotionCategory = menuPromotionApplied.stream().mapToInt(el -> el.getValue()).sum();
+            int matchedMenuByPromotionCategory = menuPromotionApplied.stream().mapToInt(SimpleEntry::getValue).sum();
             int totalBenefit = matchedMenuByPromotionCategory * Promotion.WEEKDAY_PROMOTION.checkPromotionDefaultBenefit();
 
             promotionApplied.put(Promotion.WEEKDAY_PROMOTION, totalBenefit);

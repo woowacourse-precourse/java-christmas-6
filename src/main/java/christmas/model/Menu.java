@@ -2,7 +2,6 @@ package christmas.model;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
-import java.util.Objects;
 
 public class Menu {
 
@@ -34,21 +33,7 @@ public class Menu {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || menuName.getClass() != o.getClass()) return false;
-        String menu = (String) o;
-        return this.menuName.equals(menu);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(menuName);
-    }
-
-    @Override
     public String toString() {
         return menuName;
     }
 }
-
-// TODO : 메뉴 이름 입력받아 Contains 메서드로 포함여부 확인하기 위해, equals 메서드 오버 로딩

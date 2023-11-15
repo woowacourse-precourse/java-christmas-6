@@ -9,15 +9,14 @@ import java.time.LocalDate;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class OutputView {
-    private String welecmeState = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
+    public static final String WELCOME_STATE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
     public static final String NOTHING_STATE = "없음";
     public static final String DEFAULT_PRESENT = "샴페인";
 
     public void welcome () {
-        System.out.println(welecmeState);
+        System.out.println(WELCOME_STATE);
     }
 
     public void notifyReservationPreview (Reservation reservation) {

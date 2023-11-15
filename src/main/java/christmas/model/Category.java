@@ -1,25 +1,24 @@
 package christmas.model;
 
 public class Category {
-    private int id;
-    private String category;
+    private final int id;
+    private final String categoryName;
 
-    public Category (int id, String category) {
+    public Category (int id, String categoryName) {
         this.id = id;
-        this.category = category;
+        this.categoryName = categoryName;
     }
 
     public boolean findSameCategory (int i) {
-        if (i == id) return true;
-        return false;
+        return i == id;
     }
 
     @Override
     public String toString() {
-        return category;
+        return categoryName;
     }
 
     public boolean isSame(String category) {
-        return this.category.equals(category);
+        return this.categoryName.equals(category);
     }
 }

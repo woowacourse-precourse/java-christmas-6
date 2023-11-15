@@ -9,11 +9,9 @@ import java.util.AbstractMap.SimpleEntry;
 public class Reservation {
     public static final int PROMOTION_YEAR = 2023;
     public static final int PROMOTION_MONTH = 12;
-    public static final LocalDate PROMOTION_DEFAULT_START = LocalDate.of(PROMOTION_YEAR, PROMOTION_MONTH, 1);
-    public static final LocalDate PROMOTION_DEFAULT_END = LocalDate.of(PROMOTION_YEAR, PROMOTION_MONTH, 31);
 
-    private PromotionChecker checker = new PromotionChecker();
-    private LocalDate reservedDate;
+    private final PromotionChecker checker = new PromotionChecker();
+    private final LocalDate reservedDate;
     private List<SimpleEntry<Menu, Integer>> orderedMenu;
     private int totalAmount = 0;
     private Map<Promotion, Integer> promotionApplied;
@@ -39,7 +37,7 @@ public class Reservation {
 
         return promotionApplied.values()
                 .stream()
-                .reduce(0, (a, b) -> a+b);
+                .reduce(0, Integer::sum);
     }
 
     public void applyPromotion () {

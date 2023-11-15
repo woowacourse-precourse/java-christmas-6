@@ -37,7 +37,7 @@ public class InputValidator {
     }
 
     public SimpleEntry<Menu, Integer> validateOrderStateFormat (List<Menu> menu, String menuOrdered) throws IllegalArgumentException {
-        SimpleEntry<Menu, Integer> result = null;
+        SimpleEntry<Menu, Integer> result;
 
         Pattern pattern = Pattern.compile(FORMAT_TO_ORDER_MENU_REX);
         Matcher matcher = pattern.matcher(menuOrdered);

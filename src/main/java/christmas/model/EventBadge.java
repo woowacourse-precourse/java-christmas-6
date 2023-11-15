@@ -32,4 +32,3 @@ public enum EventBadge {
         return description;
     }
 }
-// TODO: 이벤트 배지의 경우 다른 프로모션들과 다른 금액 조건을 가지고 있음

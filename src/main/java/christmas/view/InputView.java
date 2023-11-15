@@ -2,7 +2,6 @@ package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.model.Menu;
-import christmas.model.RestaurantDatabase;
 import christmas.validator.InputValidator;
 
 import java.util.AbstractMap.SimpleEntry;
@@ -12,8 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class InputView {
-    private InputValidator validator = new InputValidator();
-    private final RestaurantDatabase db = new RestaurantDatabase();
+    private final InputValidator validator = new InputValidator();
     private int date;
 
 
@@ -39,9 +37,8 @@ public class InputView {
         return true;
     }
 
-    // TODO : 날짜는 누가 가지고 있는 것이 좋을까
     public List<SimpleEntry<Menu, Integer>> receiveMenuToOrder (List<Menu> menu) {
-        List<SimpleEntry<Menu, Integer>> result = null;
+        List<SimpleEntry<Menu, Integer>> result;
         do {
             System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
             result = promptMenuToOrder(menu);
@@ -51,7 +48,7 @@ public class InputView {
     }
 
     private List<SimpleEntry<Menu, Integer>> promptMenuToOrder (List<Menu> menu) {
-        List<SimpleEntry<Menu, Integer>> result = null;
+        List<SimpleEntry<Menu, Integer>> result;
         try {
             String customerOrderState = Console.readLine().trim();
             List<String> menuOrdered = Arrays.stream(customerOrderState.split(",")).toList();
