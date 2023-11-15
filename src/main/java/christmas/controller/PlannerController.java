@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.Customer;
+import christmas.domain.Order;
 import christmas.service.PlannerService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PlannerController {
-    private PlannerService plannerService = new PlannerService();
+    private PlannerService plannerService = new PlannerService(new Order());
 
     public void run() {
         Customer customer = dateInit();

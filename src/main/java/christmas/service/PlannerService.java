@@ -6,6 +6,7 @@ import christmas.dto.DiscountInfoDto;
 import christmas.type.MenuType;
 import christmas.type.SpecialDateType;
 import christmas.type.WeekDateType;
+import christmas.utils.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,13 +18,19 @@ public class PlannerService {
     public static final int EVENT_PRICE = 120000;
     public static final int EVENT_DISCOUNT_VALUE = 2023;
     private Customer customer;
-    private Order order = new Order();
+    private Order order;
+
+    public PlannerService(Order order) {
+        this.order = order;
+    }
+
     public Customer setVisitedDate(int date) {
         customer = new Customer(date);
         return customer;
     }
 
     public void setOrder(Map<String, Integer> menuMap) {
+        Validator.checkMenuSumValid(menuMap);
         for (String foodName : menuMap.keySet()) {
             order.addOrder(foodName, menuMap.get(foodName));
         }
