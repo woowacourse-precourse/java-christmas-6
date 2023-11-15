@@ -33,10 +33,9 @@ public class Validator {
         if (value < 1) {
             throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
         }
-        checkMenuSumValid(resultMap);
     }
 
-    private static void checkMenuSumValid(Map<String, Integer> resultMap) {
+    public static void checkMenuSumValid(Map<String, Integer> resultMap) {
         int sum = 0;
         Set<String> keySet = resultMap.keySet();
         for (String key : keySet) {
