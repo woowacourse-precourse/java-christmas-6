@@ -1,5 +1,10 @@
 package christmas.controller;
 
+import christmas.constant.errorMessage.exception.CustomArrayIndexOutOfBoundsException;
+import christmas.constant.errorMessage.exception.CustomIllegalArgumentException;
+import christmas.constant.errorMessage.exception.CustomIllegalStateException;
+import christmas.constant.errorMessage.exception.CustomNullPointException;
+import christmas.constant.errorMessage.exception.CustomNumberFormatException;
 import christmas.dto.BenefitDto;
 import christmas.dto.OrderDto;
 import christmas.service.EventService;
@@ -26,13 +31,26 @@ public class EventController {
     }
 
     private void initDate() {
-        final int date = inputView.readDate();
-        eventService.initDate(date);
+        try {
+            final int date = inputView.readDate();
+            eventService.initDate(date);
+        } catch (CustomNumberFormatException | CustomNullPointException |
+                 CustomIllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            initDate();
+        }
     }
 
     private void initOrder() {
-        final Map<String, Integer> menus = inputView.readOrder();
-        eventService.initOrder(menus);
+        try {
+            final Map<String, Integer> menus = inputView.readOrder();
+            eventService.initOrder(menus);
+        } catch (CustomNumberFormatException | CustomNullPointException |
+                CustomIllegalArgumentException | CustomIllegalStateException |
+                CustomArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
+            initOrder();
+        }
     }
 
     private void initBenefit() {
@@ -62,5 +80,6 @@ public class EventController {
         outputView.printTotalBenefit(benefitDto);
         outputView.printTotalDiscount(benefitDto);
         outputView.printDiscountedTotalPrice(benefitDto);
+        outputView.printEventBadge(benefitDto);
     }
 }

@@ -20,6 +20,10 @@ public class OutputView {
     private static final String PRINT_TOTAL_DISCOUNT = "-%s원\n";
     private static final String PRINT_DISCOUNT_NOT_APPLICABLE = "%s원\n";
     private static final String PRINT_DISCOUNTED_TOTAL_PRICE_MESSAGE = "\n<할인 후 예상 결제 금액>\n%s원\n";
+    private static final String PRINT_EVENT_BADGE_MESSAGE = "\n<12월 이벤트 배지>\n%s";
+    private static final String PRINT_SNATA_EVENT_BADGE = "산타";
+    private static final String PRINT_TREE_EVENT_BADGE = "트리";
+    private static final String PRINT_STAR_EVENT_BADGE = "별";
     private static final DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 
     public void printOrderResult(final int date) {
@@ -89,5 +93,16 @@ public class OutputView {
     public void printDiscountedTotalPrice(final BenefitDto benefitDto) {
         final int DiscountTotalPrice = benefitDto.getDiscountedTotalPrice();
         System.out.printf(PRINT_DISCOUNTED_TOTAL_PRICE_MESSAGE, formatter.format(DiscountTotalPrice));
+    }
+
+    public void printEventBadge(final BenefitDto benefitDto) {
+        final int totalDiscount = benefitDto.getTotalDiscount();
+        System.out.printf(PRINT_EVENT_BADGE_MESSAGE, selectEventBadge(totalDiscount));
+    }
+
+    private String selectEventBadge(final int totalDiscount) {
+        if (20_000 <= totalDiscount) { return PRINT_SNATA_EVENT_BADGE; }
+        if (10_000 <= totalDiscount) { return PRINT_TREE_EVENT_BADGE; }
+        return PRINT_STAR_EVENT_BADGE;
     }
 }

@@ -8,6 +8,7 @@ import christmas.constant.errorMessage.exception.CustomNumberFormatException;
 import christmas.constant.errorMessage.input.EventExceptionStatus;
 import christmas.utils.Delimiter;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -43,7 +44,8 @@ public class OrderReadValidator {
                 .map(Delimiter::splitWithBar)
                 .collect(Collectors.toMap(
                         menu -> validateBothEndsIsBlank(menu[0]),
-                        quantity -> validateQuantityIsNumeric(quantity[1])
+                        quantity -> validateQuantityIsNumeric(quantity[1]),
+                        (x, y) -> y, LinkedHashMap::new
                 ));
     }
 

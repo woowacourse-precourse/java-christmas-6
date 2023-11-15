@@ -3,10 +3,8 @@ package christmas.service;
 import christmas.domain.benefit.Benefit;
 import christmas.domain.date.Date;
 import christmas.domain.order.Order;
-import christmas.domain.category.Category;
 import christmas.dto.BenefitDto;
 import christmas.dto.OrderDto;
-import java.util.List;
 import java.util.Map;
 
 public class EventService {
@@ -26,8 +24,6 @@ public class EventService {
     public void initBenefit() {
         this.benefit = new Benefit(date, order);
     }
-
-
 
     public OrderDto getOrderDto() {
         return order.toDto();
