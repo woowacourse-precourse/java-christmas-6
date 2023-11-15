@@ -32,7 +32,7 @@ public class PlannerController {
     private void showResultPrice() {
         int totalDiscount = plannerService.getTotalDiscount();
         int totalPrice = plannerService.getTotalPrice();
-        OutputView.printResultPriceOutputMessage(totalPrice -  totalDiscount);
+        OutputView.printResultPriceOutputMessage(totalPrice - totalDiscount);
     }
 
     private void showTotalBenefitPrice() {

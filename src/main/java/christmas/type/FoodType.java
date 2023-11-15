@@ -6,7 +6,6 @@ public enum FoodType {
     DESSERT("디저트"),
     DRINK("음료");
 
-
     private String type;
 
     FoodType(String type) {

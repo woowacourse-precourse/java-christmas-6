@@ -26,7 +26,6 @@ public class Customer {
                 + discount.getSpecialDiscount();
     }
 
-
     private void validate(int visitedDate) {
         Validator.checkDateValid(visitedDate);
     }
@@ -54,6 +53,7 @@ public class Customer {
     public Discount getDiscount() {
         return discount;
     }
+
     public void changeIsGiven() {
         isGiven = !isGiven;
     }

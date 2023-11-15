@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OutputView {
-
     public static final String ENTER = "\n";
     public static final String SPACE = " ";
     public static final String COUNT = "개";
@@ -45,7 +44,7 @@ public class OutputView {
 
         for (String key : discountMap.keySet()) {
             String formattedPrice = String.format(MINUS + "%,d원", discountMap.get(key));
-            System.out.println(key + COLON + SPACE  + formattedPrice);
+            System.out.println(key + COLON + SPACE + formattedPrice);
         }
     }
 

@@ -8,10 +8,8 @@ import christmas.type.MenuType;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Set;
 
 public class Validator {
-
     public static final int DECEMBER_FIRST = 1;
     public static final int DECEMBER_LAST = 31;
 
