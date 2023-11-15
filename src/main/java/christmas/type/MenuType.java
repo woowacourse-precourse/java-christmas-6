@@ -1,5 +1,7 @@
 package christmas.type;
 
+import christmas.exception.NotValidMenuInputException;
+
 public enum MenuType {
     SOUP(FoodType.APPETIZER, "양송이수프", 6000),
     TAPAS(FoodType.APPETIZER, "타파스", 5500),
@@ -42,6 +44,15 @@ public enum MenuType {
                 return menu.getPrice();
             }
         }
-        throw new IllegalArgumentException("Invalid food name: " + foodName);
+        throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
+    }
+
+    public static FoodType findFoodType(String foodName) {
+        for (MenuType menuType : MenuType.values()) {
+            if (menuType.getFoodName().equals(foodName)) {
+                return menuType.getType();
+            }
+        }
+        throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
     }
 }
