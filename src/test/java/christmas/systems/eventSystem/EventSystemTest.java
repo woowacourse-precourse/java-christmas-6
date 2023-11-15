@@ -13,11 +13,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
-import christmas.enums.menu.MenuItem;
 import christmas.event.EventBenefit;
 import christmas.order.Order;
 import christmas.order.Orders;
-import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Set;
@@ -26,9 +24,7 @@ import org.junit.jupiter.api.Test;
 
 class EventSystemTest {
     private final static Order orderTwoDessert = new Order(DessertMenu.CHOCOLATE_CAKE, 2);
-    private final static Order orderOneIceCream = new Order(DessertMenu.ICE_CREAM, 1);
     private final static Order oderTwoSteak = new Order(MainMenu.T_BONE_STEAK, 2);
-    private final static Orders ordersOneIceCream = new Orders(Set.of(orderOneIceCream));
     private final static Orders ordersWithMain = new Orders(Set.of(oderTwoSteak));
     private final static Orders ordersOver120_000 = new Orders(Set.of(orderTwoDessert, oderTwoSteak));
     private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 3);

@@ -10,12 +10,9 @@ import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKEND_DI
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.enums.benefit.DiscountBenefit;
-import christmas.enums.events.NoEvent;
-import christmas.event.EventBenefit;
-import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscountEvent;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
-import christmas.enums.menu.MenuItem;
+import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscountEvent;
 import christmas.order.Order;
 import christmas.order.Orders;
 import christmas.order.Receipt;
@@ -23,7 +20,6 @@ import christmas.systems.eventSystem.EventInitializer;
 import christmas.systems.eventSystem.EventSystem;
 import christmas.systems.ordersystem.OrderSystem;
 import christmas.systems.reservationsystem.ReservationSystem;
-import christmas.utils.EventPeriod;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Set;
@@ -59,7 +55,6 @@ class ReservationSystemTest {
         EventInitializer eventInitializer = new EventInitializer();
         eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
 
-
         EventSystem eventSystem = new EventSystem(eventInitializer);
         OrderSystem orderSystem = new OrderSystem(eventSystem);
         return new ReservationSystem(orderSystem);
@@ -91,12 +86,13 @@ class ReservationSystemTest {
         String result = ReservationSystem.printResult(RESTAURANT_NAME, reservationDate, dessertAndSteakOrders, receipt);
 
         //then
-        assertThat(result).contains("<주문 메뉴>","초코케이크 2개","티본스테이크 2개");
-        assertThat(result).contains("<할인 후 예상 결제 금액>","108,754원");
+        assertThat(result).contains("<주문 메뉴>", "초코케이크 2개", "티본스테이크 2개");
+        assertThat(result).contains("<할인 후 예상 결제 금액>", "108,754원");
     }
+
     @DisplayName("이벤트가 1개일 때의 혜택 검증")
     @Test
-    void oneEventBenefit(){
+    void oneEventBenefit() {
         //given
         final Integer expectedAmount = 1200;
         ReservationSystem reservationSystem = setOneEvent();
@@ -111,7 +107,7 @@ class ReservationSystemTest {
 
     @DisplayName("이벤트가 1개일 때의 메시지 검증")
     @Test
-    void oneEventMessage(){
+    void oneEventMessage() {
         //given
         ReservationSystem reservationSystem = setOneEvent();
 
@@ -120,10 +116,10 @@ class ReservationSystemTest {
         String result = ReservationSystem.printResult(RESTAURANT_NAME, reservationDate, dessertAndSteakOrders, receipt);
 
         //then
-        assertThat(result).contains("<혜택 내역>","크리스마스 디데이 할인 -1,200원");
-        assertThat(result).contains("<총혜택 금액>","-1,200원");
-        assertThat(result).contains("<할인 후 예상 결제 금액>","138,800원");
-        assertThat(result).contains("<12월 이벤트 배지>","없음");
+        assertThat(result).contains("<혜택 내역>", "크리스마스 디데이 할인 -1,200원");
+        assertThat(result).contains("<총혜택 금액>", "-1,200원");
+        assertThat(result).contains("<할인 후 예상 결제 금액>", "138,800원");
+        assertThat(result).contains("<12월 이벤트 배지>", "없음");
 
     }
 
@@ -154,10 +150,10 @@ class ReservationSystemTest {
         String result = ReservationSystem.printResult(RESTAURANT_NAME, reservationDate, iceCreamOrders, receipt);
 
         //then
-        assertThat(result).contains("<혜택 내역>","없음");
-        assertThat(result).contains("<총혜택 금액>","0원");
-        assertThat(result).contains("<할인 후 예상 결제 금액>","5,000원");
-        assertThat(result).contains("<12월 이벤트 배지>","없음");
+        assertThat(result).contains("<혜택 내역>", "없음");
+        assertThat(result).contains("<총혜택 금액>", "0원");
+        assertThat(result).contains("<할인 후 예상 결제 금액>", "5,000원");
+        assertThat(result).contains("<12월 이벤트 배지>", "없음");
     }
 
 }

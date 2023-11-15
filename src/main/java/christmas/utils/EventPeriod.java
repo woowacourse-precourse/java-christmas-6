@@ -7,6 +7,7 @@ import java.time.temporal.TemporalAdjusters;
 
 public record EventPeriod(LocalDate startDate, LocalDate endDate) {
     private final static Integer FIRST_DAY_OF_MONTH = 1;
+
     //한달의 기한을 잡는다.
     public static EventPeriod createMonthPeriod(int year, int month) {
         LocalDate firstDayOfMonth = LocalDate.of(year, Month.of(month), FIRST_DAY_OF_MONTH);

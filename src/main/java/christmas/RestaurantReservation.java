@@ -29,10 +29,10 @@ public class RestaurantReservation {
         EventSystem eventSystem = new EventSystem(eventInitializer);
         OrderSystem orderSystem = new OrderSystem(eventSystem);
         ReservationSystem reservationSystem = new ReservationSystem(orderSystem);
-        this. reservationProcessor =new ReservationProcessor(reservationSystem);
+        this.reservationProcessor = new ReservationProcessor(reservationSystem);
     }
 
-    public void run(){
-        reservationProcessor.process(RESTAURANT_NAME,YEAR,MONTH);
+    public void run() {
+        reservationProcessor.process(RESTAURANT_NAME, YEAR, MONTH);
     }
 }

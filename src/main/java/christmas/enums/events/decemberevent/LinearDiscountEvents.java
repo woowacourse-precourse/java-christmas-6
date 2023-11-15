@@ -11,7 +11,9 @@ public enum LinearDiscountEvents implements Events {
 
     CHRISTMAS_D_DAY_DISCOUNT("크리스마스 디데이 할인",
             new EventPeriod(LocalDate.of(2023, Month.DECEMBER, 1), LocalDate.of(2023, Month.DECEMBER, 25)), 1000, 100,
-            new LinearIncreaseDiscount("크리스마스 디데이 할인", new EventPeriod(LocalDate.of(2023, Month.DECEMBER, 1), LocalDate.of(2023, Month.DECEMBER, 25)), 1000, 100));
+            new LinearIncreaseDiscount("크리스마스 디데이 할인",
+                    new EventPeriod(LocalDate.of(2023, Month.DECEMBER, 1), LocalDate.of(2023, Month.DECEMBER, 25)),
+                    1000, 100));
     private final String name;
     private final EventPeriod eventPeriod;
     private final Integer startDiscountBenefit;

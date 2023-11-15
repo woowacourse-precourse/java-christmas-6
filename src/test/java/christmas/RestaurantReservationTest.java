@@ -3,7 +3,6 @@ package christmas;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.systems.reservationsystem.ReservationProcessor;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -47,11 +46,11 @@ class RestaurantReservationTest {
 
         //then
         String output = outContent.toString();
-        assertThat(output).contains("<주문 메뉴>","티본스테이크 1개","레드와인 1개");
-        assertThat(output).contains("<할인 전 총주문 금액>","115,000원");
-        assertThat(output).contains("<혜택 내역>","크리스마스 디데이 할인 -2,400원","평일 할인 -2,023원");
-        assertThat(output).contains("<할인 후 예상 결제 금액>","110,577원");
-        assertThat(output).contains("<12월 이벤트 배지>","없음");
+        assertThat(output).contains("<주문 메뉴>", "티본스테이크 1개", "레드와인 1개");
+        assertThat(output).contains("<할인 전 총주문 금액>", "115,000원");
+        assertThat(output).contains("<혜택 내역>", "크리스마스 디데이 할인 -2,400원", "평일 할인 -2,023원");
+        assertThat(output).contains("<할인 후 예상 결제 금액>", "110,577원");
+        assertThat(output).contains("<12월 이벤트 배지>", "없음");
     }
 
     @ParameterizedTest
@@ -78,16 +77,16 @@ class RestaurantReservationTest {
                 Arguments.of("25\n아이스크림-1\n", "<12월 이벤트 배지>" + System.lineSeparator() + "없음"),
                 Arguments.of("25\n아이스크림-1\n", "<혜택 내역>" + System.lineSeparator() + "없음"),
                 Arguments.of("25\n아이스크림-1\n", "<할인 후 예상 결제 금액>" + System.lineSeparator() + "5,000원"),
-                Arguments.of("3\n티본스테이크-1,레드와인-1\n", "<총혜택 금액>"+ System.lineSeparator() +"-4,223원"),
-                Arguments.of("3\n티본스테이크-1,레드와인-1\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"없음"),
-                Arguments.of("25\n티본스테이크-1,레드와인-1\n", "<총혜택 금액>"+ System.lineSeparator() +"-6,423원"),
-                Arguments.of("25\n티본스테이크-1,레드와인-1\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"별"),
-                Arguments.of("25\n크리스마스파스타-3\n", "<총혜택 금액>"+ System.lineSeparator() +"-10,469원"),
-                Arguments.of("25\n크리스마스파스타-3\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"트리"),
-                Arguments.of("25\n티본스테이크-2,레드와인-1\n", "<총혜택 금액>"+ System.lineSeparator() +"-33,446원"),
-                Arguments.of("25\n티본스테이크-2,레드와인-1\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"산타"),
-                Arguments.of("31\n티본스테이크-2,레드와인-1\n", "<총혜택 금액>"+ System.lineSeparator() +"-30,046원"),
-                Arguments.of("31\n티본스테이크-2,레드와인-1\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"산타")
+                Arguments.of("3\n티본스테이크-1,레드와인-1\n", "<총혜택 금액>" + System.lineSeparator() + "-4,223원"),
+                Arguments.of("3\n티본스테이크-1,레드와인-1\n", "<12월 이벤트 배지>" + System.lineSeparator() + "없음"),
+                Arguments.of("25\n티본스테이크-1,레드와인-1\n", "<총혜택 금액>" + System.lineSeparator() + "-6,423원"),
+                Arguments.of("25\n티본스테이크-1,레드와인-1\n", "<12월 이벤트 배지>" + System.lineSeparator() + "별"),
+                Arguments.of("25\n크리스마스파스타-3\n", "<총혜택 금액>" + System.lineSeparator() + "-10,469원"),
+                Arguments.of("25\n크리스마스파스타-3\n", "<12월 이벤트 배지>" + System.lineSeparator() + "트리"),
+                Arguments.of("25\n티본스테이크-2,레드와인-1\n", "<총혜택 금액>" + System.lineSeparator() + "-33,446원"),
+                Arguments.of("25\n티본스테이크-2,레드와인-1\n", "<12월 이벤트 배지>" + System.lineSeparator() + "산타"),
+                Arguments.of("31\n티본스테이크-2,레드와인-1\n", "<총혜택 금액>" + System.lineSeparator() + "-30,046원"),
+                Arguments.of("31\n티본스테이크-2,레드와인-1\n", "<12월 이벤트 배지>" + System.lineSeparator() + "산타")
 
         );
     }

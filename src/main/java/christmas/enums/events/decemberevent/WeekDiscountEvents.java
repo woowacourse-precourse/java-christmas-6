@@ -16,12 +16,12 @@ public enum WeekDiscountEvents implements Events {
     WEEKDAY_DISCOUNT("평일 할인",
             new EventPeriod(LocalDate.of(2023, Month.DECEMBER, 1), LocalDate.of(2023, Month.DECEMBER, 31)),
             MainMenu.values(), 2023, new WeekdayDiscount("평일 할인", new EventPeriod(LocalDate.of(2023, Month.DECEMBER, 1),
-            LocalDate.of(2023, Month.DECEMBER, 31)),MainMenu.values(),2023)),
+            LocalDate.of(2023, Month.DECEMBER, 31)), MainMenu.values(), 2023)),
     WEEKEND_DISCOUNT("주말 할인",
             new EventPeriod(LocalDate.of(2023, Month.DECEMBER, 1), LocalDate.of(2023, Month.DECEMBER, 31)),
             DessertMenu.values(), 2023,
             new WeekendDiscount("평일 할인", new EventPeriod(LocalDate.of(2023, Month.DECEMBER, 1),
-            LocalDate.of(2023, Month.DECEMBER, 31)),MainMenu.values(),2023));
+                    LocalDate.of(2023, Month.DECEMBER, 31)), MainMenu.values(), 2023));
     private final String name;
     private final EventPeriod eventPeriod;
     private final MenuItem[] menuItems;

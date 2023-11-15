@@ -14,7 +14,8 @@ public class GiftBenefit implements GiftBenefitEvent {
     private final MenuItem menuItem;
     private final Integer quantity;
 
-    public GiftBenefit(String eventName, EventPeriod eventPeriod, Integer needAmountToGift, MenuItem menuItem, Integer quantity) {
+    public GiftBenefit(String eventName, EventPeriod eventPeriod, Integer needAmountToGift, MenuItem menuItem,
+                       Integer quantity) {
         this.eventName = eventName;
         this.eventPeriod = eventPeriod;
         this.needAmountToGift = needAmountToGift;

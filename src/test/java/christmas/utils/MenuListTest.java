@@ -1,4 +1,4 @@
-package christmas;
+package christmas.utils;
 
 import static christmas.enums.menu.BeverageMenu.CHAMPAGNE;
 import static christmas.enums.menu.DessertMenu.CHOCOLATE_CAKE;
@@ -8,7 +8,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.enums.menu.MenuItem;
 import christmas.exceptions.IllegalOrderFormatException;
-import christmas.utils.MenuList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -42,8 +42,9 @@ public class ReservationSystem {
     }
 
     private static void combineString(StringBuilder stringBuilder, String printBenefit, String printOrders,
-                                  String printAmountBeforeDiscount, String printGiftBenefit, String printEventBenefits,
-                                  String printDiscountBenefit, String printAfterDiscount, String printBadge) {
+                                      String printAmountBeforeDiscount, String printGiftBenefit,
+                                      String printEventBenefits,
+                                      String printDiscountBenefit, String printAfterDiscount, String printBadge) {
         stringBuilder.append(printBenefit).append(System.lineSeparator());
         stringBuilder.append(printOrders).append(System.lineSeparator());
         stringBuilder.append(printAmountBeforeDiscount).append(System.lineSeparator()).append(System.lineSeparator());
@@ -78,7 +79,7 @@ public class ReservationSystem {
         String announceBeforeDiscount = Messages.announceBeforeDiscount();
         Integer totalPriceBeforeDiscount = receipt.totalPriceBeforeDiscount();
         String showAmount = Messages.showAmount(totalPriceBeforeDiscount);
-        return announceBeforeDiscount +System.lineSeparator()+ showAmount;
+        return announceBeforeDiscount + System.lineSeparator() + showAmount;
     }
 
     private static String printGiftBenefit(Receipt receipt) {
@@ -98,7 +99,7 @@ public class ReservationSystem {
         if (receipt.isEligible()) {
             oneEventResult = Messages.perEventBenefit(oneEventResults);
         }
-        return announceEventBenefits +System.lineSeparator() + oneEventResult;
+        return announceEventBenefits + System.lineSeparator() + oneEventResult;
     }
 
     private static String printDiscountBenefit(Receipt receipt) {
@@ -116,7 +117,7 @@ public class ReservationSystem {
     private static String printBadge(LocalDate reservationDate, Receipt receipt) {
         String announceEventBadge = Messages.announceEventBadge(reservationDate.getMonthValue());
         String badgeName = receipt.badge().getName();
-        return announceEventBadge +System.lineSeparator() +badgeName;
+        return announceEventBadge + System.lineSeparator() + badgeName;
     }
 
 }

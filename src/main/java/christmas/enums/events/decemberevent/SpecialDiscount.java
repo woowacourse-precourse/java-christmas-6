@@ -8,8 +8,10 @@ import java.time.LocalDate;
 import java.time.Month;
 
 public enum SpecialDiscount implements Events {
-    SPECIAL_DISCOUNT("특별 할인",new EventPeriod(LocalDate.of(2023,Month.DECEMBER,1),LocalDate.of(2023,Month.DECEMBER,31)),
-            1000, new SpecialDayDiscount("특별 할인",new EventPeriod(LocalDate.of(2023,Month.DECEMBER,1),LocalDate.of(2023,Month.DECEMBER,31)),
+    SPECIAL_DISCOUNT("특별 할인",
+            new EventPeriod(LocalDate.of(2023, Month.DECEMBER, 1), LocalDate.of(2023, Month.DECEMBER, 31)),
+            1000, new SpecialDayDiscount("특별 할인",
+            new EventPeriod(LocalDate.of(2023, Month.DECEMBER, 1), LocalDate.of(2023, Month.DECEMBER, 31)),
             1000));
     private final String name;
     private final EventPeriod eventPeriod;

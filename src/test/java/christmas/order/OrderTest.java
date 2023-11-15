@@ -1,4 +1,4 @@
-package christmas;
+package christmas.order;
 
 import static christmas.enums.menu.MainMenu.SEAFOOD_PASTA;
 import static christmas.enums.menu.MainMenu.T_BONE_STEAK;
@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
-import christmas.order.Order;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

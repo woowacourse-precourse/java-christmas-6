@@ -1,4 +1,4 @@
-package christmas;
+package christmas.enums.badge.benefit;
 
 import static christmas.enums.badge.benefit.BenefitBadge.NONE;
 import static christmas.enums.badge.benefit.BenefitBadge.SANTA;
@@ -6,7 +6,6 @@ import static christmas.enums.badge.benefit.BenefitBadge.STAR;
 import static christmas.enums.badge.benefit.BenefitBadge.TREE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.enums.badge.benefit.BenefitBadge;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -22,6 +22,7 @@ class ReceiptTest {
     private final static Order oneIceCream = new Order(DessertMenu.ICE_CREAM, 1);
     private final static Orders ordersOneIceReam = new Orders(Set.of(oneIceCream));
     private final static LocalDate reservationDate = LocalDate.of(2023, Month.DECEMBER, 3);
+
     public EventSystem eventSystem() {
         EventInitializer eventInitializer = new EventInitializer();
         eventInitializer.increaseEverydayDiscountEventsAdd(CHRISTMAS_D_DAY_DISCOUNT.getInstance());

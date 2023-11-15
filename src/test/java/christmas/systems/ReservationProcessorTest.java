@@ -15,7 +15,6 @@ import christmas.systems.reservationsystem.ReservationProcessor;
 import christmas.systems.reservationsystem.ReservationSystem;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
@@ -45,6 +44,7 @@ class ReservationProcessorTest {
     public void restoreStreams() {
         Console.close();
     }
+
     ReservationProcessor setALLEvent() {
         EventInitializer eventInitializer = new EventInitializer();
         eventInitializer.increaseEverydayDiscountEventsAdd(CHRISTMAS_D_DAY_DISCOUNT.getInstance());
@@ -84,13 +84,13 @@ class ReservationProcessorTest {
         final String input = "3\n티본스테이크-1,레드와인-1\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         ReservationProcessor reservationProcessor = this.setALLEvent();
-        reservationProcessor.process(RESTAURANT_NAME, 2023,12);
+        reservationProcessor.process(RESTAURANT_NAME, 2023, 12);
         String output = outContent.toString();
-        assertThat(output).contains("<주문 메뉴>","티본스테이크 1개","레드와인 1개");
-        assertThat(output).contains("<할인 전 총주문 금액>","115,000원");
-        assertThat(output).contains("<혜택 내역>","크리스마스 디데이 할인 -1,200원","특별 할인 -1,000원","평일 할인 -2,023원");
-        assertThat(output).contains("<할인 후 예상 결제 금액>","110,777원");
-        assertThat(output).contains("<12월 이벤트 배지>","없음");
+        assertThat(output).contains("<주문 메뉴>", "티본스테이크 1개", "레드와인 1개");
+        assertThat(output).contains("<할인 전 총주문 금액>", "115,000원");
+        assertThat(output).contains("<혜택 내역>", "크리스마스 디데이 할인 -1,200원", "특별 할인 -1,000원", "평일 할인 -2,023원");
+        assertThat(output).contains("<할인 후 예상 결제 금액>", "110,777원");
+        assertThat(output).contains("<12월 이벤트 배지>", "없음");
     }
 
     @DisplayName("등록된 이벤트가 1개일 때 정상적인 동작을 검증한다.")
@@ -99,13 +99,13 @@ class ReservationProcessorTest {
         final String input = "3\n티본스테이크-1,레드와인-1\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         ReservationProcessor reservationProcessor = this.setOneEvent();
-        reservationProcessor.process(RESTAURANT_NAME, 2023,12);
+        reservationProcessor.process(RESTAURANT_NAME, 2023, 12);
         String output = outContent.toString();
-        assertThat(output).contains("<주문 메뉴>","티본스테이크 1개","레드와인 1개");
-        assertThat(output).contains("<할인 전 총주문 금액>","115,000원");
-        assertThat(output).contains("<혜택 내역>","특별 할인 -1,000원");
-        assertThat(output).contains("<할인 후 예상 결제 금액>","114,000원");
-        assertThat(output).contains("<12월 이벤트 배지>","없음");
+        assertThat(output).contains("<주문 메뉴>", "티본스테이크 1개", "레드와인 1개");
+        assertThat(output).contains("<할인 전 총주문 금액>", "115,000원");
+        assertThat(output).contains("<혜택 내역>", "특별 할인 -1,000원");
+        assertThat(output).contains("<할인 후 예상 결제 금액>", "114,000원");
+        assertThat(output).contains("<12월 이벤트 배지>", "없음");
     }
 
     @DisplayName("등록된 이벤트가 없을 때 정상적인 동작을 검증한다.")
@@ -114,15 +114,14 @@ class ReservationProcessorTest {
         final String input = "3\n티본스테이크-1,레드와인-1\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         ReservationProcessor reservationProcessor = this.setNoEvent();
-        reservationProcessor.process(RESTAURANT_NAME, 2023,12);
+        reservationProcessor.process(RESTAURANT_NAME, 2023, 12);
         String output = outContent.toString();
-        assertThat(output).contains("<주문 메뉴>","티본스테이크 1개","레드와인 1개");
-        assertThat(output).contains("<할인 전 총주문 금액>","115,000원");
-        assertThat(output).contains("<혜택 내역>","없음");
-        assertThat(output).contains("<할인 후 예상 결제 금액>","115,000원");
-        assertThat(output).contains("<12월 이벤트 배지>","없음");
+        assertThat(output).contains("<주문 메뉴>", "티본스테이크 1개", "레드와인 1개");
+        assertThat(output).contains("<할인 전 총주문 금액>", "115,000원");
+        assertThat(output).contains("<혜택 내역>", "없음");
+        assertThat(output).contains("<할인 후 예상 결제 금액>", "115,000원");
+        assertThat(output).contains("<12월 이벤트 배지>", "없음");
     }
-
 
 
     @ParameterizedTest
@@ -134,7 +133,7 @@ class ReservationProcessorTest {
         ReservationProcessor reservationProcessor = this.setALLEvent();
 
         //when
-        reservationProcessor.process(RESTAURANT_NAME, 2023,12);
+        reservationProcessor.process(RESTAURANT_NAME, 2023, 12);
         String output = outContent.toString();
 
         //then
@@ -149,17 +148,17 @@ class ReservationProcessorTest {
                 Arguments.of("25\n아이스크림-1\n", "<12월 이벤트 배지>" + System.lineSeparator() + "없음"),
                 Arguments.of("25\n아이스크림-1\n", "<혜택 내역>" + System.lineSeparator() + "없음"),
                 Arguments.of("25\n아이스크림-1\n", "<할인 후 예상 결제 금액>" + System.lineSeparator() + "5,000원"),
-                Arguments.of("3\n티본스테이크-1,레드와인-1\n", "<총혜택 금액>"+ System.lineSeparator() +"-4,223원"),
-                Arguments.of("3\n티본스테이크-1,레드와인-1\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"없음"),
-                Arguments.of("25\n티본스테이크-1,레드와인-1\n", "<총혜택 금액>"+ System.lineSeparator() +"-6,423원"),
-                Arguments.of("25\n티본스테이크-1,레드와인-1\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"별"),
-                Arguments.of("25\n크리스마스파스타-3\n", "<총혜택 금액>"+ System.lineSeparator() +"-10,469원"),
-                Arguments.of("25\n크리스마스파스타-3\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"트리"),
-                Arguments.of("25\n티본스테이크-2,레드와인-1\n", "<총혜택 금액>"+ System.lineSeparator() +"-33,446원"),
-                Arguments.of("25\n티본스테이크-2,레드와인-1\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"산타"),
-                Arguments.of("31\n티본스테이크-2,레드와인-1\n", "<총혜택 금액>"+ System.lineSeparator() +"-30,046원"),
-                Arguments.of("31\n티본스테이크-2,레드와인-1\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"산타")
-                );
+                Arguments.of("3\n티본스테이크-1,레드와인-1\n", "<총혜택 금액>" + System.lineSeparator() + "-4,223원"),
+                Arguments.of("3\n티본스테이크-1,레드와인-1\n", "<12월 이벤트 배지>" + System.lineSeparator() + "없음"),
+                Arguments.of("25\n티본스테이크-1,레드와인-1\n", "<총혜택 금액>" + System.lineSeparator() + "-6,423원"),
+                Arguments.of("25\n티본스테이크-1,레드와인-1\n", "<12월 이벤트 배지>" + System.lineSeparator() + "별"),
+                Arguments.of("25\n크리스마스파스타-3\n", "<총혜택 금액>" + System.lineSeparator() + "-10,469원"),
+                Arguments.of("25\n크리스마스파스타-3\n", "<12월 이벤트 배지>" + System.lineSeparator() + "트리"),
+                Arguments.of("25\n티본스테이크-2,레드와인-1\n", "<총혜택 금액>" + System.lineSeparator() + "-33,446원"),
+                Arguments.of("25\n티본스테이크-2,레드와인-1\n", "<12월 이벤트 배지>" + System.lineSeparator() + "산타"),
+                Arguments.of("31\n티본스테이크-2,레드와인-1\n", "<총혜택 금액>" + System.lineSeparator() + "-30,046원"),
+                Arguments.of("31\n티본스테이크-2,레드와인-1\n", "<12월 이벤트 배지>" + System.lineSeparator() + "산타")
+        );
     }
 
     @ParameterizedTest
@@ -171,7 +170,7 @@ class ReservationProcessorTest {
         ReservationProcessor reservationProcessor = this.setALLEvent();
 
         //when
-        reservationProcessor.process(RESTAURANT_NAME, 2023,12);
+        reservationProcessor.process(RESTAURANT_NAME, 2023, 12);
         String output = outContent.toString();
 
         //then
@@ -191,6 +190,6 @@ class ReservationProcessorTest {
                 Arguments.of("3\n티본스테이크-0,레드와인-1\n티본스테이크-1,레드와인-1\n", ILLEGAL_ORDER_FORMAT_EXCEPTION),
                 Arguments.of("3\n티본스테이크-1,티본스테이크-1\n티본스테이크-1,레드와인-1\n", ILLEGAL_ORDER_FORMAT_EXCEPTION),
                 Arguments.of("3\n티본스테이크-20,레드와인-1\n티본스테이크-1,레드와인-1\n", ILLEGAL_OUT_OF_NUMBER_MENU_EXCEPTION)
-                );
+        );
     }
 }
