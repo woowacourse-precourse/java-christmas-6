@@ -1,7 +1,22 @@
 package christmas;
 
+import christmas.controller.EventController;
+
 public class Application {
+
+    private final EventController eventController;
+
+    public Application(final AppConfig appConfig) {
+        this.eventController = appConfig.eventController;
+    }
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        Application application = new Application(AppConfig.getInstance());
+        application.run();
+    }
+
+    public void run() {
+        eventController.initEvent();
+        eventController.playEvent();
     }
 }
