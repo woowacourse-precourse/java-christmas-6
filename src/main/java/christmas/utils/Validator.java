@@ -3,10 +3,12 @@ package christmas.utils;
 import christmas.exception.NotValidDateException;
 import christmas.exception.NotValidMenuInputException;
 import christmas.type.ErrorType;
+import christmas.type.FoodType;
 import christmas.type.MenuType;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 
 public class Validator {
 
@@ -36,11 +38,17 @@ public class Validator {
 
     private static void checkMenuSumValid(Map<String, Integer> resultMap) {
         int sum = 0;
-        for (String key : resultMap.keySet()) {
+        Set<String> keySet = resultMap.keySet();
+        for (String key : keySet) {
             sum += resultMap.get(key);
             if (sum > 20) {
                 throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
             }
+
+            if (keySet.size() == 1 && MenuType.findFoodType(key).equals(FoodType.DRINK)) {
+                throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER_ONLY_DRINK.getText());
+            }
         }
+
     }
 }
