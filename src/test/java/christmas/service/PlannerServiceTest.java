@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,6 +66,42 @@ class PlannerServiceTest {
         //then
         Assertions.assertEquals(1, order.getTotalOrder().size());
         Assertions.assertEquals(1, orderMap.get(MenuType.CHRIST_MAS_PASTA.getFoodName()));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"10, 4923, 1", "71000, 3623, 1", "6, 64937, 19"})
+    void 평일_날짜_할인_금액_테스트(int date, int value, int count) {
+        // given
+        HashMap<String, Integer> menuMap = new HashMap<>();
+        menuMap.put(MenuType.CHRIST_MAS_PASTA.getFoodName(), 1);
+        menuMap.put(MenuType.ICE_CREAM.getFoodName(), count);
+        plannerService.setVisitedDate(date);
+        plannerService.setOrder(menuMap);
+
+        // when
+        plannerService.calculateDiscount(date);
+        int totalBenefit = plannerService.getTotalBenefit();
+
+        //then
+        Assertions.assertEquals(value, totalBenefit);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"9, 3823, 1", "16, 4523, 1", "23, 38315, 5"})
+    void 주말_날짜_할인_금액_테스트(int date, int value, int count) {
+        // given
+        HashMap<String, Integer> menuMap = new HashMap<>();
+        menuMap.put(MenuType.CHRIST_MAS_PASTA.getFoodName(), count);
+        menuMap.put(MenuType.ICE_CREAM.getFoodName(), 1);
+        plannerService.setVisitedDate(date);
+        plannerService.setOrder(menuMap);
+
+        // when
+        plannerService.calculateDiscount(date);
+        int totalBenefit = plannerService.getTotalBenefit();
+
+        //then
+        Assertions.assertEquals(value, totalBenefit);
     }
 
 }
