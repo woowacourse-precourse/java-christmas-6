@@ -3,6 +3,8 @@
 ### 초기 구현
 ![img.png](img.png)
 
+### 실제 구현
+![img_1.png](img_1.png)
 
 ## 구현 계획
 
