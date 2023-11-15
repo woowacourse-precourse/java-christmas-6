@@ -315,6 +315,7 @@
 
 <details>
 <summary>(23.11.15)</summary>
+
 - [x] RestaurantProcessor 테스트 코드 구현
 - [x] RestaurantReservation 테스트코드 구현
 </details>
