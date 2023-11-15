@@ -45,7 +45,6 @@ public class PromotionChecker {
         }
     }
     private void checkSpecialPromotionAppliable(Reservation reservation, Map<Promotion, Integer> promotionApplied) {
-        System.out.println(reservation.checkReservedDate().getDayOfWeek());
         if (reservation.checkReservedDate().getDayOfMonth() == 25 || reservation.checkReservedDate().getDayOfWeek() == DayOfWeek.SUNDAY) {
             promotionApplied.put(Promotion.SPECIAL_PROMOTION, Promotion.SPECIAL_PROMOTION.checkPromotionDefaultBenefit());
         }
@@ -55,7 +54,9 @@ public class PromotionChecker {
         if (Arrays.stream(WEEKENDS).toList().contains(
                 reservation.checkReservedDate().getDayOfWeek()
         )) {
-            int matchedMenuByPromotionCategory = reservation.checkMenuByCategory(WEEKEND_PROMOTION_CATEGORY).size();
+            List<SimpleEntry<Menu, Integer>> menuPromotionApplied = reservation.checkMenuByCategory(WEEKEND_PROMOTION_CATEGORY);
+
+            int matchedMenuByPromotionCategory = menuPromotionApplied.stream().mapToInt(SimpleEntry::getValue).sum();
             int totalBenefit = matchedMenuByPromotionCategory * Promotion.WEEKEND_PROMOTION.checkPromotionDefaultBenefit();
 
             promotionApplied.put(Promotion.WEEKEND_PROMOTION, totalBenefit);
@@ -65,7 +66,9 @@ public class PromotionChecker {
     private void checkWeekdayPromotionAppliable(Reservation reservation, Map<Promotion, Integer> promotionApplied) {
         if (Arrays.stream(WEEKDAYS).toList()
                 .contains(reservation.checkReservedDate().getDayOfWeek())) {
-            int matchedMenuByPromotionCategory = reservation.checkMenuByCategory(WEEKDAY_PROMOTION_CATEGORY).size();
+            List<SimpleEntry<Menu, Integer>> menuPromotionApplied = reservation.checkMenuByCategory(WEEKDAY_PROMOTION_CATEGORY);
+
+            int matchedMenuByPromotionCategory = menuPromotionApplied.stream().mapToInt(el -> el.getValue()).sum();
             int totalBenefit = matchedMenuByPromotionCategory * Promotion.WEEKDAY_PROMOTION.checkPromotionDefaultBenefit();
 
             promotionApplied.put(Promotion.WEEKDAY_PROMOTION, totalBenefit);
@@ -80,11 +83,7 @@ public class PromotionChecker {
             promotionApplied.put(Promotion.CHRISTMAS_DDAY_PROMOTION, christmasPromotionBenefit);
         }
     }
-
-
-
-
-    // WEEKDAY와 WEEKEND를 어떻게 구분할 것인가에 대한 고민이 필요하다.
+    // TODO: WEEKDAY와 WEEKEND를 어떻게 구분할 것인가에 대한 고민이 필요하다.
 
 
 

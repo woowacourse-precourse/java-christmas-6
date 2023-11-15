@@ -35,7 +35,6 @@ public class Menu {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || menuName.getClass() != o.getClass()) return false;
         String menu = (String) o;
         return this.menuName.equals(menu);
