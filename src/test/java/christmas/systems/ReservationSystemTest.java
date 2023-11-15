@@ -9,11 +9,13 @@ import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKDAY_DI
 import static christmas.enums.events.decemberevent.WeekDiscountEvents.WEEKEND_DISCOUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.EventFactory;
+import christmas.enums.benefit.DiscountBenefit;
+import christmas.enums.events.NoEvent;
+import christmas.event.EventBenefit;
+import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscountEvent;
 import christmas.enums.menu.DessertMenu;
 import christmas.enums.menu.MainMenu;
 import christmas.enums.menu.MenuItem;
-import christmas.event.evnets.linearincreasediscount.LinearIncreaseDiscount;
 import christmas.order.Order;
 import christmas.order.Orders;
 import christmas.order.Receipt;
@@ -29,10 +31,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ReservationSystemTest {
-    private final static EventPeriod monthPeriod = EventPeriod.createMonthPeriod(2023, 12);
-    private final static EventPeriod typicalPeriod = EventPeriod.createTypicalPeriod(2023, 12, 1, 25);
-    private final static MenuItem[] weekdayMenus = MainMenu.values();
-    private final static MenuItem[] weekendMenus = DessertMenu.values();
     private final static Order orderTwoDessert = new Order(DessertMenu.CHOCOLATE_CAKE, 2);
     private final static Order orderOneIceCream = new Order(DessertMenu.ICE_CREAM, 1);
     private final static Order oderTwoSteak = new Order(MainMenu.T_BONE_STEAK, 2);
@@ -56,8 +54,7 @@ class ReservationSystemTest {
     }
 
     ReservationSystem setOneEvent() {
-        LinearIncreaseDiscount linearDiscount = EventFactory.createLinearDiscount(CHRISTMAS_D_DAY_DISCOUNT.getName(),
-                typicalPeriod, 1000, 100);
+        LinearIncreaseDiscountEvent linearDiscount = CHRISTMAS_D_DAY_DISCOUNT.getInstance();
 
         EventInitializer eventInitializer = new EventInitializer();
         eventInitializer.increaseEverydayDiscountEventsAdd(linearDiscount);
@@ -87,7 +84,6 @@ class ReservationSystemTest {
     @Test
     void allEventMessage() {
         //given
-        final Integer expectedAmount = 31246;
         ReservationSystem reservationSystem = setALLEvent();
 
         //when
@@ -135,7 +131,6 @@ class ReservationSystemTest {
     @Test
     void allEventBenefitUnder10_000() {
         //given
-        final Integer expectedAmount = 0;
         ReservationSystem reservationSystem = setALLEvent();
 
         //when
@@ -145,7 +140,24 @@ class ReservationSystemTest {
 
         //then
         assertThat(receipt.badge()).isEqualTo(NONE);
-        assertThat(receipt.discountBenefit()).isEqualTo(expectedAmount);
+        assertThat(receipt.discountBenefit()).isEqualTo(DiscountBenefit.NO_BENEFIT.getAmount());
+    }
+
+    @DisplayName("총 금액이 10000원 이하 일 시 메시지 검증")
+    @Test
+    void allEventMessageUnder10_000() {
+        //given
+        ReservationSystem reservationSystem = setALLEvent();
+
+        //when
+        Receipt receipt = reservationSystem.calculateOrderResult(reservationDate, iceCreamOrders);
+        String result = ReservationSystem.printResult(RESTAURANT_NAME, reservationDate, iceCreamOrders, receipt);
+
+        //then
+        assertThat(result).contains("<혜택 내역>","없음");
+        assertThat(result).contains("<총혜택 금액>","0원");
+        assertThat(result).contains("<할인 후 예상 결제 금액>","5,000원");
+        assertThat(result).contains("<12월 이벤트 배지>","없음");
     }
 
 }
