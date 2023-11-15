@@ -40,6 +40,21 @@ class PlannerControllerTest extends NsTest {
         });
     }
 
+    @Test
+    void 주문_메뉴_정상_출력() {
+        assertSimpleTest(() -> {
+            run("5", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains(
+                    "<주문 메뉴>",
+                    "티본스테이크 1개",
+                    "바비큐립 1개",
+                    "초코케이크 2개",
+                    "제로콜라 1개"
+            );
+        });
+    }
+
+
 
     @Override
     protected void runMain() {
