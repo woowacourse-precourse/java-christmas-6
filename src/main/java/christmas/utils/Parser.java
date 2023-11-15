@@ -15,6 +15,7 @@ public class Parser {
 
     public static final String COMMA_REGEX = "^([^,]+,)*[^,]+$";
     public static final String INTEGER_REGEX = "^[1-9]\\d*$";
+    public static final String MENU_COUNT_REGEX = "^[a-zA-Z가-힣]+-\\d+$";
 
     public static int convertToInt(String input) {
         if (!Pattern.matches(INTEGER_REGEX, input)) {
@@ -30,7 +31,7 @@ public class Parser {
 
         String[] commaSplits = input.split(",");
         for (String commaSplit : commaSplits) {
-            if (!Pattern.matches("^[a-zA-Z가-힣]+-\\d+$", commaSplit)) {
+            if (!Pattern.matches(MENU_COUNT_REGEX, commaSplit)) {
                 throw new IllegalArgumentException(ErrorType.NOT_VALID_ORDER.getText());
             }
         }
