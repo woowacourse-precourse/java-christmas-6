@@ -1,6 +1,8 @@
 package christmas.utils;
 
 import christmas.domain.Food;
+import christmas.exception.NotValidDateException;
+import christmas.type.ErrorType;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,14 +14,14 @@ import java.util.stream.Collectors;
 public class Parser {
     public static int convertToInt(String input) {
         if (!Pattern.matches("^[1-9]\\d*$", input)) {
-            throw new IllegalArgumentException();
+            throw new NotValidDateException(ErrorType.NOT_VALID_DATE.getText());
         }
         return Integer.parseInt(input);
     }
 
     public static Map<String, Integer> convertToMap(String input) {
-        if (!Pattern.matches("^([a-zA-Z0-9가-힣]+\\-[0-9]+,)*([a-zA-Z0-9가-힣]+\\-[0-9]+)$", input)) {
-            throw new IllegalArgumentException();
+        if (!Pattern.matches("^([a-zA-Z가-힣]+-\\d+,)*([a-zA-Z가-힣]+-\\d+)$\n", input)) {
+            throw new IllegalArgumentException(ErrorType.NOT_VALID_ORDER.getText());
         }
 
         return Arrays.stream(input.split(","))
