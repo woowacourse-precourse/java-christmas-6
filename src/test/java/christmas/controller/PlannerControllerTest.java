@@ -23,12 +23,13 @@ class PlannerControllerTest extends NsTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"0", "-1", "32"})
-    void 날짜_범위_입력_예외_테스트() {
+    void 날짜_범위_입력_예외_테스트(String input) {
         assertSimpleTest(() -> {
-            runException("a");
+            runException(input);
             assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         });
     }
+
 
 
     @Override
