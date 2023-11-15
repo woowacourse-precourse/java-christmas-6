@@ -52,20 +52,7 @@ public class PrintOrderList {
 
     public boolean benefitPossible() {
         if (totalBeforeDiscount >= 10000) {
-            Set<String> beverageItems = new HashSet<>(Arrays.asList("제로콜라", "레드와인", "샴페인"));
-            boolean hasNonBeverageItem = false;
-
-            for (Map.Entry<String, Integer> entry : orderSummary.entrySet()) {
-                String itemName = entry.getKey();
-                int quantity = entry.getValue();
-
-                if (!beverageItems.contains(itemName) && quantity > 0) {
-                    hasNonBeverageItem = true;
-                    break;
-                }
-            }
-
-            return hasNonBeverageItem;
+            return true;
         }
         return false;
     }

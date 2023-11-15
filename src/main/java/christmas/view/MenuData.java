@@ -1,10 +1,13 @@
 package christmas.view;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class MenuData {
     public static Map<String, Integer> menuMap = new HashMap<>();
+    public static Set<String> beverageItems = new HashSet<>();
 
     static {
         menuMap.put("양송이수프", 6000);
@@ -19,5 +22,9 @@ public class MenuData {
         menuMap.put("제로콜라", 3000);
         menuMap.put("레드와인", 60000);
         menuMap.put("샴페인", 25000);
+
+        beverageItems.add("제로콜라");
+        beverageItems.add("레드와인");
+        beverageItems.add("샴페인");
     }
 }
