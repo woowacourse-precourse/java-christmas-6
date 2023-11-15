@@ -83,9 +83,4 @@ public class PromotionChecker {
             promotionApplied.put(Promotion.CHRISTMAS_DDAY_PROMOTION, christmasPromotionBenefit);
         }
     }
-    // TODO: WEEKDAY와 WEEKEND를 어떻게 구분할 것인가에 대한 고민이 필요하다.
-
-
-
-
 }
