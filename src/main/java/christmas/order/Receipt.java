@@ -8,6 +8,7 @@ import christmas.event.Gift;
 import christmas.event.OneEventResult;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public record Receipt(List<OneEventResult> oneEventResults, Integer totalPriceBeforeDiscount, Integer discountBenefit,
                       Gift gift, Badge badge) {
@@ -25,7 +26,7 @@ public record Receipt(List<OneEventResult> oneEventResults, Integer totalPriceBe
             oneEventResults.add(new OneEventResult(gift().getName(), gift.getGiftDiscountBenefit()));
             oneEventResults = oneEventResults.stream().toList();
         }
-        this.oneEventResults = oneEventResults;
+        this.oneEventResults = oneEventResults.stream().filter(event -> !event.discountBenefit().equals(0)).toList();
         this.badge = badge;
     }
 
