@@ -30,6 +30,15 @@ class PlannerControllerTest extends NsTest {
         });
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"123", "티본스테이크,1", "티본스테이크-1.바비큐립-1"
+            , "티본스테이크=1,바비큐립=1", "바비큐립-1,바비큐립-3", "아이스티-2"})
+    void 주문_입력_예외_테스트(String input) {
+        assertSimpleTest(() -> {
+            runException("5", input);
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
 
 
     @Override
