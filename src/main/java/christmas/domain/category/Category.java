@@ -6,37 +6,42 @@ import java.util.Optional;
 
 public enum Category {
 
-    APPETIZER("애피타이저"),
-        MUSHROOM_SOUP("양송이수프", 6_000),
-        TAPAS("타바스", 5_500),
-        CAESAR_SALAD("시저샐러드", 8_000),
+    ROOT("메뉴판", null),
+        APPETIZER("애피타이저", ROOT),
+            MUSHROOM_SOUP("양송이수프", 6_000, APPETIZER),
+            TAPAS("타바스", 5_500, APPETIZER),
+            CAESAR_SALAD("시저샐러드", 8_000, APPETIZER),
 
-    MAIN("메인"),
-        T_BONE_STEAK("티본스테이크", 55_000),
-        BBQ_RIBS("바비큐립", 54_000),
-        SEAFOOD_PASTA("해산물파스타", 35_000),
-        CHRISTMAS_PASTA("크리스마스파스타", 25_000),
+        MAIN("메인", ROOT),
+            T_BONE_STEAK("티본스테이크", 55_000, MAIN),
+            BBQ_RIBS("바비큐립", 54_000, MAIN),
+            SEAFOOD_PASTA("해산물파스타", 35_000, MAIN),
+            CHRISTMAS_PASTA("크리스마스파스타", 25_000, MAIN),
 
-    DESSERT("디저트"),
-        CHOCOLATE_CAKE("초코케이크", 15_000),
-        ICE_CREAM("아이스크림", 5_000),
+        DESSERT("디저트", ROOT),
+            CHOCOLATE_CAKE("초코케이크", 15_000, DESSERT),
+            ICE_CREAM("아이스크림", 5_000, DESSERT),
 
-    BEVERAGE("음료"),
-        ZERO_COLA("제로콜라", 3_000),
-        RED_WINE("레드와인", 60_000),
-        CHAMPAGNE("샴페인", 25_000);
+        BEVERAGE("음료", ROOT),
+            ZERO_COLA("제로콜라", 3_000, BEVERAGE),
+            RED_WINE("레드와인", 60_000, BEVERAGE),
+                CHAMPAGNE("샴페인", 25_000, BEVERAGE);
 
     private final String menu;
     private final int price;
 
-    Category(final String menu) {
+    private final Category parentCategory;
+
+    Category(final String menu, Category parentCategory) {
         this.menu = menu;
         this.price = 0;
+        this.parentCategory = parentCategory;
     }
 
-    Category(final String menu, final int price) {
+    Category(final String menu, final int price, Category parentCategory) {
         this.menu = menu;
         this.price = price;
+        this.parentCategory = parentCategory;
     }
 
     public static Optional<Category> of(final String menu) {
@@ -58,5 +63,9 @@ public enum Category {
 
     public int getPrice() {
         return price;
+    }
+
+    public String getParentCategory() {
+        return parentCategory.getMenu();
     }
 }

@@ -16,7 +16,7 @@ public class Order {
 
     public Order(final Map<String, Integer> menus) {
         this.menus = menus;
-        this.totalPrice = calculateTotalPrice(searchCategory());
+        this.totalPrice = calculateTotalPrice(checkOrderIsValid());
     }
 
     private List<Category> searchCategory() {
@@ -34,6 +34,15 @@ public class Order {
             throw new CustomIllegalArgumentException(EventExceptionStatus.MENU_IS_NOT_CORRECT);
         }
         return category;
+    }
+
+    private List<Category> checkOrderIsValid() {
+        final List<Category> totalOrder = searchCategory();
+        final String parentCategory = totalOrder.get(0).getParentCategory();
+        if (totalOrder.size() == 1 && parentCategory.equals("음료")) {
+            throw new CustomIllegalArgumentException(EventExceptionStatus.MENU_IS_NOT_CORRECT);
+        }
+        return totalOrder;
     }
 
     private int calculateTotalPrice(List<Category> categories) {
