@@ -37,17 +37,19 @@ public class Validator {
 
     public static void checkMenuSumValid(Map<String, Integer> resultMap) {
         int sum = 0;
-        Set<String> keySet = resultMap.keySet();
-        for (String key : keySet) {
+        int count = 0;
+        for (String key : resultMap.keySet()) {
             sum += resultMap.get(key);
-            if (sum > 20) {
-                throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
-            }
-
-            if (keySet.size() == 1 && MenuType.findFoodType(key).equals(FoodType.DRINK)) {
-                throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER_ONLY_DRINK.getText());
+            if (MenuType.findFoodType(key).equals(FoodType.DRINK)) {
+                count++;
             }
         }
+        if (sum > 20) {
+            throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
+        }
 
+        if (count == resultMap.size()) {
+            throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER_ONLY_DRINK.getText());
+        }
     }
 }
