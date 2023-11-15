@@ -55,7 +55,7 @@ public class PlannerService {
     }
 
     private void setChristmasDayDiscount(int date) {
-        if (date <= CHRISTMAS_DAY) {
+        if (date <= CHRISTMAS_DAY && order.getTotalPrice() >= 10000) {
             int money = BASE_MONEY + (date - 1) * INCREMENT_MONEY;
             customer.setChristmasDiscountPrice(money);
         }
@@ -68,21 +68,24 @@ public class PlannerService {
     }
 
     private void setNormalDayDiscount(int date) {
-        if (!WeekDateType.isDateIncluded(date)) {
+        if (!WeekDateType.isDateIncluded(date) && order.getTotalPrice() >= 10000) {
             int price = order.getDessertFoods().stream()
                     .mapToInt(f -> f.getCount())
                     .sum();
             customer.setNormalDiscountPrice(price * EVENT_DISCOUNT_VALUE);
             return;
         }
-        int price = order.getMainFoods().stream()
-                .mapToInt(f -> f.getCount())
-                .sum();
-        customer.setWeekDiscountPrice(price * EVENT_DISCOUNT_VALUE);
+
+        if (order.getTotalPrice() >= 10000) {
+            int price = order.getMainFoods().stream()
+                    .mapToInt(f -> f.getCount())
+                    .sum();
+            customer.setWeekDiscountPrice(price * EVENT_DISCOUNT_VALUE);
+        }
     }
 
     private void setSpecialDayDiscount(int date) {
-        if (SpecialDateType.isDateIncluded(date)) {
+        if (SpecialDateType.isDateIncluded(date) && order.getTotalPrice() >= 10000) {
             customer.setSpecialDiscountPrice(BASE_MONEY);
         }
     }
