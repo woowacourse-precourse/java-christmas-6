@@ -29,17 +29,24 @@ public class Parser {
         if (!Pattern.matches(COMMA_REGEX, input)) {
             throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
         }
+        String[] commaSplits = checkSplit(input);
 
+        return Arrays.stream(commaSplits)
+                .map(s -> s.split("-"))
+                .collect(Collectors.toMap(a -> a[0], a -> Integer.parseInt(a[1]),
+                        (oldValue, newValue) -> {
+                            throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
+                        }));
+    }
+
+    private static String[] checkSplit(String input) {
         String[] commaSplits = input.split(",");
         for (String commaSplit : commaSplits) {
             if (!Pattern.matches(MENU_COUNT_REGEX, commaSplit)) {
                 throw new NotValidMenuInputException(ErrorType.NOT_VALID_ORDER.getText());
             }
         }
-
-        return Arrays.stream(commaSplits)
-                .map(s -> s.split("-"))
-                .collect(Collectors.toMap(a -> a[0], a -> Integer.parseInt(a[1])));
+        return commaSplits;
     }
 
     public static void convertListToMap(HashMap<String, Integer> orderMap, List<Food> foodList) {
