@@ -34,12 +34,10 @@ class ReservationProcessorTest {
     private final static String ILLEGAL_OUT_OF_NUMBER_MENU_EXCEPTION = "메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.\n"
             + "(e.g. 시저샐러드-1, 티본스테이크-1, 크리스마스파스타-1, 제로콜라-3, 아이스크림-1의 총개수는 7개)";
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private InputStream originalIn;
+
 
     @BeforeEach
     public void setUpStreams() {
-        originalIn = System.in;
         System.setOut(new PrintStream(outContent));
     }
 
@@ -47,7 +45,7 @@ class ReservationProcessorTest {
     public void restoreStreams() {
         Console.close();
     }
-    ReservationSystem setALLEvent() {
+    ReservationProcessor setALLEvent() {
         EventInitializer eventInitializer = new EventInitializer();
         eventInitializer.increaseEverydayDiscountEventsAdd(CHRISTMAS_D_DAY_DISCOUNT.getInstance());
         eventInitializer.specialDiscountEventAdd(SPECIAL_DISCOUNT.getInstance());
@@ -57,16 +55,35 @@ class ReservationProcessorTest {
 
         EventSystem eventSystem = new EventSystem(eventInitializer);
         OrderSystem orderSystem = new OrderSystem(eventSystem);
-        return new ReservationSystem(orderSystem);
+        ReservationSystem reservationSystem = new ReservationSystem(orderSystem);
+        return new ReservationProcessor(reservationSystem);
     }
 
-    @DisplayName("정상적인 동작을 검증한다.")
+    ReservationProcessor setOneEvent() {
+        EventInitializer eventInitializer = new EventInitializer();
+        eventInitializer.specialDiscountEventAdd(SPECIAL_DISCOUNT.getInstance());
+
+        EventSystem eventSystem = new EventSystem(eventInitializer);
+        OrderSystem orderSystem = new OrderSystem(eventSystem);
+        ReservationSystem reservationSystem = new ReservationSystem(orderSystem);
+        return new ReservationProcessor(reservationSystem);
+    }
+
+    ReservationProcessor setNoEvent() {
+        EventInitializer eventInitializer = new EventInitializer();
+
+        EventSystem eventSystem = new EventSystem(eventInitializer);
+        OrderSystem orderSystem = new OrderSystem(eventSystem);
+        ReservationSystem reservationSystem = new ReservationSystem(orderSystem);
+        return new ReservationProcessor(reservationSystem);
+    }
+
+    @DisplayName("모든 이벤트가 등록되었을 때 정상적인 동작을 검증한다.")
     @Test
-    void process() {
+    void processWithAllEvent() {
         final String input = "3\n티본스테이크-1,레드와인-1\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        ReservationSystem reservationSystem = this.setALLEvent();
-        ReservationProcessor reservationProcessor = new ReservationProcessor(reservationSystem);
+        ReservationProcessor reservationProcessor = this.setALLEvent();
         reservationProcessor.process(RESTAURANT_NAME, 2023,12);
         String output = outContent.toString();
         assertThat(output).contains("<주문 메뉴>","티본스테이크 1개","레드와인 1개");
@@ -76,22 +93,52 @@ class ReservationProcessorTest {
         assertThat(output).contains("<12월 이벤트 배지>","없음");
     }
 
+    @DisplayName("등록된 이벤트가 1개일 때 정상적인 동작을 검증한다.")
+    @Test
+    void processWithOneEvent() {
+        final String input = "3\n티본스테이크-1,레드와인-1\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        ReservationProcessor reservationProcessor = this.setOneEvent();
+        reservationProcessor.process(RESTAURANT_NAME, 2023,12);
+        String output = outContent.toString();
+        assertThat(output).contains("<주문 메뉴>","티본스테이크 1개","레드와인 1개");
+        assertThat(output).contains("<할인 전 총주문 금액>","115,000원");
+        assertThat(output).contains("<혜택 내역>","특별 할인 -1,000원");
+        assertThat(output).contains("<할인 후 예상 결제 금액>","114,000원");
+        assertThat(output).contains("<12월 이벤트 배지>","없음");
+    }
+
+    @DisplayName("등록된 이벤트가 없을 때 정상적인 동작을 검증한다.")
+    @Test
+    void processWithNoEvent() {
+        final String input = "3\n티본스테이크-1,레드와인-1\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        ReservationProcessor reservationProcessor = this.setNoEvent();
+        reservationProcessor.process(RESTAURANT_NAME, 2023,12);
+        String output = outContent.toString();
+        assertThat(output).contains("<주문 메뉴>","티본스테이크 1개","레드와인 1개");
+        assertThat(output).contains("<할인 전 총주문 금액>","115,000원");
+        assertThat(output).contains("<혜택 내역>","없음");
+        assertThat(output).contains("<할인 후 예상 결제 금액>","115,000원");
+        assertThat(output).contains("<12월 이벤트 배지>","없음");
+    }
+
+
+
     @ParameterizedTest
     @MethodSource("provideInputForMessageTesting")
-    @DisplayName("다양한 입력에 대한  메시지 출력을 테스트한다.")
-    void testInputMessages(String input, String expectedExceptionMessage) {
+    @DisplayName("다양한 입력에 대한  메시지 출력 검증")
+    void testInputMessages(String input, String outputMessage) {
         //given
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        ReservationSystem reservationSystem = this.setALLEvent();
-        ReservationProcessor reservationProcessor = new ReservationProcessor(reservationSystem);
+        ReservationProcessor reservationProcessor = this.setALLEvent();
 
         //when
         reservationProcessor.process(RESTAURANT_NAME, 2023,12);
         String output = outContent.toString();
-        System.out.println("output = " + output);
 
         //then
-        assertThat(output).contains(expectedExceptionMessage);
+        assertThat(output).contains(outputMessage);
     }
 
     static Stream<Arguments> provideInputForMessageTesting() {
@@ -109,19 +156,19 @@ class ReservationProcessorTest {
                 Arguments.of("25\n크리스마스파스타-3\n", "<총혜택 금액>"+ System.lineSeparator() +"-10,469원"),
                 Arguments.of("25\n크리스마스파스타-3\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"트리"),
                 Arguments.of("25\n티본스테이크-2,레드와인-1\n", "<총혜택 금액>"+ System.lineSeparator() +"-33,446원"),
-                Arguments.of("25\n티본스테이크-2,레드와인-1\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"산타")
-
+                Arguments.of("25\n티본스테이크-2,레드와인-1\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"산타"),
+                Arguments.of("31\n티본스테이크-2,레드와인-1\n", "<총혜택 금액>"+ System.lineSeparator() +"-30,046원"),
+                Arguments.of("31\n티본스테이크-2,레드와인-1\n", "<12월 이벤트 배지>"+ System.lineSeparator() +"산타")
                 );
     }
 
     @ParameterizedTest
     @MethodSource("provideInputForExceptionTesting")
-    @DisplayName("다양한 입력에 대한 예외 메시지 출력을 테스트한다.")
+    @DisplayName("다양한 입력에 대한 예외 메시지 출력 검증")
     void testInputExceptionMessages(String input, String expectedExceptionMessage) {
         //given
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        ReservationSystem reservationSystem = this.setALLEvent();
-        ReservationProcessor reservationProcessor = new ReservationProcessor(reservationSystem);
+        ReservationProcessor reservationProcessor = this.setALLEvent();
 
         //when
         reservationProcessor.process(RESTAURANT_NAME, 2023,12);
@@ -142,6 +189,7 @@ class ReservationProcessorTest {
                 Arguments.of("3\n레드와인-1\n티본스테이크-1,레드와인-1\n", ILLEGAL_ONLY_BEVERAGE_EXCEPTION),
                 Arguments.of("3\n티본스테이크-s,레드와인-1\n티본스테이크-1,레드와인-1\n", ILLEGAL_ORDER_FORMAT_EXCEPTION),
                 Arguments.of("3\n티본스테이크-0,레드와인-1\n티본스테이크-1,레드와인-1\n", ILLEGAL_ORDER_FORMAT_EXCEPTION),
+                Arguments.of("3\n티본스테이크-1,티본스테이크-1\n티본스테이크-1,레드와인-1\n", ILLEGAL_ORDER_FORMAT_EXCEPTION),
                 Arguments.of("3\n티본스테이크-20,레드와인-1\n티본스테이크-1,레드와인-1\n", ILLEGAL_OUT_OF_NUMBER_MENU_EXCEPTION)
                 );
     }
