@@ -5,11 +5,11 @@ import christmas.domain.entity.Benefits;
 import christmas.domain.util.DayUtil;
 import christmas.domain.entity.Order;
 
-public class BenefitApplication {
+public class BenefitService {
     Order order;
     DiscountPolicy discountPolicy;
 
-    public BenefitApplication(Order order) {
+    public BenefitService(Order order) {
         this.order = order;
         discountPolicy = new DiscountPolicy(order);
     }

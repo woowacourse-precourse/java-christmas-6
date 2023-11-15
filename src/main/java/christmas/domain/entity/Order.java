@@ -11,7 +11,7 @@ import java.util.Map;
 public class Order {
 
 
-    private int visitDate;
+    private final int visitDate;
     private static Map<Menu, Integer> orderMap = new HashMap<>();
 
     public Map<Menu, Integer> getOrderMap(){
@@ -48,7 +48,7 @@ public class Order {
 
     public void validateNotOnlyBeverage(){
         for(Menu menu : orderMap.keySet()){
-            if(menu.getMenuCategory().equals(MenuCategoryEnum.MenuCategory.BEVERAGE)){
+            if(!(menu.getMenuCategory().equals(MenuCategoryEnum.MenuCategory.BEVERAGE))){
                 return;
             }
         }

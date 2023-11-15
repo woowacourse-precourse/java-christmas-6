@@ -3,7 +3,7 @@ package christmas.controller;
 import christmas.domain.util.DayUtil;
 import christmas.domain.entity.Order;
 import christmas.domain.generators.OrderGenerator;
-import christmas.domain.services.BenefitApplication;
+import christmas.domain.services.BenefitService;
 import christmas.domain.util.Printer;
 import christmas.domain.view.InputView;
 import christmas.domain.view.OutputView;
@@ -46,8 +46,8 @@ public class ChristmasController {
         }
 
         outputView.printMenu(order);
-        BenefitApplication discountApplication = new BenefitApplication(order);
-        discountApplication.benefitApplication();
+        BenefitService benefitService = new BenefitService(order);
+        benefitService.benefitApplication();
         outputView.printBenefit();
     }
 }
