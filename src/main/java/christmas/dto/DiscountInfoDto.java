@@ -10,20 +10,18 @@ public class DiscountInfoDto {
 
     public static Map<String, Integer> of(Discount discount) {
         Map<String, Integer> discountMap = new HashMap<>();
-        if (discount.getChristmasDiscount() != 0) {
-            discountMap.put(DiscountType.CHRISTMAS_DISCOUNT.getDiscountText(), discount.getChristmasDiscount());
-        }
-        if (discount.getNormalDiscount() != 0) {
-            discountMap.put(DiscountType.NORMAL_DISCOUNT.getDiscountText(), discount.getNormalDiscount());
-        }
-        if (discount.getWeekDiscount() != 0) {
-            discountMap.put(DiscountType.WEEK_DISCOUNT.getDiscountText(), discount.getWeekDiscount());
-        }
-        if (discount.getSpecialDiscount() != 0) {
-            discountMap.put(DiscountType.SPECIAL_DISCOUNT.getDiscountText(), discount.getSpecialDiscount());
-        }
-        if (discount.getGivingEventDiscount() != 0) {
-            discountMap.put(DiscountType.GIVING_DISCOUNT.getDiscountText(), discount.getGivingEventDiscount());
+        Map<String, Integer> discountValues = new HashMap<>();
+
+        discountValues.put(DiscountType.CHRISTMAS_DISCOUNT.getDiscountText(), discount.getChristmasDiscount());
+        discountValues.put(DiscountType.NORMAL_DISCOUNT.getDiscountText(), discount.getNormalDiscount());
+        discountValues.put(DiscountType.WEEK_DISCOUNT.getDiscountText(), discount.getWeekDiscount());
+        discountValues.put(DiscountType.SPECIAL_DISCOUNT.getDiscountText(), discount.getSpecialDiscount());
+        discountValues.put(DiscountType.GIVING_DISCOUNT.getDiscountText(), discount.getGivingEventDiscount());
+
+        for (Map.Entry<String, Integer> entry : discountValues.entrySet()) {
+            if (entry.getValue() != 0) {
+                discountMap.put(entry.getKey(), entry.getValue());
+            }
         }
         return discountMap;
     }
