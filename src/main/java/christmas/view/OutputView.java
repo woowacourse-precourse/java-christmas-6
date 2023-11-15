@@ -11,42 +11,45 @@ import java.util.List;
 import java.util.Map;
 
 public class OutputView {
+
     public static final String WELCOME_STATE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
     public static final String NOTHING_STATE = "없음";
     public static final String DEFAULT_PRESENT = "샴페인";
 
-    public void welcome () {
+    public void welcome() {
         System.out.println(WELCOME_STATE);
     }
 
-    public void notifyReservationPreview (Reservation reservation) {
+    public void notifyReservationPreview(Reservation reservation) {
         LocalDate reservedDate = reservation.checkReservedDate();
-        String reservationDate = String.format("%d월 %d일", reservedDate.getMonthValue(), reservedDate.getDayOfMonth());
+        String reservationDate = String.format("%d월 %d일", reservedDate.getMonthValue(),
+            reservedDate.getDayOfMonth());
 
         System.out.println(reservationDate + "에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
     }
 
-    public void previewOrderedMenu (Reservation reservation) {
+    public void previewOrderedMenu(Reservation reservation) {
         System.out.println();
         System.out.println("<주문 메뉴>");
-        List<SimpleEntry<Menu, Integer>> orderedMenu =reservation.checkOrderedMenu();
+        List<SimpleEntry<Menu, Integer>> orderedMenu = reservation.checkOrderedMenu();
 
         orderedMenu.forEach(e ->
-                System.out.println(e.getKey() + " " +e.getValue() + "개"));
+            System.out.println(e.getKey() + " " + e.getValue() + "개"));
 
     }
 
-    public void previewTotalAmountBeforeApplying (Reservation reservation) {
+    public void previewTotalAmountBeforeApplying(Reservation reservation) {
         System.out.println();
         System.out.println("<할인 전 총주문 금액>");
-        String totalAmount =String.format("%,d원", reservation.checkBill());
+        String totalAmount = String.format("%,d원", reservation.checkBill());
         System.out.println(totalAmount);
     }
 
-    public void notifyPresentMenu (Reservation reservation) {
+    public void notifyPresentMenu(Reservation reservation) {
         System.out.println();
         System.out.println("<증정 메뉴>");
-        boolean isPresentPromotionApplied = reservation.checkPromotionContained(Promotion.PRESENT_PROMOTION);
+        boolean isPresentPromotionApplied = reservation.checkPromotionContained(
+            Promotion.PRESENT_PROMOTION);
 
         if (isPresentPromotionApplied) {
             System.out.println(DEFAULT_PRESENT + " 1개");
@@ -55,7 +58,7 @@ public class OutputView {
         System.out.println(NOTHING_STATE);
     }
 
-    public void notifyPromotionApplied (Reservation reservation) {
+    public void notifyPromotionApplied(Reservation reservation) {
         System.out.println();
         System.out.println("<혜택 내역>");
         Map<Promotion, Integer> promotionsApplied = reservation.checkPromotionApplied();
@@ -71,7 +74,7 @@ public class OutputView {
         }
     }
 
-    public void notifyTotalBenefit (Reservation reservation) {
+    public void notifyTotalBenefit(Reservation reservation) {
         System.out.println();
         System.out.println("<총혜택 금액>");
 
@@ -86,7 +89,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public void notifyPaymentAmountAfterPromotion (Reservation reservation){
+    public void notifyPaymentAmountAfterPromotion(Reservation reservation) {
         System.out.println();
         System.out.println("<할인 후 예상 결제 금액>");
 
@@ -102,7 +105,7 @@ public class OutputView {
         System.out.println(paymentAmountAfterPromotion);
     }
 
-    public void notifyEventBadge (Reservation reservation) {
+    public void notifyEventBadge(Reservation reservation) {
         System.out.println();
         System.out.println("<12월 이벤트 배지>");
 

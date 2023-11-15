@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class InputView {
+
     private final InputValidator validator = new InputValidator();
     private int date;
 
@@ -18,7 +19,7 @@ public class InputView {
     public int receiveReservationDate() {
         do {
             System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
-        } while(!promptForReservationDate());
+        } while (!promptForReservationDate());
 
         return date;
     }
@@ -27,7 +28,7 @@ public class InputView {
         String dateInput = Console.readLine();
 
         try {
-          validator.validateDateInput(dateInput);
+            validator.validateDateInput(dateInput);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return false;
@@ -37,7 +38,7 @@ public class InputView {
         return true;
     }
 
-    public List<SimpleEntry<Menu, Integer>> receiveMenuToOrder (List<Menu> menu) {
+    public List<SimpleEntry<Menu, Integer>> receiveMenuToOrder(List<Menu> menu) {
         List<SimpleEntry<Menu, Integer>> result;
         do {
             System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
@@ -47,7 +48,7 @@ public class InputView {
         return result;
     }
 
-    private List<SimpleEntry<Menu, Integer>> promptMenuToOrder (List<Menu> menu) {
+    private List<SimpleEntry<Menu, Integer>> promptMenuToOrder(List<Menu> menu) {
         List<SimpleEntry<Menu, Integer>> result;
         try {
             String customerOrderState = Console.readLine().trim();
@@ -57,23 +58,25 @@ public class InputView {
 
             validator.checkCategory(result);
 
-        }catch ( IllegalArgumentException e ) {
+        } catch (IllegalArgumentException e) {
             result = null;
             System.out.println(e.getMessage());
         }
         return result;
     }
 
-    private List<SimpleEntry<Menu, Integer>> makeMenuOrderedList (List<Menu> menu, List<String> menuOrdered) throws  IllegalArgumentException{
+    private List<SimpleEntry<Menu, Integer>> makeMenuOrderedList(List<Menu> menu,
+        List<String> menuOrdered) throws IllegalArgumentException {
         List<SimpleEntry<Menu, Integer>> result = new ArrayList<>();
 
-            for (String ordered : menuOrdered) {
-                SimpleEntry<Menu, Integer> menuMatched = validator.validateOrderStateFormat(menu, ordered);
-                result.add(menuMatched);
-            }
+        for (String ordered : menuOrdered) {
+            SimpleEntry<Menu, Integer> menuMatched = validator.validateOrderStateFormat(menu,
+                ordered);
+            result.add(menuMatched);
+        }
 
-            validator.checkDuplicatedMenus(result);
-            validator.hasReachedMaxOrderItems(result);
-            return result;
+        validator.checkDuplicatedMenus(result);
+        validator.hasReachedMaxOrderItems(result);
+        return result;
     }
 }

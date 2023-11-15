@@ -1,15 +1,16 @@
 package christmas.model;
 
 public class Category {
+
     private final int id;
     private final String categoryName;
 
-    public Category (int id, String categoryName) {
+    public Category(int id, String categoryName) {
         this.id = id;
         this.categoryName = categoryName;
     }
 
-    public boolean findSameCategory (int i) {
+    public boolean findSameCategory(int i) {
         return i == id;
     }
 

@@ -11,10 +11,10 @@ public class Menu {
 
     private final int price;
 
-    public static int checkBill (List<SimpleEntry<Menu, Integer>> orderedMenu) {
+    public static int checkBill(List<SimpleEntry<Menu, Integer>> orderedMenu) {
         return orderedMenu.stream()
-                .mapToInt(el -> el.getKey().price * el.getValue())
-                .sum();
+            .mapToInt(el -> el.getKey().price * el.getValue())
+            .sum();
     }
 
     public Menu(Category category, String menuName, int price) {
@@ -23,12 +23,12 @@ public class Menu {
         this.price = price;
     }
 
-    public boolean checkMenu (String menuName) {
+    public boolean checkMenu(String menuName) {
         return menuName.equals(this.menuName);
     }
 
 
-    public boolean checkCategory (String category) {
+    public boolean checkCategory(String category) {
         return this.category.isSame(category);
     }
 

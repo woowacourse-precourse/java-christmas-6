@@ -11,6 +11,7 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
 
 public class Application {
+
     private static final Application app = new Application();
     private static final RestaurantDatabase db = new RestaurantDatabase();
     private InputView reader = new InputView();
@@ -27,7 +28,7 @@ public class Application {
         app.previewReservation();
     }
 
-    public void reserveRestaurant () {
+    public void reserveRestaurant() {
         print.welcome();
 
         int date = reader.receiveReservationDate();
@@ -41,14 +42,14 @@ public class Application {
         reservation.applyPromotion();
     }
 
-    private void previewReservation () {
+    private void previewReservation() {
         print.notifyReservationPreview(reservation);
 
         print.previewOrderedMenu(reservation);
         print.previewTotalAmountBeforeApplying(reservation);
 
         print.notifyPresentMenu(reservation);
-        print.notifyPromotionApplied (reservation);
+        print.notifyPromotionApplied(reservation);
 
         print.notifyTotalBenefit(reservation);
         print.notifyPaymentAmountAfterPromotion(reservation);
