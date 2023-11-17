@@ -7,23 +7,28 @@
 기존에 작업한 브랜치에 접속합니다.
 
 인텔리제이 하단 git 탭을 클릭하여 Remote 항목에서 오른클릭 -> Manage Remotes 를 클릭
+
 ![img.png](img.png)
 
 
 `+` 버튼을 클릭하여 연결할 원격 저장소를 지정합니다.
+
 ![img_1.png](img_1.png)
 
 
 우와테크코스에서 Fork 하여 생성한 내 저장소의 주소를 추가합니다
+
 ![img_2.png](img_2.png)
 
 
 처음에 바로 git 목록을 확인하시면 추가한 Fork 저장소가 보이지 않아 당황할수도 있는데요,
 
 파란색 화살표 버튼 (Fetch All Remotes) 을 클릭하시면 원격 저장소 상태가 최신화 됩니다.
+
 ![img_3.png](img_3.png)
 
 추가된 `PrRepository`로 새로운 브랜치를 만들어 체크아웃 합니다.
+
 ![img_4.png](img_4.png)
 
 이 상태가 되면 우리가 Fork 했던 저장소의 데이터들을 가져오므로,
