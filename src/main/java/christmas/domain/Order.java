@@ -1,11 +1,10 @@
 package christmas.domain;
 
-import java.util.Arrays;
-
 public class Order {
     static final int FOOD_INDEX = 0;
     static final int QUANTITY_INDEX = 1;
     static final int MINIMUM_ORDER_QUANTITY = 1;
+    static final int CORRECT_ORDER_LENGTH = 2;
 
     private final String food;
     private final int quantity;
@@ -24,7 +23,7 @@ public class Order {
     }
 
     private void validateInput(String[] foodAndQuantity) throws IllegalArgumentException {
-        if(foodAndQuantity.length != 2){
+        if(foodAndQuantity.length != CORRECT_ORDER_LENGTH){
             throw new IllegalArgumentException();
         }
     }
