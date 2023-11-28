@@ -32,4 +32,13 @@ public enum Menu {
         return false;
     }
 
+    public int cost(String food){
+        int cost = 0;
+
+        if(food.equals(koreanName)){
+            cost = price;
+        }
+
+        return cost;
+    }
 }

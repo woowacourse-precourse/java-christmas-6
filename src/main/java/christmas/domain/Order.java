@@ -5,6 +5,7 @@ public class Order {
     static final int QUANTITY_INDEX = 1;
     static final int MINIMUM_ORDER_QUANTITY = 1;
     static final int CORRECT_ORDER_LENGTH = 2;
+    static final int ZERO = 0;
 
     private final String food;
     private final int quantity;
@@ -54,5 +55,27 @@ public class Order {
 
     private String getFood(){
         return food;
+    }
+
+    public int calculate() {
+        int price = ZERO;
+
+        for(Menu menu : Menu.values()) {
+            price = menu.cost(food);
+
+            if(isPriceChanged(price)){
+                break;
+            }
+        }
+
+        return price * quantity;
+    }
+
+    private boolean isPriceChanged(int price){
+        if(price != ZERO){
+            return true;
+        }
+
+        return false;
     }
 }

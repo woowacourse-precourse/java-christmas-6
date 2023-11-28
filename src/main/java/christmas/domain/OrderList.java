@@ -23,4 +23,14 @@ public class OrderList {
             }
         }
     }
+
+    public int checkOut() {
+        int price = 0;
+        for(Order orderInList : orders){
+            price += orderInList.calculate();
+        }
+
+        return price;
+    }
+
 }
