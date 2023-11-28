@@ -53,4 +53,21 @@ public class OrderTest {
 
         assertEquals(expected, result);
     }
+
+    @Test
+    void createTwoOrdersWhichEachOfTotalPriceIsFiftyThousandAndThirtyThousand() {
+        Order order1 = new Order("크리스마스파스타-2");
+        int resultPrice1 = order1.calculate();
+
+        int expectedPrice1 = 50_000;
+
+        assertEquals(expectedPrice1, resultPrice1);
+
+        Order order2 = new Order("초코케이크-2");
+        int resultPrice2 = order2.calculate();
+
+        int expectedPrice2 = 30_000;
+
+        assertEquals(expectedPrice2, resultPrice2);
+    }
 }
