@@ -18,7 +18,7 @@ public class OrderList {
 
     private void findDuplicatedOrderInOrderList(Order order, List<Order> orders) throws IllegalArgumentException {
         for(Order orderInList : orders){
-            if(orderInList.isOrderSameAsOrderInList(order)){
+            if(orderInList.isSame(order)){
                 throw new IllegalArgumentException();
             }
         }

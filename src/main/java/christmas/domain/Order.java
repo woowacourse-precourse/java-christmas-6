@@ -47,7 +47,7 @@ public class Order {
         }
     }
 
-    public boolean isOrderSameAsOrderInList(Order order){
+    public boolean isSame(Order order){
         boolean isSame = food.equals(order.getFood());
 
         return isSame;
