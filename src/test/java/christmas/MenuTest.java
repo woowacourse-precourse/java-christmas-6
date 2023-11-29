@@ -1,7 +1,6 @@
 package christmas;
 
 import christmas.domain.Menu;
-import christmas.domain.Order;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,63 +8,41 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MenuTest {
     @Test
     void findTwoFoodsOnMenuWhichOneExistsAndTheOtherDoesNotExist() {
-        String food1 = "해산물파스타";
-        boolean resultBoolean1 = false;
+        boolean expectation1 = true;
+        assertFoodIsOnMenu("해산물파스타", expectation1);
+        boolean expectation2 = false;
+        assertFoodIsOnMenu("김치찌개", expectation2);
+    }
 
+    private void assertFoodIsOnMenu(String food, boolean expectation) {
+        boolean isFoodOnMenu = false;
         for(Menu menu : Menu.values()){
-            if(menu.isFoodOnMenu(food1)){
-                resultBoolean1 = true;
+            if(menu.isFoodOnMenu(food)){
+                isFoodOnMenu = true;
+                break;
             }
         }
-
-        boolean expectedBoolean1 = true;
-
-        assertEquals(expectedBoolean1, resultBoolean1);
-
-        String food2 = "김치찌개";
-        boolean resultBoolean2 = false;
-
-        for(Menu menu : Menu.values()){
-            if(menu.isFoodOnMenu(food2)){
-                resultBoolean2 = true;
-            }
-        }
-
-        boolean expectedBoolean2 = false;
-
-        assertEquals(expectedBoolean2, resultBoolean2);
+        assertEquals(expectation, isFoodOnMenu);
     }
 
     @Test
     void findTwoFoodsThatCostThreeThousandAndFiveThousand() {
-        String food1 = "제로콜라";
-        int resultPrice1 = 0;
-
-        for(Menu menu : Menu.values()) {
-            resultPrice1 = menu.cost(food1);
-
-            if(resultPrice1 != 0){
-                break;
-            }
-        }
-
         int expectedPrice1 = 3000;
+        assertPrice("제로콜라", expectedPrice1);
+        int expectedPrice2 = 5000;
+        assertPrice("아이스크림", expectedPrice2);
+    }
 
-        assertEquals(expectedPrice1, resultPrice1);
-
-        String food2 = "아이스크림";
-        int resultPrice2 = 0;
+    private void assertPrice(String food, int expectedPrice) {
+        int realPrice = 0;
 
         for(Menu menu : Menu.values()) {
-            resultPrice2 = menu.cost(food2);
-
-            if(resultPrice2 != 0){
+            realPrice = menu.cost(food);
+            if(realPrice != 0){
                 break;
             }
         }
 
-        int expectedPrice2 = 5000;
-
-        assertEquals(expectedPrice2, resultPrice2);
+        assertEquals(realPrice, expectedPrice);
     }
 }
