@@ -15,18 +15,14 @@ public class OrderListTest {
 
     @Test
     void createTwoOrderListsWhichEachOfTotalChargeIsSeventyThousandAndFourtyThousand() {
-        OrderList orderList1 = new OrderList(new String[] {"바비큐립-1", "시저샐러드-2"});
-        int resultTotalCharge1 = orderList1.checkOut();
-
         int expectedTotalCharge1 = 70_000;
-
-        assertEquals(expectedTotalCharge1, resultTotalCharge1);
-
-        OrderList orderList2 = new OrderList(new String[] {"초코케이크-2", "아이스크림-2"});
-        int resultTotalCharge2 = orderList2.checkOut();
-
+        assertTotalCharge(new OrderList(new String[] {"바비큐립-1", "시저샐러드-2"}), expectedTotalCharge1);
         int expectedTotalCharge2 = 40_000;
+        assertTotalCharge(new OrderList(new String[] {"초코케이크-2", "아이스크림-2"}), expectedTotalCharge2);
+    }
 
-        assertEquals(expectedTotalCharge2, resultTotalCharge2);
+    private void assertTotalCharge(OrderList orderList, int expectedTotalCharge) {
+        int realTotalCharge = orderList.checkOut();
+        assertEquals(expectedTotalCharge, realTotalCharge);
     }
 }
