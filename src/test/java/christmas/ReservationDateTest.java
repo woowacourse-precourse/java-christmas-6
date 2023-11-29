@@ -8,6 +8,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReservationDateTest {
+    static final int CHRISTMAS_D_DAY_FROM_DECEMBER_FIRST = 24;
+    static final int CHRISTMAS_D_DAY_FROM_CHRISTMAS = 0;
     @DisplayName("예약 날짜가 12월(1~31일)에 해당하지 않으면 예외발생")
     @Test
     void createReservationDateWhichIsNotBetweenOneAndThirtyOne() {
@@ -20,16 +22,12 @@ public class ReservationDateTest {
 
     @Test
     void countdownBeforeChristmas() {
-        ReservationDate reservationDate1 = new ReservationDate(1);
-        int resultDDay1= reservationDate1.christmasCountdown();
-        int expectedDDay1 = 24;
+        assertDDay(new ReservationDate(1), CHRISTMAS_D_DAY_FROM_DECEMBER_FIRST);
 
-        assertEquals(expectedDDay1, resultDDay1);
+        assertDDay(new ReservationDate(25), CHRISTMAS_D_DAY_FROM_CHRISTMAS);
+    }
 
-        ReservationDate reservationDate2 = new ReservationDate(25);
-        int resultDDay2 = reservationDate2.christmasCountdown();
-        int expectedDDay2 = 0;
-
-        assertEquals(expectedDDay2, resultDDay2);
+    private void assertDDay(ReservationDate reservationDate, int dDay) {
+        assertEquals(reservationDate.christmasCountdown(), dDay);
     }
 }
