@@ -35,4 +35,19 @@ public class ChristmasEvent {
 
         return false;
     }
+
+    public int calculateWeekDayDiscount() {
+        int totalPrice = orderList.checkOut();
+        int discount = 0;
+
+        if(!reservationDate.isWeekDay()) {
+            return discount;
+        }
+
+        if(isPriceMoreThanTenThousand(totalPrice)){
+            discount = 2023 * orderList.getTotalDessertCount();
+        }
+
+        return discount;
+    }
 }

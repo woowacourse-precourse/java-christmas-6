@@ -78,4 +78,16 @@ public class Order {
 
         return false;
     }
+
+    public int getDessertCount() {
+        int dessertCount = 0;
+        for(Menu menu : Menu.values()) {
+            if(menu.findMenuType(food) == "dessert"){
+                dessertCount = quantity;
+                break;
+            }
+        }
+
+        return dessertCount;
+    }
 }

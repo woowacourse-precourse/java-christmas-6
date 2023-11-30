@@ -41,4 +41,13 @@ public enum Menu {
 
         return cost;
     }
+
+    public String findMenuType(String food) {
+        String type = "";
+
+        if(food.equals(koreanName)){
+            type = menuType;
+        }
+        return type;
+    }
 }

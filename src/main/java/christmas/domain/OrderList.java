@@ -33,4 +33,12 @@ public class OrderList {
         return price;
     }
 
+    public int getTotalDessertCount() {
+        int count = 0;
+        for(Order order : orders) {
+            count += order.getDessertCount();
+        }
+
+        return count;
+    }
 }
