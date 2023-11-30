@@ -25,4 +25,22 @@ public class OrderListTest {
         int realTotalCharge = orderList.checkOut();
         assertEquals(expectedTotalCharge, realTotalCharge);
     }
+
+    @Test
+    void getCountAsTotalCountOfDessertThatOrderListContain() {
+        int expectedTotalDessertCount1 = 1;
+        assertTotalDessertCount(new OrderList(new String[] {"아이스크림-1"}), expectedTotalDessertCount1);
+
+        int expectedTotalDessertCount2 = 2;
+        assertTotalDessertCount(new OrderList(new String[] {"아이스크림-2"}), expectedTotalDessertCount2);
+
+
+        int expectedTotalDessertCount3 = 0;
+        assertTotalDessertCount(new OrderList(new String[] {"제로콜라-1", "양송이수프-3"}), expectedTotalDessertCount3);
+    }
+
+    private void assertTotalDessertCount(OrderList orderList, int expectedTotalCount) {
+        int realTotalDessertCount = orderList.getTotalDessertCount();
+        assertEquals(expectedTotalCount, realTotalDessertCount);
+    }
 }

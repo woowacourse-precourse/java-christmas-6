@@ -29,4 +29,21 @@ public class ReservationDateTest {
     private void assertDDay(ReservationDate reservationDate, int dDay) {
         assertEquals(reservationDate.christmasCountdown(), dDay);
     }
+
+    @Test
+    void returnTrueWhenReserveOnWeekDay() {
+        boolean expectation = true;
+        assertIsWeekDay(new ReservationDate(3), expectation);
+    }
+
+    @Test
+    void returnFalseWhenReserveOnWeekend() {
+        boolean expectation = false;
+        assertIsWeekDay(new ReservationDate(1), expectation);
+    }
+
+    private void assertIsWeekDay(ReservationDate reservationDate, boolean expectation) {
+        boolean real = reservationDate.isWeekDay();
+        assertEquals(real, expectation);
+    }
 }

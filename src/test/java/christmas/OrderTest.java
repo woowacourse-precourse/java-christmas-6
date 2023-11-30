@@ -63,4 +63,21 @@ public class OrderTest {
         int realPrice = order.calculate();
         assertEquals(expectedPrice, realPrice);
     }
+
+    @Test
+    void getCountAsQuantityWhenOrderIsDessert() {
+        int expectedDessertCount1 = 1;
+        assertDessertCount(new Order("아이스크림-1"), expectedDessertCount1);
+
+        int expectedDessertCount2 = 2;
+        assertDessertCount(new Order("아이스크림-2"), expectedDessertCount2);
+
+        int expectedDessertCount3 = 0;
+        assertDessertCount(new Order("제로콜라-1"), expectedDessertCount3);
+    }
+
+    private void assertDessertCount(Order order, int expectedDessertCount) {
+        int realDessertCount = order.getDessertCount();
+        assertEquals(expectedDessertCount, realDessertCount);
+    }
 }

@@ -45,4 +45,25 @@ public class MenuTest {
 
         assertEquals(realPrice, expectedPrice);
     }
+
+    @Test
+    void returnMenuTypeWhenOrderDessert() {
+        String expectedMenuType1 = "dessert";
+        assertMenuType("아이스크림", expectedMenuType1);
+
+        String expectedMenuType2 = "appetizer";
+        assertMenuType("양송이수프", expectedMenuType2);
+    }
+
+    private void assertMenuType(String food, String expectedMenuType) {
+        String realMenuType = "";
+        for(Menu menu : Menu.values()) {
+            realMenuType = menu.findMenuType(food);
+            if(!realMenuType.equals("")){
+                break;
+            }
+        }
+
+        assertEquals(expectedMenuType, realMenuType);
+    }
 }
