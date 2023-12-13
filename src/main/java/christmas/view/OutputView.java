@@ -73,5 +73,5 @@ public class OutputView {
     }
     private static <T> void printListUsingFormat(List<T> list) {
         list.forEach(t -> Printer.printMessageUsingFormat("FORMAT", 1, 2, 3));
-    }
+    } //
 }
