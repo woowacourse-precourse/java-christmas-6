@@ -18,6 +18,9 @@ public class Benefits {
     }
 
     public static Benefits from(PromotionDate visitDay, Orders orders){
+        if(orders.getTotalPrice() < 10_000){
+            return new Benefits(Collections.emptyList());
+        }
         List<Benefit> benefits = new ArrayList<>();
         benefits.addAll(DiscountFactory.from(visitDay, orders));
         benefits.addAll(GiftFactory.from(visitDay, orders));

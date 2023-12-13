@@ -7,24 +7,21 @@ public class Orders {
     private final List<MenuAndCount> orders;
 
     public Orders(List<MenuAndCount> orders) {
-        validateOrders(orders);
         this.orders = orders;
     }
 
-    private void validateOrders(List<MenuAndCount> orders) {
-        if (orders.isEmpty()) {
-            throw PromotionExceptionMaker.EMPTY_ORDER.makeException();
-        }
+    private static void validateOrders(List<MenuAndCount> orders) {
         validateDuplicateMenu(orders);
         validateOrderNumber(orders);
         validateOrderNotOnlyDrink(orders);
-
     }
 
     public static Orders from(List<String> orders) {
-        return new Orders(orders.stream()
+        List<MenuAndCount> menuAndCounts = orders.stream()
                 .map(MenuAndCount::from)
-                .toList());
+                .toList();
+        validateOrders(menuAndCounts);
+        return new Orders(menuAndCounts);
     }
 
     public List<MenuAndCount> getOrders() {
@@ -49,18 +46,20 @@ public class Orders {
                 .sum();
     }
 
-    private void validateOrderNotOnlyDrink(List<MenuAndCount> orders) {
+    private static void validateOrderNotOnlyDrink(List<MenuAndCount> orders) {
+        orders.forEach(menuAndCount -> System.out.println(menuAndCount.getMenuName()
+                + " - " + menuAndCount.isCategory(Category.BEVERAGE)));
         if (isAllDrink(orders)) {
             throw PromotionExceptionMaker.ALL_ORDER_DRINK.makeException();
         }
     }
 
-    private boolean isAllDrink(List<MenuAndCount> orders) {
+    private static boolean isAllDrink(List<MenuAndCount> orders) {
         return orders.stream()
                 .allMatch(menuAndCount -> menuAndCount.isCategory(Category.BEVERAGE));
     }
 
-    private void validateDuplicateMenu(List<MenuAndCount> orders) {
+    private static void validateDuplicateMenu(List<MenuAndCount> orders) {
         int distinctMenuCount = (int) orders.stream()
                 .map(MenuAndCount::getMenuName)
                 .distinct()
@@ -70,7 +69,7 @@ public class Orders {
         }
     }
 
-    private void validateOrderNumber(List<MenuAndCount> orders) {
+    private static void validateOrderNumber(List<MenuAndCount> orders) {
         int orderNumber = orders.stream()
                 .mapToInt(MenuAndCount::getCount)
                 .sum();
