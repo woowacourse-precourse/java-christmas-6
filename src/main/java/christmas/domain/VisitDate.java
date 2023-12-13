@@ -10,4 +10,8 @@ public class VisitDate {
     public VisitDate(int visitDate) {
         this.visitDate = LocalDate.of(YEAR, MONTH, visitDate);
     }
+
+    public int getDayOfMonth() {
+        return visitDate.getDayOfMonth();
+    }
 }
