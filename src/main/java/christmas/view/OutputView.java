@@ -2,6 +2,7 @@ package christmas.view;
 
 import christmas.domain.Orders;
 import christmas.domain.PromotionDate;
+import christmas.domain.badge.Badge;
 import christmas.domain.benefit.Benefit;
 import christmas.domain.benefit.Benefits;
 import christmas.view.io.Printer;
@@ -73,5 +74,11 @@ public class OutputView {
     }
     private static <T> void printListUsingFormat(List<T> list) {
         list.forEach(t -> Printer.printMessageUsingFormat("FORMAT", 1, 2, 3));
-    } //
+    }
+
+    public static void printBadge(Badge badge) {
+        Printer.printMessage("<12월 이벤트 배지>");
+        Printer.printMessageUsingFormat("%s", badge.getBadgeName());
+        newLine();
+    }
 }
