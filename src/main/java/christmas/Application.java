@@ -6,3 +6,4 @@ public class Application {
         promotionController.run();
     }
 }
+//
