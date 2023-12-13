@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 public class OutputView {
     private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("###,##0");
     public static final String EXCEPTION_PREFIX = "[ERROR] ";
+    public static final String NONE_LIST = "없음";
 
     public static void printException(String exceptionMessage) {
         Printer.printMessage(EXCEPTION_PREFIX + exceptionMessage);
@@ -47,7 +48,7 @@ public class OutputView {
     public static void printBenefits(Benefits benefits) {
         Printer.printMessage("<혜택 내역>");
         if(benefits.hasNoBenefits()){
-            Printer.printMessage("없음");
+            Printer.printMessage(NONE_LIST);
             newLine();
             return;
         }
@@ -80,7 +81,7 @@ public class OutputView {
     public static void printGifts(Benefits benefits) {
         Printer.printMessage("<증정 메뉴>");
         if(benefits.hasNoGift()){
-            Printer.printMessage("없음");
+            Printer.printMessage(NONE_LIST);
             newLine();
             return;
         }

@@ -3,6 +3,7 @@ package christmas.domain.menu;
 import christmas.exception.PromotionExceptionMaker;
 
 public class MenuAndCount {
+    public static final int MIN_COUNT = 1;
     private final Menu menu;
     private final int count;
 
@@ -13,7 +14,7 @@ public class MenuAndCount {
     }
 
     private void validateCount(int count) {
-        if (count < 1) {
+        if (count < MIN_COUNT) {
             throw PromotionExceptionMaker.INVALID_COUNT.makeException();
         }
     }

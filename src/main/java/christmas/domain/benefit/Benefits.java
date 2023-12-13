@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Benefits {
+    public static final int MIN_PRICE_FOR_BENEFIT = 10_000;
     private final List<Benefit> benefits;
 
     public Benefits(List<Benefit> benefits) {
@@ -18,7 +19,7 @@ public class Benefits {
     }
 
     public static Benefits from(PromotionDate visitDay, Orders orders){
-        if(orders.getTotalPrice() < 10_000){
+        if(orders.getTotalPrice() < MIN_PRICE_FOR_BENEFIT){
             return new Benefits(Collections.emptyList());
         }
         List<Benefit> benefits = new ArrayList<>();

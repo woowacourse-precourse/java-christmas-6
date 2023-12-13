@@ -4,6 +4,8 @@ import christmas.exception.PromotionExceptionMaker;
 import java.util.List;
 
 public class Orders {
+    public static final String ORDER_DELIMITER = " - ";
+    public static final int MAX_ORDER_NUM = 20;
     private final List<MenuAndCount> orders;
 
     public Orders(List<MenuAndCount> orders) {
@@ -48,7 +50,7 @@ public class Orders {
 
     private static void validateOrderNotOnlyDrink(List<MenuAndCount> orders) {
         orders.forEach(menuAndCount -> System.out.println(menuAndCount.getMenuName()
-                + " - " + menuAndCount.isCategory(Category.BEVERAGE)));
+                + ORDER_DELIMITER + menuAndCount.isCategory(Category.BEVERAGE)));
         if (isAllDrink(orders)) {
             throw PromotionExceptionMaker.ALL_ORDER_DRINK.makeException();
         }
@@ -73,7 +75,7 @@ public class Orders {
         int orderNumber = orders.stream()
                 .mapToInt(MenuAndCount::getCount)
                 .sum();
-        if (orderNumber > 20) {
+        if (orderNumber > MAX_ORDER_NUM) {
             throw PromotionExceptionMaker.TOO_MANY_ORDERS.makeException();
         }
     }
