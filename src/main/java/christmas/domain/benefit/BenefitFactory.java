@@ -18,7 +18,7 @@ public enum BenefitFactory {
 
         @Override
         int getBenefitPrice(PromotionDate promotionDate, Orders orders) {
-            return 900 + promotionDate.getRemainingDays(PromotionDate.CHRISTMAS) * 100;
+            return 1000 + promotionDate.getAfterDate(PromotionDate.FIRST_DAY) * 100;
         }
     }, WEEKDAY_DISCOUNT(BenefitType.DISCOUNT, "평일 할인"){
         @Override
@@ -28,7 +28,7 @@ public enum BenefitFactory {
 
         @Override
         int getBenefitPrice(PromotionDate promotionDate, Orders orders) {
-            return orders.getMenuCountOf(Category.DESSERT) * 100;
+            return orders.getMenuCountOf(Category.DESSERT) * 2_023;
         }
     },
     WEEKEND_DISCOUNT(BenefitType.DISCOUNT, "주말 할인"){
@@ -39,7 +39,7 @@ public enum BenefitFactory {
 
         @Override
         int getBenefitPrice(PromotionDate promotionDate, Orders orders) {
-            return orders.getMenuCountOf(Category.MAIN_COURSE) * 100;
+            return orders.getMenuCountOf(Category.MAIN_COURSE) * 2_023;
         }
     },
     SPECIAL_DISCOUNT(BenefitType.DISCOUNT, "특별 할인"){

@@ -2,8 +2,7 @@ package christmas;
 
 import christmas.domain.Orders;
 import christmas.domain.PromotionDate;
-import christmas.domain.benefit.Benefit;
-import christmas.domain.benefit.BenefitFactory;
+import christmas.domain.benefit.Benefits;
 import christmas.exception.handler.RetryHandler;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -14,11 +13,17 @@ public class PromotionController {
         OutputView.sayHello();
         PromotionDate visitDay = RetryHandler.getOrRetry(() -> getVisitDay());
         Orders orders = RetryHandler.getOrRetry(() -> getOrders());
-
-        //todo 일급 컬렉션 사용하기
-        List<Benefit> benefits = getBenefits(visitDay, orders);
+        Benefits benefits = getBenefits(visitDay, orders);
 
         printResult(visitDay, orders);
+        printBenefits(orders, benefits);
+
+    }
+
+    private void printBenefits(Orders orders, Benefits benefits) {
+        OutputView.printBenefits(benefits);
+        OutputView.printBenefitPrice(benefits);
+        OutputView.printDiscountPrice(orders.getTotalPrice() + benefits.calcDiscountPrice());
     }
 
     private void printResult(PromotionDate visitDay, Orders orders) {
@@ -37,7 +42,7 @@ public class PromotionController {
         return new Orders(orders);
     }
 
-    public List<Benefit> getBenefits(PromotionDate visitDay, Orders orders){
-        return BenefitFactory.allPossibleBenefit(visitDay, orders);
+    public Benefits getBenefits(PromotionDate visitDay, Orders orders){
+        return Benefits.from(visitDay, orders);
     }
 }

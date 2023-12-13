@@ -10,4 +10,16 @@ public class Benefit {
         this.benefitName = benefitName;
         BenefitPrice = benefitPrice;
     }
+
+    public String getBenefitName() {
+        return benefitName;
+    }
+
+    public int getBenefitPrice() {
+        return BenefitPrice * -1;
+    }
+
+    public boolean isTypeOf(BenefitType benefitType) {
+        return this.benefitType == benefitType;
+    }
 }

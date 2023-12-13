@@ -2,6 +2,8 @@ package christmas.view;
 
 import christmas.domain.Orders;
 import christmas.domain.PromotionDate;
+import christmas.domain.benefit.Benefit;
+import christmas.domain.benefit.Benefits;
 import christmas.view.io.Printer;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -39,8 +41,36 @@ public class OutputView {
     public static void printNoBenefitTotalPrice(Orders orders) {
         Printer.printMessage("<할인 전 총주문 금액>");
         Printer.printMessageUsingFormat("%s원", MONEY_FORMAT.format(orders.getTotalPrice()));
+        newLine();
     }
 
+    public static void printBenefits(Benefits benefits) {
+        Printer.printMessage("<혜택 내역>");
+        if(benefits.hasNoBenefits()){
+            Printer.printMessage("<없음>");
+            newLine();
+            return;
+        }
+        benefits.getBenefits().forEach(OutputView::printEachBenefit);
+        newLine();
+    }
+
+    private static void printEachBenefit(Benefit benefit) {
+        Printer.printMessageUsingFormat("%s: %s원", benefit.getBenefitName(),
+                MONEY_FORMAT.format(benefit.getBenefitPrice()));
+    }
+
+    public static void printBenefitPrice(Benefits benefits) {
+        Printer.printMessage("<총혜택 금액>");
+        Printer.printMessageUsingFormat("%s원", MONEY_FORMAT.format(benefits.getTotalBenefitPrice()));
+        newLine();
+    }
+
+    public static void printDiscountPrice(int discountedPrice) {
+        Printer.printMessage("<할인 금액>");
+        Printer.printMessageUsingFormat("%s원", MONEY_FORMAT.format(discountedPrice));
+        newLine();
+    }
     private static <T> void printListUsingFormat(List<T> list) {
         list.forEach(t -> Printer.printMessageUsingFormat("FORMAT", 1, 2, 3));
     }

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class PromotionDate {
+    public static final PromotionDate FIRST_DAY = new PromotionDate(1);
     private static final int YEAR = 2023;
     private static final int MONTH = 12;
     public static final PromotionDate CHRISTMAS = new PromotionDate(25);
@@ -44,5 +45,9 @@ public class PromotionDate {
 
     public boolean isSpecialDay() {
         return SPECIAL_DAYS.contains(this.getDayOfMonth());
+    }
+
+    public int getAfterDate(PromotionDate firstDay) {
+        return this.getDayOfMonth() - firstDay.getDayOfMonth();
     }
 }
