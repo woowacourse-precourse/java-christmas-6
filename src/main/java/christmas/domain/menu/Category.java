@@ -1,6 +1,5 @@
-package christmas.domain;
+package christmas.domain.menu;
 
-import java.util.Arrays;
 import java.util.List;
 
 public enum Category {

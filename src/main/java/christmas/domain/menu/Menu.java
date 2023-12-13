@@ -1,4 +1,11 @@
-package christmas.domain;
+package christmas.domain.menu;
+
+import christmas.exception.PromotionExceptionMaker;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum Menu {
     // 애피타이저
@@ -21,11 +28,23 @@ public enum Menu {
     RED_WINE("레드와인", 60_000),
     CHAMPAGNE("샴페인", 25_000);
 
-    private final String name;
-    private final int price;
+    private static final Map<String, Menu> cachedMap = Arrays.stream(values())
+            .collect(Collectors.toMap(Menu::getName, Function.identity()));
 
+    private final String name;
+
+    private final int price;
     Menu(String name, int price) {
         this.name = name;
         this.price = price;
+    }
+
+    public static Menu from(String name) {
+        return Optional.ofNullable(cachedMap.get(name))
+                .orElseThrow(PromotionExceptionMaker.NO_SUCH_MENU::makeException);
+    }
+
+    private String getName() {
+        return name;
     }
 }

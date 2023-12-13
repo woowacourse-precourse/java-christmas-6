@@ -1,6 +1,6 @@
 package christmas.exception;
 
-public enum XXXExceptionMaker {
+public enum PromotionExceptionMaker {
     INVALID_NUMBER_FORMAT("숫자를 입력해 주세요"),
     INVALID_INPUT_FORMAT("입력 형식이 잘못되었습니다."),
 
@@ -13,7 +13,7 @@ public enum XXXExceptionMaker {
     private final String message;
     private final IllegalArgumentException exception;
 
-    XXXExceptionMaker(String message) {
+    PromotionExceptionMaker(String message) {
         this.message = message;
         this.exception = new IllegalArgumentException(this.message);
     }

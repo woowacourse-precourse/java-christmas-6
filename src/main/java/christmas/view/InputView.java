@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.exception.XXXExceptionMaker;
+import christmas.exception.PromotionExceptionMaker;
 import christmas.view.io.Printer;
 import christmas.view.io.Reader;
 import java.util.List;
@@ -24,7 +24,7 @@ public class InputView {
 
     private static void validateOrders(List<String> orders) {
         if(notMatchPattern(orders)){
-            throw XXXExceptionMaker.INVALID_INPUT_FORMAT.makeException();
+            throw PromotionExceptionMaker.INVALID_INPUT_FORMAT.makeException();
         }
     }
 

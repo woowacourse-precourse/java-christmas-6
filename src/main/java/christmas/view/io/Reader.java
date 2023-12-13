@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import christmas.exception.XXXExceptionMaker;
+import christmas.exception.PromotionExceptionMaker;
 
 public class Reader {
     public static int getInteger(){
@@ -17,7 +17,7 @@ public class Reader {
         try{
             return Integer.parseInt(input);
         } catch (NumberFormatException e){
-            throw XXXExceptionMaker.INVALID_NUMBER_FORMAT.makeException();
+            throw PromotionExceptionMaker.INVALID_NUMBER_FORMAT.makeException();
         }
     }
 
@@ -37,12 +37,12 @@ public class Reader {
 
     private static void validateNotBlank(String input){
         if(input.isBlank()){
-            throw XXXExceptionMaker.BLANK_INPUT.makeException();
+            throw PromotionExceptionMaker.BLANK_INPUT.makeException();
         }
     }
     private static void validateNotEndDelimiter(String input, String delimiter) {
         if (input.endsWith(delimiter)) {
-            throw XXXExceptionMaker.INVALID_INPUT_FORMAT.makeException();
+            throw PromotionExceptionMaker.INVALID_INPUT_FORMAT.makeException();
         }
     }
 
@@ -54,7 +54,7 @@ public class Reader {
         if(falseMessage.equals(input)){
             return false;
         }
-        throw XXXExceptionMaker.INVALID_INPUT_FORMAT.makeException();
+        throw PromotionExceptionMaker.INVALID_INPUT_FORMAT.makeException();
     }
 
     //아래 메서드는 안쓸 것 같긴 한데
