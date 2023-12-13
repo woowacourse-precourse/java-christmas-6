@@ -1,9 +1,9 @@
 package christmas.domain.benefit.gifts;
 
-import christmas.domain.menu.Orders;
 import christmas.domain.PromotionDate;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuAndCount;
+import christmas.domain.menu.Orders;
 import christmas.exception.PromotionExceptionMaker;
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +14,7 @@ public enum GiftFactory {
             List.of(new MenuAndCount(Menu.CHAMPAGNE, 1))) {
         @Override
         boolean canApply(PromotionDate promotionDate, Orders orders) {
-            return orders.getTotalPrice() >= 120_000;
+            return orders.calcTotalPrice() >= 120_000;
         }
     };
     private final String benefitName;
@@ -24,7 +24,6 @@ public enum GiftFactory {
         this.benefitName = benefitName;
         this.menuAndCount = menuAndCount;
     }
-    abstract boolean canApply(PromotionDate promotionDate, Orders orders);
 
     public static List<Gift> from(PromotionDate promotionDate, Orders orders) {
         return Arrays.stream(values())
@@ -32,6 +31,8 @@ public enum GiftFactory {
                 .map(factory -> factory.create(promotionDate, orders))
                 .toList();
     }
+
+    abstract boolean canApply(PromotionDate promotionDate, Orders orders);
 
     public Gift create(PromotionDate promotionDate, Orders orders) {
         if (!canApply(promotionDate, orders)) {

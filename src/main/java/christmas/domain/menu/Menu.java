@@ -34,6 +34,7 @@ public enum Menu {
     private final String name;
 
     private final int price;
+
     Menu(String name, int price) {
         this.name = name;
         this.price = price;

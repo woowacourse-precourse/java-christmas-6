@@ -4,12 +4,10 @@ import christmas.domain.benefit.Benefit;
 import christmas.domain.benefit.BenefitType;
 
 public class Discount implements Benefit {
-    private final BenefitType benefitType;
     private final String benefitName;
     private final int BenefitPrice;
 
     public Discount(String benefitName, int benefitPrice) {
-        this.benefitType = BenefitType.DISCOUNT;
         this.benefitName = benefitName;
         BenefitPrice = benefitPrice;
     }
@@ -26,6 +24,6 @@ public class Discount implements Benefit {
 
     @Override
     public boolean isTypeOf(BenefitType benefitType) {
-        return this.benefitType == benefitType;
+        return BenefitType.DISCOUNT == benefitType;
     }
 }

@@ -1,5 +1,5 @@
 package christmas.domain.benefit;
 
-public enum BenefitType{
+public enum BenefitType {
     DISCOUNT, GIFTS
 }

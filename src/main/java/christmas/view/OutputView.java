@@ -1,17 +1,17 @@
 package christmas.view;
 
-import christmas.domain.menu.Orders;
 import christmas.domain.PromotionDate;
 import christmas.domain.badge.Badge;
 import christmas.domain.benefit.Benefit;
 import christmas.domain.benefit.Benefits;
+import christmas.domain.menu.Orders;
 import christmas.view.io.Printer;
 import java.text.DecimalFormat;
 
 public class OutputView {
-    private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("###,##0");
     public static final String EXCEPTION_PREFIX = "[ERROR] ";
     public static final String NONE_LIST = "없음";
+    private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("###,##0");
 
     public static void printException(String exceptionMessage) {
         Printer.printMessage(EXCEPTION_PREFIX + exceptionMessage);
@@ -41,13 +41,13 @@ public class OutputView {
 
     public static void printNoBenefitTotalPrice(Orders orders) {
         Printer.printMessage("<할인 전 총주문 금액>");
-        Printer.printMessageUsingFormat("%s원", MONEY_FORMAT.format(orders.getTotalPrice()));
+        Printer.printMessageUsingFormat("%s원", MONEY_FORMAT.format(orders.calcTotalPrice()));
         newLine();
     }
 
     public static void printBenefits(Benefits benefits) {
         Printer.printMessage("<혜택 내역>");
-        if(benefits.hasNoBenefits()){
+        if (benefits.hasNoBenefits()) {
             Printer.printMessage(NONE_LIST);
             newLine();
             return;
@@ -63,7 +63,7 @@ public class OutputView {
 
     public static void printBenefitPrice(Benefits benefits) {
         Printer.printMessage("<총혜택 금액>");
-        Printer.printMessageUsingFormat("%s원", MONEY_FORMAT.format(benefits.getTotalBenefitPrice()));
+        Printer.printMessageUsingFormat("%s원", MONEY_FORMAT.format(benefits.calcTotalBenefitPrice()));
         newLine();
     }
 
@@ -72,6 +72,7 @@ public class OutputView {
         Printer.printMessageUsingFormat("%s원", MONEY_FORMAT.format(discountedPrice));
         newLine();
     }
+
     public static void printBadge(Badge badge) {
         Printer.printMessage("<12월 이벤트 배지>");
         Printer.printMessageUsingFormat("%s", badge.getBadgeName());
@@ -80,7 +81,7 @@ public class OutputView {
 
     public static void printGifts(Benefits benefits) {
         Printer.printMessage("<증정 메뉴>");
-        if(benefits.hasNoGift()){
+        if (benefits.hasNoGift()) {
             Printer.printMessage(NONE_LIST);
             newLine();
             return;

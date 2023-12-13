@@ -1,27 +1,27 @@
 package christmas.view.io;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.exception.PromotionExceptionMaker;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import christmas.exception.PromotionExceptionMaker;
 
 public class Reader {
-    public static int getInteger(){
+    public static int getInteger() {
         String input = Console.readLine();
         return parseInt(input);
     }
 
     private static int parseInt(String input) {
-        try{
+        try {
             return Integer.parseInt(input);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw PromotionExceptionMaker.INVALID_NUMBER_FORMAT.makeException();
         }
     }
 
-    public static String getString(){
+    public static String getString() {
         return Console.readLine();
     }
 
@@ -35,30 +35,31 @@ public class Reader {
         return inputs;
     }
 
-    private static void validateNotBlank(String input){
-        if(input.isBlank()){
+    private static void validateNotBlank(String input) {
+        if (input.isBlank()) {
             throw PromotionExceptionMaker.BLANK_INPUT.makeException();
         }
     }
+
     private static void validateNotEndDelimiter(String input, String delimiter) {
         if (input.endsWith(delimiter)) {
             throw PromotionExceptionMaker.INVALID_INPUT_FORMAT.makeException();
         }
     }
 
-    private static boolean getBoolean(String trueMessage, String falseMessage){
+    private static boolean getBoolean(String trueMessage, String falseMessage) {
         String input = Console.readLine();
-        if(trueMessage.equals(input)){
+        if (trueMessage.equals(input)) {
             return true;
         }
-        if(falseMessage.equals(input)){
+        if (falseMessage.equals(input)) {
             return false;
         }
         throw PromotionExceptionMaker.INVALID_INPUT_FORMAT.makeException();
     }
 
     //아래 메서드는 안쓸 것 같긴 한데
-    public static <T> List<T> getObjectsUsingDelimiter(Function<String, T> converter, String delimiter){
+    public static <T> List<T> getObjectsUsingDelimiter(Function<String, T> converter, String delimiter) {
         List<String> inputStrings = getStringsUsingDelimiter(delimiter);
         return inputStrings.stream()
                 .map(converter::apply)

@@ -1,11 +1,11 @@
 package christmas.domain.benefit;
 
-import christmas.domain.menu.Orders;
 import christmas.domain.PromotionDate;
 import christmas.domain.benefit.discount.DiscountFactory;
 import christmas.domain.benefit.gifts.Gift;
 import christmas.domain.benefit.gifts.GiftFactory;
 import christmas.domain.menu.MenuAndCount;
+import christmas.domain.menu.Orders;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,12 +14,12 @@ public class Benefits {
     public static final int MIN_PRICE_FOR_BENEFIT = 10_000;
     private final List<Benefit> benefits;
 
-    public Benefits(List<Benefit> benefits) {
+    private Benefits(List<Benefit> benefits) {
         this.benefits = benefits;
     }
 
-    public static Benefits from(PromotionDate visitDay, Orders orders){
-        if(orders.getTotalPrice() < MIN_PRICE_FOR_BENEFIT){
+    public static Benefits from(PromotionDate visitDay, Orders orders) {
+        if (orders.calcTotalPrice() < MIN_PRICE_FOR_BENEFIT) {
             return new Benefits(Collections.emptyList());
         }
         List<Benefit> benefits = new ArrayList<>();
@@ -32,17 +32,17 @@ public class Benefits {
         return Collections.unmodifiableList(benefits);
     }
 
-    public boolean hasNoBenefits(){
+    public boolean hasNoBenefits() {
         return benefits.isEmpty();
     }
 
-    public int getTotalBenefitPrice(){
+    public int calcTotalBenefitPrice() {
         return benefits.stream()
                 .mapToInt(Benefit::getBenefitPrice)
                 .sum();
     }
 
-    public int calcDiscountPrice(){
+    public int calcDiscountPrice() {
         return benefits.stream()
                 .filter(benefit -> benefit.isTypeOf(BenefitType.DISCOUNT))
                 .mapToInt(Benefit::getBenefitPrice)
@@ -54,7 +54,7 @@ public class Benefits {
                 .noneMatch(benefit -> benefit.isTypeOf(BenefitType.GIFTS));
     }
 
-    public List<MenuAndCount> getGifts(){
+    public List<MenuAndCount> getGifts() {
         return benefits.stream()
                 .filter(benefit -> benefit.isTypeOf(BenefitType.GIFTS))
                 .map(benefit -> (Gift) benefit)
