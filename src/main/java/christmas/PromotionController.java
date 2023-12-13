@@ -28,6 +28,7 @@ public class PromotionController {
     }
 
     private void printBenefits(Orders orders, Benefits benefits) {
+        OutputView.printGifts(benefits);
         OutputView.printBenefits(benefits);
         OutputView.printBenefitPrice(benefits);
         OutputView.printDiscountPrice(orders.getTotalPrice() + benefits.calcDiscountPrice());

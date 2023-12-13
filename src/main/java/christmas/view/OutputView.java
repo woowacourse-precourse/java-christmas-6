@@ -49,7 +49,7 @@ public class OutputView {
     public static void printBenefits(Benefits benefits) {
         Printer.printMessage("<혜택 내역>");
         if(benefits.hasNoBenefits()){
-            Printer.printMessage("<없음>");
+            Printer.printMessage("없음");
             newLine();
             return;
         }
@@ -73,13 +73,20 @@ public class OutputView {
         Printer.printMessageUsingFormat("%s원", MONEY_FORMAT.format(discountedPrice));
         newLine();
     }
-    private static <T> void printListUsingFormat(List<T> list) {
-        list.forEach(t -> Printer.printMessageUsingFormat("FORMAT", 1, 2, 3));
-    }
-
     public static void printBadge(Badge badge) {
         Printer.printMessage("<12월 이벤트 배지>");
         Printer.printMessageUsingFormat("%s", badge.getBadgeName());
         newLine();
+    }
+
+    public static void printGifts(Benefits benefits) {
+        Printer.printMessage("<증정 메뉴>");
+        if(benefits.hasNoGift()){
+            Printer.printMessage("없음");
+            newLine();
+            return;
+        }
+        benefits.getGifts().forEach(menuAndCount ->
+                Printer.printMessageUsingFormat("%s %d개", menuAndCount.getMenuName(), menuAndCount.getCount()));
     }
 }

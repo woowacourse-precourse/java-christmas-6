@@ -22,7 +22,8 @@ public enum DiscountFactory {
     }, WEEKDAY_DISCOUNT("평일 할인"){
         @Override
         boolean canApply(PromotionDate promotionDate, Orders orders) {
-            return promotionDate.isWeekDay();
+            return promotionDate.isWeekDay()
+                    && orders.hasCategoryOf(Category.DESSERT);
         }
 
         @Override
@@ -33,7 +34,8 @@ public enum DiscountFactory {
     WEEKEND_DISCOUNT("주말 할인"){
         @Override
         boolean canApply(PromotionDate promotionDate, Orders orders) {
-            return promotionDate.isWeekend();
+            return promotionDate.isWeekend()
+                    && orders.hasCategoryOf(Category.MAIN_COURSE);
         }
 
         @Override

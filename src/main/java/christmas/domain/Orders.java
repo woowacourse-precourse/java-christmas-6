@@ -26,6 +26,10 @@ public class Orders {
                 .sum();
     }
 
+    public boolean hasCategoryOf(Category category) {
+        return orders.stream()
+                .anyMatch(menuAndCount -> menuAndCount.isCategory(category));
+    }
     public int getMenuCountOf(Category category) {
         return orders.stream()
                 .filter(menuAndCount -> menuAndCount.isCategory(category))
