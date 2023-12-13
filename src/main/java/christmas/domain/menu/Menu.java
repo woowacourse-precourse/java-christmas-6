@@ -13,7 +13,7 @@ public enum Menu {
     TAPAS("타파스", 5_500),
     CAESAR_SALAD("시저샐러드", 8_000),
 
-    // 메인"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1
+    // 메인
     T_BONE_STEAK("티본스테이크", 55_000),
     BARBECUE_RIBS("바비큐립", 54_000),
     SEAFOOD_PASTA("해산물파스타", 35_000),

@@ -4,6 +4,7 @@ import christmas.domain.PromotionDate;
 import christmas.domain.badge.Badge;
 import christmas.domain.benefit.Benefit;
 import christmas.domain.benefit.Benefits;
+import christmas.domain.menu.MenuAndCount;
 import christmas.domain.menu.Orders;
 import christmas.view.io.Printer;
 import java.text.DecimalFormat;
@@ -31,11 +32,12 @@ public class OutputView {
 
     public static void printOrders(Orders orders) {
         Printer.printMessage("<주문 메뉴>");
-        orders.getOrders().forEach(
-                menuAndCount ->
-                        Printer.printMessageUsingFormat("%s %d개", menuAndCount.getMenuName(), menuAndCount.getCount())
-        );
+        orders.getOrders().forEach(OutputView::printEachOrder);
         newLine();
+    }
+
+    private static void printEachOrder(MenuAndCount menuAndCount) {
+        Printer.printMessageUsingFormat("%s %d개", menuAndCount.getMenuName(), menuAndCount.getCount());
     }
 
 
@@ -48,8 +50,7 @@ public class OutputView {
     public static void printBenefits(Benefits benefits) {
         Printer.printMessage("<혜택 내역>");
         if (benefits.hasNoBenefits()) {
-            Printer.printMessage(NONE_LIST);
-            newLine();
+            printEmptyList();
             return;
         }
         benefits.getBenefits().forEach(OutputView::printEachBenefit);
@@ -82,11 +83,14 @@ public class OutputView {
     public static void printGifts(Benefits benefits) {
         Printer.printMessage("<증정 메뉴>");
         if (benefits.hasNoGift()) {
-            Printer.printMessage(NONE_LIST);
-            newLine();
+            printEmptyList();
             return;
         }
-        benefits.getGifts().forEach(menuAndCount ->
-                Printer.printMessageUsingFormat("%s %d개", menuAndCount.getMenuName(), menuAndCount.getCount()));
+        benefits.getGifts().forEach(OutputView::printEachOrder);
+    }
+
+    private static void printEmptyList() {
+        Printer.printMessage(NONE_LIST);
+        newLine();
     }
 }
