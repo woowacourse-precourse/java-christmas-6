@@ -24,7 +24,7 @@ public class OutputView {
 
     public static void printResultHead(VisitDate visitDate) {
         Printer.printMessageUsingFormat("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", visitDate.getDayOfMonth());
-    }
+    } //
 
     public static void printOrders(Orders orders) {
         Printer.printMessage("<주문 메뉴>");
