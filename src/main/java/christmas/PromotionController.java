@@ -19,6 +19,7 @@ public class PromotionController {
     private void printResult(VisitDate visitDay, Orders orders) {
         OutputView.printResultHead(visitDay);
         OutputView.printOrders(orders);
+        OutputView.printNoBenefitTotalPrice(orders);
     }
 
     public VisitDate getVisitDay(){

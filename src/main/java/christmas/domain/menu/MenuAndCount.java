@@ -16,6 +16,10 @@ public class MenuAndCount {
         return new MenuAndCount(menu, count);
     }
 
+    public int calcPrice() {
+        return menu.getPrice() * count;
+    }
+
     public String getMenuName() {
         return menu.getName();
     }
