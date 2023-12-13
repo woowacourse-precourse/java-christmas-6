@@ -2,6 +2,7 @@ package christmas.domain;
 
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuAndCount;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -13,5 +14,9 @@ public class Orders {
         this.orders = orders.stream()
                 .map(MenuAndCount::from)
                 .toList();
+    }
+
+    public List<MenuAndCount> getOrders() {
+        return orders;
     }
 }

@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.Orders;
 import christmas.view.io.Printer;
 import java.util.List;
 
@@ -17,6 +18,19 @@ public class OutputView {
     public static void sayHello(){
         Printer.printMessage("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
     }
+
+    public static void printResultHead(){
+        Printer.printMessage("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+    }
+
+    public static void printOrders(Orders orders){
+        orders.getOrders().forEach(
+                menuAndCount ->
+                        Printer.printMessageUsingFormat("%s %d개", menuAndCount.getMenuName(), menuAndCount.getCount())
+        );
+        newLine();
+    }
+
 
 
 

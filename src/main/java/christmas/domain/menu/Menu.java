@@ -44,7 +44,7 @@ public enum Menu {
                 .orElseThrow(PromotionExceptionMaker.NO_SUCH_MENU::makeException);
     }
 
-    private String getName() {
+    public String getName() {
         return name;
     }
 }

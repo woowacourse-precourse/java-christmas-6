@@ -15,4 +15,12 @@ public class MenuAndCount {
         int count = Integer.parseInt(split[1]);
         return new MenuAndCount(menu, count);
     }
+
+    public String getMenuName() {
+        return menu.getName();
+    }
+
+    public int getCount() {
+        return count;
+    }
 }

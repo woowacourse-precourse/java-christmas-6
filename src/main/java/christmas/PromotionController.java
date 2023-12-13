@@ -12,6 +12,13 @@ public class PromotionController {
         OutputView.sayHello();
         VisitDate visitDay = RetryHandler.getOrRetry(() -> getVisitDay());
         Orders orders = RetryHandler.getOrRetry(() -> getOrders());
+
+        printResult(orders);
+    }
+
+    private void printResult(Orders orders) {
+        OutputView.printResultHead();
+        OutputView.printOrders(orders);
     }
 
     public VisitDate getVisitDay(){
