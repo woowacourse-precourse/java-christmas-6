@@ -9,7 +9,7 @@ import christmas.domain.menu.Orders;
 import christmas.view.io.Printer;
 import java.text.DecimalFormat;
 
-public class OutputView {
+public class OutputView {//
     public static final String EXCEPTION_PREFIX = "[ERROR] ";
     public static final String NONE_LIST = "없음";
     private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("###,##0");
