@@ -23,7 +23,7 @@ public class PromotionController {
         printResult(visitDay, orders);
         printBenefits(orders, benefits);
         printBadge(badge);
-    }
+    } //
 
     private void printBadge(Badge badge) {
         OutputView.printBadge(badge);
