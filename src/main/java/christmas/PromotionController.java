@@ -46,7 +46,7 @@ public class PromotionController {
 
     public Orders getOrders(){
         List<String> orders = InputView.getMenus();
-        return new Orders(orders);
+        return Orders.from(orders);
     }
 
     public Benefits getBenefits(PromotionDate visitDay, Orders orders){

@@ -4,7 +4,7 @@ public class MenuAndCount {
     private final Menu menu;
     private final int count;
 
-    private MenuAndCount(Menu menu, int count) {
+    public MenuAndCount(Menu menu, int count) {
         this.menu = menu;
         this.count = count;
     }

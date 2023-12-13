@@ -7,10 +7,13 @@ import java.util.List;
 public class Orders {
     private final List<MenuAndCount> orders;
 
-    public Orders(List<String> orders) {
-        this.orders = orders.stream()
+    public Orders(List<MenuAndCount> orders) {
+        this.orders = orders;
+    }
+    public static Orders from(List<String> orders) {
+        return new Orders(orders.stream()
                 .map(MenuAndCount::from)
-                .toList();
+                .toList());
     }
 
     public List<MenuAndCount> getOrders() {
