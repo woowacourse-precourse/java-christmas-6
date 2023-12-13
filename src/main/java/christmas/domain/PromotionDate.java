@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.exception.PromotionExceptionMaker;
+import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -14,7 +16,11 @@ public class PromotionDate {
 
 
     public PromotionDate(int visitDate) {
-        this.visitDate = LocalDate.of(YEAR, MONTH, visitDate);
+        try{
+            this.visitDate = LocalDate.of(YEAR, MONTH, visitDate);
+        } catch (DateTimeException e){
+            throw PromotionExceptionMaker.INVALID_DATE.makeException();
+        }
     }
 
     public int getDayOfMonth() {
