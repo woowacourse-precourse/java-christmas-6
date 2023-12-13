@@ -12,8 +12,10 @@ import java.util.List;
 public class PromotionController {
     public void run(){
         OutputView.sayHello();
-        PromotionDate visitDay = RetryHandler.getOrRetry(() -> getVisitDay());
-        Orders orders = RetryHandler.getOrRetry(() -> getOrders());
+        PromotionDate visitDay = RetryHandler.getOrRetry(() -> getVisitDay(),
+                "유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+        Orders orders = RetryHandler.getOrRetry(() -> getOrders(),
+                "유효하지 않은 주문입니다. 다시 입력해 주세요.");
         Benefits benefits = getBenefits(visitDay, orders);
         //todo 혜택 금액의 - 처리
         Badge badge = Badge.of(benefits.getTotalBenefitPrice() * -1);

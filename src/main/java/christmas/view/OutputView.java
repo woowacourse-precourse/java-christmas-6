@@ -14,8 +14,8 @@ public class OutputView {
     private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("###,##0");
     public static final String EXCEPTION_PREFIX = "[ERROR] ";
 
-    public static void printException(Exception e) {
-        Printer.printMessage(EXCEPTION_PREFIX + e.getMessage());
+    public static void printException(String exceptionMessage) {
+        Printer.printMessage(EXCEPTION_PREFIX + exceptionMessage);
     }
 
     public static void newLine() {
@@ -69,7 +69,7 @@ public class OutputView {
     }
 
     public static void printDiscountPrice(int discountedPrice) {
-        Printer.printMessage("<할인 금액>");
+        Printer.printMessage("<할인 후 예상 결제 금액>");
         Printer.printMessageUsingFormat("%s원", MONEY_FORMAT.format(discountedPrice));
         newLine();
     }
