@@ -1,12 +1,21 @@
 package christmas.domain.menu;
 
+import christmas.exception.PromotionExceptionMaker;
+
 public class MenuAndCount {
     private final Menu menu;
     private final int count;
 
     public MenuAndCount(Menu menu, int count) {
+        validateCount(count);
         this.menu = menu;
         this.count = count;
+    }
+
+    private void validateCount(int count) {
+        if (count < 1) {
+            throw PromotionExceptionMaker.INVALID_COUNT.makeException();
+        }
     }
 
     public static MenuAndCount from(String order){

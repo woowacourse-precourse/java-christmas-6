@@ -14,7 +14,8 @@ public enum PromotionExceptionMaker {
     EMPTY_ORDER("주문이 비어있습니다."),
     DUPLICATE_ORDER("중복된 주문이 있습니다."),
     TOO_MANY_ORDERS("주문은 20개 이하로 가능합니다."),
-    ALL_ORDER_DRINK("주문은 음료만으로는 불가능합니다.");
+    ALL_ORDER_DRINK("주문은 음료만으로는 불가능합니다."),
+    INVALID_COUNT("상품 수량은 1개 이상이어야 합니다.");
 
     private final String message;
     private final IllegalArgumentException exception;

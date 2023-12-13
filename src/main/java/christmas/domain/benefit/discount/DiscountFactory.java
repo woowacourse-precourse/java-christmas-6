@@ -1,6 +1,6 @@
 package christmas.domain.benefit.discount;
 
-import christmas.domain.Orders;
+import christmas.domain.menu.Orders;
 import christmas.domain.PromotionDate;
 import christmas.domain.menu.Category;
 import christmas.exception.PromotionExceptionMaker;

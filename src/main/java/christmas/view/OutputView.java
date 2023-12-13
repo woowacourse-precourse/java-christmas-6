@@ -1,14 +1,12 @@
 package christmas.view;
 
-import christmas.domain.Orders;
+import christmas.domain.menu.Orders;
 import christmas.domain.PromotionDate;
 import christmas.domain.badge.Badge;
 import christmas.domain.benefit.Benefit;
-import christmas.domain.benefit.discount.Discount;
 import christmas.domain.benefit.Benefits;
 import christmas.view.io.Printer;
 import java.text.DecimalFormat;
-import java.util.List;
 
 public class OutputView {
     private static final DecimalFormat MONEY_FORMAT = new DecimalFormat("###,##0");

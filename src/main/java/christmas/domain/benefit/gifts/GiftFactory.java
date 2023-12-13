@@ -1,6 +1,6 @@
 package christmas.domain.benefit.gifts;
 
-import christmas.domain.Orders;
+import christmas.domain.menu.Orders;
 import christmas.domain.PromotionDate;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuAndCount;
