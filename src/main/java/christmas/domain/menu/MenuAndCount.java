@@ -27,4 +27,8 @@ public class MenuAndCount {
     public int getCount() {
         return count;
     }
+
+    public boolean isCategory(Category category) {
+        return category.contains(menu);
+    }
 }

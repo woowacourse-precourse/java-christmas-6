@@ -19,4 +19,8 @@ public enum Category {
         this.koreanName = koreanName;
         this.menus = menus;
     }
+
+    public boolean contains(Menu menu) {
+        return menus.contains(menu);
+    }
 }

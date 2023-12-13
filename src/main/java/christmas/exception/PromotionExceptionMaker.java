@@ -8,7 +8,8 @@ public enum PromotionExceptionMaker {
     NO_SUCH_MENU("잘못된 메뉴 입력입니다."),
     MENU_AMOUNT_MUST_POSITIVE("상품 수량은 양수여야 합니다."),
     MONEY_MUST_NOT_NEGATIVE("금액은 0 이상이어야 합니다."),
-    NOT_ENOUGH_MONEY("잔액이 부족합니다.");
+    NOT_ENOUGH_MONEY("잔액이 부족합니다."),
+    CANT_APPLY_BENEFIT_EXCEPTION("혜택을 적용할 수 없습니다.");
 
     private final String message;
     private final IllegalArgumentException exception;
