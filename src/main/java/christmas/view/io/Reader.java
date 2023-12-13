@@ -65,4 +65,8 @@ public class Reader {
                 .map(converter::apply)
                 .collect(Collectors.toList());
     }
+
+    public static void close() {
+        Console.close();
+    }
 }

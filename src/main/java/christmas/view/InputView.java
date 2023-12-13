@@ -33,4 +33,7 @@ public class InputView {
                 .anyMatch(order -> !MENU_PATTERN.matcher(order).matches());
     }
 
+    public static void closeConsole() {
+        Reader.close();
+    }
 }

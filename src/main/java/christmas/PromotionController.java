@@ -16,6 +16,7 @@ public class PromotionController {
                 "유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         Orders orders = RetryHandler.getOrRetry(() -> getOrders(),
                 "유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        closeConsole();
         Benefits benefits = getBenefits(visitDay, orders);
         //todo 혜택 금액의 - 처리
         Badge badge = Badge.of(benefits.calcTotalBenefitPrice() * -1);
@@ -24,6 +25,10 @@ public class PromotionController {
         printBenefits(orders, benefits);
         printBadge(badge);
     } //
+
+    private void closeConsole() {
+        InputView.closeConsole();
+    }
 
     private void printBadge(Badge badge) {
         OutputView.printBadge(badge);
