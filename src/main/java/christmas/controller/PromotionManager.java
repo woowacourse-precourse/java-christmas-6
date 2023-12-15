@@ -2,7 +2,9 @@ package christmas.controller;
 
 import christmas.controller.dto.PromotionResult;
 import christmas.controller.dto.PromotionsResult;
+import christmas.domain.Badge;
 import christmas.domain.Benefit;
+import christmas.domain.Discount;
 import christmas.domain.Orders;
 import christmas.domain.constants.Promotion;
 import christmas.view.InputView;
@@ -24,10 +26,51 @@ public class PromotionManager {
     public void run() {
         int day = inputView.readDay();
         Orders orders = inputView.readOrders();
-
-        outputView.printMenuAndPrice(orders);
+        int amount = printBeforePromotion(orders);
         Optional<PromotionsResult> result = applyPromotion(day, orders);
-        outputView.printResult(result);
+        printAfterPromotion(amount, result);
+    }
+
+    private int printBeforePromotion(Orders orders) {
+        outputView.printMenu(orders);
+        int amount = orders.calculateTotalPrice();
+        outputView.printPrice(amount);
+        return amount;
+    }
+
+    private void printAfterPromotion(int amount, Optional<PromotionsResult> result) {
+        outputView.printGiftAndBenefit(result);
+        int benefit = calculateTotalBenefit(result);
+        outputView.printBenefitAmount(benefit);
+        outputView.printFinalPrice(calculateFinalPrice(amount, result));
+        outputView.printBadge(calculateBadge(benefit));
+    }
+
+    private Badge calculateBadge(int benefit) {
+        return Badge.from(benefit);
+    }
+
+    private int calculateFinalPrice(int amount, Optional<PromotionsResult> result) {
+        if (result.isEmpty()) {
+            return amount;
+        }
+        int discount = (int) result.get().promotionResults()
+                .stream()
+                .map(PromotionResult::benefit)
+                .filter(element -> element instanceof Discount)
+                .mapToInt(element -> element.calculate())
+                .sum();
+        return amount - discount;
+    }
+
+    private int calculateTotalBenefit(Optional<PromotionsResult> result) {
+        if (result.isEmpty()) {
+            return 0;
+        }
+        return result.get().promotionResults()
+                .stream()
+                .mapToInt(element -> element.benefit().calculate())
+                .sum();
     }
 
     private Optional<PromotionsResult> applyPromotion(int day, Orders orders) {

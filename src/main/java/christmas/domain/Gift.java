@@ -15,4 +15,12 @@ public class Gift implements Benefit {
     public int calculate() {
         return menu.getPrice() * count;
     }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public int getCount() {
+        return count;
+    }
 }
