@@ -3,6 +3,7 @@ package christmas.domain;
 import christmas.domain.constants.MenuCategory;
 import christmas.global.exception.CustomException;
 import christmas.global.exception.ErrorMessage;
+import java.util.Collections;
 import java.util.List;
 
 public class Orders {
@@ -23,6 +24,10 @@ public class Orders {
         return orders.stream()
                 .mapToInt(order -> order.calculatePrice())
                 .sum();
+    }
+
+    public List<Order> getOrders() {
+        return Collections.unmodifiableList(orders);
     }
 
     private static class Validator {
