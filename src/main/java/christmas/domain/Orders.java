@@ -15,9 +15,13 @@ public class Orders {
     }
 
     public int getCountOfCategory(MenuCategory category) {
-        return (int) orders.stream()
-                .filter(order -> order.isCategory(category))
-                .count();
+        int count = 0;
+        for (Order order : orders) {
+            if (order.isCategory(category)) {
+                count += order.getCount();
+            }
+        }
+        return count;
     }
 
     public int calculateTotalPrice() {

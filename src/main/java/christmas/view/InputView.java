@@ -33,14 +33,14 @@ public class InputView {
 
     private static class Validator {
         public static int validateDay(String message) {
-            int number = validateNumber(message);
+            int number = validateNumber(message, ErrorMessage.INVALID_DAY_ERROR);
             validateRange(number, START_DAY, END_DAY);
             return number;
         }
 
-        public static int validateNumber(String message) {
+        public static int validateNumber(String message, ErrorMessage errorMessage) {
             if (isNotNumber(message)) {
-                throw CustomException.from(ErrorMessage.INVALID_DAY_ERROR);
+                throw CustomException.from(errorMessage);
             }
             return Integer.parseInt(message);
         }
@@ -69,7 +69,7 @@ public class InputView {
                 }
                 orderList.add(new Order(
                                 Menu.from(orderInfo.get(0)),
-                                validateNumber(orderInfo.get(1))
+                                validateNumber(orderInfo.get(1), ErrorMessage.INVALID_ORDER_ERROR)
                         )
                 );
             }

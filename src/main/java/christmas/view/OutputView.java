@@ -75,7 +75,7 @@ public class OutputView {
     }
 
     public void printBenefitAmount(int amount) {
-        ConsoleWriter.printlnMessage("<총 혜택 금액>");
+        ConsoleWriter.printlnMessage("<총혜택 금액>");
         ConsoleWriter.printlnFormat(DISCOUNT, amount);
         ConsoleWriter.println();
     }
@@ -90,6 +90,7 @@ public class OutputView {
         ConsoleWriter.printlnMessage("<12월 이벤트 배지>");
         if (badge == null) {
             ConsoleWriter.printlnMessage(NONE);
+            return;
         }
         ConsoleWriter.printlnMessage(badge.getName());
     }

@@ -9,9 +9,11 @@ import christmas.domain.Orders;
 import christmas.domain.constants.Promotion;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import christmas.view.console.ConsoleWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class PromotionManager {
     private final InputView inputView;
@@ -24,8 +26,8 @@ public class PromotionManager {
     }
 
     public void run() {
-        int day = inputView.readDay();
-        Orders orders = inputView.readOrders();
+        int day = retry(inputView::readDay);
+        Orders orders = retry(inputView::readOrders);
         int amount = printBeforePromotion(orders);
         Optional<PromotionsResult> result = applyPromotion(day, orders);
         printAfterPromotion(amount, result);
@@ -96,5 +98,15 @@ public class PromotionManager {
             }
         }
         return new PromotionsResult(promotionResults);
+    }
+
+    private static <T> T retry(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                ConsoleWriter.printlnMessage(e.getMessage());
+            }
+        }
     }
 }
