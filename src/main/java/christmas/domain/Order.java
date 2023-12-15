@@ -19,4 +19,12 @@ public class Order {
     public boolean isCategory(MenuCategory category) {
         return menu.getCategory().equals(category);
     }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public int getCount() {
+        return count;
+    }
 }
