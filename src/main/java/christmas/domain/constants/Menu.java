@@ -1,5 +1,9 @@
 package christmas.domain.constants;
 
+import christmas.global.exception.CustomException;
+import christmas.global.exception.ErrorMessage;
+import java.util.Arrays;
+
 public enum Menu {
     YANGSONGI_SOUP(6000, "양송이수프", MenuCategory.APPETIZER),
     TAPAS(5500, "타파스", MenuCategory.APPETIZER),
@@ -12,7 +16,7 @@ public enum Menu {
 
     CHOCOLATE_CAKE(15000, "초코케이크", MenuCategory.DESSERT),
     ICECREAM(5000, "아이스크림", MenuCategory.DESSERT),
-    
+
     ZERO_COLA(3000, "제로콜라", MenuCategory.DRINK),
     RED_WINE(60000, "레드와인", MenuCategory.DRINK),
     CHAMPAGNE(25000, "샴페인", MenuCategory.DRINK);
@@ -25,6 +29,13 @@ public enum Menu {
         this.price = price;
         this.name = name;
         this.category = category;
+    }
+
+    public static Menu from(String menu) {
+        return Arrays.stream(Menu.values())
+                .filter(element -> element.name.equals(menu))
+                .findFirst()
+                .orElseThrow(() -> CustomException.from(ErrorMessage.INVALID_ORDER_ERROR));
     }
 
     public int getPrice() {
