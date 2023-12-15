@@ -2,6 +2,7 @@ package christmas.view;
 
 import christmas.controller.dto.PromotionResult;
 import christmas.controller.dto.PromotionsResult;
+import christmas.domain.Badge;
 import christmas.domain.Benefit;
 import christmas.domain.Gift;
 import christmas.domain.Order;
@@ -85,4 +86,11 @@ public class OutputView {
         ConsoleWriter.println();
     }
 
+    public void printBadge(Badge badge) {
+        ConsoleWriter.printlnMessage("<12월 이벤트 배지>");
+        if (badge == null) {
+            ConsoleWriter.printlnMessage(NONE);
+        }
+        ConsoleWriter.printlnMessage(badge.getName());
+    }
 }
