@@ -1,6 +1,7 @@
 package christmas.utils;
 
 import christmas.model.Menu;
+import christmas.model.MenuType;
 
 import java.util.Map;
 
@@ -16,6 +17,16 @@ public class Validator {
         if(currMenu == null) throw new IllegalArgumentException(Exceptions.NO_SUCH_MENU.getMessage());
         if(orderMap.get(currMenu) != null) throw new IllegalArgumentException(Exceptions.MENU_DUPLICATED.getMessage());
     }
+
+    public static void validateOrderMap(Map<Menu, Integer> orderMap) {
+        boolean allDrinks = orderMap.keySet().stream()
+                .allMatch(menu -> menu.getType() == MenuType.DRINK);
+
+        if(allDrinks) {
+            throw new IllegalArgumentException("주문은 최소 하나 이상의 음료 외의 메뉴를 포함해야 합니다.");
+        }
+    }
+
 
     public static void isNumber(String str) {
         try {
