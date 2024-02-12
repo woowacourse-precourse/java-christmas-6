@@ -36,7 +36,7 @@ public class InputView {
     private static Map<Menu, Integer> toOrder(String str) {
         String[] orders = str.split(",");
         Map<Menu, Integer> orderMap = new HashMap<>();
-        Integer countSum = 0;
+        int countSum = 0;
 
         for(String order : orders) {
             String[] temp = order.split("-");
