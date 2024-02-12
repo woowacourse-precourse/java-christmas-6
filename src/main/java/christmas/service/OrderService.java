@@ -28,7 +28,7 @@ public class OrderService {
                 .sum();
     }
 
-    public boolean determineGift() {
+    private boolean determineGift() {
         return calculateTotalPrice() >= 120000;
     }
 
@@ -72,13 +72,19 @@ public class OrderService {
 
     private void calculateDayDiscount() {
         if (orderDate.getDayOfWeek().getValue() <= 5) { // 일~목
-            discountMap.put(Discount.WEEKDAY_DISCOUNT, (int) orderMap.entrySet().stream()
+            int discount = (int) orderMap.entrySet().stream()
                     .filter(e -> e.getKey().getType() == DESERT)
-                    .count() * WEEKDAY_DISCOUNT.getValue());
+                    .count() * WEEKDAY_DISCOUNT.getValue();
+            if (discount > 0) {
+                discountMap.put(Discount.WEEKDAY_DISCOUNT, discount);
+            }
         } else { // 금~토
-            discountMap.put(Discount.WEEKEND_DISCOUNT, (int) orderMap.entrySet().stream()
+            int discount = (int) orderMap.entrySet().stream()
                     .filter(e -> e.getKey().getType() == MAIN)
-                    .count() * WEEKEND_DISCOUNT.getValue());
+                    .count() * WEEKEND_DISCOUNT.getValue();
+            if (discount > 0) {
+                discountMap.put(Discount.WEEKEND_DISCOUNT, discount);
+            }
         }
     }
 
@@ -91,7 +97,11 @@ public class OrderService {
     }
 
     private boolean checkStarInEventCalendar() {
-        return orderDate.getDayOfWeek().getValue() == 1;
+        return orderDate.getDayOfWeek().getValue() == 7;
+    }
+
+    public Integer getOrderDate() {
+        return orderDate.getDayOfMonth();
     }
 
     public Map<Menu, Integer> getOrderMap() {
