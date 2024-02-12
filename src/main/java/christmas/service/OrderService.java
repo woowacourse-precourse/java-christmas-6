@@ -36,6 +36,7 @@ public class OrderService {
         calculateChristmasDiscount();
         calculateDayDiscount();
         calculateSpecialDiscount();
+        calculateGiftDiscount();
     }
 
     public int calculateTotalDiscountPrice() {
@@ -83,6 +84,10 @@ public class OrderService {
 
     private void calculateSpecialDiscount() {
         if(checkStarInEventCalendar()) discountMap.put(Discount.SPECIAL_DISCOUNT, SPECIAL_DISCOUNT.getValue());
+    }
+
+    private void calculateGiftDiscount() {
+        if(determineGift()) discountMap.put(Discount.GIFT_EVENT, GIFT_DISCOUNT.getValue());
     }
 
     private boolean checkStarInEventCalendar() {
